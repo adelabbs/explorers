@@ -1,7 +1,7 @@
-# Explorateurs autonomes et communiquants
-Notre projet d'intégration à CY Cergy Paris Université
+# Autonomous and communicating explorers
+Our integration project at CY Cergy Paris University
 
-# Contributeurs
+# Contributors
 
 - Léo Coquet
 - Geoffroy Keime
