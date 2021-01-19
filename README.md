@@ -1,5 +1,5 @@
 # Autonomous and communicating explorers
-Our integration project at CY Cergy Paris University
+Our integration project at CY Cergy Paris University.
 
 # Contributors
 
