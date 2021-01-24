@@ -4,13 +4,16 @@ import data.map.ExplorerMap;
 
 public class Explorer extends LivingEntity {
 
+	private final static double EXPLORER_SIZE_X = 1.0;
+	private final static double EXPLORER_SIZE_Y = 2.0;
+	
 	private String name;
 	private ExplorerMap map;
 	private int communicationRange;
 	
-	public Explorer(String type, double[] position, double[] size, int maxHealth, int speed, int damage, 
+	public Explorer(double[] position, int maxHealth, int speed, int damage, 
 			int scope, String name, ExplorerMap map, int communicationRange) {
-		super(type, position, size, maxHealth, speed, damage, scope);
+		super("Explorer", position, new double[]{EXPLORER_SIZE_X, EXPLORER_SIZE_Y}, maxHealth, speed, damage, scope);
 		this.name = name;
 		this.map = map;
 		this.communicationRange = communicationRange;

@@ -19,6 +19,7 @@ public class Environment {
 	private ArrayList<Entity> obstacles;
 	private ArrayList<BreakableEntity> breakableObstacles;
 	private int state;
+	
 	public Map getMap() {
 		return map;
 	}
