@@ -22,7 +22,6 @@ public class ExplorerManager extends Thread {
 	public void run() {
 		while (!dead && running) {
 			SimulationUtility.unitTime();
-			System.out.println("Running");
 			// TODO
 		}
 	}

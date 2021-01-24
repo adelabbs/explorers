@@ -40,13 +40,12 @@ public class Simulation {
 		environment.setExplorerInit(explorerCount);
 		for (int count = 0; count < explorerCount; count++) {
 			Explorer explorer = ExplorerFactory.createTestExplorer(null);
-			ExplorerManager explorerManager = new ExplorerManager(explorer); // This also starts the explorerManager
-																				// thread.
+			ExplorerManager explorerManager = new ExplorerManager(explorer);
 			explorerManagers.add(explorerManager);
 		}
 		setState(SimulationState.READY);
 	}
-
+	
 	public void simulate() {
 		//TODO
 	}
