@@ -2,7 +2,7 @@ package data.map;
 
 public class ExplorerMap {
 
-	private ExplorerTile[][] tiles = new ExplorerTile[100][100];
+	private ExplorerTile[][] tiles = new ExplorerTile[90][90];
 	
 	public ExplorerMap(ExplorerTile[][] tiles) {
 		this.tiles = tiles;
