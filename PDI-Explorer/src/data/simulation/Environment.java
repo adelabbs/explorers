@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import data.entity.*;
 import data.map.Map;
 
-public class Simulation {
+public class Environment {
 
 	private Map map;
 	private ArrayList<Explorer> explorers;
 	private int explorerAmount;
 	private int explorerInit;
-	private ArrayList<Animal> animals;
+	private ArrayList<LivingEntity> animals;
 	private ArrayList<Chest> chests;
 	private int chestAmount;
 	private int foundChest;
@@ -31,7 +31,7 @@ public class Simulation {
 	public int getExplorerInit() {
 		return explorerInit;
 	}
-	public ArrayList<Animal> getAnimals() {
+	public ArrayList<LivingEntity> getAnimals() {
 		return animals;
 	}
 	public ArrayList<Chest> getChests() {
@@ -67,7 +67,7 @@ public class Simulation {
 	public void setExplorerInit(int explorerInit) {
 		this.explorerInit = explorerInit;
 	}
-	public void setAnimals(ArrayList<Animal> animals) {
+	public void setAnimals(ArrayList<LivingEntity> animals) {
 		this.animals = animals;
 	}
 	public void setChests(ArrayList<Chest> chests) {
