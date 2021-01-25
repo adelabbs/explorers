@@ -5,6 +5,20 @@ import java.util.ArrayList;
 import data.entity.*;
 import data.map.Map;
 
+/**
+ * 
+ * Contains all the data needed for a simulation.
+ * 
+ * Environment has four states :
+ * 0. Finished
+ * 1. Running
+ * 2. Paused
+ * 3. Stopped
+ * 
+ * @author Léo COQUET
+ *
+ */
+
 public class Environment {
 
 	private Map map;
