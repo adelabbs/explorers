@@ -8,6 +8,10 @@ public class Map {
 		this.tiles = tiles;
 	}
 
+	public Tile getTile(int i, int j) {
+		return getTiles()[i][j];
+	}
+	
 	public Tile[][] getTiles() {
 		return tiles;
 	}

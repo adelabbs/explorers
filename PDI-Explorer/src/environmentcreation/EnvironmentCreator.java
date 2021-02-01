@@ -3,10 +3,11 @@ package environmentcreation;
 import java.util.ArrayList;
 
 import data.simulation.*;
+import environmentcreation.event.EntityCreationException;
 
 public class EnvironmentCreator {
 
-	public static Environment creation(int explorerAmount, int animalAmount, int chestAmount) {
+	public static Environment creation(int explorerAmount, int animalAmount, int chestAmount) throws EntityCreationException {
 		
 		Environment environment = new Environment();
 		environment.setMap(MapCreator.creation());
