@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import data.simulation.SimulationEntry;
 import environmentcreation.EnvironmentCreator;
-import environmentcreation.ExplorationStrategy;
 import environmentcreation.event.EntityCreationException;
 import process.factory.ManagerFactory;
 import data.entity.Explorer;
@@ -37,7 +36,7 @@ public class Simulation {
 		int explorerAmount = simulationEntry.getExplorerAmount();
 		int animalAmount = simulationEntry.getAnimalAmount();
 		int chestAmount = simulationEntry.getChestAmount();
-		ExplorationStrategy strategy = simulationEntry.getExplorationStrategy();
+		int strategy = simulationEntry.getExplorationStrategy();
 		try {
 			environment = EnvironmentCreator.creation(explorerAmount, animalAmount, chestAmount);
 		} catch (EntityCreationException e) {

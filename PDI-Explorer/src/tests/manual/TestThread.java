@@ -1,14 +1,14 @@
 package tests.manual;
 
 import data.simulation.SimulationEntry;
-import environmentcreation.ExplorationStrategy;
 import process.Simulation;
+import process.SimulationUtility;
 
 public class TestThread extends Thread {
 	private static final int EXPLORER_AMOUNT = 3;
 	private static final int ANIMAL_AMOUNT = 0;
 	private static final int CHEST_AMOUNT = 0;
-	private static final ExplorationStrategy EXPLORATION_STRATEGY = ExplorationStrategy.COMBAT;
+	private static final int EXPLORATION_STRATEGY = 0;
 	Simulation simulation;
 
 	public TestThread() {
@@ -23,6 +23,7 @@ public class TestThread extends Thread {
 			simulation.launch();
 
 		while (simulation.isRunning()) {
+			SimulationUtility.unitTime();
 			simulation.update();
 		}
 	}

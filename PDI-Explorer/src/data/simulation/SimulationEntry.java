@@ -2,8 +2,6 @@ package data.simulation;
 
 import java.util.ArrayList;
 
-import environmentcreation.ExplorationStrategy;
-
 /**
  * This class is used to regroup the simulation entry parameters.
  *
@@ -12,11 +10,11 @@ public class SimulationEntry {
 	private int explorerAmount;
 	private int animalAmount;
 	private int chestAmount;
-	private ExplorationStrategy explorationStrategy;
+	private int explorationStrategy;
 	private ArrayList<Item> items = new ArrayList<Item>();
 
 	public SimulationEntry(int explorerAmount, int animalAmount, int chestAmount,
-			ExplorationStrategy explorationStrategy) {
+			int explorationStrategy) {
 		this.explorerAmount = explorerAmount;
 		this.animalAmount = animalAmount;
 		this.chestAmount = chestAmount;
@@ -35,7 +33,7 @@ public class SimulationEntry {
 		return chestAmount;
 	}
 
-	public ExplorationStrategy getExplorationStrategy() {
+	public int getExplorationStrategy() {
 		return explorationStrategy;
 	}
 

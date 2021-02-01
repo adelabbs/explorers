@@ -1,7 +1,7 @@
 package process;
 
 import data.entity.Explorer;
-import environmentcreation.ExplorationStrategy;
+import process.strategy.ExplorationStrategy;
 
 /**
  * The explorer controller class. Each instance of the class represents an
@@ -16,9 +16,16 @@ public class ExplorerManager extends Thread {
 	private boolean dead = false;
 	private boolean running = false;
 
-	public ExplorerManager(Simulation simulation, Explorer explorer, ExplorationStrategy strategy) {
+	public ExplorerManager(Simulation simulation, Explorer explorer) {
 		this.simulation = simulation;
 		this.explorer = explorer;
+	}
+
+	public ExplorationStrategy getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(ExplorationStrategy strategy) {
 		this.strategy = strategy;
 	}
 
@@ -28,6 +35,14 @@ public class ExplorerManager extends Thread {
 			SimulationUtility.unitTime();
 			// TODO
 		}
+	}
+
+	public Simulation getSimulation() {
+		return simulation;
+	}
+
+	public Explorer getExplorer() {
+		return explorer;
 	}
 
 	public String getExplorerName() {
