@@ -3,7 +3,10 @@ package process;
 import java.util.ArrayList;
 
 import data.simulation.SimulationEntry;
-import process.factory.ExplorerFactory;
+import environmentcreation.EnvironmentCreator;
+import environmentcreation.ExplorationStrategy;
+import environmentcreation.event.EntityCreationException;
+import process.factory.ManagerFactory;
 import data.entity.Explorer;
 import data.simulation.Environment;
 
@@ -30,24 +33,38 @@ public class Simulation {
 		buildSimulation();
 	}
 
-	/*
-	 * At the moment a method is enough to prepare the simulation. We might need a
-	 * separate Builder class later if the initial preparation work increases.
-	 */
 	private void buildSimulation() {
-		environment = new Environment();
-		int explorerCount = environment.getExplorerInit();
-		environment.setExplorerInit(explorerCount);
-		for (int count = 0; count < explorerCount; count++) {
-			Explorer explorer = ExplorerFactory.createTestExplorer(null);
-			ExplorerManager explorerManager = new ExplorerManager(explorer);
+		int explorerAmount = simulationEntry.getExplorerAmount();
+		int animalAmount = simulationEntry.getAnimalAmount();
+		int chestAmount = simulationEntry.getChestAmount();
+		ExplorationStrategy strategy = simulationEntry.getExplorationStrategy();
+		try {
+			environment = EnvironmentCreator.creation(explorerAmount, animalAmount, chestAmount);
+		} catch (EntityCreationException e) {
+			e.printStackTrace();
+		}
+		for (Explorer explorer : environment.getExplorers()) {
+			ExplorerManager explorerManager = ManagerFactory.createExplorerManager(this, explorer, strategy);
 			explorerManagers.add(explorerManager);
 		}
 		setState(SimulationState.READY);
 	}
-	
-	public void simulate() {
-		//TODO
+
+	public void launch() {
+		startAllExplorerManagers();
+	}
+
+	public void update() {
+		if (environment.getExplorerAmount() > 0 && (environment.getFoundChest() < environment.getChestAmount())) {
+			setState(SimulationState.OVER);
+		}
+	}
+
+	public void startAllExplorerManagers() {
+		for (ExplorerManager explorerManager : explorerManagers) {
+			explorerManager.start();
+		}
+		setState(SimulationState.RUNNING);
 	}
 
 	public void stopAllExplorerManagers() {
@@ -68,7 +85,27 @@ public class Simulation {
 		return environment;
 	}
 
+	public SimulationState getState() {
+		return state;
+	}
+
 	public void setState(SimulationState state) {
 		this.state = state;
+	}
+
+	public boolean isRunning() {
+		return state.equals(SimulationState.RUNNING);
+	}
+
+	public boolean isReady() {
+		return state.equals(SimulationState.READY);
+	}
+
+	public boolean isPaused() {
+		return state.equals(SimulationState.PAUSED);
+	}
+
+	public boolean isOver() {
+		return state.equals(SimulationState.OVER);
 	}
 }

@@ -1,6 +1,7 @@
 package process;
 
 import data.entity.Explorer;
+import environmentcreation.ExplorationStrategy;
 
 /**
  * The explorer controller class. Each instance of the class represents an
@@ -8,14 +9,17 @@ import data.entity.Explorer;
  *
  */
 public class ExplorerManager extends Thread {
+	private Simulation simulation;
 	private Explorer explorer;
+	private ExplorationStrategy strategy;
 
 	private boolean dead = false;
 	private boolean running = false;
 
-	//TODO we will need to add more parameters later
-	public ExplorerManager(Explorer explorer) {
+	public ExplorerManager(Simulation simulation, Explorer explorer, ExplorationStrategy strategy) {
+		this.simulation = simulation;
 		this.explorer = explorer;
+		this.strategy = strategy;
 	}
 
 	@Override
