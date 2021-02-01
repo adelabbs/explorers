@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import data.simulation.*;
 import environmentcreation.event.EntityCreationException;
+import environmentcreation.mapcreation.MapCreator;
 
 public class EnvironmentCreator {
 
