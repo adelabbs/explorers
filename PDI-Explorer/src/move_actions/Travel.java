@@ -1,42 +1,67 @@
 package move_actions;
 
+import java.util.ArrayList;
+
+import data.entity.Entity;
 import data.entity.Explorer;
-import data.map.ExplorerMap;
+import data.simulation.Environment;
 
 /*
- * This class is used to set the explorer's movement for the current tick
- * 
+ * This class is used to set all explorers movement for the current tick
  */
 
 public class Travel {
 
-	private Explorer explorer;
-
+	//MIN & MAX for directions change MAX to 8 for diagonals
 	private static final int MIN = 1;
-	private static final int MAX = 4;
+	private static final int MAX = 4; 
 	
+	// Four possible directions
 	private static final int NORTH = 1;
 	private static final int EAST = 2;
 	private static final int SOUTH = 3;
 	private static final int WEST = 4;
 	
-	double nextPos[] = null;
-	double currentPos[] = null;
 	
-	public Travel(Explorer explorer) {
-		this.explorer = explorer;
-		currentPos = explorer.getPosition();
+	private Environment environment = null;
+	private ArrayList<Explorer> explorers = null;
+	private ArrayList<Entity> obstacles = null;
+
+	private double nextPos[] = null;
+
+	public Travel(Environment environment) {
+		this.environment = environment;
+		explorers = environment.getExplorers();
+		obstacles = environment.getObstacles();
+	}
+	
+	// This method iterate the ArrayList of explorers to set new position for each explorers
+	public void determineAllNewPositions() {
+		for(Explorer e : explorers) {
+			randomMovement(e);
+		}
+		updatePosition();
+	}
+	
+	// This method is used to know if the entity's destination is free
+	public boolean checkForCollide(double[] nextPosition) {
+		for(Entity e : obstacles) {
+			if(e.getPosition() == nextPosition) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	// Random movement for explorers (only 4 directions) this method will be the same for animals
-	public void randomMovement() {
+	public void randomMovement(Explorer explorer) {
 		int direction = (int) (MIN + Math.random()*((MAX-MIN) + 1));
-		nextPos = currentPos;
+		nextPos = explorer.getPosition();
 		
 		switch(direction) {
 		case NORTH:
 			System.out.println("NORTH");
-			nextPos[1] ++;
+			nextPos[1]++;
 			break;
 		case EAST:
 			System.out.println("EAST");
@@ -51,46 +76,17 @@ public class Travel {
 			System.out.println("SOUTH");
 			break;
 		}
-		//Set the position for the next tick
-		explorer.setPosition(nextPos);
 		
-		updatePosition();
-		resetNextPosition();
+		//If free :
+		if(checkForCollide(nextPos)) {
+			//Set the position for the next tick
+			explorer.setPosition(nextPos);
+		}
+		//Or check for a new position
+		randomMovement(explorer);
 	}
 	
 	public void updatePosition() {
-		currentPos = explorer.getPosition();
+		environment.setExplorers(explorers);
 	}
-	
-	public void resetNextPosition() {
-		nextPos = null;
-	}
-	
-	public void testMovement() {
-		System.out.println("BEGINNING EXPLORER'S POSITION : " + currentPos[0] + ", " + currentPos[1]);
-		for(int i = 0; i < 10; i++) {
-			randomMovement();
-			System.out.println("EXPLORER'S POSITION : " + currentPos[0] + ", " + currentPos[1]);
-		}
-	}
-	
-	
-	public Explorer getExplorer() {
-		return explorer;
-	}
-	
-	public void setExplorer(Explorer explorer) {
-		this.explorer = explorer;
-	}
-	
-	
-	// Test main 
-	public final static void main(String[] args) {
-		double[] pos = {1,2};
-		ExplorerMap exmap = new ExplorerMap(null);
-		Explorer ex = new Explorer(pos, 100,5,5,5,"hi", exmap, 5);
-		Travel travel = new Travel(ex);
-		travel.testMovement();
-	}
-
 }

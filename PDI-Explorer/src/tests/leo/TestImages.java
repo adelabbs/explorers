@@ -11,14 +11,15 @@ import data.simulation.Environment;
 import environmentcreation.EnvironmentCreator;
 import environmentcreation.event.EntityCreationException;
 
+@SuppressWarnings("serial")
 public class TestImages extends JPanel {
 
-	private static final int TILE_SIZE = 10;
+	private static final int TILE_SIZE = 11;
 	private static Environment environment;
 	
 	public TestImages() {
 		
-		JFrame frame = new JFrame("Guardians");
+		JFrame frame = new JFrame("Explorers");
 		frame.add(this);
 		frame.setSize(1920,1080);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);

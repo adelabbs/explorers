@@ -1,4 +1,4 @@
-package environmentcreation;
+package environmentcreation.mapcreation;
 
 import data.map.Map;
 import data.map.Tile;
@@ -30,18 +30,15 @@ import data.map.Tile;
 public class MapCreator {
 
 	public static Map creation() {
-		
-		Tile[][] tiles = new Tile[90][90];
-		
-		for(int i = 0; i < 90; i ++)
-			for(int j = 0; j < 90; j ++)
-				if(i == 0 || i == 1 || i == 88 || i == 89)
-					tiles[i][j] = new Tile("w");
-				else if(j == 0 || j == 1 || j == 88 || j == 89)
-					tiles[i][j] = new Tile("w");
-				else
-					tiles[i][j] = new Tile("g");
+
+		SubMap[][] subMaps = new SubMap[6][6];
+		CornerGenerator.generation(subMaps);
+		BorderGenerator.generation(subMaps);
+		SubMapsFiller.fill(subMaps);
+		char[][] zones = ZonesGenerator.generation(subMaps);
+		Tile[][] tiles = TilesGenerator.generation(zones);		
 		return new Map(tiles);
+		
 	}
 	
 }
