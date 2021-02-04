@@ -51,19 +51,21 @@ public class Simulation {
 
 	public void launch() {
 		startAllExplorerManagers();
+		setState(SimulationState.RUNNING);
 	}
 
 	public void update() {
-		if (environment.getExplorerAmount() > 0 && (environment.getFoundChest() < environment.getChestAmount())) {
+		if (environment.getExplorerAmount() <= 0 || (environment.getFoundChest() >= environment.getChestAmount())) {
 			setState(SimulationState.OVER);
+			stopAllExplorerManagers();
 		}
 	}
 
 	public void startAllExplorerManagers() {
 		for (ExplorerManager explorerManager : explorerManagers) {
+			explorerManager.setRunning(true);
 			explorerManager.start();
 		}
-		setState(SimulationState.RUNNING);
 	}
 
 	public void stopAllExplorerManagers() {

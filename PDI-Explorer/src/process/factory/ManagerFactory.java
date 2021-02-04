@@ -31,6 +31,7 @@ public class ManagerFactory {
 		case RANDOM_STRATEGY:
 			ExplorerManager randomExplorerManager = new ExplorerManager(simulation, explorer);
 			randomExplorerManager.setStrategy(new RandomStrategy(randomExplorerManager));
+			return randomExplorerManager;
 		default:
 			throw new IllegalArgumentException("Unknown strategy: " + explorationStrategy);
 		}

@@ -28,8 +28,10 @@ public class ExplorerManager extends Thread implements LivingEntityManager {
 		while (!dead && running) {
 			SimulationUtility.unitTime();
 			strategy.decide();
-			action.execute();
-			removeAction();
+			if (action != null) {
+				action.execute();
+				removeAction();
+			}
 		}
 	}
 

@@ -2,7 +2,8 @@ package tests.manual;
 
 public class TestSimulation {
 	public static void main(String[] args) {
-		TestThread thread = new TestThread();
+		TestGUI simulationGUI = new TestGUI();
+		Thread thread = new Thread(simulationGUI);
 		thread.start();
 	}
 }
