@@ -39,14 +39,14 @@ public class Simulation {
 		int strategy = simulationEntry.getExplorationStrategy();
 		try {
 			environment = EnvironmentCreator.creation(explorerAmount, animalAmount, chestAmount);
+			for (Explorer explorer : environment.getExplorers()) {
+				ExplorerManager explorerManager = ManagerFactory.createExplorerManager(this, explorer, strategy);
+				explorerManagers.add(explorerManager);
+			}
+			setState(SimulationState.READY);
 		} catch (EntityCreationException e) {
 			e.printStackTrace();
 		}
-		for (Explorer explorer : environment.getExplorers()) {
-			ExplorerManager explorerManager = ManagerFactory.createExplorerManager(this, explorer, strategy);
-			explorerManagers.add(explorerManager);
-		}
-		setState(SimulationState.READY);
 	}
 
 	public void launch() {
