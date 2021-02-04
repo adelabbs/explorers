@@ -1,6 +1,7 @@
 package process.action;
 
 import data.entity.LivingEntity;
+import data.simulation.Environment;
 
 public class MoveAction implements Action {
 	private static final int MIN = 1;
@@ -13,13 +14,14 @@ public class MoveAction implements Action {
 
 	int direction;
 	LivingEntity entity;
+	Environment environment;
 
-	public MoveAction(LivingEntity entity) {
+	public MoveAction(LivingEntity entity, Environment environment) {
 		direction = pickRandomDirection();
 		this.entity = entity;
 	}
 
-	public MoveAction(LivingEntity entity, int direction) {
+	public MoveAction(LivingEntity entity, Environment environment, int direction) {
 		this.direction = direction;
 	}
 

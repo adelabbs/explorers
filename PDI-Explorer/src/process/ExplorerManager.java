@@ -1,7 +1,5 @@
 package process;
 
-import java.util.ArrayList;
-
 import data.entity.Explorer;
 import process.action.Action;
 import process.strategy.ExplorationStrategy;
@@ -15,7 +13,7 @@ public class ExplorerManager extends Thread implements LivingEntityManager {
 	private Simulation simulation;
 	private Explorer explorer;
 	private ExplorationStrategy strategy;
-	private ArrayList<Action> actions = new ArrayList<Action>();
+	private Action action = null;
 
 	private boolean dead = false;
 	private boolean running = false;
@@ -30,21 +28,17 @@ public class ExplorerManager extends Thread implements LivingEntityManager {
 		while (!dead && running) {
 			SimulationUtility.unitTime();
 			strategy.decide();
-			for (Action action : actions) {
-				action.execute();
-			}
-			actions.clear();
+			action.execute();
+			removeAction();
 		}
 	}
 
 	public void planAction(Action action) {
-		if (!actions.contains(action)) {
-			actions.add(action);
-		}
+		this.action = action;
 	}
 
-	public void remove(Action action) {
-		actions.remove(action);
+	private void removeAction() {
+		action = null;
 	}
 
 	public Simulation getSimulation() {

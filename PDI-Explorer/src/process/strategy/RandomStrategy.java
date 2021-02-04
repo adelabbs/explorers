@@ -11,7 +11,8 @@ public class RandomStrategy extends ExplorationStrategy {
 
 	@Override
 	public void decide() {
-		MoveAction action = new MoveAction(getExplorerManager().getExplorer());
+		MoveAction action = new MoveAction(getExplorerManager().getExplorer(),
+				getExplorerManager().getSimulation().getEnvironment());
 		super.planAction(action);
 	}
 
