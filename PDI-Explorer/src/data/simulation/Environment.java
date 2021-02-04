@@ -106,5 +106,12 @@ public class Environment {
 	public void setState(int state) {
 		this.state = state;
 	}
-		
+	public void decrementExplorerAmount() {
+		if(explorerAmount > 0)
+			explorerAmount --;
+	}
+	public void incrementFoundChest() {
+		if(foundChest < chestAmount)
+			foundChest++;
+	}
 }

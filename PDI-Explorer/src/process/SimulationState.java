@@ -4,6 +4,5 @@ public enum SimulationState {
 	READY,
 	RUNNING,
 	PAUSED,
-	OVER,
-	STOP
+	OVER
 }

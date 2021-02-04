@@ -1,6 +1,7 @@
 package data.entity;
 
 import data.map.ExplorerMap;
+import process.EntityVisitor;
 
 public class Explorer extends LivingEntity {
 
@@ -41,6 +42,11 @@ public class Explorer extends LivingEntity {
 
 	public void setCommunicationRange(int communicationRange) {
 		this.communicationRange = communicationRange;
+	}
+
+	@Override
+	public <T> T accept(EntityVisitor<T> visitor) {
+		return visitor.visit(this);
 	}
 	
 }

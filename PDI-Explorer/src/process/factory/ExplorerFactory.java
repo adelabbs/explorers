@@ -10,8 +10,7 @@ import tests.manual.SimuPara;
  */
 public class ExplorerFactory {
 	public static Explorer createTestExplorer(ExplorerMap explorerMap) {
-		return new Explorer(SimuPara.EXPLORER_TYPE, SimuPara.TEST_POSITION, SimuPara.TEST_EXPLORER_SIZE,
-				SimuPara.TEST_EXPLORER_MAX_HEALTH, SimuPara.TEST_EXPLORER_SPEED, SimuPara.TEST_EXPLORER_DAMAGE,
+		return new Explorer(SimuPara.TEST_POSITION, SimuPara.TEST_EXPLORER_MAX_HEALTH, SimuPara.TEST_EXPLORER_SPEED, SimuPara.TEST_EXPLORER_DAMAGE,
 				SimuPara.TEST_EXPLORER_SCOPE, SimuPara.TEST_EXPLORER_NAME, explorerMap,
 				SimuPara.TEST_COMMUNICATION_RANGE);
 	}
