@@ -1,6 +1,9 @@
 package process;
 
+import java.util.ArrayList;
+
 import data.entity.Explorer;
+import process.action.Action;
 import process.strategy.ExplorationStrategy;
 
 /**
@@ -8,10 +11,11 @@ import process.strategy.ExplorationStrategy;
  * explorer in the simulation environment.
  *
  */
-public class ExplorerManager extends Thread {
+public class ExplorerManager extends Thread implements LivingEntityManager {
 	private Simulation simulation;
 	private Explorer explorer;
 	private ExplorationStrategy strategy;
+	private ArrayList<Action> actions = new ArrayList<Action>();
 
 	private boolean dead = false;
 	private boolean running = false;
@@ -21,20 +25,26 @@ public class ExplorerManager extends Thread {
 		this.explorer = explorer;
 	}
 
-	public ExplorationStrategy getStrategy() {
-		return strategy;
-	}
-
-	public void setStrategy(ExplorationStrategy strategy) {
-		this.strategy = strategy;
-	}
-
 	@Override
 	public void run() {
 		while (!dead && running) {
 			SimulationUtility.unitTime();
-			// TODO
+			strategy.decide();
+			for (Action action : actions) {
+				action.execute();
+			}
+			actions.clear();
 		}
+	}
+
+	public void planAction(Action action) {
+		if (!actions.contains(action)) {
+			actions.add(action);
+		}
+	}
+
+	public void remove(Action action) {
+		actions.remove(action);
 	}
 
 	public Simulation getSimulation() {
@@ -49,10 +59,20 @@ public class ExplorerManager extends Thread {
 		return explorer.getName();
 	}
 
+	public ExplorationStrategy getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(ExplorationStrategy strategy) {
+		this.strategy = strategy;
+	}
+
+	@Override
 	public void updatePosition(double[] newPosition) {
 		explorer.setPosition(newPosition);
 	}
 
+	@Override
 	public void updateHealth(int newHealth) {
 		explorer.setHealth(newHealth);
 	}

@@ -2,6 +2,7 @@ package environmentcreation;
 
 import java.util.ArrayList;
 
+import data.entity.Bear;
 import data.entity.LivingEntity;
 
 /**
@@ -16,9 +17,9 @@ public class AnimalsCreator {
 	public static ArrayList<LivingEntity> creation(int animalAmount){
 		
 		ArrayList<LivingEntity> animals = new ArrayList<>();
-		animals.add(new LivingEntity("Bear", new double[]{75.2, 52.0}, new double[]{2.0, 1.0}, 25, 5, 20, 3));
-		animals.add(new LivingEntity("Bear", new double[]{95, 93.2}, new double[]{2.0, 1.0}, 25, 5, 20, 3));
-		animals.add(new LivingEntity("Bear", new double[]{23.2, 18.0}, new double[]{2.0, 1.0}, 25, 5, 20, 3));
+		animals.add(new Bear("Bear", new double[]{75.2, 52.0}, new double[]{2.0, 1.0}, 25, 5, 20, 3));
+		animals.add(new Bear("Bear", new double[]{95, 93.2}, new double[]{2.0, 1.0}, 25, 5, 20, 3));
+		animals.add(new Bear("Bear", new double[]{23.2, 18.0}, new double[]{2.0, 1.0}, 25, 5, 20, 3));
 		return animals;
 		
 	}

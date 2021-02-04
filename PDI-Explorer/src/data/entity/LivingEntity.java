@@ -1,6 +1,6 @@
 package data.entity;
 
-public class LivingEntity extends BreakableEntity {
+public abstract class LivingEntity extends BreakableEntity {
 
 	private int speed;
 	private int damage;

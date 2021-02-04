@@ -1,6 +1,8 @@
 package data.entity;
 
-public class Entity {
+import process.EntityVisitor;
+
+public abstract class Entity {
 
 	private String type;
 	private double position[] = new double[2];
@@ -36,4 +38,5 @@ public class Entity {
 		this.size = size;
 	}	
 	
+	public abstract<T> T accept(EntityVisitor<T> visitor);
 }

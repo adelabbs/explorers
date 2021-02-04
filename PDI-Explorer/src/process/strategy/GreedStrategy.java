@@ -2,21 +2,20 @@ package process.strategy;
 
 import process.ExplorerManager;
 
-public class GreedStrategy implements ExplorationStrategy {
-
-	private ExplorerManager explorerManager;
+/**
+ * With the greed strategy the explorer will attempt to reach a chest at all cost
+ * 
+ *
+ */
+public class GreedStrategy extends ExplorationStrategy {
 
 	public GreedStrategy(ExplorerManager explorerManager) {
-		this.explorerManager = explorerManager;
-	}
-
-	public ExplorerManager getExplorerManager() {
-		return explorerManager;
+		super(explorerManager);
 	}
 
 	@Override
 	public void decide() {
-		// TODO Auto-generated method stub
-
+		// TODO
 	}
+
 }

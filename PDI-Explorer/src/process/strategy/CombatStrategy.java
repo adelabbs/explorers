@@ -2,20 +2,20 @@ package process.strategy;
 
 import process.ExplorerManager;
 
-public class CombatStrategy implements ExplorationStrategy {
-
-	private ExplorerManager explorerManager;
+/**
+ * With the combat strategy the explorers will regroup to fight any animal they encounter
+ * 
+ *
+ */
+public class CombatStrategy extends ExplorationStrategy {
 
 	public CombatStrategy(ExplorerManager explorerManager) {
-		this.explorerManager = explorerManager;
-	}
-
-	public ExplorerManager getExplorerManager() {
-		return explorerManager;
+		super(explorerManager);
 	}
 
 	@Override
 	public void decide() {
-		// Use manager data to make a decision.
+		// TODO
 	}
+
 }

@@ -8,7 +8,7 @@ public class TestThread extends Thread {
 	private static final int EXPLORER_AMOUNT = 3;
 	private static final int ANIMAL_AMOUNT = 0;
 	private static final int CHEST_AMOUNT = 0;
-	private static final int EXPLORATION_STRATEGY = 0;
+	private static final int EXPLORATION_STRATEGY = 4;
 	Simulation simulation;
 
 	public TestThread() {

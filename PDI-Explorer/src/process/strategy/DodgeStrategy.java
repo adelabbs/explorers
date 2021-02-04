@@ -2,21 +2,20 @@ package process.strategy;
 
 import process.ExplorerManager;
 
-public class DodgeStrategy implements ExplorationStrategy {
-
-	private ExplorerManager explorerManager;
+/**
+ * With the dodge strategy the explorer tries to avoid danger as much as possible.
+ * 
+ *
+ */
+public class DodgeStrategy extends ExplorationStrategy {
 
 	public DodgeStrategy(ExplorerManager explorerManager) {
-		this.explorerManager = explorerManager;
-	}
-
-	public ExplorerManager getExplorerManager() {
-		return explorerManager;
+		super(explorerManager);
 	}
 
 	@Override
 	public void decide() {
-		// TODO Auto-generated method stub
-
+		// TODO
 	}
+
 }
