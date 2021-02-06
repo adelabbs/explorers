@@ -1,5 +1,6 @@
 package move_actions;
 
+import data.entity.Animal;
 import data.entity.Entity;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
@@ -19,6 +20,10 @@ public class Travel {
 	private static final int EAST = 2;
 	private static final int SOUTH = 3;
 	private static final int WEST = 4;
+	
+	// Territory's borders for all animals
+	private static final double ANIMAL_MAX_TERRITORY = 20;
+		
 
 	private double nextPos[] = null;
 
@@ -72,6 +77,38 @@ public class Travel {
 		}
 		//Or check for a new position
 		randomMovement(entity);
+	}
+	
+	/*
+	 * This method is used to determine the movement of an animal
+	 * Two cases : 
+	 * 1) The animal is on the border -> The animal move back
+	 * 2) The animal is inside his territory -> Random Movement
+	 */
+	public void moveAnimal(Animal animal) {
+		double[] nextPosition = animal.getPosition();
+		//If the animal is located on his territory's border :
+		if(Math.abs(nextPosition[0]) == ANIMAL_MAX_TERRITORY || 
+				Math.abs(nextPosition[1]) == ANIMAL_MAX_TERRITORY) {
+			// axe X 
+			if(nextPosition[0] > 0) {
+				nextPosition[0]--;
+			} else {
+				nextPosition[0]++;
+			}
+			// axe Y
+			if(nextPosition[1] > 0) {
+				nextPosition[1]--;
+			} else {
+				nextPosition[1]++;
+			}
+			//Set new location
+			animal.setPosition(nextPosition);
+		}
+		//If not, random movement :
+		else {
+			randomMovement(animal);
+		}
 	}
 	
 }
