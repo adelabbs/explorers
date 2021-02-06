@@ -14,7 +14,10 @@ public abstract class MoveAction implements Action {
 	public static final int WEST = 4;
 
 	// Absolute border for square map
-	private static int MAP_BORDER = 90;
+	private static int MAP_BORDER_MAX = 89;
+	private static int MAP_BORDER_MIN = 0;
+	
+	
 
 	private int direction;
 	private LivingEntity entity;
@@ -69,13 +72,23 @@ public abstract class MoveAction implements Action {
 				return false;
 			}
 		}
-		if (nextPosition[0] >= Math.abs(MAP_BORDER) || (nextPosition[1] >= Math.abs(MAP_BORDER))) {
+		if (checkGBorderMap(nextPosition) && checkLBorderMap(nextPosition)) {
 			return false;
-
 		}
 		return true;
 	}
+	
+	
+	private boolean checkLBorderMap(double[] position) {
+		return position[0] >= MAP_BORDER_MIN && position[1] >= MAP_BORDER_MIN;
+	}
+	
+	private boolean checkGBorderMap(double[] position) {
+		return position[0] <= MAP_BORDER_MAX && position[1] <= MAP_BORDER_MAX;
+	}
 
+	
+	
 	private int pickRandomDirection() {
 		return (int) (MIN + Math.random() * ((MAX - MIN) + 1));
 	}

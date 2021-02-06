@@ -24,8 +24,9 @@ public class Travel {
 	// Territory's borders for all animals
 	private static final double ANIMAL_MAX_TERRITORY = 20;
 
-	//Absolute border for square map
-	private static int MAP_BORDER = 90;
+	// Absolute border for square map
+	private static int MAP_BORDER_MAX = 89;
+	private static int MAP_BORDER_MIN = 0;
 
 	private double nextPos[] = null;
 
@@ -39,16 +40,14 @@ public class Travel {
 	}
 	
 	// This method is used to know if the entity's destination is free or not out of border
-	public boolean checkForCollide(double[] nextPosition) {
-		for(Entity e : Environment.getInstance().getObstacles()) {
-			if(e.getPosition() == nextPosition) {
+	private boolean checkForCollide(double[] nextPosition) {
+		for (Entity e : Environment.getInstance().getObstacles()) {
+			if (e.getPosition() == nextPosition) {
 				return false;
 			}
 		}
-		if(nextPosition[0] == Math.abs(MAP_BORDER) || 
-				(nextPosition[1] == Math.abs(MAP_BORDER))){
+		if (checkGBorderMap(nextPosition) && checkLBorderMap(nextPosition)) {
 			return false;
-			
 		}
 		return true;
 	}
@@ -118,6 +117,14 @@ public class Travel {
 		else {
 			randomMovement(animal);
 		}
+	}
+	
+	private boolean checkLBorderMap(double[] position) {
+		return position[0] >= MAP_BORDER_MIN && position[1] >= MAP_BORDER_MIN;
+	}
+	
+	private boolean checkGBorderMap(double[] position) {
+		return position[0] <= MAP_BORDER_MAX && position[1] <= MAP_BORDER_MAX;
 	}
 	
 }
