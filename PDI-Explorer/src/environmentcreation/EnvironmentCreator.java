@@ -17,7 +17,8 @@ public class EnvironmentCreator {
 	public static void creation(int explorerAmount, int animalAmount, int chestAmount) throws EntityCreationException {
 	
 		Environment.getInstance().setMap(MapCreator.creation());
-		Environment.getInstance().setEntities(EntityCreator.creation(explorerAmount, animalAmount, chestAmount));
+		Environment.getInstance().setEntities(EntityCreator.creation(explorerAmount, animalAmount));
+		Environment.getInstance().setObstacles(ObstaclesCreator.creation(chestAmount));
 		Environment.getInstance().setExplorerAmount(explorerAmount);
 		Environment.getInstance().setExplorerInit(explorerAmount);
 		Environment.getInstance().setChestAmount(chestAmount);
