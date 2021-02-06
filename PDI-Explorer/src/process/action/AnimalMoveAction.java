@@ -21,13 +21,13 @@ public class AnimalMoveAction extends MoveAction {
 		double[] nextPosition = getEntity().getPosition();
 		// If the entity is located on his territory's border :
 		if (Math.abs(nextPosition[0]) >= ANIMAL_MAX_TERRITORY || Math.abs(nextPosition[1]) >= ANIMAL_MAX_TERRITORY) {
-			// axe X
+			//Y axis
 			if (nextPosition[0] > 0) {
 				nextPosition[0]--;
 			} else {
 				nextPosition[0]++;
 			}
-			// axe Y
+			//X axis
 			if (nextPosition[1] > 0) {
 				nextPosition[1]--;
 			} else {
@@ -41,5 +41,4 @@ public class AnimalMoveAction extends MoveAction {
 			super.execute();
 		}
 	}
-
 }

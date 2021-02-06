@@ -31,7 +31,6 @@ public class ExplorerManager extends LivingEntityManager {
 				action.execute();
 				removeAction();
 			}
-			System.out.println(explorer.getName() + "[" + explorer.getPosition()[0] + explorer.getPosition()[1] + "]");
 		}
 	}
 

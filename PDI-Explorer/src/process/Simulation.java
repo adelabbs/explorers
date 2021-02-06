@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import data.simulation.SimulationEntry;
 import environmentcreation.EnvironmentCreator;
 import environmentcreation.event.EntityCreationException;
+import process.communication.CommunicationSystem;
+import process.communication.Radio;
 import process.manager.ExplorerManager;
 import process.manager.LivingEntityManager;
 import process.visitor.ManagerCreationVisitor;
@@ -25,6 +27,8 @@ public class Simulation {
 
 	private ArrayList<LivingEntityManager> managers = new ArrayList<LivingEntityManager>();
 
+	private CommunicationSystem communicationSystem;
+
 	/**
 	 * 
 	 * @param simulationEntry the simulation entry parameters
@@ -40,16 +44,25 @@ public class Simulation {
 		int chestAmount = simulationEntry.getChestAmount();
 		try {
 			EnvironmentCreator.creation(explorerAmount, animalAmount, chestAmount);
-			Environment e = Environment.getInstance();
-			for (LivingEntity livingEntity : e.getEntities()) {
-				ManagerCreationVisitor visitor = new ManagerCreationVisitor(this, simulationEntry);
-				LivingEntityManager livingEntityManager = livingEntity.accept(visitor);
-				managers.add(livingEntityManager);
-			}
+			buildManagers();
+			buildCommunicationSystem();
 			setState(SimulationState.READY);
 		} catch (EntityCreationException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void buildManagers() {
+		Environment e = Environment.getInstance();
+		for (LivingEntity livingEntity : e.getEntities()) {
+			ManagerCreationVisitor visitor = new ManagerCreationVisitor(this, simulationEntry);
+			LivingEntityManager livingEntityManager = livingEntity.accept(visitor);
+			managers.add(livingEntityManager);
+		}
+	}
+
+	private void buildCommunicationSystem() {
+		communicationSystem = new Radio();
 	}
 
 	public void launch() {
@@ -89,6 +102,10 @@ public class Simulation {
 
 	public ArrayList<LivingEntityManager> getManagers() {
 		return managers;
+	}
+
+	public CommunicationSystem getCommunicationSystem() {
+		return communicationSystem;
 	}
 
 	public SimulationState getState() {
