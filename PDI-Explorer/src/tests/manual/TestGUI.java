@@ -5,7 +5,6 @@ import java.awt.Container;
 
 import javax.swing.JFrame;
 
-import GUI.Dashboard;
 import data.simulation.SimulationEntry;
 import process.Simulation;
 import process.SimulationUtility;
