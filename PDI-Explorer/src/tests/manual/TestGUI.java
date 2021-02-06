@@ -30,7 +30,7 @@ public class TestGUI extends JFrame implements Runnable {
 		super("Test movement");
 		simulationEntry = new SimulationEntry(EXPLORER_AMOUNT, ANIMAL_AMOUNT, CHEST_AMOUNT, EXPLORATION_STRATEGY);
 		simulation = new Simulation(simulationEntry);
-		dashboard = new Dashboard(simulation);
+		dashboard = new Dashboard();
 		initLayout();
 	}
 

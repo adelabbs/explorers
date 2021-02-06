@@ -1,8 +1,10 @@
 package process.factory;
 
+import data.entity.Bear;
 import data.entity.Explorer;
-import process.ExplorerManager;
 import process.Simulation;
+import process.manager.BearManager;
+import process.manager.ExplorerManager;
 import process.strategy.CombatStrategy;
 import process.strategy.GreedStrategy;
 import process.strategy.RandomStrategy;
@@ -35,5 +37,10 @@ public class ManagerFactory {
 		default:
 			throw new IllegalArgumentException("Unknown strategy: " + explorationStrategy);
 		}
+	}
+	
+	
+	public static BearManager createBearManager(Simulation simulation, Bear bear) {
+		return new BearManager(simulation, bear);
 	}
 }

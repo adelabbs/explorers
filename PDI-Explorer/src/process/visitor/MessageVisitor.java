@@ -1,5 +1,5 @@
 package process.visitor;
 
-public interface MessageVisitor {
-
+public interface MessageVisitor<T> {
+	// TODO
 }
