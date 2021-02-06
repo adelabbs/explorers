@@ -1,10 +1,10 @@
 package process.strategy;
 
-import process.ExplorerManager;
+import process.manager.ExplorerManager;
 
 /**
- * With the combat strategy the explorers will regroup to fight any animal they encounter
- * 
+ * With the combat strategy the explorers will regroup to fight any animal they
+ * encounter
  *
  */
 public class CombatStrategy extends ExplorationStrategy {

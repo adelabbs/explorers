@@ -7,7 +7,8 @@ import data.entity.Bear;
 import data.entity.Chest;
 import data.entity.Explorer;
 import data.entity.Obstacle;
-import process.EntityVisitor;
+import process.visitor.EntityVisitor;
+import tests.manual.Dashboard;
 
 public class PaintVisitor implements EntityVisitor<Void> {
 	private Graphics graphics;

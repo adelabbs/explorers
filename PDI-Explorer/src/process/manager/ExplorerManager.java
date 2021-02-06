@@ -1,6 +1,8 @@
-package process;
+package process.manager;
 
 import data.entity.Explorer;
+import process.Simulation;
+import process.SimulationUtility;
 import process.action.Action;
 import process.strategy.ExplorationStrategy;
 
@@ -9,14 +11,12 @@ import process.strategy.ExplorationStrategy;
  * explorer in the simulation environment.
  *
  */
-public class ExplorerManager extends Thread implements LivingEntityManager {
+public class ExplorerManager extends LivingEntityManager {
 	private Simulation simulation;
 	private Explorer explorer;
 	private ExplorationStrategy strategy;
 	private Action action = null;
 
-	private boolean dead = false;
-	private boolean running = false;
 
 	public ExplorerManager(Simulation simulation, Explorer explorer) {
 		this.simulation = simulation;
@@ -25,7 +25,7 @@ public class ExplorerManager extends Thread implements LivingEntityManager {
 
 	@Override
 	public void run() {
-		while (!dead && running) {
+		while (!isDead() && isRunning()) {
 			SimulationUtility.unitTime();
 			strategy.decide();
 			if (action != null) {
@@ -73,19 +73,4 @@ public class ExplorerManager extends Thread implements LivingEntityManager {
 		explorer.setHealth(newHealth);
 	}
 
-	public boolean isDead() {
-		return dead;
-	}
-
-	public void setDead(boolean isDead) {
-		this.dead = isDead;
-	}
-
-	public boolean isRunning() {
-		return running;
-	}
-
-	public void setRunning(boolean isRunning) {
-		this.running = isRunning;
-	}
 }

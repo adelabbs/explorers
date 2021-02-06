@@ -1,13 +1,13 @@
-package GUI;
+package tests.manual;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import data.entity.Explorer;
-import process.ExplorerManager;
-import process.Simulation;
+import GUI.PaintVisitor;
+import data.entity.LivingEntity;
+import data.simulation.Environment;
 
 public class Dashboard extends JPanel {
 
@@ -15,23 +15,17 @@ public class Dashboard extends JPanel {
 
 	public static final int TILE_SIZE = 10;
 
-	private Simulation simulation;
-
-	public Dashboard(Simulation simulation) {
-		this.simulation = simulation;
-	}
-
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		printMap(g);
-		printExplorers(g);
+		printLivingEntities(g);
 	}
 
 	private void printMap(Graphics g) {
 		for (int i = 0; i < 90; i++) {
 			for (int j = 0; j < 90; j++) {
-				switch (simulation.getEnvironment().getMap().getTile(i, j).getType()) {
+				switch (Environment.getInstance().getMap().getTile(i, j).getType()) {
 				case "w":
 					g.setColor(Color.BLUE);
 					break;
@@ -44,11 +38,11 @@ public class Dashboard extends JPanel {
 		}
 	}
 
-	private void printExplorers(Graphics g) {
-		for (ExplorerManager explorerManager : simulation.getExplorerManagers()) {
+	private void printLivingEntities(Graphics g) {
+		Environment e = Environment.getInstance();
+		for (LivingEntity livingEntity : e.getEntities()) {
 			PaintVisitor paintVisitor = new PaintVisitor(g);
-			Explorer explorer = explorerManager.getExplorer();
-			explorer.accept(paintVisitor);
+			livingEntity.accept(paintVisitor);
 		}
 	}
 

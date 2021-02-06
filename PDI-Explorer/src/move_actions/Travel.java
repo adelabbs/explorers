@@ -1,9 +1,6 @@
 package move_actions;
 
-import java.util.ArrayList;
-
 import data.entity.Entity;
-import data.entity.Explorer;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
 

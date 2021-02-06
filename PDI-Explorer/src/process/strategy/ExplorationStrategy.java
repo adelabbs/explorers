@@ -1,7 +1,7 @@
 package process.strategy;
 
-import process.ExplorerManager;
 import process.action.Action;
+import process.manager.ExplorerManager;
 
 /**
  * This class allows us to abstract the decision-making process of the

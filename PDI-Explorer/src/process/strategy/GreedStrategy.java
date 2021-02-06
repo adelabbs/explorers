@@ -1,9 +1,10 @@
 package process.strategy;
 
-import process.ExplorerManager;
+import process.manager.ExplorerManager;
 
 /**
- * With the greed strategy the explorer will attempt to reach a chest at all cost
+ * With the greed strategy the explorer will attempt to reach a chest at all
+ * cost
  * 
  *
  */
