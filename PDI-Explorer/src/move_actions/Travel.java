@@ -86,11 +86,13 @@ public class Travel {
 		randomMovement(entity);
 	}
 	
-	/*
+	/**
 	 * This method is used to determine the movement of an animal
 	 * Two cases : 
 	 * 1) The animal is on the border -> The animal move back
 	 * 2) The animal is inside his territory -> Random Movement
+	 * 
+	 * @param animal
 	 */
 	public void moveAnimal(Animal animal) {
 		double[] nextPosition = animal.getPosition();
