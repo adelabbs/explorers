@@ -33,7 +33,7 @@ public class PaintVisitor implements EntityVisitor<Void> {
 		graphics.setColor(Color.DARK_GRAY);
 		int i = (int) entity.getPosition()[0];
 		int j = (int) entity.getPosition()[1];
-		graphics.fillRect(j * Dashboard.TILE_SIZE, i * Dashboard.TILE_SIZE, Dashboard.TILE_SIZE, Dashboard.TILE_SIZE);
+		graphics.fillRect(j * Dashboard.TILE_SIZE, i * Dashboard.TILE_SIZE, (int) (Dashboard.TILE_SIZE * entity.getSize()[0]), (int) (Dashboard.TILE_SIZE* entity.getSize()[1]));
 		return null;
 	}
 
@@ -42,7 +42,7 @@ public class PaintVisitor implements EntityVisitor<Void> {
 		graphics.setColor(Color.RED);
 		int i = (int) entity.getPosition()[0];
 		int j = (int) entity.getPosition()[1];
-		graphics.fillRect(j * Dashboard.TILE_SIZE, i * Dashboard.TILE_SIZE, Dashboard.TILE_SIZE, Dashboard.TILE_SIZE);
+		graphics.fillRect(j * Dashboard.TILE_SIZE, i * Dashboard.TILE_SIZE, (int) (Dashboard.TILE_SIZE * entity.getSize()[0]), (int) (Dashboard.TILE_SIZE* entity.getSize()[1]));
 		return null;
 	}
 }
