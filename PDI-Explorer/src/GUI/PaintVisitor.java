@@ -39,7 +39,10 @@ public class PaintVisitor implements EntityVisitor<Void> {
 
 	@Override
 	public Void visit(Bear entity) {
-		// TODO Auto-generated method stub
+		graphics.setColor(Color.RED);
+		int i = (int) entity.getPosition()[0];
+		int j = (int) entity.getPosition()[1];
+		graphics.fillRect(j * Dashboard.TILE_SIZE, i * Dashboard.TILE_SIZE, Dashboard.TILE_SIZE, Dashboard.TILE_SIZE);
 		return null;
 	}
 }
