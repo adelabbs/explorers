@@ -1,6 +1,7 @@
 package process.strategy;
 
 import data.simulation.Environment;
+import process.action.ExplorerMoveAction;
 import process.action.MoveAction;
 import process.manager.ExplorerManager;
 
@@ -12,7 +13,7 @@ public class RandomStrategy extends ExplorationStrategy {
 
 	@Override
 	public void decide() {
-		MoveAction action = new MoveAction(getExplorerManager().getExplorer(),
+		MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(),
 				Environment.getInstance());
 		super.planAction(action);
 	}

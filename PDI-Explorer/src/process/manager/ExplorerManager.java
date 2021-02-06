@@ -17,7 +17,6 @@ public class ExplorerManager extends LivingEntityManager {
 	private ExplorationStrategy strategy;
 	private Action action = null;
 
-
 	public ExplorerManager(Simulation simulation, Explorer explorer) {
 		this.simulation = simulation;
 		this.explorer = explorer;
@@ -32,6 +31,7 @@ public class ExplorerManager extends LivingEntityManager {
 				action.execute();
 				removeAction();
 			}
+			System.out.println(explorer.getName() + "[" + explorer.getPosition()[0] + explorer.getPosition()[1] + "]");
 		}
 	}
 

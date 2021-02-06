@@ -1,11 +1,16 @@
 package process.manager;
 
 import data.entity.Bear;
+import data.simulation.Environment;
 import process.Simulation;
+import process.SimulationUtility;
+import process.action.Action;
+import process.action.AnimalMoveAction;
 
 public class BearManager extends LivingEntityManager {
 	private Simulation simulation;
 	private Bear bear;
+	private Action action = null;
 
 	public BearManager(Simulation simulation, Bear bear) {
 		this.simulation = simulation;
@@ -30,19 +35,29 @@ public class BearManager extends LivingEntityManager {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		while (!isDead() && isRunning()) {
+			SimulationUtility.unitTime();
+			action = new AnimalMoveAction(bear, Environment.getInstance());
+			action.execute();
+		}
 	}
 
 	@Override
 	public void updatePosition(double[] newPosition) {
-		// TODO Auto-generated method stub
-
+		bear.setPosition(newPosition);
 	}
 
 	@Override
 	public void updateHealth(int newHealth) {
-		// TODO Auto-generated method stub
+		bear.setHealth(newHealth);
+	}
 
+	public Action getAction() {
+		return action;
+	}
+
+	public void setAction(Action action) {
+		this.action = action;
 	}
 
 }
