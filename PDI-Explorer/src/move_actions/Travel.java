@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import data.entity.Entity;
 import data.entity.Explorer;
+import data.entity.LivingEntity;
 import data.simulation.Environment;
 
 /*
@@ -21,31 +22,21 @@ public class Travel {
 	private static final int EAST = 2;
 	private static final int SOUTH = 3;
 	private static final int WEST = 4;
-	
-	
-	private Environment environment = null;
-	private ArrayList<Explorer> explorers = null;
-	private ArrayList<Entity> obstacles = null;
 
 	private double nextPos[] = null;
 
-	public Travel(Environment environment) {
-		this.environment = environment;
-		explorers = environment.getExplorers();
-		obstacles = environment.getObstacles();
-	}
+	public Travel() {}
 	
 	// This method iterate the ArrayList of explorers to set new position for each explorers
 	public void determineAllNewPositions() {
-		for(Explorer e : explorers) {
+		for(LivingEntity e : Environment.getInstance().getEntities()) {
 			randomMovement(e);
 		}
-		updatePosition();
 	}
 	
 	// This method is used to know if the entity's destination is free
 	public boolean checkForCollide(double[] nextPosition) {
-		for(Entity e : obstacles) {
+		for(Entity e : Environment.getInstance().getObstacles()) {
 			if(e.getPosition() == nextPosition) {
 				return false;
 			}
@@ -54,9 +45,9 @@ public class Travel {
 	}
 	
 	// Random movement for explorers (only 4 directions) this method will be the same for animals
-	public void randomMovement(Explorer explorer) {
+	public void randomMovement(LivingEntity entity) {
 		int direction = (int) (MIN + Math.random()*((MAX-MIN) + 1));
-		nextPos = explorer.getPosition();
+		nextPos = entity.getPosition();
 		
 		switch(direction) {
 		case NORTH:
@@ -80,13 +71,10 @@ public class Travel {
 		//If free :
 		if(checkForCollide(nextPos)) {
 			//Set the position for the next tick
-			explorer.setPosition(nextPos);
+			entity.setPosition(nextPos);
 		}
 		//Or check for a new position
-		randomMovement(explorer);
+		randomMovement(entity);
 	}
 	
-	public void updatePosition() {
-		environment.setExplorers(explorers);
-	}
 }

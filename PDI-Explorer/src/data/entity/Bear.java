@@ -2,7 +2,7 @@ package data.entity;
 
 import process.EntityVisitor;
 
-public class Bear extends LivingEntity {
+public class Bear extends Animal  {
 
 	public Bear(String type, double[] position, double[] size, int maxHealth, int speed, int damage, int scope) {
 		super(type, position, size, maxHealth, speed, damage, scope);
