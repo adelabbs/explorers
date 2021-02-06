@@ -6,7 +6,8 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import data.entity.Explorer;
+import GUI.PaintVisitor;
+import data.entity.Entity;
 import data.simulation.Environment;
 import environmentcreation.EnvironmentCreator;
 import environmentcreation.event.EntityCreationException;
@@ -15,7 +16,6 @@ import environmentcreation.event.EntityCreationException;
 public class TestImages extends JPanel {
 
 	private static final int TILE_SIZE = 11;
-	private static Environment environment;
 	
 	public TestImages() {
 		
@@ -29,9 +29,12 @@ public class TestImages extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		PaintVisitor pv = new PaintVisitor(g);
+		
+		//faire fonction plus jolie externe
 		for(int i = 0; i < 90; i ++) {
 			for(int j = 0; j < 90; j ++) {
-				switch(environment.getMap().getTile(i, j).getType()) {
+				switch(Environment.getInstance().getMap().getTile(i, j).getType()) {
 				case "w" :
 					g.setColor(Color.BLUE);
 					break;
@@ -43,20 +46,15 @@ public class TestImages extends JPanel {
 			}
 		}
 		
-		g.setColor(Color.DARK_GRAY);
-		for(int x = 0; x < environment.getExplorerAmount(); x ++) {
-			Explorer e = environment.getExplorers().get(x);
-			int i = (int) e.getPosition()[0];
-			int j = (int) e.getPosition()[1];
-			g.fillRect(j*TILE_SIZE, i*TILE_SIZE, TILE_SIZE, TILE_SIZE);
-		}
+		for(Entity entity : Environment.getInstance().getEntities())
+			entity.accept(pv);
 		
 		g.dispose();
 	}
 	
 	public static void main(String[] args) {
 		try {
-			environment = EnvironmentCreator.creation(3, 0, 0);
+			EnvironmentCreator.creation(3, 0, 0);
 		} catch (EntityCreationException e) {
 			e.printStackTrace();
 		}

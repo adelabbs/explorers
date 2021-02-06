@@ -21,7 +21,8 @@ public final class Environment {
 	private static volatile Environment instance = null;
 	
 	private Map map;
-	private ArrayList<Entity> entities;
+	private ArrayList<LivingEntity> entities;
+	private ArrayList<Entity> obstacles;
 	private int explorerAmount;
 	private int explorerInit;
 	private int chestAmount;
@@ -42,9 +43,12 @@ public final class Environment {
 			}
 		return Environment.instance;
 	}
-	
-	public ArrayList<Entity> getEntities(){
+
+	public ArrayList<LivingEntity> getEntities(){
 		return entities;
+	}
+	public ArrayList<Entity> getObstacles(){
+		return obstacles;
 	}
 	public int getExplorerAmount() {
 		return explorerAmount;
@@ -64,8 +68,11 @@ public final class Environment {
 	public void setMap(Map map) {
 		this.map = map;
 	}
-	public void setEntities(ArrayList<Entity> entities) {
+	public void setEntities(ArrayList<LivingEntity> entities) {
 		this.entities = entities;
+	}
+	public void setObstacles(ArrayList<Entity> obstacles) {
+		this.obstacles = obstacles;
 	}
 	public void setExplorerAmount(int explorerAmount) {
 		this.explorerAmount = explorerAmount;

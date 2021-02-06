@@ -38,7 +38,8 @@ public class Simulation {
 		int chestAmount = simulationEntry.getChestAmount();
 		int strategy = simulationEntry.getExplorationStrategy();
 		try {
-			environment = EnvironmentCreator.creation(explorerAmount, animalAmount, chestAmount);
+			EnvironmentCreator.creation(explorerAmount, animalAmount, chestAmount);
+//			faire visitor
 			for (Explorer explorer : environment.getExplorers()) {
 				ExplorerManager explorerManager = ManagerFactory.createExplorerManager(this, explorer, strategy);
 				explorerManagers.add(explorerManager);
