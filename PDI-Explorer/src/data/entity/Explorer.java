@@ -1,7 +1,7 @@
 package data.entity;
 
 import data.map.ExplorerMap;
-import process.EntityVisitor;
+import process.visitor.EntityVisitor;
 
 public class Explorer extends LivingEntity {
 

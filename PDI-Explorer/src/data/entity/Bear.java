@@ -1,6 +1,6 @@
 package data.entity;
 
-import process.EntityVisitor;
+import process.visitor.EntityVisitor;
 
 public class Bear extends LivingEntity {
 
