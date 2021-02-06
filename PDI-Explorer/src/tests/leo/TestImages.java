@@ -54,7 +54,7 @@ public class TestImages extends JPanel {
 	
 	public static void main(String[] args) {
 		try {
-			EnvironmentCreator.creation(3, 0, 0);
+			EnvironmentCreator.creation(3, 0, 3);
 		} catch (EntityCreationException e) {
 			e.printStackTrace();
 		}
