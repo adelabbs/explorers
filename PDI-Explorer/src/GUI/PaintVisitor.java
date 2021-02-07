@@ -32,18 +32,20 @@ public class PaintVisitor implements EntityVisitor<Void> {
 	@Override
 	public Void visit(Explorer entity) {
 		graphics.setColor(Color.DARK_GRAY);
-		int i = (int) entity.getPosition()[0];
-		int j = (int) entity.getPosition()[1];
-		graphics.fillRect(j * Dashboard.TILE_SIZE, i * Dashboard.TILE_SIZE, (int) (Dashboard.TILE_SIZE * entity.getSize()[0]), (int) (Dashboard.TILE_SIZE* entity.getSize()[1]));
+		int y = (int) entity.getPosition()[0];
+		int x = (int) entity.getPosition()[1];
+		graphics.fillRect(x * Dashboard.TILE_SIZE, y * Dashboard.TILE_SIZE,
+				(int) (Dashboard.TILE_SIZE * entity.getSize()[1]), (int) (Dashboard.TILE_SIZE * entity.getSize()[0]));
 		return null;
 	}
 
 	@Override
 	public Void visit(Bear entity) {
 		graphics.setColor(Color.RED);
-		int i = (int) entity.getPosition()[0];
-		int j = (int) entity.getPosition()[1];
-		graphics.fillRect(j * Dashboard.TILE_SIZE, i * Dashboard.TILE_SIZE, (int) (Dashboard.TILE_SIZE * entity.getSize()[0]), (int) (Dashboard.TILE_SIZE* entity.getSize()[1]));
+		int y = (int) entity.getPosition()[0];
+		int x = (int) entity.getPosition()[1];
+		graphics.fillRect(x * Dashboard.TILE_SIZE, y * Dashboard.TILE_SIZE,
+				(int) (Dashboard.TILE_SIZE * entity.getSize()[1]), (int) (Dashboard.TILE_SIZE * entity.getSize()[0]));
 		return null;
 	}
 }

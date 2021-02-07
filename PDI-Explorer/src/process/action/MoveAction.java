@@ -14,10 +14,8 @@ public abstract class MoveAction implements Action {
 	public static final int WEST = 4;
 
 	// Absolute border for square map
-	private static int MAP_BORDER_MAX = 89;
-	private static int MAP_BORDER_MIN = 0;
-	
-	
+	private static double MAP_BORDER_MAX = 89;
+	private static double MAP_BORDER_MIN = 0;
 
 	private int direction;
 	private LivingEntity entity;
@@ -37,58 +35,62 @@ public abstract class MoveAction implements Action {
 
 	@Override
 	public void execute() {
+		double currentPosY = entity.getPosition()[0];
+		double currentPosX = entity.getPosition()[1];
 		double nextPos[] = entity.getPosition();
 		switch (direction) {
 		case NORTH:
-			nextPos[1] += 1;
-			break;
-		case EAST:
-			nextPos[0] += 1;
-			break;
-		case WEST:
 			nextPos[0] -= 1;
 			break;
-		case SOUTH:
+		case EAST:
+			nextPos[1] += 1;
+			break;
+		case WEST:
 			nextPos[1] -= 1;
+			break;
+		case SOUTH:
+			nextPos[0] += 1;
 			break;
 		}
 
 		// If free :
-		if (checkForCollide(nextPos)) {
+		if (isValid(nextPos) != false) {
 			// Set the position for the next tick
+			entity.setPosition(nextPos);
+		} else {
+			nextPos[0] = currentPosY;
+			nextPos[1] = currentPosX;
 			entity.setPosition(nextPos);
 		}
 	}
 
 	/**
-	 * This method is used to know if the entity's destination is free
+	 * This method is used to know if the entity's destination is valid
 	 * 
 	 * @param nextPosition
 	 * @return true if the destination is free
 	 */
-	private boolean checkForCollide(double[] nextPosition) {
+	private boolean isValid(double[] nextPosition) {
+		return checkForCollide(nextPosition) && checkRBorderMap(nextPosition) && checkLBorderMap(nextPosition);
+	}
+
+	private boolean checkForCollide(double[] position) {
 		for (Entity e : Environment.getInstance().getObstacles()) {
-			if (e.getPosition() == nextPosition) {
+			if ((e.getPosition()[0] == position[0]) && (e.getPosition()[1] == position[1])) {
 				return false;
 			}
 		}
-		if (checkGBorderMap(nextPosition) && checkLBorderMap(nextPosition)) {
-			return false;
-		}
 		return true;
 	}
-	
-	
+
 	private boolean checkLBorderMap(double[] position) {
-		return position[0] >= MAP_BORDER_MIN && position[1] >= MAP_BORDER_MIN;
-	}
-	
-	private boolean checkGBorderMap(double[] position) {
-		return position[0] <= MAP_BORDER_MAX && position[1] <= MAP_BORDER_MAX;
+		return (position[0] >= MAP_BORDER_MIN) && (position[1] >= MAP_BORDER_MIN);
 	}
 
-	
-	
+	private boolean checkRBorderMap(double[] position) {
+		return (position[0] <= MAP_BORDER_MAX) && (position[1] <= MAP_BORDER_MAX);
+	}
+
 	private int pickRandomDirection() {
 		return (int) (MIN + Math.random() * ((MAX - MIN) + 1));
 	}
