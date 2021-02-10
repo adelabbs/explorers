@@ -3,9 +3,9 @@ package process;
 import tests.manual.SimuPara;
 
 public class SimulationUtility {
-	
+
 	/**
-	 * Simulates the unit time (for an iteration) defined for the simulation. 
+	 * Simulates the unit time (for an iteration) defined for the simulation.
 	 */
 	public static void unitTime() {
 		try {
@@ -13,5 +13,12 @@ public class SimulationUtility {
 		} catch (InterruptedException e) {
 			System.err.println(e.getMessage());
 		}
+	}
+
+	public static double distance(double[] positionA, double[] positionB) throws IllegalArgumentException {
+		if (positionA.length >= 2 && positionB.length >= 2)
+			return Math.sqrt((Math.pow(positionA[0] - positionB[0], 2) + (Math.pow(positionA[1] - positionB[1], 2))));
+		else
+			throw new IllegalArgumentException();
 	}
 }

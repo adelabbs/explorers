@@ -2,6 +2,10 @@ package data.message;
 
 import java.util.Arrays;
 
+/**
+ * A {@link DangerMessage} contains the position of a potential danger
+ *
+ */
 public class DangerMessage extends Message {
 	private double[] dangerPosition;
 

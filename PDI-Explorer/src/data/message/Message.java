@@ -1,5 +1,9 @@
 package data.message;
 
+/**
+ * The abstract message type.
+ *
+ */
 public abstract class Message {
 	String message;
 
@@ -13,6 +17,11 @@ public abstract class Message {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	@Override
+	public String toString() {
+		return message;
 	}
 
 }

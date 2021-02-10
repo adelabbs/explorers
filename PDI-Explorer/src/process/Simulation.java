@@ -44,8 +44,8 @@ public class Simulation {
 		int chestAmount = simulationEntry.getChestAmount();
 		try {
 			EnvironmentCreator.creation(explorerAmount, animalAmount, chestAmount);
+			communicationSystem = new Radio();
 			buildManagers();
-			buildCommunicationSystem();
 			setState(SimulationState.READY);
 		} catch (EntityCreationException e) {
 			e.printStackTrace();
@@ -59,10 +59,6 @@ public class Simulation {
 			LivingEntityManager livingEntityManager = livingEntity.accept(visitor);
 			managers.add(livingEntityManager);
 		}
-	}
-
-	private void buildCommunicationSystem() {
-		communicationSystem = new Radio();
 	}
 
 	public void launch() {
@@ -106,6 +102,13 @@ public class Simulation {
 
 	public CommunicationSystem getCommunicationSystem() {
 		return communicationSystem;
+	}
+
+	public void addToCommunicationSystem(ExplorerManager manager) {
+		if (communicationSystem != null) {
+			communicationSystem.addExplorerManager(manager);
+			manager.setCommunicationSystem(communicationSystem);
+		}
 	}
 
 	public SimulationState getState() {
