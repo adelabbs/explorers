@@ -8,4 +8,5 @@ package process.action;
  */
 public interface Action {
 	void execute();
+	boolean isOver();
 }

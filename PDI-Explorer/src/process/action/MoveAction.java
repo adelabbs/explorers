@@ -64,6 +64,11 @@ public abstract class MoveAction implements Action {
 		}
 	}
 
+	@Override
+	public boolean isOver() {
+		return true;
+	}
+
 	/**
 	 * This method is used to know if the entity's destination is valid
 	 * 
