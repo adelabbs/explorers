@@ -1,4 +1,4 @@
-package tests.manual;
+package tests.geoffroy;
 
 public class TestSimulation {
 	public static void main(String[] args) {
