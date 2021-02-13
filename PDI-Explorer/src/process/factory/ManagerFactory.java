@@ -6,6 +6,7 @@ import process.Simulation;
 import process.manager.BearManager;
 import process.manager.ExplorerManager;
 import process.strategy.CombatStrategy;
+import process.strategy.DodgeStrategy;
 import process.strategy.GreedStrategy;
 import process.strategy.RandomStrategy;
 import tests.manual.comms.JustChattingStrategy;
@@ -31,7 +32,7 @@ public class ManagerFactory {
 			return greedExplorerManager;
 		case DODGE_STRATEGY:
 			ExplorerManager dodgeExplorerManager = new ExplorerManager(simulation, explorer);
-			dodgeExplorerManager.setStrategy(new GreedStrategy(dodgeExplorerManager));
+			dodgeExplorerManager.setStrategy(new DodgeStrategy(dodgeExplorerManager));
 			return dodgeExplorerManager;
 		case RANDOM_STRATEGY:
 			ExplorerManager randomExplorerManager = new ExplorerManager(simulation, explorer);

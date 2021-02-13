@@ -12,6 +12,7 @@ import data.entity.Explorer;
 import data.map.ExplorerMap;
 import data.map.ExplorerTile;
 import data.message.Message;
+import process.SimulationUtility;
 import process.action.Action;
 import process.action.SendMessageAction;
 import process.communication.CommunicationSystem;
@@ -69,10 +70,42 @@ public class TestCommunication {
 		assertEquals(0, sender.getMessages().size());
 		assertEquals(1, receiver1.getMessages().size());
 		assertEquals(1, receiver2.getMessages().size());
-		
-		
+
 		assertTrue(receiver1.getMessages().get(0).getMessage().equals(TEST_MESSAGE));
 		assertTrue(receiver2.getMessages().get(0).getMessage().equals(TEST_MESSAGE));
+	}
+	
+	@Test
+	public void testReceptionWithinSenderRange() {
+		Message message = new TestMessage(TEST_MESSAGE);
+		ExplorerManager sender = explorerManagers.get(0);
+		Action action = new SendMessageAction(sender, message);
+		action.execute();
+
+		ExplorerManager receiver1 = explorerManagers.get(1);
+		ExplorerManager receiver2 = explorerManagers.get(2);
+
+		int range = sender.getExplorer().getCommunicationRange();
+		double distance1 = SimulationUtility.distance(receiver1.getExplorer().getPosition(),
+				sender.getExplorer().getPosition());
+		double distance2 = SimulationUtility.distance(receiver2.getExplorer().getPosition(),
+				sender.getExplorer().getPosition());
+		
+		assertEquals(0, sender.getMessages().size());
+
+		if (distance1 <= range) {
+			assertEquals(1, receiver1.getMessages().size());
+			assertTrue(receiver1.getMessages().get(0).getMessage().equals(TEST_MESSAGE));
+		} else {
+			assertEquals(0, receiver1.getMessages().size());
+		}
+
+		if (distance2 <= range) {
+			assertEquals(1, receiver2.getMessages().size());
+			assertTrue(receiver2.getMessages().get(0).getMessage().equals(TEST_MESSAGE));
+		} else {
+			assertEquals(0, receiver2.getMessages().size());
+		}
 	}
 
 }
