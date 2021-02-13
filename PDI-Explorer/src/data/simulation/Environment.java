@@ -21,13 +21,13 @@ public final class Environment {
 	private static volatile Environment instance = null;
 	
 	private Map map;
-	private ArrayList<LivingEntity> entities;
-	private ArrayList<Entity> obstacles;
+	private ArrayList<LivingEntity> entities = new ArrayList<LivingEntity>();
+	private ArrayList<Entity> obstacles = new ArrayList<Entity>();
 	private int explorerAmount;
 	private int explorerInit;
 	private int chestAmount;
 	private int foundChest;
-	private ArrayList<Item> items;
+	private ArrayList<Item> items = new ArrayList<Item>();
 	
 	private Environment() {}
 	
@@ -89,12 +89,26 @@ public final class Environment {
 	public void setItems(ArrayList<Item> items) {
 		this.items = items;
 	}
-	public void decrementExplorerAmount() {
+	public synchronized void decrementExplorerAmount() {
 		if(explorerAmount > 0)
 			explorerAmount --;
 	}
-	public void incrementFoundChest() {
+	public synchronized void incrementFoundChest() {
 		if(foundChest < chestAmount)
 			foundChest++;
+	}
+	public synchronized void remove(LivingEntity entity) {
+		entities.remove(entity);
+	}
+	public void add(Entity entity) {
+		if(entity!= null) {
+			obstacles.add(entity);
+		}
+	}
+	public synchronized void remove(Entity entity) {
+		obstacles.remove(entity);
+	}
+	public void remove(Item item) {
+		items.remove(item);
 	}
 }
