@@ -1,23 +1,31 @@
-package GUI;
+package tests.lucas;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import data.simulation.Environment;
+import data.simulation.SimulationEntry;
 import environmentcreation.event.EntityCreationException;
+import move_actions.Travel;
+import process.Simulation;
+import process.SimulationUtility;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+@SuppressWarnings("serial")
 public class GUI2 extends JFrame implements ActionListener {
 	private static CardLayout card = new CardLayout(10, 10);
 	private static Container c;
 	JButton jb1, jb2, jb3, jb4, jb5, jb6;
 	private JPanel parameters = new JPanel();
 	private JPanel simulation = new JPanel();
+	private SideBar sideBar;
 	
 	public GUI2(GuiMap sim) throws IOException {
 		super();
@@ -49,20 +57,29 @@ public class GUI2 extends JFrame implements ActionListener {
 	    parameters.add(jb5);
 	    parameters.add(jb6);
 	    
-	    //simulation.add(sim);
 	    c.add(jb1);
 	    c.add(parameters);
-	   	c.add(sim);
+	    c.add(simulation);
+	    simulation.setLayout(new BorderLayout());
+	    simulation.add(BorderLayout.CENTER, sim);
+	    simulation.add(BorderLayout.EAST, sideBar);
+	   	//c.add(sim);
 	}
 	
 	public void actionPerformed(ActionEvent e) {  
-	    card.next(c);  
+	    card.next(c); 
 	}  
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IOException {
 		try {
+			int x = 1000;
 			GuiMap sim = new GuiMap();
 			GUI2 test = new GUI2(sim);
+			/*Travel travel = Travel(Environment.getInstance());
+			while (x > 0) {
+				
+			}*/
 		} catch (EntityCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
