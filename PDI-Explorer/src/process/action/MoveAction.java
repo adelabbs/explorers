@@ -80,6 +80,7 @@ public abstract class MoveAction implements Action {
 				return false;
 			}
 		}
+
 		return true;
 	}
 
