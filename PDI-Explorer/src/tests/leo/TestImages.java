@@ -48,17 +48,21 @@ public class TestImages extends JPanel {
 		
 		for(Entity entity : Environment.getInstance().getEntities())
 			entity.accept(pv);
+		for(Entity entity : Environment.getInstance().getObstacles())
+			entity.accept(pv);
 		
 		g.dispose();
 	}
 	
 	public static void main(String[] args) {
 		try {
-			EnvironmentCreator.creation(3, 0, 3);
+			EnvironmentCreator.creation(3, 0, 10);
 		} catch (EntityCreationException e) {
 			e.printStackTrace();
 		}
 		TestImages test = new TestImages();
+		for(Entity e : Environment.getInstance().getEntities())
+			System.out.println(e);
 	}
 
 }

@@ -17,14 +17,20 @@ public class ExplorersCreator {
 
 	public static ArrayList<Explorer> creation(int explorerAmount){
 
+		ExplorerPlacer ep = new ExplorerPlacer(explorerAmount);
+		
 		ArrayList<Explorer> explorers = new ArrayList<>();
-		explorers.add(new Explorer(new double[] {5.0, 6.0}, 15, 8, 3, 3, "Roger", 
+		for(int i = 0; i < explorerAmount; i ++)
+		explorers.add(new Explorer(ep.place(), 15, 8, 3, 3, "Roger", 
 				new ExplorerMap(new ExplorerTile[90][90]), 5));
-		explorers.add(new Explorer(new double[] {7.0, 5.0}, 15, 8, 3, 3, "Michel", 
-				new ExplorerMap(new ExplorerTile[90][90]), 5));
-		explorers.add(new Explorer(new double[] {3.0, 2.0}, 15, 8, 3, 3, "Didier", 
-				new ExplorerMap(new ExplorerTile[90][90]), 5));
+//		explorers.add(new Explorer(ep.place(), 15, 8, 3, 3, "Roger", 
+//				new ExplorerMap(new ExplorerTile[90][90]), 5));
+//		explorers.add(new Explorer(ep.place(), 15, 8, 3, 3, "Michel", 
+//				new ExplorerMap(new ExplorerTile[90][90]), 5));
+//		explorers.add(new Explorer(ep.place(), 15, 8, 3, 3, "Didier", 
+//				new ExplorerMap(new ExplorerTile[90][90]), 5));
 		return explorers;
+		
 	}
 	
 }
