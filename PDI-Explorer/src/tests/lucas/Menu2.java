@@ -133,6 +133,7 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 	    this.add(damage);
 	    this.add(scope);
 	    this.add(com);
+	    this.add(play);
 	    
 	    ButtonGroup healthGroup = new ButtonGroup();
 	    healthGroup.add(simpleShirt);
