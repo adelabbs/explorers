@@ -15,7 +15,7 @@ public class ItemFactory {
 		//Speed items
 		case "Boots" :
 			return bootsCreation();
-		case "Trecking shoes" :
+		case "Trecking_shoes" :
 			return treckingShoesCreation();
 		
 		//Damage items
@@ -55,7 +55,7 @@ public class ItemFactory {
 		return new Item("Boots", "Speed", 1);
 	}
 	private static Item treckingShoesCreation() {
-		return new Item("Trecking Shoes", "Speed", 2);
+		return new Item("Trecking_Shoes", "Speed", 2);
 	}
 	
 	//Damage items
