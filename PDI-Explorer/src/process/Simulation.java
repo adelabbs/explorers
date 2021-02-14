@@ -17,7 +17,7 @@ import data.simulation.Environment;
  * The Simulation processing class. It contains and prepares all
  * {@link ExplorerManager}.
  * 
- * @author dedely
+ * @author Adel
  *
  */
 public class Simulation {
@@ -67,6 +67,8 @@ public class Simulation {
 	}
 
 	public void update() {
+		System.out.println("a=" + environment.getChestAmount());
+		System.out.println("f = " + environment.getFoundChest());
 		if (environment.getExplorerAmount() <= 0 || (environment.getFoundChest() >= environment.getChestAmount())) {
 			setState(SimulationState.OVER);
 			stopAllManagerThreads();

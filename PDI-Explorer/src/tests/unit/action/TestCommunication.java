@@ -23,7 +23,7 @@ import tests.manual.comms.TestMessage;
  * Unit tests for the communication between {@link ExplorerManager} using the
  * {@link Radio} system
  * 
- * @author dedely
+ * @author Adel
  *
  */
 public class TestCommunication {
