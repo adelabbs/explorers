@@ -20,39 +20,98 @@ public class ExplorationAction implements Action {
 	}
 	
 	@Override
-	public void execute() {
-		int scanningRange = 0;
-		boolean newZoneDiscovered = false;
-		double[] currentPosition = explorer.getPosition();
-		ExplorerMap ex = explorer.getMap();
-		ExplorerTile tileA;
-		ExplorerTile tileB;
-		ExplorerTile tileC;
-		ExplorerTile tileD;
-			
-		while(scanningRange < 90 || newZoneDiscovered) {
+//	public void execute() {
+//		int scanningRange = 0;
+//		boolean newZoneDiscovered = false;
+//		double[] currentPosition = explorer.getPosition();
+//		ExplorerMap ex = explorer.getMap();
+//		ExplorerTile tileA;
+//		ExplorerTile tileB;
+//		ExplorerTile tileC;
+//		ExplorerTile tileD;
+//			
+//		while(scanningRange < 90 || newZoneDiscovered) {
+//	
+//			tileA = ex.getTile((int) currentPosition[1] + scanningRange, (int) currentPosition[0] + scanningRange);
+//			tileB = ex.getTile((int) currentPosition[1] - scanningRange, (int) currentPosition[0] + scanningRange);	
+//			tileC = ex.getTile((int) currentPosition[1] + scanningRange, (int) currentPosition[0] - scanningRange);
+//			tileD = ex.getTile((int) currentPosition[1] - scanningRange, (int) currentPosition[0] - scanningRange);
+//			
+//			if(!tileA.isExplored()) {
+//				newZoneDiscovered = true;
+//				createUndiscoveredMoveAction((int) currentPosition[1] + scanningRange, (int) currentPosition[0] + scanningRange);
+//			} else if(!tileB.isExplored()) {
+//				newZoneDiscovered = true;
+//				createUndiscoveredMoveAction((int) currentPosition[1] - scanningRange, (int) currentPosition[0] + scanningRange);
+//			} else if (!tileC.isExplored()) {
+//				newZoneDiscovered = true;
+//				createUndiscoveredMoveAction((int) currentPosition[1] + scanningRange, (int) currentPosition[0] - scanningRange);
+//			} else if (!tileD.isExplored()) {
+//				newZoneDiscovered = true;
+//				createUndiscoveredMoveAction((int) currentPosition[1] - scanningRange, (int) currentPosition[0] - scanningRange);
+//			} else {
+//				scanningRange++;
+//			}
+//		}
+//	}
 	
-			tileA = ex.getTile((int) currentPosition[1] + scanningRange, (int) currentPosition[0] + scanningRange);
-			tileB = ex.getTile((int) currentPosition[1] - scanningRange, (int) currentPosition[0] + scanningRange);	
-			tileC = ex.getTile((int) currentPosition[1] + scanningRange, (int) currentPosition[0] - scanningRange);
-			tileD = ex.getTile((int) currentPosition[1] - scanningRange, (int) currentPosition[0] - scanningRange);
-			
-			if(!tileA.isExplored()) {
-				newZoneDiscovered = true;
-				createUndiscoveredMoveAction((int) currentPosition[1] + scanningRange, (int) currentPosition[0] + scanningRange);
-			} else if(!tileB.isExplored()) {
-				newZoneDiscovered = true;
-				createUndiscoveredMoveAction((int) currentPosition[1] - scanningRange, (int) currentPosition[0] + scanningRange);
-			} else if (!tileC.isExplored()) {
-				newZoneDiscovered = true;
-				createUndiscoveredMoveAction((int) currentPosition[1] + scanningRange, (int) currentPosition[0] - scanningRange);
-			} else if (!tileD.isExplored()) {
-				newZoneDiscovered = true;
-				createUndiscoveredMoveAction((int) currentPosition[1] - scanningRange, (int) currentPosition[0] - scanningRange);
+	public void execute() {
+		int range = 6;
+		ExplorerMap explorerMap = explorer.getMap();
+		int x = (int) explorer.getPosition()[0];
+		int y = (int) explorer.getPosition()[1];
+		boolean move = false;
+		int distMax = 1500;
+		int tempI = 0;
+		int tempJ = 0;
+		while(!move) {
+			for(int i = x - range/2; i < x + range/2; i ++) {
+				for(int j = y - range/2; j < y + range/2; j ++) {
+					if(!oob(i, j))
+						if(!explorerMap.getTile(i, j).isExplored()) {
+							int tempX = x - i;
+							int tempY = y - j;
+							if(distance(tempX, tempY) < distMax) {
+								tempI = i;
+								tempJ = j;
+							}
+							move = true;
+						}
+				}
+			}
+			range ++;
+		}
+		createMoveAction(tempI, tempJ);
+	}
+	
+	private void createMoveAction(int i, int j) {
+		int vx = i - (int) explorer.getPosition()[0];
+		int vy = j - (int) explorer.getPosition()[1];
+		if(Math.abs(vx) > Math.abs(vy)) {
+			if(vx < 0) {
+				ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.NORTH);
+				ema.execute();
 			} else {
-				scanningRange++;
+				ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.SOUTH);
+				ema.execute();
+			}
+		} else {
+			if(vy < 0) {
+				ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.WEST);
+				ema.execute();
+			} else {
+				ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.EAST);
+				ema.execute();
 			}
 		}
+	}
+	
+	private boolean oob(int i, int j) {
+		return i >= 90 || j >= 90 || i < 0 || j < 0;
+	}
+	
+	private int distance(int i, int j) {
+		return (int) (Math.sqrt(Math.pow((double) i - explorer.getPosition()[0], 2) + Math.pow((double) i - explorer.getPosition()[0], 2)));
 	}
 	
 	public void createUndiscoveredMoveAction(int i, int j) {
