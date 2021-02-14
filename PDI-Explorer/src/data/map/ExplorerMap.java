@@ -12,6 +12,10 @@ public class ExplorerMap {
 		return tiles;
 	}
 
+	public ExplorerTile getTile(int i, int j) {
+		return tiles[i][j];
+	}
+	
 	public void setTiles(ExplorerTile[][] tiles) {
 		this.tiles = tiles;
 	}
