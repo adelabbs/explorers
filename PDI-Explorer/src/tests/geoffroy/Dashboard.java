@@ -14,7 +14,7 @@ public class Dashboard extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final int TILE_SIZE = 11;
+	public static final int TILE_SIZE = 10;
 
 	@Override
 	protected void paintComponent(Graphics g) {
