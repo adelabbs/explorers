@@ -28,6 +28,9 @@ public class Explorer extends LivingEntity {
 				BASIC_SCOPE + boostVerifier("Scope"));
 		this.name = name;
 		this.map = new ExplorerMap(new ExplorerTile[90][90]);
+		for(int i = 0; i < 90; i ++)
+			for(int j = 0; j < 90; j ++)
+				map.getTiles()[i][j] = new ExplorerTile();
 		this.communicationRange = BASIC_COMMUNICATION_RANGE + boostVerifier("Communication Range");
 	}
 	

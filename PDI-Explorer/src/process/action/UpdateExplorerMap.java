@@ -31,7 +31,7 @@ public class UpdateExplorerMap {
 			explorerTile.setType(tile.getType());
 			explorerTile.setExplored(true);
 			for(LivingEntity le : Environment.getInstance().getEntities())
-				if(le.getType().equals("bear"))
+				if(le.getType().equals("Bear"))
 					explorerTile.setInterest(-1);
 			for(Entity entity : Environment.getInstance().getObstacles())
 				if(entity.getType().equals("Chest"))
