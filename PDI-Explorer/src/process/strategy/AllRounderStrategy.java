@@ -8,6 +8,7 @@ import data.entity.LivingEntity;
 import data.simulation.Environment;
 import process.SimulationUtility;
 import process.action.CollectChestAction;
+import process.action.ExplorationAction;
 import process.action.ExplorerMoveAction;
 import process.action.LeaveMeAloneAction;
 import process.action.MoveAction;
@@ -33,8 +34,9 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		updateValues();
 		// If there is no living entity in scope then
 		if (inScopeEntities.isEmpty() && inScopeObstacles.isEmpty()) {
-			// Set random movement action
-			MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(), Environment.getInstance());
+			// Set non random movement action
+			//MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(), Environment.getInstance());
+			ExplorationAction action = new ExplorationAction(getExplorerManager().getExplorer());
 			super.planAction(action);
 		} if (!inScopeObstacles.isEmpty()) {
 			// If not empty, and is a chest
@@ -44,8 +46,9 @@ public class AllRounderStrategy extends ExplorationStrategy {
 					super.planAction(action);
 				} else {
 					// If the entity is not a chest, the explorer moves randomly
-					MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(),
-							Environment.getInstance());
+					/*MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(),
+							Environment.getInstance());*/
+					ExplorationAction action = new ExplorationAction(getExplorerManager().getExplorer());
 					super.planAction(action);
 				}
 			}
@@ -58,7 +61,8 @@ public class AllRounderStrategy extends ExplorationStrategy {
 					super.planAction(action);
 				} else {
 					// Set random movement action
-					MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(), Environment.getInstance());
+					//MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(), Environment.getInstance());
+					ExplorationAction action = new ExplorationAction(getExplorerManager().getExplorer());
 					super.planAction(action);
 				}
 			}
