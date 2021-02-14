@@ -22,4 +22,10 @@ public class ExplorerMoveAction extends MoveAction {
 		return entity;
 	}
 
+	@Override
+	public void execute() {
+		super.execute();
+		UpdateExplorerMap.update(entity);
+	}
+
 }
