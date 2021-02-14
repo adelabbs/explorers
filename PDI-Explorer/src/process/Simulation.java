@@ -67,8 +67,6 @@ public class Simulation {
 	}
 
 	public void update() {
-		System.out.println("a=" + environment.getChestAmount());
-		System.out.println("f = " + environment.getFoundChest());
 		if (environment.getExplorerAmount() <= 0 || (environment.getFoundChest() >= environment.getChestAmount())) {
 			setState(SimulationState.OVER);
 			stopAllManagerThreads();

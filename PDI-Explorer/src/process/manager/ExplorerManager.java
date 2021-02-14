@@ -46,7 +46,6 @@ public class ExplorerManager extends LivingEntityManager {
 
 	public void receive(Message message) {
 		messages.add(message);
-		// System.out.println(getExplorerName() + " just received : '" + message + "'");
 	}
 
 	public void planAction(Action action) {
