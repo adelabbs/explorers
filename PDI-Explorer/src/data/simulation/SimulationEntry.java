@@ -30,6 +30,26 @@ public class SimulationEntry {
 		this.explorationStrategy = explorationStrategy;
 	}
 
+	public void setExplorerAmount(int explorerAmount) {
+		this.explorerAmount = explorerAmount;
+	}
+
+	public void setAnimalAmount(int animalAmount) {
+		this.animalAmount = animalAmount;
+	}
+
+	public void setChestAmount(int chestAmount) {
+		this.chestAmount = chestAmount;
+	}
+
+	public void setExplorationStrategy(int explorationStrategy) {
+		this.explorationStrategy = explorationStrategy;
+	}
+
+	public static void setItems(HashMap<String, Item> items) {
+		SimulationEntry.items = items;
+	}
+
 	public int getExplorerAmount() {
 		return explorerAmount;
 	}
