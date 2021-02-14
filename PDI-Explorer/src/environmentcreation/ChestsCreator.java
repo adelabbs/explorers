@@ -21,6 +21,8 @@ public class ChestsCreator {
 				i ++;
 			}
 		}
+		//debug
+		chests.add(new Chest(new double[] {15, 15}));
 		return chests;
 	}
 	
