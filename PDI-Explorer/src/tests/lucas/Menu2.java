@@ -1,6 +1,7 @@
 package tests.lucas;
 
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -11,6 +12,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -36,7 +38,7 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 	JRadioButton Antenna = new JRadioButton("Antenna");
 	JRadioButton Radio = new JRadioButton("Radio");
 	
-	JPanel globalEnveloppe = new JPanel();
+	JPanel globalEnvelope = new JPanel();
 	JPanel explorers = new JPanel();
 	JPanel health = new JPanel();
 	JPanel speed = new JPanel();
@@ -50,15 +52,15 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 	private String[] nbExplorers = { "3", "4", "5", "6" };
 	private SimulationEntry sim = new SimulationEntry(0,0,10,0);
 	private int animalAmount;
-	private int enveloppe = 180;
+	private int envelope = 180;
 	private String explorersAmount = "3";
 	
-	private JTextField enveloppeField = new JTextField(String.valueOf(enveloppe) ,3);
+	private JTextField envelopeField = new JTextField(String.valueOf(envelope) ,3);
 	
 	public Menu2 () {
 		this.setLayout(new FlowLayout());
 		
-		globalEnveloppe.setLayout(new BoxLayout(globalEnveloppe, BoxLayout.Y_AXIS));
+		globalEnvelope.setLayout(new BoxLayout(globalEnvelope, BoxLayout.Y_AXIS));
 		explorers.setLayout(new BoxLayout(explorers, BoxLayout.Y_AXIS));
 		health.setLayout(new BoxLayout(health, BoxLayout.Y_AXIS));
 		speed.setLayout(new BoxLayout(speed, BoxLayout.Y_AXIS));
@@ -73,18 +75,15 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 		JLabel labelExplorers = new JLabel("Number of explorers:");
 		
 		JLabel gEnveloppe = new JLabel("Money amount :");
-		//JLabel moneyAmount = new JLabel(String.valueOf(enveloppe));
-		//JTextField enveloppeField = new JTextField(String.valueOf(enveloppe) ,3);
-		enveloppeField.setEditable(false);
+		envelopeField.setEditable(false);
 		
-		globalEnveloppe.add(gEnveloppe);
-		globalEnveloppe.add(enveloppeField);
-		//globalEnveloppe.add(moneyAmount);
+		globalEnvelope.add(gEnveloppe);
+		globalEnvelope.add(envelopeField);
 		
 		explorers.add(labelExplorers);
 		explorers.add(explorerChoice);
 		
-		this.add(globalEnveloppe);
+		this.add(globalEnvelope);
 		this.add(explorers);
 
 		noTools.setSelected(true);
@@ -92,16 +91,6 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 	    simpleShirt.setSelected(true);
 	    normalShoes.setSelected(true);
 	    noGlasses.setSelected(true);
-		Binoculars.setSelected(false);
-	    Knife.setSelected(false);
-	    Antenna.setSelected(false);
-	    Glasses.setSelected(false);
-	    Machete.setSelected(false);
-	    Radio.setSelected(false);
-	    Helmet.setSelected(false);
-	    Trecking_Shoes.setSelected(false);
-	    Chestplate.setSelected(false);
-	    Boots.setSelected(false);
 
 	    noTools.addItemListener(this);
 	    bareHands.addItemListener(this);
@@ -179,65 +168,76 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 		public void itemStateChanged(ItemEvent e) {
 
 	    	Object source = e.getItemSelectable();
-
-	    	if (e.getStateChange() == ItemEvent.SELECTED) {
-	    		if (source == Binoculars) {
-	    			enveloppe -= 10* Integer.valueOf(explorersAmount);
-	    			sim.add("Binoculars");
-	    		} else if (source == Knife) {
-	    			enveloppe -= 5* Integer.valueOf(explorersAmount);
-	    			sim.add("Knife");
-	    		} else if (source == Antenna) {
-	    			enveloppe -= 5* Integer.valueOf(explorersAmount);
-	    			sim.add("Antenna");
-	    		} else if (source == Glasses) {
-	    			enveloppe -= 5* Integer.valueOf(explorersAmount);
-	    			sim.add("Glasses");
-	    		} else if (source == Helmet) {
-	    			enveloppe -= 5* Integer.valueOf(explorersAmount);
-	    			sim.add("Helmet");
-	    		} else if (source == Chestplate) {
-	    			enveloppe -= 10* Integer.valueOf(explorersAmount);
-	    			sim.add("Chestplate");
-	    		} else if (source == Boots) {
-	    			enveloppe -= 5* Integer.valueOf(explorersAmount);
-	    			sim.add("Boots");
-	    		} else if (source == Trecking_Shoes) {
-	    			enveloppe -= 10* Integer.valueOf(explorersAmount);
-	    			sim.add("Trecking_Shoes");
-	    		} else if (source == Machete) {
-	    			enveloppe -= 10* Integer.valueOf(explorersAmount);
-	    			sim.add("Machete");
-	    		} else if (source == Radio) {
-	    			enveloppe -= 10* Integer.valueOf(explorersAmount);
-	    			sim.add("Radio");
-	    		}	
+	    	if (envelope <= 0) {
+	    		JOptionPane.showMessageDialog(new Frame(), "You went over budget.", "Warning", JOptionPane.WARNING_MESSAGE);
+	    		sim.getItems().clear();
+	    		envelope = 180;
+	    		noTools.setSelected(true);
+	    	    bareHands.setSelected(true);
+	    	    simpleShirt.setSelected(true);
+	    	    normalShoes.setSelected(true);
+	    	    noGlasses.setSelected(true);
 	    	}
-	    	else if (e.getStateChange() == ItemEvent.DESELECTED) {
-	    		if (source == Binoculars) {
-	    			enveloppe += 10* Integer.valueOf(explorersAmount);
-	    		} else if (source == Knife) {
-	    			enveloppe += 5* Integer.valueOf(explorersAmount);
-	    		} else if (source == Antenna) {
-	    			enveloppe += 5* Integer.valueOf(explorersAmount);
-	    		} else if (source == Glasses) {
-	    			enveloppe += 5* Integer.valueOf(explorersAmount);
-	    		} else if (source == Helmet) {
-	    			enveloppe += 5* Integer.valueOf(explorersAmount);
-	    		} else if (source == Chestplate) {
-	    			enveloppe += 10* Integer.valueOf(explorersAmount);
-	    		} else if (source == Boots) {
-	    			enveloppe += 5* Integer.valueOf(explorersAmount);
-	    		} else if (source == Trecking_Shoes) {
-	    			enveloppe += 10* Integer.valueOf(explorersAmount);
-	    		} else if (source == Machete) {
-	    			enveloppe += 10* Integer.valueOf(explorersAmount);
-	    		} else if (source == Radio) {
-	    			enveloppe += 10* Integer.valueOf(explorersAmount);
-	    		}  		
+	    	else {
+	    		if (e.getStateChange() == ItemEvent.SELECTED) {
+	    			if (source == Binoculars) {
+	    				envelope -= 10* Integer.valueOf(explorersAmount);
+	    				sim.add("Binoculars");
+	    			} else if (source == Knife) {
+	    				envelope -= 5* Integer.valueOf(explorersAmount);
+	    				sim.add("Knife");
+	    			} else if (source == Antenna) {
+	    				envelope -= 5* Integer.valueOf(explorersAmount);
+	    				sim.add("Antenna");
+	    			} else if (source == Glasses) {
+	    				envelope -= 5* Integer.valueOf(explorersAmount);
+	    				sim.add("Glasses");
+	    			} else if (source == Helmet) {
+	    				envelope -= 5* Integer.valueOf(explorersAmount);
+	    				sim.add("Helmet");
+	    			} else if (source == Chestplate) {
+	    				envelope -= 10* Integer.valueOf(explorersAmount);
+	    				sim.add("Chestplate");
+	    			} else if (source == Boots) {
+	    				envelope -= 5* Integer.valueOf(explorersAmount);
+	    				sim.add("Boots");
+	    			} else if (source == Trecking_Shoes) {
+	    				envelope -= 10* Integer.valueOf(explorersAmount);
+	    				sim.add("Trecking_Shoes");
+	    			} else if (source == Machete) {
+	    				envelope -= 10* Integer.valueOf(explorersAmount);
+	    				sim.add("Machete");
+	    			} else if (source == Radio) {
+	    				envelope -= 10* Integer.valueOf(explorersAmount);
+	    				sim.add("Radio");
+	    			}	
+	    		}
+	    		else if (e.getStateChange() == ItemEvent.DESELECTED) {
+	    			if (source == Binoculars) {
+	    				envelope += 10* Integer.valueOf(explorersAmount);
+	    			} else if (source == Knife) {
+	    				envelope += 5* Integer.valueOf(explorersAmount);
+	    			} else if (source == Antenna) {
+	    				envelope += 5* Integer.valueOf(explorersAmount);
+	    			} else if (source == Glasses) {
+	    				envelope += 5* Integer.valueOf(explorersAmount);
+	    			} else if (source == Helmet) {
+	    				envelope += 5* Integer.valueOf(explorersAmount);
+	    			} else if (source == Chestplate) {
+	    				envelope += 10* Integer.valueOf(explorersAmount);
+	    			} else if (source == Boots) {
+	    				envelope += 5* Integer.valueOf(explorersAmount);
+	    			} else if (source == Trecking_Shoes) {
+	    				envelope += 10* Integer.valueOf(explorersAmount);
+	    			} else if (source == Machete) {
+	    				envelope += 10* Integer.valueOf(explorersAmount);
+	    			} else if (source == Radio) {
+	    				envelope += 10* Integer.valueOf(explorersAmount);
+	    			}  		
+	    		}
 	    	}
-	    	enveloppeField.setText(String.valueOf(enveloppe));
-	    	System.out.println(enveloppe);
+	    	envelopeField.setText(String.valueOf(envelope));
+	    	System.out.println(envelope);
 	    }
 	
 
