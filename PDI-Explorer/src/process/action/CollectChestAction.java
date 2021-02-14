@@ -11,8 +11,8 @@ public class CollectChestAction implements Action {
 	private Explorer explorer;
 	private int collectingTime = SimuPara.CHEST_COLLECTING_TIME;
 
-	public CollectChestAction(Chest chest, Explorer explorer) {
-		this.chest = chest;
+	public CollectChestAction(Chest e, Explorer explorer) {
+		this.chest = e;
 		this.explorer = explorer;
 	}
 

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import data.entity.Entity;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
+import process.action.CollectChestAction;
 import process.action.ExplorerMoveAction;
 import process.action.MoveAction;
 import process.manager.ExplorerManager;
+import data.entity.Chest;
 
 public class AllRounderStrategy extends ExplorationStrategy {
 	
@@ -33,7 +35,28 @@ public class AllRounderStrategy extends ExplorationStrategy {
 					Environment.getInstance());
 			super.planAction(action);
 		}
+		else if(!inScopeObstacles.isEmpty()) {
+			//If not empty, and is a chest 
+			for(Entity e : inScopeObstacles) {
+				if(e.getType().equals("chest")) {
+					CollectChestAction action = new CollectChestAction((Chest) e, getExplorerManager().getExplorer());
+					super.planAction(action);
+				}
+				else {
+					//If the entity is not a chest, the explorer moves randomly
+					MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(),
+							Environment.getInstance());
+					super.planAction(action);
+				}
+			}
+		}
 		else {
+			//Set random movement action
+			MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(),
+					Environment.getInstance());
+			super.planAction(action);
+		}
+		/*else {
 			int i = 0;
 			for(LivingEntity le : inScopeEntities) {
 				System.out.println("Aventurier"+i + le.getType());
@@ -43,7 +66,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 			MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(),
 					Environment.getInstance());
 			super.planAction(action);
-		}
+		}*/
 		
 	}
 	
