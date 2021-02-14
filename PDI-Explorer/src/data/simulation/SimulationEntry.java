@@ -11,7 +11,7 @@ public class SimulationEntry {
 	private int animalAmount;
 	private int chestAmount;
 	private int explorationStrategy;
-	private ArrayList<Item> items = new ArrayList<Item>();
+	private static ArrayList<Item> items = new ArrayList<Item>();
 
 	public SimulationEntry(int explorerAmount, int animalAmount, int chestAmount,
 			int explorationStrategy) {
@@ -37,6 +37,10 @@ public class SimulationEntry {
 		return explorationStrategy;
 	}
 
+	public static ArrayList<Item> getItems(){
+		return items;
+	}
+	
 	public void add(Item item) throws ItemAlreadyExistsException {
 		if (items.contains(item)) {
 			throw new ItemAlreadyExistsException(item);

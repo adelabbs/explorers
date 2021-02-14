@@ -3,27 +3,37 @@ package data.simulation;
 public class Item {
 
 	private String name;
-	private String effect;
+	private String type;
+	private int boost;
 	
-	public Item(String name, String effect) {
+	public Item(String name, String type, int boost) {
 		this.name = name;
-		this.effect = effect;
+		this.type = type;
+		this.boost = boost;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getEffect() {
-		return effect;
+	public String getType() {
+		return type;
+	}
+	
+	public int getBoost() {
+		return boost;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setEffect(String effect) {
-		this.effect = effect;
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public void setBoost(int boost) {
+		this.boost = boost;
 	}
 		
 }

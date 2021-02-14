@@ -15,7 +15,7 @@ import environmentcreation.event.EntityCreationException;
 @SuppressWarnings("serial")
 public class TestImages extends JPanel {
 
-	private static final int TILE_SIZE = 11;
+	private static final int TILE_SIZE = 10;
 	
 	public TestImages() {
 		

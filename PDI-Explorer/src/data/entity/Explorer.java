@@ -2,6 +2,8 @@ package data.entity;
 
 import data.map.ExplorerMap;
 import data.map.ExplorerTile;
+import data.simulation.Item;
+import data.simulation.SimulationEntry;
 import process.visitor.EntityVisitor;
 
 public class Explorer extends LivingEntity {
@@ -21,10 +23,21 @@ public class Explorer extends LivingEntity {
 	
 	public Explorer(double[] position, String name) {
 		super("Explorer", position, new double[]{EXPLORER_SIZE_X, EXPLORER_SIZE_Y},
-				BASIC_MAX_HEALTH, BASIC_SPEED, BASIC_DAMAGE, BASIC_SCOPE);
+				BASIC_MAX_HEALTH + boostVerifier("Health"),
+				BASIC_SPEED + boostVerifier("Speed"),
+				BASIC_DAMAGE + boostVerifier("Damage"),
+				BASIC_SCOPE + boostVerifier("Scope"));
 		this.name = name;
 		this.map = new ExplorerMap(new ExplorerTile[90][90]);
-		this.communicationRange = BASIC_COMMUNICATION_RANGE;
+		this.communicationRange = BASIC_COMMUNICATION_RANGE + boostVerifier("Communication Range");
+	}
+	
+	private static int boostVerifier(String type) {
+		for(Item item : SimulationEntry.getItems()) {
+			if(item.getType().equals(type))
+				return item.getBoost();
+		}
+		return 0;
 	}
 
 	public String getName() {
