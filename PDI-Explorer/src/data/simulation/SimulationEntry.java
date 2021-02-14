@@ -66,17 +66,15 @@ public class SimulationEntry {
 		return explorationStrategy;
 	}
 
-	public void setExplorationStrategy(int explorationStrategy) {
-		this.explorationStrategy = explorationStrategy;
-	}
-
 	public static HashMap<String, Item> getItems() {
 		return items;
 	}
 
 	public void add(String name) {
 		Item item = ItemFactory.create(name);
-		items.put(item.getType(), item);
+		if (item != null) {
+			items.put(item.getType(), item);
+		}
 	}
 
 	public void remove(Item item) {
