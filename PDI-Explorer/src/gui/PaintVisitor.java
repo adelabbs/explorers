@@ -35,9 +35,13 @@ public class PaintVisitor implements EntityVisitor<Void> {
 	@Override
 	public Void visit(Explorer entity) {
 		g.setColor(Color.DARK_GRAY);
-		g.drawOval((int) entity.getPosition()[1] * Dashboard.TILE_SIZE - (entity.getScope() * Dashboard.TILE_SIZE) + Dashboard.TILE_SIZE / 2,
-				(int) entity.getPosition()[0] * Dashboard.TILE_SIZE - (entity.getScope() * Dashboard.TILE_SIZE) + Dashboard.TILE_SIZE / 2,
-				2*entity.getScope() * Dashboard.TILE_SIZE, 2*entity.getScope() * Dashboard.TILE_SIZE);
+		int r = entity.getScope();
+		int x = (int) entity.getPosition()[1] - r / 2;
+		int y = (int) (int) entity.getPosition()[0] - r / 2;
+		r *= Dashboard.TILE_SIZE;
+		x *= Dashboard.TILE_SIZE;
+		y *= Dashboard.TILE_SIZE;
+		g.drawOval(x, y, r, r);
 		paint(entity);
 		return null;
 	}
@@ -48,11 +52,12 @@ public class PaintVisitor implements EntityVisitor<Void> {
 		paint(entity);
 		return null;
 	}
-	
+
 	private void paint(Entity entity) {
 		int i = (int) entity.getPosition()[0];
 		int j = (int) entity.getPosition()[1];
-		g.fillRect(j * Dashboard.TILE_SIZE, i * Dashboard.TILE_SIZE, (int) (Dashboard.TILE_SIZE * entity.getSize()[0]), (int) (Dashboard.TILE_SIZE* entity.getSize()[1]));
+		g.fillRect(j * Dashboard.TILE_SIZE, i * Dashboard.TILE_SIZE, (int) (Dashboard.TILE_SIZE * entity.getSize()[0]),
+				(int) (Dashboard.TILE_SIZE * entity.getSize()[1]));
 	}
-	
+
 }
