@@ -18,7 +18,8 @@ public class UpdateExplorerMap {
 			for(int j = originJ- e.getScope(); j < originI + e.getScope(); j ++) {
 				if(SimulationUtility.distance(new double[] {(double) i, (double) j}, 
 						e.getPosition()) < e.getScope())
-					updateTile(i, j, e);
+					if(i >= 0 && j >= 0 && i < 90 && j < 90)
+						updateTile(i, j, e);
 			}
 		}
 	}
