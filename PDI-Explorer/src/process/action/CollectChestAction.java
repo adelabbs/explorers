@@ -18,7 +18,7 @@ public class CollectChestAction implements Action {
 
 	@Override
 	public void execute() {
-		if (SimulationUtility.distance(chest.getPosition(), explorer.getPosition()) == 0) {
+		if (SimulationUtility.distance(chest.getPosition(), explorer.getPosition()) <= explorer.getScope()) {
 			collectingTime--;
 			if (collectingTime == 0) {
 				Environment e = Environment.getInstance();

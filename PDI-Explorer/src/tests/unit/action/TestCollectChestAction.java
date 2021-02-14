@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import data.entity.Chest;
 import data.entity.Entity;
 import data.entity.Explorer;
-import data.map.ExplorerMap;
-import data.map.ExplorerTile;
 import data.simulation.Environment;
 import process.action.CollectChestAction;
 
@@ -20,8 +18,7 @@ public class TestCollectChestAction {
 	public void shouldCollectCloseChest() {
 		Environment e = Environment.getInstance();
 		Chest chest = new Chest(new double[] { 2, 2 });
-		Explorer explorer = new Explorer(new double[] { 2.0, 2.0 }, 15, 8, 3, 3, "Roger",
-				new ExplorerMap(new ExplorerTile[90][90]), 5);
+		Explorer explorer = new Explorer(new double[] { 3.0, 3.0 }, "Roger");
 		ArrayList<Entity> chests = new ArrayList<Entity>();
 		chests.add(chest);
 		e.setObstacles(chests);
@@ -39,8 +36,7 @@ public class TestCollectChestAction {
 	public void shouldNotCollectFarChest() {
 		Environment e = Environment.getInstance();
 		Chest chest = new Chest(new double[] { 1, 1 });
-		Explorer explorer = new Explorer(new double[] { 2.0, 1.0 }, 15, 8, 3, 3, "Roger",
-				new ExplorerMap(new ExplorerTile[90][90]), 5);
+		Explorer explorer = new Explorer(new double[] { 6.0, 6.0 }, "Roger");
 		ArrayList<Entity> chests = new ArrayList<Entity>();
 		chests.add(chest);
 		e.setObstacles(chests);

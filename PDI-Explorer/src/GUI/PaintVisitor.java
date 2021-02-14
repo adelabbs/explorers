@@ -35,9 +35,9 @@ public class PaintVisitor implements EntityVisitor<Void> {
 	@Override
 	public Void visit(Explorer entity) {
 		g.setColor(Color.DARK_GRAY);
-		g.drawOval((int) entity.getPosition()[1] * Dashboard.TILE_SIZE - entity.getScope() / 2 * Dashboard.TILE_SIZE,
-				(int) entity.getPosition()[0] * Dashboard.TILE_SIZE - entity.getScope() / 2 * Dashboard.TILE_SIZE,
-				entity.getScope() * Dashboard.TILE_SIZE, entity.getScope() * Dashboard.TILE_SIZE);
+		g.drawOval((int) entity.getPosition()[1] * Dashboard.TILE_SIZE - (entity.getScope() * Dashboard.TILE_SIZE) + Dashboard.TILE_SIZE / 2,
+				(int) entity.getPosition()[0] * Dashboard.TILE_SIZE - (entity.getScope() * Dashboard.TILE_SIZE) + Dashboard.TILE_SIZE / 2,
+				2*entity.getScope() * Dashboard.TILE_SIZE, 2*entity.getScope() * Dashboard.TILE_SIZE);
 		paint(entity);
 		return null;
 	}

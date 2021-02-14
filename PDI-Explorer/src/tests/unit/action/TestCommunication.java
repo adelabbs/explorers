@@ -9,8 +9,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import data.entity.Explorer;
-import data.map.ExplorerMap;
-import data.map.ExplorerTile;
 import data.message.Message;
 import process.SimulationUtility;
 import process.action.Action;
@@ -36,12 +34,9 @@ public class TestCommunication {
 	@Before
 	public void prepareManagersAndCommunicationSystem() {
 		ArrayList<Explorer> explorers = new ArrayList<>();
-		explorers.add(new Explorer(new double[] { 5.0, 6.0 }, 15, 8, 3, 3, "Roger",
-				new ExplorerMap(new ExplorerTile[90][90]), 5));
-		explorers.add(new Explorer(new double[] { 7.0, 5.0 }, 15, 8, 3, 3, "Michel",
-				new ExplorerMap(new ExplorerTile[90][90]), 5));
-		explorers.add(new Explorer(new double[] { 3.0, 2.0 }, 15, 8, 3, 3, "Didier",
-				new ExplorerMap(new ExplorerTile[90][90]), 5));
+		explorers.add(new Explorer(new double[] { 5.0, 6.0 }, "Roger"));
+		explorers.add(new Explorer(new double[] { 7.0, 5.0 }, "Michel"));
+		explorers.add(new Explorer(new double[] { 3.0, 2.0 }, "Didier"));
 
 		for (Explorer explorer : explorers) {
 			ExplorerManager chattingExplorerManager = new ExplorerManager(null, explorer);
@@ -74,7 +69,7 @@ public class TestCommunication {
 		assertTrue(receiver1.getMessages().get(0).getMessage().equals(TEST_MESSAGE));
 		assertTrue(receiver2.getMessages().get(0).getMessage().equals(TEST_MESSAGE));
 	}
-	
+
 	@Test
 	public void testReceptionWithinSenderRange() {
 		Message message = new TestMessage(TEST_MESSAGE);
@@ -90,7 +85,7 @@ public class TestCommunication {
 				sender.getExplorer().getPosition());
 		double distance2 = SimulationUtility.distance(receiver2.getExplorer().getPosition(),
 				sender.getExplorer().getPosition());
-		
+
 		assertEquals(0, sender.getMessages().size());
 
 		if (distance1 <= range) {
