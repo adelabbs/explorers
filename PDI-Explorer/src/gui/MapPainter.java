@@ -35,11 +35,11 @@ public class MapPainter {
 	
 	private void explorerMapsPainter() {
 		int initY = 90*Dashboard.TILE_SIZE;
-		int explorerAmount = Environment.getInstance().getExplorerInit();
+		int entityAmount = Environment.getInstance().getEntities().size();
 		int sent = 0;
-		for(int i = 0; i < explorerAmount; i ++)
+		for(int i = 0; i < entityAmount; i ++)
 			if(Environment.getInstance().getEntities().get(i).getType().equals("Explorer")) {
-				explorerMapPainter((sent/2)*90, initY + (sent%2)*90, i);
+				explorerMapPainter((sent/2)*90*3, initY + (sent%2)*90*3, i);
 				sent ++;
 			}
 	}
@@ -48,9 +48,9 @@ public class MapPainter {
 		ExplorerMap map = ((Explorer) Environment.getInstance().getEntities().get(i)).getMap();
 		for(int k = 0; k < 90; k ++)
 			for(int j = 0; j < 90; j ++) {
-				if(map.getTile(i, j).isExplored()) {
-					if(map.getTile(i, j).getInterest() == 0) {
-						switch(map.getTile(i, j).getType()) {
+				if(map.getTile(k, j).isExplored()) {
+					if(map.getTile(k, j).getInterest() == 0) {
+						switch(map.getTile(k, j).getType()) {
 						case "g" :
 							g.setColor(Color.LIGHT_GRAY);
 							break;
@@ -70,7 +70,7 @@ public class MapPainter {
 				} else {
 					g.setColor(Color.BLACK);
 				}
-				g.fillRect((y + j), (x + k), 2, 2);
+				g.fillRect(y + j*3, x + k*3, 3, 3);
 			}
 //		g.setColor(Color.LIGHT_GRAY);
 //		g.fillRect(y, x, 90, 90);

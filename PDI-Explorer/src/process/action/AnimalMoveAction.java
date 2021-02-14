@@ -24,7 +24,7 @@ public class AnimalMoveAction extends MoveAction {
 	public void execute() {
 		double newPos[];
 		do {
-			newPos = new double[] { getEntity().getPosition()[0], getEntity().getPosition()[1] };
+			newPos = new double[] {getEntity().getPosition()[0], getEntity().getPosition()[1]};
 			int direction = (int) (Math.random() * 4);
 			if (direction == 4)
 				direction = 3;
@@ -42,13 +42,19 @@ public class AnimalMoveAction extends MoveAction {
 				newPos[1]--;
 				break;
 			}
-		} while (distanceFromInitialPos(newPos) > ANIMAL_MAX_TERRITORY);
+		} while (distanceFromInitialPos(newPos) > ANIMAL_MAX_TERRITORY && !outOfBorder(newPos));
 		getEntity().setPosition(newPos);
 	}
 
 	private double distanceFromInitialPos(double newPos[]) {
 		return Math.sqrt(Math.pow(newPos[0] - getEntity().getInitPosition()[0], 2)
 				+ Math.pow(newPos[1] - getEntity().getInitPosition()[1], 2));
+	}
+	
+	private boolean outOfBorder(double[] newPos) {
+		int i = (int) newPos[0];
+		int j = (int) newPos[1];
+		return (i >= 0 && i < (90 - (int) getEntity().getSize()[0] - 1) && j >= 0 && j < (90 - (int) getEntity().getSize()[1] - 1));
 	}
 
 	public Animal getEntity() {

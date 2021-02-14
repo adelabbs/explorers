@@ -39,7 +39,7 @@ public class TestGUI extends JFrame implements Runnable {
 
 		c.add(dashboard);
 
-		this.setSize(940, 940);
+		this.setSize(1920, 1080);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
