@@ -3,6 +3,8 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import data.entity.Explorer;
+import data.map.ExplorerMap;
 import data.simulation.Environment;
 import tests.geoffroy.Dashboard;
 
@@ -28,6 +30,50 @@ public class MapPainter {
 				g.fillRect(j*Dashboard.TILE_SIZE, i*Dashboard.TILE_SIZE, Dashboard.TILE_SIZE, Dashboard.TILE_SIZE);
 			}
 		}
+		explorerMapsPainter();
+	}
+	
+	private void explorerMapsPainter() {
+		int initY = 90*Dashboard.TILE_SIZE;
+		int explorerAmount = Environment.getInstance().getExplorerInit();
+		int sent = 0;
+		for(int i = 0; i < explorerAmount; i ++)
+			if(Environment.getInstance().getEntities().get(i).getType().equals("Explorer")) {
+				explorerMapPainter((sent/2)*90, initY + (sent%2)*90, i);
+				sent ++;
+			}
+	}
+	
+	private void explorerMapPainter(int x, int y, int i) {
+		ExplorerMap map = ((Explorer) Environment.getInstance().getEntities().get(i)).getMap();
+		for(int k = 0; k < 90; k ++)
+			for(int j = 0; j < 90; j ++) {
+				if(map.getTile(i, j).isExplored()) {
+					if(map.getTile(i, j).getInterest() == 0) {
+						switch(map.getTile(i, j).getType()) {
+						case "g" :
+							g.setColor(Color.LIGHT_GRAY);
+							break;
+						case "w" :
+							g.setColor(Color.BLUE);
+							break;
+						}
+					} else {
+						switch(map.getTile(i, j).getInterest()) {
+						case 1 :
+							g.setColor(Color.YELLOW);
+							break;
+						case -1 :
+							g.setColor(Color.RED);
+						}
+					}
+				} else {
+					g.setColor(Color.BLACK);
+				}
+				g.fillRect((y + j), (x + k), 2, 2);
+			}
+//		g.setColor(Color.LIGHT_GRAY);
+//		g.fillRect(y, x, 90, 90);
 	}
 	
 }
