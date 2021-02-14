@@ -3,11 +3,13 @@ package process.strategy;
 import java.util.ArrayList;
 
 import data.entity.Entity;
+import data.entity.Explorer;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
 import process.SimulationUtility;
 import process.action.CollectChestAction;
 import process.action.ExplorerMoveAction;
+import process.action.LeaveMeAloneAction;
 import process.action.MoveAction;
 import process.manager.ExplorerManager;
 import data.entity.Chest;
@@ -34,10 +36,10 @@ public class AllRounderStrategy extends ExplorationStrategy {
 			// Set random movement action
 			MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(), Environment.getInstance());
 			super.planAction(action);
-		} else if (!inScopeObstacles.isEmpty()) {
+		} if (!inScopeObstacles.isEmpty()) {
 			// If not empty, and is a chest
 			for (Entity e : inScopeObstacles) {
-				if (e.getType().equals("chest")) {
+				if (e.getType().equals("Chest")) {
 					CollectChestAction action = new CollectChestAction((Chest) e, getExplorerManager().getExplorer());
 					super.planAction(action);
 				} else {
@@ -47,19 +49,21 @@ public class AllRounderStrategy extends ExplorationStrategy {
 					super.planAction(action);
 				}
 			}
-		} else {
-			// Set random movement action
-			MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(), Environment.getInstance());
-			super.planAction(action);
+		} if (!inScopeEntities.isEmpty()) {
+			for(LivingEntity le : inScopeEntities) {
+				if (le.getType().equals("Explorer")) {
+					System.out.println("COUCOU");
+					// Trigger leave me alone action to make space between explorers
+					LeaveMeAloneAction action = new LeaveMeAloneAction(getExplorerManager().getExplorer(),
+							(Explorer) le);
+					super.planAction(action);
+				} else {
+					// Set random movement action
+					MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(), Environment.getInstance());
+					super.planAction(action);
+				}
+			}
 		}
-		/*
-		 * else { int i = 0; for(LivingEntity le : inScopeEntities) {
-		 * System.out.println("Aventurier"+i + le.getType()); i++; } //Set random
-		 * movement action MoveAction action = new
-		 * ExplorerMoveAction(getExplorerManager().getExplorer(),
-		 * Environment.getInstance()); super.planAction(action); }
-		 */
-
 	}
 
 	/**

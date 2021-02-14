@@ -13,7 +13,7 @@ public class Explorer extends LivingEntity {
 	private final static int BASIC_MAX_HEALTH = 15;
 	private final static int BASIC_SPEED = 8;
 	private final static int BASIC_DAMAGE = 1;
-	private final static int BASIC_SCOPE = 3;
+	private final static int BASIC_SCOPE = 5;
 	private final static int BASIC_COMMUNICATION_RANGE = 5;
 	
 	private String name;
