@@ -22,6 +22,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	
 	@Override
 	public void decide() { 
+		inScopeEntities.removeAll(inScopeEntities);
 		updateValues();
 		//If there is no living entity in scope then
 		if(inScopeEntities.isEmpty()) {
@@ -31,7 +32,11 @@ public class AllRounderStrategy extends ExplorationStrategy {
 			super.planAction(action);
 		}
 		else {
-			System.out.println(inScopeEntities.get(0).getType());
+			int i = 0;
+			for(LivingEntity le : inScopeEntities) {
+				System.out.println("Aventurier"+i + le.getType());
+				i++;
+			}
 			//Set random movement action
 			MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(),
 					Environment.getInstance());
@@ -65,9 +70,11 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		ArrayList<LivingEntity> entities = Environment.getInstance().getEntities();
 		ArrayList<LivingEntity> inScope = new ArrayList<LivingEntity>();
 		for (LivingEntity le : entities) {
-			if(le.getPosition()[0] <= dx && le.getPosition()[1] >= mdx) {
+			if(le.getPosition()[0] <= dx && le.getPosition()[0] >= mdx) {
 				if(le.getPosition()[1] <= dy && le.getPosition()[1] >= mdy) {
-					inScope.add(le);
+					if(!(position == le.getPosition())) {
+						inScope.add(le);
+					}
 				}
 			}
 		}
