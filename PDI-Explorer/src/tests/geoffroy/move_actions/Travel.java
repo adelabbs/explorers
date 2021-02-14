@@ -1,4 +1,4 @@
-package move_actions;
+package tests.geoffroy.move_actions;
 
 import data.entity.Animal;
 import data.entity.Entity;

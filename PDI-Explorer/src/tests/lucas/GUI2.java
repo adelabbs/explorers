@@ -7,9 +7,9 @@ import javax.swing.JPanel;
 import data.simulation.Environment;
 import data.simulation.SimulationEntry;
 import environmentcreation.event.EntityCreationException;
-import move_actions.Travel;
 import process.Simulation;
 import process.SimulationUtility;
+import tests.geoffroy.move_actions.Travel;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

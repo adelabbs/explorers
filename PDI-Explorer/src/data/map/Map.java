@@ -9,7 +9,7 @@ public class Map {
 	}
 
 	public Tile getTile(int i, int j) {
-		return getTiles()[i][j];
+		return tiles[i][j];
 	}
 	
 	public Tile[][] getTiles() {
