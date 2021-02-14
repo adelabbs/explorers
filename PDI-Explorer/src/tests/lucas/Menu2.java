@@ -18,6 +18,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import data.simulation.SimulationEntry;
+import tests.leo.TestStart;
 
 @SuppressWarnings("serial")
 public class Menu2 extends JPanel implements ActionListener, ItemListener{
@@ -59,7 +60,7 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 	
 	public Menu2 () {
 		this.setLayout(new FlowLayout());
-		
+		play.addActionListener(new TestStart());
 		globalEnvelope.setLayout(new BoxLayout(globalEnvelope, BoxLayout.Y_AXIS));
 		explorers.setLayout(new BoxLayout(explorers, BoxLayout.Y_AXIS));
 		health.setLayout(new BoxLayout(health, BoxLayout.Y_AXIS));

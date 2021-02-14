@@ -56,7 +56,7 @@ public class ExplorationAction implements Action {
 //	}
 	
 	public void execute() {
-		int range = 6;
+		int range = explorer.getScope() + 1;
 		ExplorerMap explorerMap = explorer.getMap();
 		int x = (int) explorer.getPosition()[0];
 		int y = (int) explorer.getPosition()[1];
@@ -71,9 +71,13 @@ public class ExplorationAction implements Action {
 						if(!explorerMap.getTile(i, j).isExplored()) {
 							int tempX = x - i;
 							int tempY = y - j;
-							if(distance(tempX, tempY) < distMax) {
-								tempI = i;
-								tempJ = j;
+							int distance = distance(tempX, tempY);
+							if(distance <= distMax) {
+								int rand = (int) Math.random()*2;
+								if(distance < distMax || rand == 1) {
+									tempI = i;
+									tempJ = j;
+								}
 							}
 							move = true;
 						}
