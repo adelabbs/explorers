@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import data.simulation.SimulationEntry;
 
@@ -52,9 +53,12 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 	private int enveloppe = 180;
 	private String explorersAmount = "3";
 	
+	private JTextField enveloppeField = new JTextField(String.valueOf(enveloppe) ,3);
+	
 	public Menu2 () {
 		this.setLayout(new FlowLayout());
 		
+		globalEnveloppe.setLayout(new BoxLayout(globalEnveloppe, BoxLayout.Y_AXIS));
 		explorers.setLayout(new BoxLayout(explorers, BoxLayout.Y_AXIS));
 		health.setLayout(new BoxLayout(health, BoxLayout.Y_AXIS));
 		speed.setLayout(new BoxLayout(speed, BoxLayout.Y_AXIS));
@@ -67,14 +71,21 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 		explorerChoice.addActionListener(this);
 		
 		JLabel labelExplorers = new JLabel("Number of explorers:");
+		
 		JLabel gEnveloppe = new JLabel("Money amount :");
+		//JLabel moneyAmount = new JLabel(String.valueOf(enveloppe));
+		//JTextField enveloppeField = new JTextField(String.valueOf(enveloppe) ,3);
+		enveloppeField.setEditable(false);
 		
 		globalEnveloppe.add(gEnveloppe);
+		globalEnveloppe.add(enveloppeField);
+		//globalEnveloppe.add(moneyAmount);
 		
 		explorers.add(labelExplorers);
 		explorers.add(explorerChoice);
-		this.add(explorers);
+		
 		this.add(globalEnveloppe);
+		this.add(explorers);
 
 		noTools.setSelected(true);
 	    bareHands.setSelected(true);
@@ -225,6 +236,7 @@ public class Menu2 extends JPanel implements ActionListener, ItemListener{
 	    			enveloppe += 10* Integer.valueOf(explorersAmount);
 	    		}  		
 	    	}
+	    	enveloppeField.setText(String.valueOf(enveloppe));
 	    	System.out.println(enveloppe);
 	    }
 	
