@@ -5,10 +5,10 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import GUI.PaintVisitor;
 import data.entity.Entity;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
+import gui.PaintVisitor;
 
 public class Dashboard extends JPanel {
 

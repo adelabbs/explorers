@@ -5,17 +5,21 @@ import data.simulation.Environment;
 
 public class ExplorerMoveAction extends MoveAction {
 
+	private Explorer entity;
+
 	public ExplorerMoveAction(Explorer entity, Environment environment) {
-		super(entity, environment);
+		super(environment);
+		this.entity = entity;
 	}
 
 	public ExplorerMoveAction(Explorer entity, Environment environment, int direction) {
-		super(entity, environment, direction);
+		super(environment, direction);
+		this.entity = entity;
 	}
 
 	@Override
 	public Explorer getEntity() {
-		return (Explorer) entity;
+		return entity;
 	}
 
 }

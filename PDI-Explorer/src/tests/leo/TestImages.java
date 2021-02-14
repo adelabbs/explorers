@@ -5,12 +5,12 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import GUI.MapPainter;
-import GUI.PaintVisitor;
 import data.entity.Entity;
 import data.simulation.Environment;
 import environmentcreation.EnvironmentCreator;
 import environmentcreation.event.EntityCreationException;
+import gui.MapPainter;
+import gui.PaintVisitor;
 
 @SuppressWarnings("serial")
 public class TestImages extends JPanel {

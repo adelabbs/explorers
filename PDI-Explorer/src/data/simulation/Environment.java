@@ -106,7 +106,10 @@ public final class Environment {
 		}
 	}
 	public synchronized void remove(Entity entity) {
-		obstacles.remove(entity);
+		if(obstacles.contains(entity)) {
+			obstacles.remove(entity);
+			incrementFoundChest();
+		}
 	}
 	public void remove(Item item) {
 		items.remove(item);

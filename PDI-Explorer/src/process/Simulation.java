@@ -17,7 +17,7 @@ import data.simulation.Environment;
  * The Simulation processing class. It contains and prepares all
  * {@link ExplorerManager}.
  * 
- * @author dedely
+ * @author Adel
  *
  */
 public class Simulation {

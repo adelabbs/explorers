@@ -34,7 +34,6 @@ public class SendMessageAction implements Action {
 	public void execute() {
 		CommunicationSystem communicationSystem = explorerManager.getCommunicationSystem();
 		communicationSystem.sendMessage(message, explorerManager);
-		// System.out.println(explorerManager.getExplorerName() + " just chatted");
 	}
 
 	@Override
