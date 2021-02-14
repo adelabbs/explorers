@@ -6,6 +6,13 @@ public class ExplorerTile extends Tile {
 	private boolean visible;
 	private int interest;
 	
+	public ExplorerTile() {
+		super();
+		explored = false;
+		visible = false;
+		interest = 0;
+	}
+	
 	public ExplorerTile(String type, boolean explored, boolean visible, int interest){
 		super(type);
 		this.explored = explored;

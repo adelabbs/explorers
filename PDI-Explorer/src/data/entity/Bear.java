@@ -4,8 +4,16 @@ import process.visitor.EntityVisitor;
 
 public class Bear extends Animal  {
 
-	public Bear(String type, double[] position, double[] size, int maxHealth, int speed, int damage, int scope) {
-		super(type, position, size, maxHealth, speed, damage, scope);
+	private final static double SIZE_X = 2.0;
+	private final static double SIZE_Y = 1.0;
+	
+	private final static int MAX_HEALTH = 25;
+	private final static int SPEED = 5;
+	private final static int DAMAGE = 5;
+	private final static int SCOPE = 3;
+
+	public Bear(double[] position) {
+		super("Bear", position, new double[] {SIZE_X, SIZE_Y}, MAX_HEALTH, SPEED, DAMAGE, SCOPE);
 	}
 
 	@Override
