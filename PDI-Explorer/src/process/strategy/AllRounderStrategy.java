@@ -52,7 +52,6 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		} if (!inScopeEntities.isEmpty()) {
 			for(LivingEntity le : inScopeEntities) {
 				if (le.getType().equals("Explorer")) {
-					System.out.println("COUCOU");
 					// Trigger leave me alone action to make space between explorers
 					LeaveMeAloneAction action = new LeaveMeAloneAction(getExplorerManager().getExplorer(),
 							(Explorer) le);
