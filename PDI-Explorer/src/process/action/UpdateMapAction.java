@@ -33,6 +33,9 @@ public class UpdateMapAction implements Action {
 						if (interest > 0) {
 							currentMapTile.setInterest(interest);
 						}
+						if (messageMapTile.isExplored()) {
+							currentMapTile.setExplored(true);
+						}
 					}
 				}
 			}
