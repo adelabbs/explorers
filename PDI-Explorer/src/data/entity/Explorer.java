@@ -2,7 +2,6 @@ package data.entity;
 
 import data.map.ExplorerMap;
 import data.map.ExplorerTile;
-import data.simulation.Item;
 import data.simulation.SimulationEntry;
 import process.visitor.EntityVisitor;
 
@@ -33,10 +32,8 @@ public class Explorer extends LivingEntity {
 	}
 	
 	private static int boostVerifier(String type) {
-		for(Item item : SimulationEntry.getItems()) {
-			if(item.getType().equals(type))
-				return item.getBoost();
-		}
+		if(SimulationEntry.getItems().containsKey(type))
+			return SimulationEntry.getItems().get(type).getBoost();
 		return 0;
 	}
 

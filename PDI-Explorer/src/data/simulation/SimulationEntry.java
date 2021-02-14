@@ -1,6 +1,8 @@
 package data.simulation;
++
+import java.util.HashMap;
 
-import java.util.ArrayList;
+import process.itemCreation.ItemFactory;
 
 /**
  * This class is used to regroup the simulation entry parameters.
@@ -11,7 +13,8 @@ public class SimulationEntry {
 	private int animalAmount;
 	private int chestAmount;
 	private int explorationStrategy;
-	private static ArrayList<Item> items = new ArrayList<Item>();
+	//HashMap of Item, the key is the Item TYPE
+	private static HashMap<String, Item> items = new HashMap<String, Item>();
 
 	public SimulationEntry(int explorerAmount, int animalAmount, int chestAmount,
 			int explorationStrategy) {
@@ -37,19 +40,18 @@ public class SimulationEntry {
 		return explorationStrategy;
 	}
 
-	public static ArrayList<Item> getItems(){
+	public static HashMap<String, Item> getItems(){
 		return items;
 	}
 	
-	public void add(Item item) throws ItemAlreadyExistsException {
-		if (items.contains(item)) {
-			throw new ItemAlreadyExistsException(item);
-		} else {
-			items.add(item);
-		}
+	public void add(String name) {
+		Item item = ItemFactory.create(name);
+		if (items.containsKey(item.getType()))
+			items.remove(item.getType());
+		items.put(item.getType(), item);
 	}
 
 	public void remove(Item item) {
-		items.remove(item);
+		items.remove(item.getType());
 	}
 }
