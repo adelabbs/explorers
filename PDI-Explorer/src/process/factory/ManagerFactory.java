@@ -5,6 +5,7 @@ import data.entity.Explorer;
 import process.Simulation;
 import process.manager.BearManager;
 import process.manager.ExplorerManager;
+import process.strategy.AllRounderStrategy;
 import process.strategy.CombatStrategy;
 import process.strategy.DodgeStrategy;
 import process.strategy.GreedStrategy;
@@ -17,6 +18,7 @@ public class ManagerFactory {
 	public static final int GREED_STRATEGY = 2;
 	public static final int COMBAT_STRATEGY = 3;
 	public static final int JUSTCHATTING_STRATEGY = 4;
+	public static final int ALL_ROUNDER_STRATEGY = 5;
 	
 
 	public static ExplorerManager createExplorerManager(Simulation simulation, Explorer explorer,
@@ -42,6 +44,10 @@ public class ManagerFactory {
 			ExplorerManager chattingExplorerManager = new ExplorerManager(simulation, explorer);
 			chattingExplorerManager.setStrategy(new JustChattingStrategy(chattingExplorerManager));
 			return chattingExplorerManager;
+		case ALL_ROUNDER_STRATEGY:
+			ExplorerManager allRounderExplorerManager = new ExplorerManager(simulation, explorer);
+			allRounderExplorerManager.setStrategy(new AllRounderStrategy(allRounderExplorerManager));
+			return allRounderExplorerManager;
 		default:
 			throw new IllegalArgumentException("Unknown strategy: " + explorationStrategy);
 		}

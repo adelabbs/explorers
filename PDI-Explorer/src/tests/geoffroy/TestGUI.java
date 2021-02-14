@@ -19,7 +19,7 @@ public class TestGUI extends JFrame implements Runnable {
 	private static final int EXPLORER_AMOUNT = 3;
 	private static final int ANIMAL_AMOUNT = 0;
 	private static final int CHEST_AMOUNT = 3;
-	private static final int EXPLORATION_STRATEGY = 0;
+	private static final int EXPLORATION_STRATEGY = 5;
 
 	private SimulationEntry simulationEntry;
 	private Simulation simulation;
