@@ -1,4 +1,4 @@
-package tests.manual;
+package tests.geoffroy;
 
 import java.awt.CardLayout;
 import java.awt.Container;

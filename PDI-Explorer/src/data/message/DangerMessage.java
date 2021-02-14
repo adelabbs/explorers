@@ -2,6 +2,8 @@ package data.message;
 
 import java.util.Arrays;
 
+import process.visitor.MessageVisitor;
+
 /**
  * A {@link DangerMessage} contains the position of a potential danger
  *
@@ -25,6 +27,11 @@ public class DangerMessage extends Message {
 	@Override
 	public String toString() {
 		return message + "[" + Arrays.toString(dangerPosition) + "]";
+	}
+
+	@Override
+	public <T> T accept(MessageVisitor<T> visitor) {
+		return visitor.visit(this);
 	}
 
 }

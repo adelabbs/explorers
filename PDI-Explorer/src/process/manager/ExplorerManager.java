@@ -1,6 +1,7 @@
 package process.manager;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import data.entity.Explorer;
 import data.message.Message;
@@ -19,7 +20,7 @@ public class ExplorerManager extends LivingEntityManager {
 	private Simulation simulation;
 	private Explorer explorer;
 	private ExplorationStrategy strategy;
-	private Action action = null;
+	private LinkedList<Action> actions = new LinkedList<Action>();
 	private CommunicationSystem communicationSystem;
 	private ArrayList<Message> messages = new ArrayList<Message>();
 
@@ -33,28 +34,31 @@ public class ExplorerManager extends LivingEntityManager {
 		while (!isDead() && isRunning()) {
 			SimulationUtility.unitTime();
 			strategy.decide();
+			Action action = actions.peekFirst();
 			if (action != null) {
 				action.execute();
-				removeAction();
+				if (action.isOver()) {
+					removeAction();
+				}
 			}
 		}
 	}
 
 	public void receive(Message message) {
 		messages.add(message);
-		//System.out.println(getExplorerName() + " just received : '" + message + "'");
+		// System.out.println(getExplorerName() + " just received : '" + message + "'");
 	}
 
 	public void planAction(Action action) {
-		this.action = action;
+		actions.addLast(action);
 	}
 
 	private void removeAction() {
-		action = null;
+		actions.removeFirst();
 	}
 
-	public Action getAction() {
-		return action;
+	public Action getCurrentAction() {
+		return actions.peekFirst();
 	}
 
 	public Simulation getSimulation() {

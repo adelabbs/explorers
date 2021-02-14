@@ -1,5 +1,7 @@
 package data.message;
 
+import process.visitor.MessageVisitor;
+
 /**
  * The abstract message type.
  *
@@ -23,5 +25,7 @@ public abstract class Message {
 	public String toString() {
 		return message;
 	}
+
+	public abstract <T> T accept(MessageVisitor<T> visitor);
 
 }

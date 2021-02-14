@@ -9,7 +9,7 @@ import data.entity.Entity;
 import data.entity.Explorer;
 import data.entity.Obstacle;
 import process.visitor.EntityVisitor;
-import tests.manual.Dashboard;
+import tests.geoffroy.Dashboard;
 
 public class PaintVisitor implements EntityVisitor<Void> {
 	private Graphics g;
