@@ -31,7 +31,7 @@ public class LeaveMeAloneAction implements Action {
 		double dx = myPos[0] - hisPos[0];
 		double dy = myPos[1] - hisPos[1];
 		
-		for (int i = 0; i < SPACE_BETWEEN_EX; i++) {
+		//for (int i = 0; i < SPACE_BETWEEN_EX; i++) {
 			if (Math.abs(dx) >= Math.abs(dy)) {
 				//X movement case
 				if(dx > 0) {
@@ -51,7 +51,7 @@ public class LeaveMeAloneAction implements Action {
 					moveExplorer(MoveAction.NORTH);
 				}
 			}
-		}
+		//}
 	}
 	
 	@Override
