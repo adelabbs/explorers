@@ -14,8 +14,8 @@ public abstract class MoveAction implements Action {
 	public static final int WEST = 4;
 
 	// Absolute border for square map
-	private static double MAP_BORDER_MAX = 89;
-	private static double MAP_BORDER_MIN = 0;
+	public static final double MAP_BORDER_MAX = 89;
+	public static final double MAP_BORDER_MIN = 0;
 
 	private int direction;
 	private Environment environment;

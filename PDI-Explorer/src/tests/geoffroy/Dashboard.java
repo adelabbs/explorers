@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import data.entity.Entity;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
+import gui.MapPainter;
 import gui.PaintVisitor;
 
 public class Dashboard extends JPanel {
@@ -26,20 +27,23 @@ public class Dashboard extends JPanel {
 	private void printMap(Graphics g) {
 		super.paintComponent(g);
 		PaintVisitor pv = new PaintVisitor(g);
+		MapPainter mp = new MapPainter(g);
 		
-		for (int i = 0; i < 90; i++) {
-			for (int j = 0; j < 90; j++) {
-				switch (Environment.getInstance().getMap().getTile(i, j).getType()) {
-				case "w":
-					g.setColor(Color.BLUE);
-					break;
-				case "g":
-					g.setColor(Color.LIGHT_GRAY);
-					break;
-				}
-				g.fillRect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-			}
-		}
+//		for (int i = 0; i < 90; i++) {
+//			for (int j = 0; j < 90; j++) {
+//				switch (Environment.getInstance().getMap().getTile(i, j).getType()) {
+//				case "w":
+//					g.setColor(Color.BLUE);
+//					break;
+//				case "g":
+//					g.setColor(Color.LIGHT_GRAY);
+//					break;
+//				}
+//				g.fillRect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+//			}
+//		}
+		mp.paint();
+		
 		for(Entity entity : Environment.getInstance().getEntities())
 			entity.accept(pv);
 		for(Entity entity : Environment.getInstance().getObstacles())

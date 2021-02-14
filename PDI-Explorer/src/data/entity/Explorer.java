@@ -13,7 +13,7 @@ public class Explorer extends LivingEntity {
 	private final static int BASIC_MAX_HEALTH = 15;
 	private final static int BASIC_SPEED = 8;
 	private final static int BASIC_DAMAGE = 1;
-	private final static int BASIC_SCOPE = 3;
+	private final static int BASIC_SCOPE = 5;
 	private final static int BASIC_COMMUNICATION_RANGE = 5;
 	
 	private String name;
@@ -28,6 +28,9 @@ public class Explorer extends LivingEntity {
 				BASIC_SCOPE + boostVerifier("Scope"));
 		this.name = name;
 		this.map = new ExplorerMap(new ExplorerTile[90][90]);
+		for(int i = 0; i < 90; i ++)
+			for(int j = 0; j < 90; j ++)
+				map.getTiles()[i][j] = new ExplorerTile();
 		this.communicationRange = BASIC_COMMUNICATION_RANGE + boostVerifier("Communication Range");
 	}
 	
