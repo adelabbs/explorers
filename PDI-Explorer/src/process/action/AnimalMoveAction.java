@@ -1,44 +1,54 @@
 package process.action;
 
-import data.entity.LivingEntity;
+import data.entity.Animal;
 import data.simulation.Environment;
 
 public class AnimalMoveAction extends MoveAction {
 
 	// Territory's borders for all animals
-	private static final double ANIMAL_MAX_TERRITORY = 20;
+	private static final double ANIMAL_MAX_TERRITORY = 10;
+	
 
-	public AnimalMoveAction(LivingEntity entity, Environment environment) {
+	public AnimalMoveAction(Animal entity, Environment environment) {
 		super(entity, environment);
 	}
 
-	public AnimalMoveAction(LivingEntity entity, Environment environment, int direction) {
+	public AnimalMoveAction(Animal entity, Environment environment, int direction) {
 		super(entity, environment, direction);
 	}
 
 	@Override
 	public void execute() {
-		double[] nextPosition = getEntity().getPosition();
-		// If the entity is located on his territory's border :
-		if (Math.abs(nextPosition[0]) >= ANIMAL_MAX_TERRITORY || Math.abs(nextPosition[1]) >= ANIMAL_MAX_TERRITORY) {
-			//Y axis
-			if (nextPosition[0] > 0) {
-				nextPosition[0]--;
-			} else {
-				nextPosition[0]++;
+		double newPos[];
+		do {
+			newPos = new double[] {getEntity().getPosition()[0], getEntity().getPosition()[1]};
+			int direction = (int) (Math.random()*4);
+			if(direction == 4)
+				direction = 3;
+			switch(direction) {
+			case 0 :
+				newPos[0] ++;
+				break;
+			case 1 :
+				newPos[0] --;
+				break;
+			case 2 :
+				newPos[1] ++;
+				break;
+			case 3 :
+				newPos[1] --;
+				break;
 			}
-			//X axis
-			if (nextPosition[1] > 0) {
-				nextPosition[1]--;
-			} else {
-				nextPosition[1]++;
-			}
-			// Set new location
-			getEntity().setPosition(nextPosition);
-		}
-		// If not, random movement :
-		else {
-			super.execute();
-		}
+		} while(distanceFromInitialPos(newPos) > ANIMAL_MAX_TERRITORY);
+		getEntity().setPosition(newPos);
+	}
+	
+	private double distanceFromInitialPos(double newPos[]) {
+		return Math.sqrt(Math.pow(newPos[0] - getEntity().getInitPosition()[0], 2)
+				+ Math.pow(newPos[1] - getEntity().getInitPosition()[1], 2));
+	}
+	
+	public Animal getEntity() {
+		return (Animal) entity;
 	}
 }

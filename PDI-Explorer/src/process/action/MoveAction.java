@@ -18,7 +18,7 @@ public abstract class MoveAction implements Action {
 	private static double MAP_BORDER_MIN = 0;
 
 	private int direction;
-	private LivingEntity entity;
+	protected LivingEntity entity;
 	private Environment environment;
 
 	public MoveAction(LivingEntity entity, Environment environment) {
@@ -105,9 +105,7 @@ public abstract class MoveAction implements Action {
 		return direction;
 	}
 
-	public LivingEntity getEntity() {
-		return entity;
-	}
+	public abstract LivingEntity getEntity();
 
 	public Environment getEnvironment() {
 		return environment;
