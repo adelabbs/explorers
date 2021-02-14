@@ -18,26 +18,23 @@ public abstract class MoveAction implements Action {
 	private static double MAP_BORDER_MIN = 0;
 
 	private int direction;
-	protected LivingEntity entity;
 	private Environment environment;
 
-	public MoveAction(LivingEntity entity, Environment environment) {
+	public MoveAction(Environment environment) {
 		direction = pickRandomDirection();
-		this.entity = entity;
 		this.environment = environment;
 	}
 
-	public MoveAction(LivingEntity entity, Environment environment, int direction) {
-		this.entity = entity;
+	public MoveAction(Environment environment, int direction) {
 		this.environment = environment;
 		this.direction = direction;
 	}
 
 	@Override
 	public void execute() {
-		double currentPosY = entity.getPosition()[0];
-		double currentPosX = entity.getPosition()[1];
-		double nextPos[] = entity.getPosition();
+		double currentPosY = getEntity().getPosition()[0];
+		double currentPosX = getEntity().getPosition()[1];
+		double nextPos[] = getEntity().getPosition();
 		switch (direction) {
 		case NORTH:
 			nextPos[0] -= 1;
@@ -56,11 +53,11 @@ public abstract class MoveAction implements Action {
 		// If free :
 		if (isValid(nextPos) != false) {
 			// Set the position for the next tick
-			entity.setPosition(nextPos);
+			getEntity().setPosition(nextPos);
 		} else {
 			nextPos[0] = currentPosY;
 			nextPos[1] = currentPosX;
-			entity.setPosition(nextPos);
+			getEntity().setPosition(nextPos);
 		}
 	}
 

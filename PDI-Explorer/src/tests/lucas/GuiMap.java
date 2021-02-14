@@ -5,12 +5,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-import GUI.PaintVisitor;
 import data.entity.Entity;
 import data.entity.Explorer;
 import data.simulation.Environment;
 import environmentcreation.EnvironmentCreator;
 import environmentcreation.event.EntityCreationException;
+import gui.PaintVisitor;
 
 
 @SuppressWarnings("serial")
