@@ -37,10 +37,10 @@ public class PaintVisitor implements EntityVisitor<Void> {
 		g.setColor(Color.DARK_GRAY);
 		int r = 2 * entity.getScope();
 		int x = (int) entity.getPosition()[1] - r / 2;
-		int y = (int) (int) entity.getPosition()[0] - r / 2;
+		int y = (int) entity.getPosition()[0] - r / 2;
 		r *= Dashboard.TILE_SIZE;
-		x *= Dashboard.TILE_SIZE;
-		y *= Dashboard.TILE_SIZE;
+		x = x * Dashboard.TILE_SIZE + Dashboard.TILE_SIZE / 2;
+		y = y * Dashboard.TILE_SIZE + Dashboard.TILE_SIZE / 2;
 		g.drawOval(x, y, r, r);
 		paint(entity);
 		return null;
