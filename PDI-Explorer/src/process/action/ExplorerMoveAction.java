@@ -13,4 +13,9 @@ public class ExplorerMoveAction extends MoveAction {
 		super(entity, environment, direction);
 	}
 
+	@Override
+	public Explorer getEntity() {
+		return (Explorer) entity;
+	}
+
 }
