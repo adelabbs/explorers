@@ -1,5 +1,10 @@
 package data.entity;
 
+/**
+ * Class handling every animals in the simulation. The initPos permits the calculation of the animal's territory.
+ * @author Léo
+ *
+ */
 public abstract class Animal extends LivingEntity {
 	
 	private double[] initPosition;

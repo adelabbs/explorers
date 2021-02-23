@@ -2,6 +2,11 @@ package data.entity;
 
 import process.visitor.EntityVisitor;
 
+/**
+ * Class containing every entities that can be on the map. Can be animals, explorers, chests or obstacles.
+ * @author Léo
+ *
+ */
 public abstract class Entity {
 
 	private String type;

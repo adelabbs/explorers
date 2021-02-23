@@ -1,5 +1,10 @@
 package data.map;
 
+/**
+ * Minimal element of the map. Contains the type of the tile, it can be g for ground or w for water.
+ * @author Léo
+ *
+ */
 public class Tile {
 
 	private String type;

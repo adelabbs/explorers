@@ -1,5 +1,10 @@
 package environmentcreation.mapcreation;
 
+/**
+ * Generation of the sub maps on the right border.
+ * @author Léo
+ *
+ */
 public class RightBorderGenerator {
 
 	public static void generation(SubMap[][] subMaps) {

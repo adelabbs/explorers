@@ -1,5 +1,10 @@
 package data.entity;
 
+/**
+ * Class of all breakable entities. Can be animals, explorer, or breakable obstacles such as trees. 
+ * @author Léo
+ *
+ */
 public abstract class BreakableEntity extends Entity {
 
 	private int health;

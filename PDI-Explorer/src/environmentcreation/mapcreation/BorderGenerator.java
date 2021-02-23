@@ -1,5 +1,10 @@
 package environmentcreation.mapcreation;
 
+/**
+ * Calls every border sub maps generation methods.
+ * @author Léo
+ *
+ */
 public class BorderGenerator {
 
 	public static void generation(SubMap[][] subMaps) {

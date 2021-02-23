@@ -2,6 +2,11 @@ package data.entity;
 
 import process.visitor.EntityVisitor;
 
+/**
+ * The obstacles can't be passed by the explorers.
+ * @author Léo
+ *
+ */
 public class Obstacle extends Entity {
 
 	public Obstacle(String type, double[] position, double[] size) {

@@ -1,5 +1,11 @@
 package data.map;
 
+/**
+ * Contains all the informations about the explored tiles by explorers. We also know if it is visible, and other 
+ * informations such as the interest point, indicating if the tile is normal, a danger or the presence of a chest.
+ * @author Léo
+ *
+ */
 public class ExplorerTile extends Tile {
 
 	private boolean explored;

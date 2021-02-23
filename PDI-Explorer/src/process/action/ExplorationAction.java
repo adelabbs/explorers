@@ -73,10 +73,12 @@ public class ExplorationAction implements Action {
 							int tempY = y - j;
 							int distance = distance(tempX, tempY);
 							if(distance <= distMax) {
-								int rand = (int) Math.random()*2;
-								if(distance < distMax || rand == 1) {
+								int rand = (int) (Math.random()*2);
+								if(distance <= distMax || rand == 1) {
 									tempI = i;
 									tempJ = j;
+									if(distance < distMax)
+										distMax = distance;
 								}
 							}
 							move = true;

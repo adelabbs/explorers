@@ -1,5 +1,10 @@
 package environmentcreation.mapcreation;
 
+/**
+ * First used function, creates the corner submaps.
+ * @author Léo
+ *
+ */
 public class CornerGenerator {
 
 	public static void generation(SubMap[][] subMaps) {

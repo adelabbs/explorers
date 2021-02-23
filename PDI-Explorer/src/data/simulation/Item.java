@@ -1,5 +1,12 @@
 package data.simulation;
 
+/**
+ * The items are separated in five different types.
+ * Health, speed, damage, scope and communication range.
+ * The boost is a value added to the basic explorer's statistics.
+ * @author Léo
+ *
+ */
 public class Item {
 
 	private String name;

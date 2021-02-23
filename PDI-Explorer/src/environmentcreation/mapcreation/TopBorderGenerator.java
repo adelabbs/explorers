@@ -1,5 +1,10 @@
 package environmentcreation.mapcreation;
 
+/**
+ * Generation of the sub maps on the top border.
+ * @author Léo
+ *
+ */
 public class TopBorderGenerator {
 
 	public static void generation(SubMap[][] subMaps) {

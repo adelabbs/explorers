@@ -1,5 +1,11 @@
 package environmentcreation.mapcreation;
 
+
+/**
+ * Generates all the submaps after creating the border ones. It will fill depeding on the other submaps created.
+ * @author Léo
+ *
+ */
 public class SubMapsFiller {
 
 	public static void fill(SubMap[][] subMaps) {

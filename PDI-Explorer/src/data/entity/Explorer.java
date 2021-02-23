@@ -5,6 +5,12 @@ import data.map.ExplorerTile;
 import data.simulation.SimulationEntry;
 import process.visitor.EntityVisitor;
 
+/**
+ * The explorers will try to find every chests on the map, and interact with the map, and entities depending on the 
+ * chosen strategy.
+ * @author Léo
+ *
+ */
 public class Explorer extends LivingEntity {
 
 	private final static double EXPLORER_SIZE_X = 1.0;

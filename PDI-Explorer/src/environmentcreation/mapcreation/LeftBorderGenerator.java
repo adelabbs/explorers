@@ -1,5 +1,10 @@
 package environmentcreation.mapcreation;
 
+/**
+ * Generation of the sub maps on the left border.
+ * @author Léo
+ *
+ */
 public class LeftBorderGenerator {
 
 	public static void generation(SubMap[][] subMaps) {

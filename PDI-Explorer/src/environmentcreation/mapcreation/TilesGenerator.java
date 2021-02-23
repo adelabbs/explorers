@@ -7,6 +7,11 @@ import java.io.IOException;
 
 import data.map.Tile;
 
+/**
+ * transforms submaps' zones into finer tiles.
+ * @author Léo
+ *
+ */
 public class TilesGenerator {
 
 	public static Tile[][] generation(char[][] zones){

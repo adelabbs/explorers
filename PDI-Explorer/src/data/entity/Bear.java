@@ -2,6 +2,11 @@ package data.entity;
 
 import process.visitor.EntityVisitor;
 
+/**
+ * Instantiable class of a bear. The bear has a large territory, and massive damage/health. 
+ * @author Léo
+ *
+ */
 public class Bear extends Animal  {
 
 	private final static double SIZE_X = 2.0;

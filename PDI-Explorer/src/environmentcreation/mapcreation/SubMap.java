@@ -1,5 +1,10 @@
 package environmentcreation.mapcreation;
 
+/**
+ * Temporary data class used to generate the map.
+ * @author Léo
+ *
+ */
 public class SubMap {
 
 	private int top;

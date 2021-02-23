@@ -1,5 +1,10 @@
 package data.entity;
 
+/**
+ * All living entities, ie animals and explorers.
+ * @author Léo
+ *
+ */
 public abstract class LivingEntity extends BreakableEntity {
 
 	private int speed;
