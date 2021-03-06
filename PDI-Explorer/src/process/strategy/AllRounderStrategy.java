@@ -7,6 +7,7 @@ import data.entity.Explorer;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
 import process.SimulationUtility;
+import process.action.Action;
 import process.action.CollectChestAction;
 import process.action.ExplorationAction;
 import process.action.ExplorerMoveAction;
@@ -22,7 +23,15 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	private int scope;
 	private ArrayList<LivingEntity> inScopeEntities;
 	private ArrayList<Entity> inScopeObstacles;
+	private PriorityList pl = new PriorityList();
 
+	/* Priority of this strategy */
+	private static final int COLLECT_ACTION = 5;
+	private static final int LEAVE_ME_ACTION = 4;
+	private static final int RUN_AWAY = 3;
+	private static final int SEND_MESSAGE = 2;
+	private static final int EXPLORE_ACTION = 1;
+	
 	public AllRounderStrategy(ExplorerManager explorerManager) {
 		super(explorerManager);
 		updateValues();
@@ -30,43 +39,33 @@ public class AllRounderStrategy extends ExplorationStrategy {
 
 	@Override
 	public void decide() {
-		// inScopeEntities.removeAll(inScopeEntities);
 		updateValues();
-		// If there is no living entity in scope then
-		if (inScopeEntities.isEmpty() && inScopeObstacles.isEmpty()) {
-			// Set non random movement action
-			//MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(), Environment.getInstance());
-			ExplorationAction action = new ExplorationAction(getExplorerManager().getExplorer());
-			super.planAction(action);
-		} if (!inScopeObstacles.isEmpty()) {
-			// If not empty, and is a chest
+		
+		//Default operation :
+		pl.addElement(EXPLORE_ACTION, new ExplorationAction(getExplorerManager().getExplorer()));
+		
+		//If an obstacles is detected 
+		if (!inScopeObstacles.isEmpty()) {
 			for (Entity e : inScopeObstacles) {
+				//If the obstacle is a chest
 				if (e.getType().equals("Chest")) {
-					CollectChestAction action = new CollectChestAction((Chest) e, getExplorerManager().getExplorer());
-					super.planAction(action);
-				} else {
-					// If the entity is not a chest, the explorer moves randomly
-					/*MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(),
-							Environment.getInstance());*/
-					ExplorationAction action = new ExplorationAction(getExplorerManager().getExplorer());
-					super.planAction(action);
-				}
-			}
-		} if (!inScopeEntities.isEmpty()) {
-			for(LivingEntity le : inScopeEntities) {
-				if (le.getType().equals("Explorer")) {
-					// Trigger leave me alone action to make space between explorers
-					LeaveMeAloneAction action = new LeaveMeAloneAction(getExplorerManager().getExplorer(),
-							(Explorer) le);
-					super.planAction(action);
-				} else {
-					// Set random movement action
-					//MoveAction action = new ExplorerMoveAction(getExplorerManager().getExplorer(), Environment.getInstance());
-					ExplorationAction action = new ExplorationAction(getExplorerManager().getExplorer());
-					super.planAction(action);
+					pl.addElement(COLLECT_ACTION, new CollectChestAction((Chest) e, getExplorerManager().getExplorer()));
+				
 				}
 			}
 		}
+		if(!inScopeEntities.isEmpty()) {
+			for (LivingEntity le : inScopeEntities) {
+				if (le.getType().equals("Explorer")) {
+					// Trigger leave me alone action to make space between explorers
+					pl.addElement(LEAVE_ME_ACTION, new LeaveMeAloneAction(getExplorerManager().getExplorer(), (Explorer) le));
+				} //TODO Add run away from beasts
+			}
+		}
+		//TODO Send message ?
+		Action action = pl.selectAction();
+		pl.clear();
+		super.planAction(action);
 	}
 
 	/**
@@ -114,10 +113,9 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	 */
 	public ArrayList<Entity> getAllObstaclesInScope(int scope) {
 		/*
-		int dx = (int) position[0] + scope;
-		int mdx = (int) position[0] - scope;
-		int dy = (int) position[1] + scope;
-		int mdy = (int) position[1] - scope;*/
+		 * int dx = (int) position[0] + scope; int mdx = (int) position[0] - scope; int
+		 * dy = (int) position[1] + scope; int mdy = (int) position[1] - scope;
+		 */
 
 		ArrayList<Entity> entities = Environment.getInstance().getObstacles();
 		ArrayList<Entity> inScope = new ArrayList<Entity>();
@@ -126,14 +124,12 @@ public class AllRounderStrategy extends ExplorationStrategy {
 				inScope.add(e);
 			}
 			/*
-			if (e.getPosition()[0] <= dx && e.getPosition()[0] >= mdx) {
-				if (e.getPosition()[1] <= dy && e.getPosition()[1] >= mdy) {
-					if (!(position == e.getPosition())) {
-						System.out.println(SimulationUtility.distance(e.getPosition(), position));
-						inScope.add(e);
-					}
-				}
-			}*/
+			 * if (e.getPosition()[0] <= dx && e.getPosition()[0] >= mdx) { if
+			 * (e.getPosition()[1] <= dy && e.getPosition()[1] >= mdy) { if (!(position ==
+			 * e.getPosition())) {
+			 * System.out.println(SimulationUtility.distance(e.getPosition(), position));
+			 * inScope.add(e); } } }
+			 */
 
 		}
 		return inScope;
