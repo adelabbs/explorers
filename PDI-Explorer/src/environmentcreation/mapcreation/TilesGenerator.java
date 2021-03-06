@@ -127,7 +127,7 @@ public class TilesGenerator {
 		try {
 			String fileName = "ressources/zones/" + shape;
 			if(!(shape.equals("gE") || shape.equals("gO")))
-				fileName += (int)(Math.random()*2);
+				fileName += (int)(Math.random()*4);
 			fileName += ".csv";
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
 			String line;
