@@ -3,6 +3,7 @@ package data.simulation;
 import java.util.ArrayList;
 
 import data.entity.*;
+import data.map.GeneralExplorerMap;
 import data.map.Map;
 
 /** 
@@ -28,6 +29,7 @@ public final class Environment {
 	private int chestAmount;
 	private int foundChest;
 	private ArrayList<Item> items = new ArrayList<Item>();
+	private GeneralExplorerMap generalExplorerMap = new GeneralExplorerMap();
 	
 	private Environment() {}
 	
@@ -65,6 +67,10 @@ public final class Environment {
 	public ArrayList<Item> getItems() {
 		return items;
 	}
+	public GeneralExplorerMap getGeneralExplorerMap() {
+		return generalExplorerMap;
+	}
+
 	public void setMap(Map map) {
 		this.map = map;
 	}
@@ -89,6 +95,10 @@ public final class Environment {
 	public void setItems(ArrayList<Item> items) {
 		this.items = items;
 	}
+	public void setGeneralExplorerMap(GeneralExplorerMap generalExplorerMap) {
+		this.generalExplorerMap = generalExplorerMap;
+	}
+	
 	public synchronized void decrementExplorerAmount() {
 		if(explorerAmount > 0)
 			explorerAmount --;
