@@ -1,6 +1,5 @@
 package tests.geoffroy;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -29,19 +28,6 @@ public class Dashboard extends JPanel {
 		PaintVisitor pv = new PaintVisitor(g);
 		MapPainter mp = new MapPainter(g);
 		
-//		for (int i = 0; i < 90; i++) {
-//			for (int j = 0; j < 90; j++) {
-//				switch (Environment.getInstance().getMap().getTile(i, j).getType()) {
-//				case "w":
-//					g.setColor(Color.BLUE);
-//					break;
-//				case "g":
-//					g.setColor(Color.LIGHT_GRAY);
-//					break;
-//				}
-//				g.fillRect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-//			}
-//		}
 		mp.paint();
 		
 		for(Entity entity : Environment.getInstance().getEntities())

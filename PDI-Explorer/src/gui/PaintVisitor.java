@@ -2,6 +2,11 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import data.entity.Bear;
 import data.entity.Chest;
@@ -12,10 +17,19 @@ import process.visitor.EntityVisitor;
 import tests.geoffroy.Dashboard;
 
 public class PaintVisitor implements EntityVisitor<Void> {
+
+	private static final int IMG_TILE_SIZE = 25;
+	
 	private Graphics g;
+	private Image tiles;
 
 	public PaintVisitor(Graphics g) {
 		this.g = g;
+		try {
+            tiles = ImageIO.read(new File("ressources/img/texture.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } 
 	}
 
 	@Override
@@ -42,7 +56,14 @@ public class PaintVisitor implements EntityVisitor<Void> {
 		x = x * Dashboard.TILE_SIZE + Dashboard.TILE_SIZE / 2;
 		y = y * Dashboard.TILE_SIZE + Dashboard.TILE_SIZE / 2;
 		g.drawOval(x, y, r, r);
-		paint(entity);
+		//paint(entity);
+		int i = (int) entity.getPosition()[0];
+		int j = (int) entity.getPosition()[1];
+		x=0;
+		y=0;
+		g.drawImage(tiles, j*Dashboard.TILE_SIZE, i*Dashboard.TILE_SIZE, 
+				j*Dashboard.TILE_SIZE+Dashboard.TILE_SIZE, i*Dashboard.TILE_SIZE+Dashboard.TILE_SIZE, 
+				x, y, x+IMG_TILE_SIZE, y+IMG_TILE_SIZE, null);
 		return null;
 	}
 
