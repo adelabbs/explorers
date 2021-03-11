@@ -1,8 +1,10 @@
 package tests.lucas;
 
 import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 
+import data.simulation.SimulationEntry;
 import javafx.application.Application;
 
 import javafx.beans.value.ChangeListener;
@@ -13,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
@@ -23,6 +26,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -36,8 +40,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import process.Simulation;
+import process.SimulationUtility;
 
-public class TestMenuFX extends Application {
+public class MenuFX extends Application {
 	private int enveloppe = 180;
 	
 	private final Text text = new Text("Global envelope :");
@@ -104,10 +111,20 @@ public class TestMenuFX extends Application {
 	private final Spinner<Integer> nbExplorers = new Spinner<Integer>();   
     private final int initialNb = 3;
     private SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(3, 6, initialNb);
+    
+    private SimulationEntry simulationEntry;
+	private Simulation simulation;
+    private DashboardFX dashboard;
+    
+    //private static final int EXPLORER_AMOUNT = 3;
+	private static final int ANIMAL_AMOUNT = 0;
+	private static final int CHEST_AMOUNT = 3;
+	private static final int EXPLORATION_STRATEGY = 5;
 	
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
+    	
         primaryStage.setTitle("Autonomous and communicant explorers");
         
         primaryStage.initStyle(StageStyle.UNIFIED);
@@ -115,6 +132,7 @@ public class TestMenuFX extends Application {
         primaryStage.setResizable(false);
         
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        //dashboard = new DashboardFX(primaryScreenBounds.getWidth() / 1.8, primaryScreenBounds.getHeight() / 1.8);
       
         text.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
         text.setFill(Color.GOLD);
@@ -172,41 +190,41 @@ public class TestMenuFX extends Application {
         comEffect.setTextOrigin(VPos.CENTER);
         
         
-        FileInputStream input = new FileInputStream("img/Essai_explorateur.gif");
+        FileInputStream input = new FileInputStream("ressources/img/Essai_explorateur.gif");
         Image image = new Image(input);
         ImageView explorerGIF = new ImageView(image);
         explorerGIF.setFitHeight(primaryScreenBounds.getHeight() / 10);
         explorerGIF.setPreserveRatio(true);
         
-        FileInputStream input1 = new FileInputStream("img/aucun_objet.png");
+        FileInputStream input1 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image1 = new Image(input1);
         ImageView healthView = new ImageView(image1);
         healthView .setFitHeight(primaryScreenBounds.getHeight() / 10);
         healthView .setPreserveRatio(true);
         healthBox.getChildren().add(healthView);
         
-        FileInputStream input2 = new FileInputStream("img/aucun_objet.png");
+        FileInputStream input2 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image2 = new Image(input2);
         ImageView speedView = new ImageView(image2);
         speedView.setFitHeight(primaryScreenBounds.getHeight() / 10);
         speedView.setPreserveRatio(true);
         speedBox.getChildren().add(speedView);
         
-        FileInputStream input3 = new FileInputStream("img/aucun_objet.png");
+        FileInputStream input3 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image3 = new Image(input3);
         ImageView damageView = new ImageView(image3);
         damageView.setFitHeight(primaryScreenBounds.getHeight() / 10);
         damageView.setPreserveRatio(true);
         damageBox.getChildren().add(damageView);
         
-        FileInputStream input4 = new FileInputStream("img/aucun_objet.png");
+        FileInputStream input4 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image4 = new Image(input4);
         ImageView scopeView = new ImageView(image4);
         scopeView.setFitHeight(primaryScreenBounds.getHeight() / 10);
         scopeView.setPreserveRatio(true);
         scopeBox.getChildren().add(scopeView);
         
-        FileInputStream input5 = new FileInputStream("img/aucun_objet.png");
+        FileInputStream input5 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image5 = new Image(input5);
         ImageView comView = new ImageView(image5);
         comView.setFitHeight(primaryScreenBounds.getHeight() / 10);
@@ -526,6 +544,28 @@ public class TestMenuFX extends Application {
             }
         });
         
+        startButton.setOnAction(actionEvent ->  {
+              if (enveloppe >= 0) {
+            	  
+            	  simulationEntry = new SimulationEntry(3, ANIMAL_AMOUNT, CHEST_AMOUNT, EXPLORATION_STRATEGY);
+            	  simulation = new Simulation(simulationEntry);
+            	  dashboard = new DashboardFX(primaryScreenBounds.getWidth() / 1.8, primaryScreenBounds.getHeight() / 1.8);
+            	  Group root = new Group();
+            	  root.getChildren().add(dashboard); 
+            	  primaryStage.setScene(new Scene(root));
+              }
+              else {
+            	 /* Alert errorAlert = new Alert(AlertType.ERROR);
+            	  errorAlert.setHeaderText("Input not valid");
+            	  errorAlert.setContentText("The maximum amount of money is exceeded.");
+            	  errorAlert.showAndWait(); */
+            	  
+            	  Tooltip tooltip = new Tooltip("The maximum amount of money is exceeded.");
+            	  startButton.setTooltip(tooltip);
+            	  tooltip.setShowDelay(Duration.millis(100));
+              }
+        });
+        
         healthBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 30, 0, 0, 0));
         healthBox.setSpacing(primaryScreenBounds.getHeight() / 30);
         speedBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 30, 0, 0, 0));
@@ -560,7 +600,20 @@ public class TestMenuFX extends Application {
         primaryStage.show();
         primaryStage.toFront();        
     }
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
+   public void run() {
+	    System.out.println("0");
+		simulation.launch();
+		System.out.println("1");
+		while (simulation.isRunning()) {
+			SimulationUtility.unitTime();
+			simulation.update();
+			dashboard.drawShapes();
+		}
+	} 
+    
+   
+     public static void main(String[] args) {
+    	 launch(args);
+     } 
 }
