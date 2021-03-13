@@ -3,6 +3,8 @@ package tests.lucas;
 import data.entity.Entity;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
+import environmentcreation.EnvironmentCreator;
+import environmentcreation.event.EntityCreationException;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -13,6 +15,12 @@ public class DashboardFX extends Canvas {
 	
 	public DashboardFX(double arg1, double arg2) {
 		super(arg1, arg2);
+		try {
+			EnvironmentCreator.creation(3, 0, 10);
+		} catch (EntityCreationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         drawShapes(); 
 	}
 	void drawShapes() {
