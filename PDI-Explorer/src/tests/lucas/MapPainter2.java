@@ -24,8 +24,8 @@ public class MapPainter2 {
 	public MapPainter2(GraphicsContext gc){
 		this.g = gc;
 		try {
-			FileInputStream input = new FileInputStream("ressources/img/texture.png");
-            this.tiles = new Image(input);
+			FileInputStream input = new FileInputStream("ressources/img/tiles.png");
+            tiles = new Image(input);
         } catch (IOException e) {
             e.printStackTrace();
         } 
@@ -36,9 +36,9 @@ public class MapPainter2 {
 		int y = 0;
 		for(int i = 0; i < 90; i ++) {
 			for(int j = 0; j < 90; j ++) {
-				switch(Environment.getInstance().getMap().getTile(i, j).getType()) {
+				switch(Environment.getInstance().getMap().getTile(i, j).getType()) { 
 				case "w" :
-					x = (int) IMG_TILE_SIZE;
+					x = IMG_TILE_SIZE;
 					y = 0;
 					break;
 				case "g" :
@@ -46,16 +46,16 @@ public class MapPainter2 {
 					y = 0;
 					break;
 				}
-				g.drawImage(tiles, j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, 
-						j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, 
-						x, y, x+IMG_TILE_SIZE, y+IMG_TILE_SIZE);
+				g.drawImage(tiles, x , y, DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE,j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE ); 
+				//x, y, DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE,j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE
+				//j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE +DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, x, y, x+IMG_TILE_SIZE, y+IMG_TILE_SIZE
 			}
 		}
 		explorerMapsPainter();
 	}
 	
 	private void explorerMapsPainter() {
-		double initY = 90*DashboardFX.TILE_SIZE;
+		int initY = (int) (90*DashboardFX.TILE_SIZE);
 		int entityAmount = Environment.getInstance().getEntities().size();
 		int sent = 0;
 		for(int i = 0; i < entityAmount; i ++)
