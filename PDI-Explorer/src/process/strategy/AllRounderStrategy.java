@@ -2,6 +2,7 @@ package process.strategy;
 
 import java.util.ArrayList;
 
+import data.entity.Animal;
 import data.entity.Entity;
 import data.entity.Explorer;
 import data.entity.LivingEntity;
@@ -13,6 +14,7 @@ import process.action.ExplorationAction;
 import process.action.ExplorerMoveAction;
 import process.action.LeaveMeAloneAction;
 import process.action.MoveAction;
+import process.action.RunAwayAction;
 import process.manager.ExplorerManager;
 import data.entity.Chest;
 
@@ -61,8 +63,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 					pl.addElement(LEAVE_ME_ACTION, new LeaveMeAloneAction(getExplorerManager().getExplorer(), (Explorer) le));
 				} //Else Run away from a beast
 				else {
-					//TODO ADD RUN AWAY ACTION & IMPLEMENTATION
-					//pl.addELement(RUN_AWAY, new RunAwayAction(getExplorerManager().getExplorer(), (Animal) le));
+					pl.addElement(RUN_AWAY, new RunAwayAction(getExplorerManager().getExplorer(), (Animal) le));
 				}
 			}
 		}
