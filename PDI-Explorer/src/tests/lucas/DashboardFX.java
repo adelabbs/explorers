@@ -15,12 +15,12 @@ public class DashboardFX extends Canvas {
 	
 	public DashboardFX(double arg1, double arg2) {
 		super(arg1, arg2);
-		try {
+		/*try {
 			EnvironmentCreator.creation(3, 0, 10);
 		} catch (EntityCreationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
         drawShapes(); 
 	}
 	void drawShapes() {

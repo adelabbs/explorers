@@ -16,6 +16,7 @@ import process.visitor.EntityVisitor;
 public class PaintVisitor2 implements EntityVisitor<Void> {
 
 	private static final double IMG_TILE_SIZE = 25;
+	private double scale = 2.5;
 	
 	private GraphicsContext g;
 	private Image tiles;
@@ -59,9 +60,8 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 		int j = (int) entity.getPosition()[1];
 		x=0;
 		y=0;
-		g.drawImage(tiles, j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, 
-				j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, 
-				x, y, x+IMG_TILE_SIZE, y+IMG_TILE_SIZE);
+		g.drawImage(tiles, x, y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*IMG_TILE_SIZE/scale, i*IMG_TILE_SIZE/scale, IMG_TILE_SIZE/scale, IMG_TILE_SIZE/scale);
+		//j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, x, y, x+IMG_TILE_SIZE, y+IMG_TILE_SIZE);
 		return null;
 	}
 
