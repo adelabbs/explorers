@@ -45,7 +45,6 @@ public class ManagerCreationVisitor implements EntityVisitor<LivingEntityManager
 	public LivingEntityManager visit(Explorer entity) {
 		int strategy = simulationEntry.getExplorationStrategy();
 		ExplorerManager manager = ManagerFactory.createExplorerManager(simulation, entity, strategy);
-		simulation.addToCommunicationSystem(manager);
 		return manager;
 	}
 
