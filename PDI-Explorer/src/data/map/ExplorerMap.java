@@ -2,6 +2,7 @@ package data.map;
 
 /**
  * Every explorer has his own ExplorerMap. It has the same size than the map, and is composed of ExplorerTiles.
+ * 
  * @author Léo
  *
  */
