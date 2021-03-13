@@ -46,7 +46,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration; 
 import process.Simulation;
-import process.SimulationUtility;
 
 public class MenuFX extends Application {
 	private int enveloppe = 180;

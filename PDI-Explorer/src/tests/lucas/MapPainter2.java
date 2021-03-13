@@ -45,8 +45,9 @@ public class MapPainter2 {
 					x = 0;
 					y = 0;
 					break;
-				}
-				g.drawImage(tiles, x , y, DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE,j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE ); 
+				} //tiles, x , y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE
+				g.drawImage(tiles, x , y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE);
+				//g.drawImage(tiles, x , y, DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE,j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE ); 
 				//x, y, DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE,j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE
 				//j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, j*DashboardFX.TILE_SIZE +DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE+DashboardFX.TILE_SIZE, x, y, x+IMG_TILE_SIZE, y+IMG_TILE_SIZE
 			}

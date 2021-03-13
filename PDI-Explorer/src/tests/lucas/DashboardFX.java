@@ -1,7 +1,6 @@
 package tests.lucas;
 
 import data.entity.Entity;
-
 import data.entity.LivingEntity;
 import data.simulation.Environment;
 import javafx.scene.canvas.Canvas;
