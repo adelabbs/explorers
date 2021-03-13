@@ -2,7 +2,7 @@ package data.message;
 
 import data.entity.Explorer;
 
-public class Message<T> {
+public abstract class Message<T> {
 	
 	private T content;
 	private Explorer explorer;
@@ -12,6 +12,8 @@ public class Message<T> {
 		this.content = content;
 		this.explorer = explorer;
 	}
+	
+	public abstract void send();
 
 	public T getContent() {
 		return content;

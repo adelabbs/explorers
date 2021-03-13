@@ -8,5 +8,10 @@ public class HelpMessage extends Message<double[]> {
 		super(content, explorer);
 		setSendingTime(10);
 	}
+
+	@Override
+	public void send() {
+		
+	}
 	
 }

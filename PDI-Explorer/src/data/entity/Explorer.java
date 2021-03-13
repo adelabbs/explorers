@@ -14,6 +14,7 @@ import process.visitor.EntityVisitor;
  * @author Léo
  *
  */
+@SuppressWarnings("rawtypes")
 public class Explorer extends LivingEntity {
 
 	private final static double EXPLORER_SIZE_X = 1.0;
