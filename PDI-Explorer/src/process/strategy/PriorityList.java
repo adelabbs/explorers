@@ -41,4 +41,8 @@ public class PriorityList {
 	public void clear() {
 		priorityMap.clear();
 	}
+	
+	public HashMap<Integer, Action> getPriorityMap() {
+		return priorityMap;
+	}
 }
