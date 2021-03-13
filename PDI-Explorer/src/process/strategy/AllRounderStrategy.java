@@ -32,11 +32,16 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	private PriorityList pl = new PriorityList();
 
 	/* Basic priorities of this strategy */
-	private static final int COLLECT_ACTION = 5;
-	private static final int LEAVE_ME_ACTION = 4;
-	private static final int RUN_AWAY = 3;
-	private static final int SEND_MESSAGE = 2;
-	private static final int EXPLORE_ACTION = 1;
+	private static final int COLLECT_ACTION = 10;
+	private static final int LEAVE_ME_ACTION = 8;
+	private static final int RUN_AWAY = 6;
+	private static final int SEND_MESSAGE = 4;
+	private static final int EXPLORE_ACTION = 3;
+	
+	/* Modulate priority for messages */
+	private static final int LOW_PRIORITY = 2;
+	private static final int HIGH_PRIORITY = 9;
+	
 	
 	/* Ponderate priorities of this strategy */
 	//Note : CollectAction is set to be the highest level of priority in the simulation
@@ -94,29 +99,30 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		
 		
 		//Receiving Message
-		//ArrayList getExplorerManager().getExplorer().getMessages()
-		
+		ArrayList<Message> messages = getExplorerManager().getExplorer().getMessages();
+		if(!messages.isEmpty()) {
+			HelpMessage helpMe = (HelpMessage) messages.get(0);
+			int helpPriority = calculatePrioritiesByDistance(helpMe.getContent());
+			// TODO pl.addElement(helpPriority, new HelpAction);
+		}
+	
 		
 		Action action = pl.selectAction();
 		pl.clear();
 		super.planAction(action);
 	}
 
-	
-	//TODO IF DISTANCES IN MESSAGES
-	/*
-	public void calculatePriorities() {
-		double distance = 0;
-		if(pl.getPriorityMap().containsKey(SEND_MESSAGE)) {
-	
-			ArrayList<Message> messages = getExplorerManager().getExplorer().getMessages();
-			for (Message m : messages)	
-				if(m.getClass() == HelpMessage.class) {
-					SimulationUtility.distance(getExplorerManager().getExplorer().getPosition(), m.ge);
-				}
+
+	public int calculatePrioritiesByDistance(double[] senderPos) {
+		double distance = SimulationUtility.distance(getExplorerManager().getExplorer().getPosition(), senderPos);
+		if (distance > 50) {
+			return LOW_PRIORITY;
+		}
+		else {
+			return HIGH_PRIORITY;
 		}
 	}
-	*/
+	
 	
 	/**
 	 * Update all in scope values for each tick of decide()

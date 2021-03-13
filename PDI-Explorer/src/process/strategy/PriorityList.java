@@ -13,7 +13,7 @@ import process.action.Action;
 public class PriorityList {
 	
 	//Number of possible actions in the simulation
-	private static final int MAX = 5;
+	private static final int MAX = 10;
 	private static final int MIN = 1;
 
 	private HashMap<Integer, Action> priorityMap = new HashMap<Integer, Action>();
