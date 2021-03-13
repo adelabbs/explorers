@@ -2,6 +2,7 @@ package environmentcreation;
 
 import java.util.ArrayList;
 
+import data.map.GeneralExplorerMap;
 import data.simulation.*;
 import environmentcreation.event.EntityCreationException;
 import environmentcreation.mapcreation.MapCreator;
@@ -24,6 +25,7 @@ public class EnvironmentCreator {
 		Environment.getInstance().setChestAmount(chestAmount);
 		Environment.getInstance().setFoundChest(0);
 		Environment.getInstance().setItems(new ArrayList<Item>());
+		Environment.getInstance().setGeneralExplorerMap(new GeneralExplorerMap());
 		
 	}
 	
