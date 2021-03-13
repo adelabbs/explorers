@@ -2,13 +2,17 @@ package tests.lucas;
 
 import java.io.FileInputStream;
 
+
 import java.io.FileNotFoundException;
 
 import data.simulation.SimulationEntry;
 import javafx.application.Application;
-
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.Worker;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -40,7 +44,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
+import javafx.util.Duration; 
 import process.Simulation;
 import process.SimulationUtility;
 
@@ -117,13 +121,16 @@ public class MenuFX extends Application {
     private DashboardFX dashboard;
     
     //private static final int EXPLORER_AMOUNT = 3;
-	private static final int ANIMAL_AMOUNT = 0;
+	private static final int ANIMAL_AMOUNT = 3;
 	private static final int CHEST_AMOUNT = 3;
 	private static final int EXPLORATION_STRATEGY = 5;
 	
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
+  	  
+    	simulationEntry = new SimulationEntry(3, ANIMAL_AMOUNT, CHEST_AMOUNT, EXPLORATION_STRATEGY);
+    	simulation = new Simulation(simulationEntry);
     	
         primaryStage.setTitle("Autonomous and communicant explorers");
         
@@ -132,7 +139,7 @@ public class MenuFX extends Application {
         primaryStage.setResizable(false);
         
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        //dashboard = new DashboardFX(primaryScreenBounds.getWidth() / 1.8, primaryScreenBounds.getHeight() / 1.8);
+        dashboard = new DashboardFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
       
         text.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
         text.setFill(Color.GOLD);
@@ -546,13 +553,63 @@ public class MenuFX extends Application {
         
         startButton.setOnAction(actionEvent ->  {
               if (enveloppe >= 0) {
-            	  
-            	  simulationEntry = new SimulationEntry(3, ANIMAL_AMOUNT, CHEST_AMOUNT, EXPLORATION_STRATEGY);
-            	  simulation = new Simulation(simulationEntry);
-            	  dashboard = new DashboardFX(primaryScreenBounds.getWidth() / 1.8, primaryScreenBounds.getHeight() / 1.8);
             	  Group root = new Group();
             	  root.getChildren().add(dashboard); 
             	  primaryStage.setScene(new Scene(root));
+            	  
+            	/* Task<Void> task = new Task<Void>() {
+                      @Override
+                      public Void call() throws Exception {
+                    	  System.out.println("0");
+                    	  simulation.launch();
+                    	  System.out.println("1");
+                          return null ;
+                      }
+                  };
+
+                  task.setOnSucceeded(event -> {
+                	  while (simulation.isRunning()) {
+  		 				System.out.println("2");
+  		 				SimulationUtility.unitTime();
+  		 				System.out.println("3");
+  		 				simulation.update();
+  		 				System.out.println("4");
+  		 				dashboard.drawShapes();
+  		 				System.out.println("5");
+                	  }
+                  });
+
+                  new Thread(task).run(); */
+            	  
+            	  
+            	  /*Service<Void> simLaunch = new Service<Void>(){
+
+            		  @Override
+            		  protected Task<Void> createTask() {
+            		    return new Task<Void>(){
+
+            		     @Override
+            		     protected Void call() throws Exception {
+            		    	System.out.println("0");
+            		    	simulation.launch();
+            		    	System.out.println("1");
+            		 			while (simulation.isRunning()) {
+            		 				System.out.println("2");
+            		 				SimulationUtility.unitTime();
+            		 				System.out.println("3");
+            		 				simulation.update();
+            		 				System.out.println("4");
+            		 				dashboard.drawShapes();
+            		 				System.out.println("5");
+            		 		}
+                		    System.out.println("6");
+            		        return null;
+            		      }
+            		    };
+            		  }
+            		};
+            		simLaunch.start(); 
+            		System.out.println("7"); */
               }
               else {
             	 /* Alert errorAlert = new Alert(AlertType.ERROR);
@@ -599,18 +656,29 @@ public class MenuFX extends Application {
         
         primaryStage.show();
         primaryStage.toFront();        
+        
+        /*Thread taskThread = new Thread(new Runnable() {
+            @Override
+            public void run() { 
+            	simulation.launch();
+            	while (simulation.isRunning()) {
+        			SimulationUtility.unitTime();
+        			simulation.update();
+        			dashboard.drawShapes();
+            	}
+        			Platform.runLater(new Runnable() {
+        				@Override
+        				public void run() {
+        				}
+        			});
+        		}
+        	});
+        	taskThread.start(); 
+    	} */
+        
     }
-    
-   public void run() {
-	    System.out.println("0");
-		simulation.launch();
-		System.out.println("1");
-		while (simulation.isRunning()) {
-			SimulationUtility.unitTime();
-			simulation.update();
-			dashboard.drawShapes();
-		}
-	} 
+        
+  
     
    
      public static void main(String[] args) {
