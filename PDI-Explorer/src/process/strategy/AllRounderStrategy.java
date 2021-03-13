@@ -59,10 +59,22 @@ public class AllRounderStrategy extends ExplorationStrategy {
 				if (le.getType().equals("Explorer")) {
 					// Trigger leave me alone action to make space between explorers
 					pl.addElement(LEAVE_ME_ACTION, new LeaveMeAloneAction(getExplorerManager().getExplorer(), (Explorer) le));
-				} //TODO Add run away from beasts
+				} //Else Run away from a beast
+				else {
+					//TODO ADD RUN AWAY ACTION & IMPLEMENTATION
+					//pl.addELement(RUN_AWAY, new RunAwayAction(getExplorerManager().getExplorer(), (Animal) le));
+				}
 			}
 		}
-		//TODO Send message ?
+		
+		/*
+		int sendMessageChance = 1 + (int)(Math.random() * ((500 - 1) + 1));
+		//Send Message with a 1:500 chance
+		if(sendMessageChance > 499) {
+			//TODO
+			pl.addElement(SEND_MESSAGE, null);
+		}
+		*/
 		Action action = pl.selectAction();
 		pl.clear();
 		super.planAction(action);
