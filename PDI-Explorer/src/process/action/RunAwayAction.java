@@ -49,7 +49,7 @@ public class RunAwayAction implements Action {
 
 	@Override
 	public boolean isOver() {
-		return false;
+		return true;
 	}
 
 }

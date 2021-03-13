@@ -6,7 +6,9 @@ import data.entity.Animal;
 import data.entity.Entity;
 import data.entity.Explorer;
 import data.entity.LivingEntity;
+import data.message.HelpMessage;
 import data.message.MapMessage;
+import data.message.Message;
 import data.simulation.Environment;
 import process.SimulationUtility;
 import process.action.Action;
@@ -29,12 +31,25 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	private ArrayList<Entity> inScopeObstacles;
 	private PriorityList pl = new PriorityList();
 
-	/* Priority of this strategy */
-	private static final int COLLECT_ACTION = 5;
-	private static final int LEAVE_ME_ACTION = 4;
-	private static final int RUN_AWAY = 3;
-	private static final int SEND_MESSAGE = 2;
-	private static final int EXPLORE_ACTION = 1;
+	/* Basic priorities of this strategy */
+	private static final int COLLECT_ACTION = 10;
+	private static final int LEAVE_ME_ACTION = 8;
+	private static final int RUN_AWAY = 6;
+	private static final int SEND_MESSAGE = 4;
+	private static final int EXPLORE_ACTION = 3;
+	
+	/* Modulate priority for messages */
+	private static final int LOW_PRIORITY = 2;
+	private static final int HIGH_PRIORITY = 9;
+	
+	
+	/* Ponderate priorities of this strategy */
+	//Note : CollectAction is set to be the highest level of priority in the simulation
+	private int leave_me_action = LEAVE_ME_ACTION;
+	private int run_away = RUN_AWAY; 
+	private int send_message = SEND_MESSAGE;
+	private int explore_action = EXPLORE_ACTION;
+	
 	
 	public AllRounderStrategy(ExplorerManager explorerManager) {
 		super(explorerManager);
@@ -46,7 +61,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		updateValues();
 		
 		//Default operation :
-		pl.addElement(EXPLORE_ACTION, new ExplorationAction(getExplorerManager().getExplorer()));
+		pl.addElement(explore_action, new ExplorationAction(getExplorerManager().getExplorer()));
 		
 		//If an obstacles is detected 
 		if (!inScopeObstacles.isEmpty()) {
@@ -58,37 +73,57 @@ public class AllRounderStrategy extends ExplorationStrategy {
 				}
 			}
 		}
+		
+		//If an entity is detected
 		if(!inScopeEntities.isEmpty()) {
 			for (LivingEntity le : inScopeEntities) {
 				if (le.getType().equals("Explorer")) {
 					// Trigger leave me alone action to make space between explorers
-					pl.addElement(LEAVE_ME_ACTION, new LeaveMeAloneAction(getExplorerManager().getExplorer(), (Explorer) le));
+					pl.addElement(leave_me_action, new LeaveMeAloneAction(getExplorerManager().getExplorer(), (Explorer) le));
 				} //Else Run away from a beast
 				else {
-					pl.addElement(RUN_AWAY, new RunAwayAction(getExplorerManager().getExplorer(), (Animal) le));
+					pl.addElement(run_away, new RunAwayAction(getExplorerManager().getExplorer(), (Animal) le));
 				}
 			}
 		}
-		//Sending message
 		
+		
+		//Sending message
 		int sendMessageChance = 1 + (int)(Math.random() * ((100 - 1) + 1));
-		//Send Message with a 1:500 chance
+		//Send Message with a 1:99 chance
 		if(sendMessageChance > 99) {
 			System.out.println("Envoyé");
-			pl.addElement(SEND_MESSAGE, new SendMessageAction(new MapMessage(getExplorerManager().getExplorer().getMap(), getExplorerManager().getExplorer()),
+			pl.addElement(send_message, new SendMessageAction(new MapMessage(getExplorerManager().getExplorer().getMap(), getExplorerManager().getExplorer()),
 					getExplorerManager().getExplorer()));
 		}
 		
 		
 		//Receiving Message
-		//getExplorerManager().getExplorer().getMessages()
-		
+		ArrayList<Message> messages = getExplorerManager().getExplorer().getMessages();
+		if(!messages.isEmpty()) {
+			HelpMessage helpMe = (HelpMessage) messages.get(0);
+			int helpPriority = calculatePrioritiesByDistance(helpMe.getContent());
+			// TODO pl.addElement(helpPriority, new HelpAction);
+		}
+	
 		
 		Action action = pl.selectAction();
 		pl.clear();
 		super.planAction(action);
 	}
 
+
+	public int calculatePrioritiesByDistance(double[] senderPos) {
+		double distance = SimulationUtility.distance(getExplorerManager().getExplorer().getPosition(), senderPos);
+		if (distance > 50) {
+			return LOW_PRIORITY;
+		}
+		else {
+			return HIGH_PRIORITY;
+		}
+	}
+	
+	
 	/**
 	 * Update all in scope values for each tick of decide()
 	 */
