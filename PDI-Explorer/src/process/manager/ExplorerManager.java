@@ -1,14 +1,11 @@
 package process.manager;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import data.entity.Explorer;
-import data.message.Message;
 import process.Simulation;
 import process.SimulationUtility;
 import process.action.Action;
-import process.communication.CommunicationSystem;
 import process.strategy.ExplorationStrategy;
 
 /**
@@ -21,8 +18,6 @@ public class ExplorerManager extends LivingEntityManager {
 	private Explorer explorer;
 	private ExplorationStrategy strategy;
 	private LinkedList<Action> actions = new LinkedList<Action>();
-	private CommunicationSystem communicationSystem;
-	private ArrayList<Message> messages = new ArrayList<Message>();
 
 	public ExplorerManager(Simulation simulation, Explorer explorer) {
 		this.simulation = simulation;
@@ -42,10 +37,6 @@ public class ExplorerManager extends LivingEntityManager {
 				}
 			}
 		}
-	}
-
-	public void receive(Message message) {
-		messages.add(message);
 	}
 
 	public void planAction(Action action) {
@@ -70,18 +61,6 @@ public class ExplorerManager extends LivingEntityManager {
 
 	public String getExplorerName() {
 		return explorer.getName();
-	}
-
-	public CommunicationSystem getCommunicationSystem() {
-		return communicationSystem;
-	}
-
-	public void setCommunicationSystem(CommunicationSystem communicationSystem) {
-		this.communicationSystem = communicationSystem;
-	}
-
-	public ArrayList<Message> getMessages() {
-		return messages;
 	}
 
 	public ExplorationStrategy getStrategy() {

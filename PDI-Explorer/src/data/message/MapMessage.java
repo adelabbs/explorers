@@ -1,27 +1,13 @@
 package data.message;
 
+import data.entity.Explorer;
 import data.map.ExplorerMap;
-import process.visitor.MessageVisitor;
 
-public class MapMessage extends Message {
-	private ExplorerMap map;
-
-	public MapMessage(String message, ExplorerMap map) {
-		super(message);
-		this.map = map;
+public class MapMessage extends Message<ExplorerMap> {
+	
+	public MapMessage(ExplorerMap content, Explorer explorer) {
+		super(content, explorer);
+		setSendingTime(150);
 	}
-
-	public ExplorerMap getMap() {
-		return map;
-	}
-
-	public void setMap(ExplorerMap map) {
-		this.map = map;
-	}
-
-	@Override
-	public <T> T accept(MessageVisitor<T> visitor) {
-		return visitor.visit(this);
-	}
-
+	
 }

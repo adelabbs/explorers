@@ -1,7 +1,10 @@
 package data.entity;
 
+import java.util.ArrayList;
+
 import data.map.ExplorerMap;
 import data.map.ExplorerTile;
+import data.message.Message;
 import data.simulation.SimulationEntry;
 import process.visitor.EntityVisitor;
 
@@ -25,6 +28,7 @@ public class Explorer extends LivingEntity {
 	private String name;
 	private ExplorerMap map;
 	private int communicationRange;
+	private ArrayList<Message> messages = new ArrayList<Message>();
 	
 	public Explorer(double[] position, String name) {
 		super("Explorer", position, new double[]{EXPLORER_SIZE_X, EXPLORER_SIZE_Y},
@@ -70,9 +74,16 @@ public class Explorer extends LivingEntity {
 		this.communicationRange = communicationRange;
 	}
 
+	public ArrayList<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(ArrayList<Message> messages) {
+		this.messages = messages;
+	}
+
 	@Override
 	public <T> T accept(EntityVisitor<T> visitor) {
 		return visitor.visit(this);
 	}
-	
 }

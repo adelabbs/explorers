@@ -1,31 +1,40 @@
 package data.message;
 
-import process.visitor.MessageVisitor;
+import data.entity.Explorer;
 
-/**
- * The abstract message type.
- *
- */
-public abstract class Message {
-	String message;
-
-	public Message(String message) {
-		this.message = message;
+public class Message<T> {
+	
+	private T content;
+	private Explorer explorer;
+	private int sendingTime;
+	
+	public Message(T content, Explorer explorer) {
+		this.content = content;
+		this.explorer = explorer;
 	}
 
-	public String getMessage() {
-		return message;
+	public T getContent() {
+		return content;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setContent(T content) {
+		this.content = content;
 	}
 
-	@Override
-	public String toString() {
-		return message;
+	public int getSendingTime() {
+		return sendingTime;
 	}
 
-	public abstract <T> T accept(MessageVisitor<T> visitor);
+	public void setSendingTime(int sendingTime) {
+		this.sendingTime = sendingTime;
+	}
+	
+	public Explorer getExplorer() {
+		return explorer;
+	}
 
+	public void setExplorer(Explorer explorer) {
+		this.explorer = explorer;
+	}
+	
 }
