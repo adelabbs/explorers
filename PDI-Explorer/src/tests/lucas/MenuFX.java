@@ -14,6 +14,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -45,8 +46,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration; 
 import process.Simulation;
+import process.SimulationUtility;
 
 public class MenuFX extends Application {
 	private int enveloppe = 180;
@@ -557,32 +560,7 @@ public class MenuFX extends Application {
             	  root.getChildren().add(dashboard); 
             	  primaryStage.setScene(new Scene(root));
             	  
-            	/* Task<Void> task = new Task<Void>() {
-                      @Override
-                      public Void call() throws Exception {
-                    	  System.out.println("0");
-                    	  simulation.launch();
-                    	  System.out.println("1");
-                          return null ;
-                      }
-                  };
-
-                  task.setOnSucceeded(event -> {
-                	  while (simulation.isRunning()) {
-  		 				System.out.println("2");
-  		 				SimulationUtility.unitTime();
-  		 				System.out.println("3");
-  		 				simulation.update();
-  		 				System.out.println("4");
-  		 				dashboard.drawShapes();
-  		 				System.out.println("5");
-                	  }
-                  });
-
-                  new Thread(task).run(); */
-            	  
-            	  
-            	  /*Service<Void> simLaunch = new Service<Void>(){
+            	  Service<Void> simLaunch = new Service<Void>(){
 
             		  @Override
             		  protected Task<Void> createTask() {
@@ -590,26 +568,23 @@ public class MenuFX extends Application {
 
             		     @Override
             		     protected Void call() throws Exception {
-            		    	System.out.println("0");
-            		    	simulation.launch();
-            		    	System.out.println("1");
-            		 			while (simulation.isRunning()) {
-            		 				System.out.println("2");
-            		 				SimulationUtility.unitTime();
-            		 				System.out.println("3");
-            		 				simulation.update();
-            		 				System.out.println("4");
-            		 				dashboard.drawShapes();
-            		 				System.out.println("5");
-            		 		}
-                		    System.out.println("6");
+            		 		System.out.println("2");
+            		 		SimulationUtility.unitTime();
+            		 		System.out.println("3");
+            		 		simulation.update();
+            		 		System.out.println("4");
+            		 		dashboard.drawShapes();
+            		 		System.out.println("5");
             		        return null;
             		      }
             		    };
             		  }
             		};
-            		simLaunch.start(); 
-            		System.out.println("7"); */
+            		simulation.launch();
+            		while (simulation.isRunning()) {
+            			simLaunch.start(); 
+            			System.out.println("7"); 
+            		} 
               }
               else {
             	 /* Alert errorAlert = new Alert(AlertType.ERROR);
@@ -657,7 +632,7 @@ public class MenuFX extends Application {
         primaryStage.show();
         primaryStage.toFront();        
         
-        /*Thread taskThread = new Thread(new Runnable() {
+         Thread taskThread = new Thread(new Runnable() {
             @Override
             public void run() { 
             	simulation.launch();
@@ -666,22 +641,25 @@ public class MenuFX extends Application {
         			simulation.update();
         			dashboard.drawShapes();
             	}
-        			Platform.runLater(new Runnable() {
-        				@Override
-        				public void run() {
-        				}
-        			});
-        		}
-        	});
-        	taskThread.start(); 
-    	} */
-        
-    }
-        
-  
-    
+        		Platform.runLater(new Runnable() {
+        			@Override
+        			public void run() {
+        			}
+        		});
+        	}
+        });
+       	taskThread.start(); 
+       	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        	@Override
+        	public void handle(WindowEvent e) {
+        		Platform.exit();
+        		System.exit(0);
+        		System.out.println("7"); 
+        	}
+        });
+    }         
    
      public static void main(String[] args) {
     	 launch(args);
-     } 
+    } 
 }
