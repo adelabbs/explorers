@@ -24,5 +24,16 @@ public class Map {
 	public void setTiles(Tile[][] tiles) {
 		this.tiles = tiles;
 	}
-		
+	
+	public String toString() {
+		String res = "";
+		for(int i = 0; i < 90; i ++) {
+			for(int j = 0; j < 90; j ++) {
+				res += tiles[i][j].getType();
+			}
+			res += "\n";
+		}
+		return res;
+	}
+	
 }

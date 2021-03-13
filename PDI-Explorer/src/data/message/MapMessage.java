@@ -10,7 +10,7 @@ public class MapMessage extends Message<ExplorerMap> {
 	
 	public MapMessage(ExplorerMap content, Explorer explorer) {
 		super(content, explorer);
-		setSendingTime(150);
+		setSendingTime(1000);
 	}
 
 	@Override
@@ -24,6 +24,12 @@ public class MapMessage extends Message<ExplorerMap> {
 			}
 		gem.setUsed(true);
 		MapMerger.merge(getExplorer().getMap().getTiles());
+		try {
+			Thread.sleep(getSendingTime());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		gem.setUsed(false);
 	}
 	

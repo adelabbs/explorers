@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import data.entity.Explorer;
 import data.map.ExplorerMap;
+import data.map.ExplorerTile;
 import data.simulation.Environment;
 import tests.geoffroy.Dashboard;
 
@@ -50,6 +51,7 @@ public class MapPainter {
 			}
 		}
 		explorerMapsPainter();
+		generalMapPainter();
 	}
 	
 	private void explorerMapsPainter() {
@@ -93,6 +95,25 @@ public class MapPainter {
 			}
 //		g.setColor(Color.LIGHT_GRAY);
 //		g.fillRect(y, x, 90, 90);
+	}
+	
+	private void generalMapPainter() {
+		ExplorerTile[][] map = Environment.getInstance().getGeneralExplorerMap().getTiles();
+		int originX = 1500;
+		int originY = 700;
+		for(int i = 0; i < 90; i ++) {
+			for(int j = 0; j < 90; j ++) {
+				if(map[i][j].isExplored()) {
+					if(map[i][j].getType().equals("g"))
+						g.setColor(Color.GRAY);
+					else
+						g.setColor(Color.BLUE);
+				}
+				else
+					g.setColor(Color.BLACK);
+				g.fillRect(originX + j*3, originY + i*3, 3, 3);
+			}
+		}
 	}
 	
 }

@@ -25,7 +25,7 @@ public class EnvironmentCreator {
 		Environment.getInstance().setChestAmount(chestAmount);
 		Environment.getInstance().setFoundChest(0);
 		Environment.getInstance().setItems(new ArrayList<Item>());
-		Environment.getInstance().setGeneralExplorerMap(new GeneralExplorerMap());
+		Environment.getInstance().setGeneralExplorerMap(GeneralExplorerMapCreator.creation());
 		
 	}
 	
