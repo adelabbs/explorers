@@ -10,7 +10,6 @@ import process.strategy.CombatStrategy;
 import process.strategy.DodgeStrategy;
 import process.strategy.GreedStrategy;
 import process.strategy.RandomStrategy;
-import tests.manual.comms.JustChattingStrategy;
 
 public class ManagerFactory {
 	public static final int RANDOM_STRATEGY = 0;
@@ -19,7 +18,6 @@ public class ManagerFactory {
 	public static final int COMBAT_STRATEGY = 3;
 	public static final int JUSTCHATTING_STRATEGY = 4;
 	public static final int ALL_ROUNDER_STRATEGY = 5;
-	
 
 	public static ExplorerManager createExplorerManager(Simulation simulation, Explorer explorer,
 			int explorationStrategy) throws IllegalArgumentException {
@@ -40,10 +38,6 @@ public class ManagerFactory {
 			ExplorerManager randomExplorerManager = new ExplorerManager(simulation, explorer);
 			randomExplorerManager.setStrategy(new RandomStrategy(randomExplorerManager));
 			return randomExplorerManager;
-		case JUSTCHATTING_STRATEGY:
-			ExplorerManager chattingExplorerManager = new ExplorerManager(simulation, explorer);
-			chattingExplorerManager.setStrategy(new JustChattingStrategy(chattingExplorerManager));
-			return chattingExplorerManager;
 		case ALL_ROUNDER_STRATEGY:
 			ExplorerManager allRounderExplorerManager = new ExplorerManager(simulation, explorer);
 			allRounderExplorerManager.setStrategy(new AllRounderStrategy(allRounderExplorerManager));
@@ -52,8 +46,7 @@ public class ManagerFactory {
 			throw new IllegalArgumentException("Unknown strategy: " + explorationStrategy);
 		}
 	}
-	
-	
+
 	public static BearManager createBearManager(Simulation simulation, Bear bear) {
 		return new BearManager(simulation, bear);
 	}
