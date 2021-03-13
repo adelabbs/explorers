@@ -1,11 +1,11 @@
 package process.visitor;
 
-import data.message.DangerMessage;
+import data.message.HelpMessage;
 import data.message.MapMessage;
 import tests.manual.comms.TestMessage;
 
 public interface MessageVisitor<T> {
-	T visit(DangerMessage message);
+	T visit(HelpMessage message);
 
 	T visit(MapMessage message);
 
