@@ -16,7 +16,7 @@ public class SimulationEntry {
 	public static final int MIN_CHEST_AMOUNT = 1;
 	public static final int MAX_CHEST_AMOUNT = 15;
 
-	private int explorerAmount = 3;
+	private int explorerAmount = 5;
 	private int animalAmount = 0;
 	private int chestAmount = 0;
 	private int explorationStrategy = 0;

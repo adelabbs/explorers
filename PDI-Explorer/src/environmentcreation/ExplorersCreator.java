@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import data.entity.Explorer;
+import process.action.UpdateExplorerMap;
 
 /**
  * Creation of the Explorer ArrayList, depending on the amount of explorer asked by the user.
@@ -36,8 +37,11 @@ public class ExplorersCreator {
 		ExplorerPlacer ep = new ExplorerPlacer(explorerAmount);
 		
 		ArrayList<Explorer> explorers = new ArrayList<>();
-		for(int i = 0; i < explorerAmount; i ++)
-			explorers.add(new Explorer(ep.place(), names[i]));
+		for(int i = 0; i < explorerAmount; i ++) {
+			Explorer e = new Explorer(ep.place(), names[i]);
+			UpdateExplorerMap.update(e);			
+			explorers.add(e);
+		}
 		return explorers;
 		
 	}

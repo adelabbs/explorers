@@ -29,7 +29,7 @@ public class ExplorerPlacer {
 		double[] last = new double[] {(double)(sent), (double)(sent)};
 		positions.add(new double[] {last[0], last[1]});
 		for(int i = 0; i < explorerAmount - 1; i ++) {
-			last[1] += 5.0;
+			last[1] += 8.0;
 			while(map.getTile((int) last[0], (int) last[1]).getType().equals("w"))
 				last[1] ++;
 			positions.add(new double[] {last[0], last[1]});

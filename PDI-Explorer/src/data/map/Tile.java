@@ -13,7 +13,9 @@ public class Tile {
 		this.type = type;
 	}
 	
-	public Tile() {}
+	public Tile() {
+		this.type = " ";
+	}
 
 	public String getType() {
 		return type;

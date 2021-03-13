@@ -2,7 +2,6 @@ package environmentcreation;
 
 import java.util.ArrayList;
 
-import data.map.GeneralExplorerMap;
 import data.simulation.*;
 import environmentcreation.event.EntityCreationException;
 import environmentcreation.mapcreation.MapCreator;

@@ -2,7 +2,6 @@ package process.action;
 
 import data.entity.Explorer;
 import data.map.ExplorerMap;
-import data.map.ExplorerTile;
 import data.simulation.Environment;
 
 /**
@@ -19,42 +18,6 @@ public class ExplorationAction implements Action {
 		this.explorer = explorer;
 	}
 	
-	@Override
-//	public void execute() {
-//		int scanningRange = 0;
-//		boolean newZoneDiscovered = false;
-//		double[] currentPosition = explorer.getPosition();
-//		ExplorerMap ex = explorer.getMap();
-//		ExplorerTile tileA;
-//		ExplorerTile tileB;
-//		ExplorerTile tileC;
-//		ExplorerTile tileD;
-//			
-//		while(scanningRange < 90 || newZoneDiscovered) {
-//	
-//			tileA = ex.getTile((int) currentPosition[1] + scanningRange, (int) currentPosition[0] + scanningRange);
-//			tileB = ex.getTile((int) currentPosition[1] - scanningRange, (int) currentPosition[0] + scanningRange);	
-//			tileC = ex.getTile((int) currentPosition[1] + scanningRange, (int) currentPosition[0] - scanningRange);
-//			tileD = ex.getTile((int) currentPosition[1] - scanningRange, (int) currentPosition[0] - scanningRange);
-//			
-//			if(!tileA.isExplored()) {
-//				newZoneDiscovered = true;
-//				createUndiscoveredMoveAction((int) currentPosition[1] + scanningRange, (int) currentPosition[0] + scanningRange);
-//			} else if(!tileB.isExplored()) {
-//				newZoneDiscovered = true;
-//				createUndiscoveredMoveAction((int) currentPosition[1] - scanningRange, (int) currentPosition[0] + scanningRange);
-//			} else if (!tileC.isExplored()) {
-//				newZoneDiscovered = true;
-//				createUndiscoveredMoveAction((int) currentPosition[1] + scanningRange, (int) currentPosition[0] - scanningRange);
-//			} else if (!tileD.isExplored()) {
-//				newZoneDiscovered = true;
-//				createUndiscoveredMoveAction((int) currentPosition[1] - scanningRange, (int) currentPosition[0] - scanningRange);
-//			} else {
-//				scanningRange++;
-//			}
-//		}
-//	}
-	
 	public void execute() {
 		int range = explorer.getScope() + 1;
 		ExplorerMap explorerMap = explorer.getMap();
@@ -67,8 +30,8 @@ public class ExplorationAction implements Action {
 		while(!move) {
 			for(int i = x - range/2; i < x + range/2; i ++) {
 				for(int j = y - range/2; j < y + range/2; j ++) {
-					if(!oob(i, j))
-						if(!explorerMap.getTile(i, j).isExplored()) {
+					if(!oob(i, j)) {
+						if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
 							int tempX = x - i;
 							int tempY = y - j;
 							int distance = distance(tempX, tempY);
@@ -83,6 +46,7 @@ public class ExplorationAction implements Action {
 							}
 							move = true;
 						}
+					}
 				}
 			}
 			range ++;
@@ -90,6 +54,16 @@ public class ExplorationAction implements Action {
 		createMoveAction(tempI, tempJ);
 	}
 	
+	private boolean isNotWaterBoarded(ExplorerMap explorerMap, int i, int j) {
+		if(i == 0 || i == 89 || j == 0 || j == 89) 
+			return false;
+		else
+			return(explorerMap.getTile(i-1, j).getType().equals("g") || 
+				explorerMap.getTile(i, j-1).getType().equals("g") || 
+				explorerMap.getTile(i+1, j).getType().equals("g") || 
+				explorerMap.getTile(i, j+1).getType().equals("g"));
+	}
+
 	private void createMoveAction(int i, int j) {
 		int vx = i - (int) explorer.getPosition()[0];
 		int vy = j - (int) explorer.getPosition()[1];
