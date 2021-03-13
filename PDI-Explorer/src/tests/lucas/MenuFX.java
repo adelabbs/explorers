@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 
 import data.simulation.SimulationEntry;
 import environmentcreation.EnvironmentCreator;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -120,8 +121,8 @@ public class MenuFX extends Application {
     private SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(3, 6, initialNb);
     
     private SimulationEntry simulationEntry;
-	private Simulation simulation;
-    private DashboardFX dashboard;
+	private static Simulation simulation;
+    private static DashboardFX dashboard;
     
     //private static final int EXPLORER_AMOUNT = 3;
 	private static final int ANIMAL_AMOUNT = 3;
@@ -630,25 +631,38 @@ public class MenuFX extends Application {
         primaryStage.sizeToScene();
         
         primaryStage.show();
-        primaryStage.toFront();        
+        primaryStage.toFront();
+                
+//         Thread taskThread = new Thread(new Runnable() {
+//            @Override
+//            public void run() { 
+//            	simulation.launch();
+//            	while (simulation.isRunning()) {
+//        			SimulationUtility.unitTime();
+//        			simulation.update();
+//        			dashboard.drawShapes();
+//            	}
+//        		Platform.runLater(new Runnable() {
+//        			@Override
+//        			public void run() {
+//        			}
+//        		});
+//        	}
+//        });
+//       	taskThread.start();
         
-         Thread taskThread = new Thread(new Runnable() {
-            @Override
-            public void run() { 
-            	simulation.launch();
-            	while (simulation.isRunning()) {
-        			SimulationUtility.unitTime();
-        			simulation.update();
-        			dashboard.drawShapes();
-            	}
-        		Platform.runLater(new Runnable() {
-        			@Override
-        			public void run() {
-        			}
-        		});
-        	}
-        });
-       	taskThread.start(); 
+        AnimationTimer timer = new AnimationTimer() {
+
+ 			@Override
+ 			public void handle(long arg0) {
+ 				SimulationUtility.unitTime();
+ 				simulation.update();
+ 				dashboard.drawShapes();		
+ 			}
+     	   
+        };
+        timer.start();
+        
        	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         	@Override
         	public void handle(WindowEvent e) {

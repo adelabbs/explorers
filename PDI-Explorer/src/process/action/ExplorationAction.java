@@ -2,6 +2,7 @@ package process.action;
 
 import data.entity.Explorer;
 import data.map.ExplorerMap;
+import data.message.MapMessage;
 import data.simulation.Environment;
 
 /**
@@ -24,30 +25,36 @@ public class ExplorationAction implements Action {
 		int x = (int) explorer.getPosition()[0];
 		int y = (int) explorer.getPosition()[1];
 		boolean move = false;
-		int distMax = 1500;
+		int distMax = 150;
 		int tempI = 0;
 		int tempJ = 0;
 		while(!move) {
-			for(int i = x - range/2; i < x + range/2; i ++) {
-				for(int j = y - range/2; j < y + range/2; j ++) {
-					if(!oob(i, j)) {
-						if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
-							int tempX = x - i;
-							int tempY = y - j;
-							int distance = distance(tempX, tempY);
-							if(distance <= distMax) {
-								int rand = (int) (Math.random()*2);
-								if(distance <= distMax || rand == 1) {
-									tempI = i;
-									tempJ = j;
-									if(distance < distMax)
-										distMax = distance;
+			if(range < distMax) {
+				for(int i = x - range/2; i < x + range/2; i ++) {
+					for(int j = y - range/2; j < y + range/2; j ++) {
+						if(!oob(i, j)) {
+							if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
+								int tempX = x - i;
+								int tempY = y - j;
+								int distance = distance(tempX, tempY);
+								if(distance <= distMax) {
+									int rand = (int) (Math.random()*2);
+									if(distance <= distMax || rand == 1) {
+										tempI = i;
+										tempJ = j;
+										if(distance < distMax)
+											distMax = distance;
+									}
 								}
+								move = true;
 							}
-							move = true;
 						}
 					}
 				}
+			} else {
+				SendMessageAction sma = new SendMessageAction(new MapMessage(explorer.getMap(), explorer), explorer);
+				sma.execute();
+				range = explorer.getScope();
 			}
 			range ++;
 		}
