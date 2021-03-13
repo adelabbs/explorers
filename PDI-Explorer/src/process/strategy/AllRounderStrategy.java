@@ -115,7 +115,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 
 	public int calculatePrioritiesByDistance(double[] senderPos) {
 		double distance = SimulationUtility.distance(getExplorerManager().getExplorer().getPosition(), senderPos);
-		if (distance > 50) {
+		if (distance > 10) {
 			return LOW_PRIORITY;
 		}
 		else {

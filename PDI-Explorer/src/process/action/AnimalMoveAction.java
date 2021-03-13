@@ -2,6 +2,7 @@ package process.action;
 
 import data.entity.Animal;
 import data.entity.Entity;
+import data.entity.Explorer;
 import data.simulation.Environment;
 import process.SimulationUtility;
 
@@ -43,6 +44,12 @@ public class AnimalMoveAction extends MoveAction {
 					newPos[1] ++;
 				}
 			}
+			//If contact with a human
+			Explorer explorer = getClosestExplorer(closestHumanPos);
+			if(explorer != null) {
+				fight(explorer, entity);
+			}
+			
 		}
 		else {
 			do {
@@ -69,7 +76,17 @@ public class AnimalMoveAction extends MoveAction {
 		getEntity().setPosition(newPos);
 	}
 		
-
+	
+	//Damage
+	private void fight(Explorer explorer, Animal animal) {
+		int explorersLife = explorer.getHealth();
+		int animalsLife = animal.getHealth();
+		
+		explorer.setHealth(explorersLife - animal.getDamage());
+		animal.setHealth(animalsLife - explorer.getDamage());
+	}
+	
+	
 	private double distanceFromInitialPos(double newPos[]) {
 		return Math.sqrt(Math.pow(newPos[0] - getEntity().getInitPosition()[0], 2)
 				+ Math.pow(newPos[1] - getEntity().getInitPosition()[1], 2));
@@ -84,6 +101,16 @@ public class AnimalMoveAction extends MoveAction {
 	public Animal getEntity() {
 		return entity;
 	}
+	
+	private Explorer getClosestExplorer(double[] closestHumanPos) {
+		for(Entity e : Environment.getInstance().getEntities()) {
+			if(e.getType().equals("Explorer") && SimulationUtility.distance(entity.getPosition(), closestHumanPos) <= 1) {
+				return (Explorer) e;
+			}
+		}
+		return null;
+	}
+	
 	
 	private double[] closestHumanInScope() {
 		double[] closestPosition = null;
