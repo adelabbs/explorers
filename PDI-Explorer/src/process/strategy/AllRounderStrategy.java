@@ -6,6 +6,7 @@ import data.entity.Animal;
 import data.entity.Entity;
 import data.entity.Explorer;
 import data.entity.LivingEntity;
+import data.message.MapMessage;
 import data.simulation.Environment;
 import process.SimulationUtility;
 import process.action.Action;
@@ -15,6 +16,7 @@ import process.action.ExplorerMoveAction;
 import process.action.LeaveMeAloneAction;
 import process.action.MoveAction;
 import process.action.RunAwayAction;
+import process.action.SendMessageAction;
 import process.manager.ExplorerManager;
 import data.entity.Chest;
 
@@ -67,15 +69,21 @@ public class AllRounderStrategy extends ExplorationStrategy {
 				}
 			}
 		}
+		//Sending message
 		
-		/*
-		int sendMessageChance = 1 + (int)(Math.random() * ((500 - 1) + 1));
+		int sendMessageChance = 1 + (int)(Math.random() * ((100 - 1) + 1));
 		//Send Message with a 1:500 chance
-		if(sendMessageChance > 499) {
-			//TODO
-			pl.addElement(SEND_MESSAGE, null);
+		if(sendMessageChance > 99) {
+			System.out.println("Envoyé");
+			pl.addElement(SEND_MESSAGE, new SendMessageAction(new MapMessage(getExplorerManager().getExplorer().getMap(), getExplorerManager().getExplorer()),
+					getExplorerManager().getExplorer()));
 		}
-		*/
+		
+		
+		//Receiving Message
+		//getExplorerManager().getExplorer().getMessages()
+		
+		
 		Action action = pl.selectAction();
 		pl.clear();
 		super.planAction(action);
