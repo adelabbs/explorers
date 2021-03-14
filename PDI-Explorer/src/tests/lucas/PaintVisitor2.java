@@ -7,6 +7,7 @@ import data.entity.Bear;
 import data.entity.Chest;
 import data.entity.Entity;
 import data.entity.Explorer;
+import data.entity.LivingEntity;
 import data.entity.Obstacle;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -60,6 +61,7 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 		x=0;
 		y=0;
 		g.drawImage(tiles, x, y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*IMG_TILE_SIZE/scale, i*IMG_TILE_SIZE/scale, IMG_TILE_SIZE/scale, IMG_TILE_SIZE/scale);
+		paintLifeBar(entity);
 		return null;
 	}
 
@@ -75,6 +77,18 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 		int j = (int) entity.getPosition()[1];
 		g.fillRect(j * DashboardFX.TILE_SIZE, i * DashboardFX.TILE_SIZE, (int) (DashboardFX.TILE_SIZE * entity.getSize()[0]),
 				(int) (DashboardFX.TILE_SIZE * entity.getSize()[1]));
+	}
+	
+	private void paintLifeBar(LivingEntity entity) {
+		int i = (int) entity.getPosition()[0];
+		int j = (int) entity.getPosition()[1];
+		int half = (int) (IMG_TILE_SIZE/(2*scale));
+		g.setFill(Color.RED); 
+		g.fillRect(j * IMG_TILE_SIZE/scale - half, i * IMG_TILE_SIZE/scale - half, 
+				(IMG_TILE_SIZE/scale)*2, 3);
+		g.setFill(Color.LIGHTGREEN); 
+		g.fillRect(j * IMG_TILE_SIZE/scale - half, i * IMG_TILE_SIZE/scale - half, 
+				((IMG_TILE_SIZE/scale)*2)*(entity.getHealth()/entity.getMaxHealth()), 3);
 	}
 
 }
