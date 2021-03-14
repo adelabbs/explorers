@@ -46,6 +46,7 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration; 
 import process.Simulation;
 import process.SimulationUtility;
+import process.factory.ManagerFactory;
 
 public class MenuFX extends Application {
 	private int enveloppe = 180;
@@ -122,7 +123,7 @@ public class MenuFX extends Application {
     //private static final int EXPLORER_AMOUNT = 3;
 	private static final int ANIMAL_AMOUNT = 3;
 	private static final int CHEST_AMOUNT = 3;
-	private static final int EXPLORATION_STRATEGY = 5;
+	private static final int EXPLORATION_STRATEGY = ManagerFactory.ALL_ROUNDER_STRATEGY;
 	
 	private HashMap<String, String> items = new HashMap<String, String>();
 	

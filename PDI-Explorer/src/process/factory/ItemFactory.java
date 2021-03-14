@@ -1,4 +1,4 @@
-package process.itemCreation;
+package process.factory;
 
 import data.simulation.Item;
 
