@@ -20,6 +20,8 @@ import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Spinner;
@@ -143,58 +145,58 @@ public class MenuFX extends Application {
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         
       
-        text.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
+        text.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
         text.setFill(Color.GOLD);
         text.setStroke(Color.BROWN);
         text.setTextOrigin(VPos.TOP);
         
-        text2.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 20));
+        text2.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 10));
         text2.setFill(Color.GOLD);
         text2.setStroke(Color.DARKGOLDENROD);
         text2.setTextOrigin(VPos.CENTER);
         
-        text3.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
+        text3.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
         text3.setFill(Color.BROWN);
         text3.setStroke(Color.BURLYWOOD);
         text3.setTextOrigin(VPos.CENTER);
         
-        effectLabel1.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
+        effectLabel1.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
         effectLabel1.setFill(Color.BROWN);
         effectLabel1.setStroke(Color.BURLYWOOD);
         effectLabel1.setTextOrigin(VPos.CENTER);
-        healthEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 50));
+        healthEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
         healthEffect.setFill(Color.MOCCASIN);
         healthEffect.setTextOrigin(VPos.CENTER);
         
-        effectLabel2.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
+        effectLabel2.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
         effectLabel2.setFill(Color.BROWN);
         effectLabel2.setStroke(Color.BURLYWOOD);
         effectLabel2.setTextOrigin(VPos.CENTER);
-        speedEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 50));
+        speedEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
         speedEffect.setFill(Color.MOCCASIN);
         speedEffect.setTextOrigin(VPos.CENTER);
         
-        effectLabel3.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
+        effectLabel3.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
         effectLabel3.setFill(Color.BROWN);
         effectLabel3.setStroke(Color.BURLYWOOD);
         effectLabel3.setTextOrigin(VPos.CENTER);
-        damageEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 50));
+        damageEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
         damageEffect.setFill(Color.MOCCASIN);
         damageEffect.setTextOrigin(VPos.CENTER);
         
-        effectLabel4.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
+        effectLabel4.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
         effectLabel4.setFill(Color.BROWN);
         effectLabel4.setStroke(Color.BURLYWOOD);
         effectLabel4.setTextOrigin(VPos.CENTER);
-        scopeEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 50));
+        scopeEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
         scopeEffect.setFill(Color.MOCCASIN);
         scopeEffect.setTextOrigin(VPos.CENTER);
         
-        effectLabel5.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
+        effectLabel5.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
         effectLabel5.setFill(Color.BROWN);
         effectLabel5.setStroke(Color.BURLYWOOD);
         effectLabel5.setTextOrigin(VPos.CENTER);
-        comEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 50));
+        comEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
         comEffect.setFill(Color.MOCCASIN);
         comEffect.setTextOrigin(VPos.CENTER);
         
@@ -202,41 +204,41 @@ public class MenuFX extends Application {
         FileInputStream input = new FileInputStream("ressources/img/Essai_explorateur.gif");
         Image image = new Image(input);
         ImageView explorerGIF = new ImageView(image);
-        explorerGIF.setFitHeight(primaryScreenBounds.getHeight() / 10);
+        explorerGIF.setFitHeight(primaryScreenBounds.getHeight() / 5);
         explorerGIF.setPreserveRatio(true);
         
         FileInputStream input1 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image1 = new Image(input1);
         ImageView healthView = new ImageView(image1);
-        healthView .setFitHeight(primaryScreenBounds.getHeight() / 10);
+        healthView .setFitHeight(primaryScreenBounds.getHeight() / 5);
         healthView .setPreserveRatio(true);
         healthBox.getChildren().add(healthView);
         
         FileInputStream input2 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image2 = new Image(input2);
         ImageView speedView = new ImageView(image2);
-        speedView.setFitHeight(primaryScreenBounds.getHeight() / 10);
+        speedView.setFitHeight(primaryScreenBounds.getHeight() / 5);
         speedView.setPreserveRatio(true);
         speedBox.getChildren().add(speedView);
         
         FileInputStream input3 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image3 = new Image(input3);
         ImageView damageView = new ImageView(image3);
-        damageView.setFitHeight(primaryScreenBounds.getHeight() / 10);
+        damageView.setFitHeight(primaryScreenBounds.getHeight() / 5);
         damageView.setPreserveRatio(true);
         damageBox.getChildren().add(damageView);
         
         FileInputStream input4 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image4 = new Image(input4);
         ImageView scopeView = new ImageView(image4);
-        scopeView.setFitHeight(primaryScreenBounds.getHeight() / 10);
+        scopeView.setFitHeight(primaryScreenBounds.getHeight() / 5);
         scopeView.setPreserveRatio(true);
         scopeBox.getChildren().add(scopeView);
         
         FileInputStream input5 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image5 = new Image(input5);
         ImageView comView = new ImageView(image5);
-        comView.setFitHeight(primaryScreenBounds.getHeight() / 10);
+        comView.setFitHeight(primaryScreenBounds.getHeight() / 5);
         comView.setPreserveRatio(true);
         comBox.getChildren().add(comView);
   
@@ -585,7 +587,7 @@ public class MenuFX extends Application {
               if (enveloppe >= 0) {
                   simulationEntry = new SimulationEntry(valueFactory.getValue(), ANIMAL_AMOUNT, CHEST_AMOUNT, EXPLORATION_STRATEGY);
                   if (items.containsKey("health"))
-                	  simulationEntry.add(items.get("scope"));
+                	  simulationEntry.add(items.get("health"));
                   if (items.containsKey("speed"))
                 	  simulationEntry.add(items.get("speed"));
                   if (items.containsKey("damage"))
@@ -604,10 +606,9 @@ public class MenuFX extends Application {
                   timer.start();
               }
               else {
-            	 /* Alert errorAlert = new Alert(AlertType.ERROR);
-            	  errorAlert.setHeaderText("Input not valid");
+            	  Alert errorAlert = new Alert(AlertType.ERROR);
             	  errorAlert.setContentText("The maximum amount of money is exceeded.");
-            	  errorAlert.showAndWait(); */
+            	  errorAlert.show(); 
             	  
             	  Tooltip tooltip = new Tooltip("The maximum amount of money is exceeded.");
             	  startButton.setTooltip(tooltip);
@@ -615,16 +616,16 @@ public class MenuFX extends Application {
               }
         });
         
-        healthBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 30, 0, 0, 0));
-        healthBox.setSpacing(primaryScreenBounds.getHeight() / 30);
-        speedBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 30, 0, 0, 0));
-        speedBox.setSpacing(primaryScreenBounds.getHeight() / 30);
-        damageBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 30, 0, 0, 0));
-        damageBox.setSpacing(primaryScreenBounds.getHeight() / 30);
-        scopeBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 30, 0, 0, 0));
-        scopeBox.setSpacing(primaryScreenBounds.getHeight() / 30);
-        comBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 30, 0, 0, 0));
-        comBox.setSpacing(primaryScreenBounds.getHeight() / 30);
+        healthBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        healthBox.setSpacing(primaryScreenBounds.getHeight() / 15);
+        speedBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        speedBox.setSpacing(primaryScreenBounds.getHeight() / 15);
+        damageBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        damageBox.setSpacing(primaryScreenBounds.getHeight() / 15);
+        scopeBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        scopeBox.setSpacing(primaryScreenBounds.getHeight() / 15);
+        comBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        comBox.setSpacing(primaryScreenBounds.getHeight() / 15);
 
         tabPane.getTabs().add(health);
         tabPane.getTabs().add(speed);
@@ -633,13 +634,13 @@ public class MenuFX extends Application {
         tabPane.getTabs().add(com);
         
         HBox hBox = new HBox(enveloppeBox, separator, tabPane);
-        hBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 30, primaryScreenBounds.getWidth() / 30, primaryScreenBounds.getHeight() / 30, primaryScreenBounds.getWidth() / 30));
-        hBox.setSpacing(primaryScreenBounds.getWidth() / 30);      
+        hBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, primaryScreenBounds.getWidth() / 15, primaryScreenBounds.getHeight() / 15, primaryScreenBounds.getWidth() / 15));
+        hBox.setSpacing(primaryScreenBounds.getWidth() / 10);      
         
         StackPane stack = new StackPane();
         stack.getChildren().addAll(new Rectangle(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight(), Color.OLIVEDRAB), hBox);
         
-        Scene scene = new Scene(stack, primaryScreenBounds.getWidth() / 1.8, primaryScreenBounds.getHeight() / 1.8);
+        Scene scene = new Scene(stack, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
 
         scene.setCursor(Cursor.OPEN_HAND); //Pourra être remplacé par un curseur personnalisé
 
@@ -652,9 +653,7 @@ public class MenuFX extends Application {
        	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         	@Override
         	public void handle(WindowEvent e) {
-        		Platform.exit();
         		System.exit(0);
-        		System.out.println("7"); 
         	}
         });
     }         
