@@ -601,7 +601,7 @@ public class MenuFX extends Application {
             	  try {
             		  hud = new HUDFX(primaryScreenBounds.getWidth());
             		  HBox simuBox = new HBox(dashboard);
-            		  simuBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 35, primaryScreenBounds.getHeight() / 40 , 0, primaryScreenBounds.getHeight() / 25));
+            		  simuBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 35, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
             		  StackPane pane = new StackPane(simuBox, hud);
             		  root.getChildren().add(pane); 
             		  primaryStage.setScene(new Scene(root, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight()));
@@ -655,7 +655,7 @@ public class MenuFX extends Application {
         primaryStage.sizeToScene();
         
         primaryStage.show();
-        //primaryStage.toFront();
+        primaryStage.toFront();
  
        	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         	@Override
