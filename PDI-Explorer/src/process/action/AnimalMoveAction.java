@@ -45,7 +45,7 @@ public class AnimalMoveAction extends MoveAction {
 				}
 			}
 			//If contact with a human
-			Explorer explorer = getClosestExplorer(closestHumanPos);
+			Explorer explorer = getClosestExplorer();
 			if(explorer != null) {
 				fight(explorer, entity);
 			}
@@ -95,16 +95,17 @@ public class AnimalMoveAction extends MoveAction {
 	private boolean outOfBorder(double[] newPos) {
 		int i = (int) newPos[0];
 		int j = (int) newPos[1];
-		return (i >= 0 && i <= (90 - (int) getEntity().getSize()[0] - 1) && j >= 0 && j <= (90 - (int) getEntity().getSize()[1] - 1));
+		return (i >= 0 && i <= (89 - (int) getEntity().getSize()[0] - 1) && j >= 0 && j <= (89 - (int) getEntity().getSize()[1] - 1));
 	}
 
 	public Animal getEntity() {
 		return entity;
 	}
 	
-	private Explorer getClosestExplorer(double[] closestHumanPos) {
+	private Explorer getClosestExplorer() {
 		for(Entity e : Environment.getInstance().getEntities()) {
-			if(e.getType().equals("Explorer") && SimulationUtility.distance(entity.getPosition(), closestHumanPos) <= 1) {
+			if(e.getType().equals("Explorer") && 
+					SimulationUtility.distance(entity.getPosition(), e.getPosition()) <= 1) {
 				return (Explorer) e;
 			}
 		}
