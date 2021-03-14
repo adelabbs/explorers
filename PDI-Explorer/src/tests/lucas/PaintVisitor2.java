@@ -88,7 +88,7 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 				(IMG_TILE_SIZE/scale)*2, 3);
 		g.setFill(Color.LIGHTGREEN); 
 		g.fillRect(j * IMG_TILE_SIZE/scale - half, i * IMG_TILE_SIZE/scale - half, 
-				((IMG_TILE_SIZE/scale)*2)*(entity.getHealth()/entity.getMaxHealth()), 3);
+				(int) ((IMG_TILE_SIZE/scale)*2*(entity.getHealth()/entity.getMaxHealth())), 3);
 	}
 
 }
