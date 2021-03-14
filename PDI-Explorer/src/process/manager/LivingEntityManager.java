@@ -8,7 +8,6 @@ import data.entity.LivingEntity;
  */
 public abstract class LivingEntityManager extends Thread {
 
-	private boolean dead = false;
 	private boolean running = false;
 
 	public abstract void updatePosition(double[] newPosition);
@@ -16,13 +15,9 @@ public abstract class LivingEntityManager extends Thread {
 	public abstract void updateHealth(int newHealth);
 
 	public abstract LivingEntity getEntity();
-	
+
 	public boolean isDead() {
 		return getEntity().getHealth() <= 0;
-	}
-
-	public void setDead(boolean isDead) {
-		this.dead = isDead;
 	}
 
 	public boolean isRunning() {
