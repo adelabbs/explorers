@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+    <item id="Helmet">
+        <type>Health</type>
+        <tier>1</tier>
+        <boost>5</boost>
+    </item>
+    <item id="Chestplate">
+        <type>Health</type>
+        <tier>2</tier>
+        <boost>10</boost>
+    </item>
+    <item id="Boots">
+        <type>Speed</type>
+        <tier>1</tier>
+        <boost>1</boost>
+    </item>
+    <item id="Trecking_Shoes">
+        <type>Speed</type>
+        <tier>2</tier>
+        <boost>2</boost>
+    </item>
+    <item id="Knife">
+        <type>Damage</type>
+        <tier>1</tier>
+        <boost>1</boost>
+    </item>
+    <item id="Machete">
+        <type>Damage</type>
+        <tier>2</tier>
+        <boost>3</boost>
+    </item>
+    <item id="Glasses">
+        <type>Scope</type>
+        <tier>1</tier>
+        <boost>1</boost>
+    </item>
+    <item id="Binoculars">
+        <type>Scope</type>
+        <tier>2</tier>
+        <boost>2</boost>
+    </item>
+    <item id="Antenna">
+        <type>Communication Range</type>
+        <tier>1</tier>
+        <boost>1</boost>
+    </item>
+    <item id="Radio">
+        <type>Communication Range</type>
+        <tier>2</tier>
+        <boost>2</boost>
+    </item>
+</items>

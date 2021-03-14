@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<strings>
+    <items>
+        <item id="Helmet">
+            <name>Helmet</name>
+            <description>A nice helmet</description>
+        </item>
+        <item id="Chestplate">
+            <name>Chestplate</name>
+            <description>A nice chestplate</description>
+        </item>
+        <item id="Boots">
+            <name>Boots</name>
+            <description>A nice pair of boots</description>
+        </item>
+        <item id="Trecking_Shoes">
+            <name>Trecking Shoes</name>
+            <description>A nice pair of trecking shoes</description>
+        </item>
+        <item id="Knife">
+            <name>Knife</name>
+            <description>A nice knife</description>
+        </item>
+        <item id="Machete">
+            <name>Machete</name>
+            <description>A nice machete</description>
+        </item>
+        <item id="Glasses">
+            <name>Glasses</name>
+            <description>A nice pair of glasses</description>
+        </item>
+        <item id="Binoculars">
+            <name>Binoculars</name>
+            <description>A nice pair of binoculars</description>
+        </item>
+        <item id="Antenna">
+            <name>Antenna</name>
+            <description>A nice antenna</description>
+        </item>
+        <item id="Radio">
+            <name>Radio</name>
+            <description>A nice Radio</description>
+        </item>
+    </items>
+</strings>
