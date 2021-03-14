@@ -16,7 +16,7 @@ import tests.geoffroy.Dashboard;
 
 public class MapPainter2 {
 
-	private static final double IMG_TILE_SIZE = 25;
+	private static double IMG_TILE_SIZE = 25;
 	private double scale = 2.5;
 	
 	private GraphicsContext g;

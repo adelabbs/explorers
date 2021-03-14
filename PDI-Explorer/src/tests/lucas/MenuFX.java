@@ -4,15 +4,13 @@ import java.io.FileInputStream;
 
 
 import java.io.FileNotFoundException;
-
+import java.util.HashMap;
 import data.simulation.SimulationEntry;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -127,21 +125,23 @@ public class MenuFX extends Application {
 	private static final int CHEST_AMOUNT = 3;
 	private static final int EXPLORATION_STRATEGY = 5;
 	
+	private HashMap<String, String> items = new HashMap<String, String>();
+	
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
-  	  
-    	simulationEntry = new SimulationEntry(3, ANIMAL_AMOUNT, CHEST_AMOUNT, EXPLORATION_STRATEGY);
-    	simulation = new Simulation(simulationEntry);
     	
         primaryStage.setTitle("Autonomous and communicant explorers");
         
         primaryStage.initStyle(StageStyle.UNIFIED);
-        //primaryStage.setMaximized(true);  //plein écran avec bordures
-        primaryStage.setResizable(false);
+        primaryStage.setMaximized(true);  //plein écran avec bordures
+       // primaryStage.setFullScreen(true);
+        primaryStage.setResizable(true);
+        
+
         
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        dashboard = new DashboardFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
+        
       
         text.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 30));
         text.setFill(Color.GOLD);
@@ -297,6 +297,7 @@ public class MenuFX extends Application {
             	if (healthButton1.isSelected() == false) {
             		if (healthButton2.isSelected() == true) {
             			if (healthTemp == 0) {
+            				items.put("health", "Helmet");
             				enveloppe -= 5*nbExplorers.getValue();
             			}
             			else if (healthTemp == 2) {
@@ -306,6 +307,7 @@ public class MenuFX extends Application {
             			healthEffect.setText("Health +");
             		}
             		else if (healthButton3.isSelected() == true) {
+            			items.put("health", "Chestplate");
             			if (healthTemp == 0) {
             				enveloppe -= 10*nbExplorers.getValue();
             			}
@@ -317,6 +319,7 @@ public class MenuFX extends Application {
             		}
         		}
             	else if (healthButton1.isSelected() == true) {
+            		items.remove("health");
             		if (healthTemp == 1) {
         				enveloppe += 5*nbExplorers.getValue();
         			}
@@ -333,6 +336,7 @@ public class MenuFX extends Application {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle,Toggle new_toggle) {
             	if (speedButton1.isSelected() == false) {
             		if (speedButton2.isSelected() == true) {
+            			items.put("speed", "Boots");
             			if (speedTemp == 0) {
             				enveloppe -= 5*nbExplorers.getValue();
             			}
@@ -343,6 +347,7 @@ public class MenuFX extends Application {
             			speedEffect.setText("Speed +");
             		}
             		else if (speedButton3.isSelected() == true) {
+            			items.put("speed", "Trecking_shoes");
             			if (speedTemp == 0) {
             				enveloppe -= 10*nbExplorers.getValue();
             			}
@@ -354,6 +359,7 @@ public class MenuFX extends Application {
             		}
         		}
             	else if (speedButton1.isSelected() == true) {
+            		items.remove("speed");
             		if (speedTemp == 1) {
         				enveloppe += 5*nbExplorers.getValue();
         			}
@@ -370,6 +376,7 @@ public class MenuFX extends Application {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle,Toggle new_toggle) {
             	if (damageButton1.isSelected() == false) {
             		if (damageButton2.isSelected() == true) {
+            			items.put("damage", "Knife");
             			if (damageTemp == 0) {
             				enveloppe -= 5*nbExplorers.getValue();
             			}
@@ -380,6 +387,7 @@ public class MenuFX extends Application {
             			damageEffect.setText("Damage +");
             		}
             		else if (damageButton3.isSelected() == true) {
+            			items.put("damage", "Machete");
             			if (damageTemp == 0) {
             				enveloppe -= 10*nbExplorers.getValue();
             			}
@@ -391,6 +399,7 @@ public class MenuFX extends Application {
             		}
         		}
             	else if (damageButton1.isSelected() == true) {
+            		items.remove("damage");
             		if (damageTemp == 1) {
         				enveloppe += 5*nbExplorers.getValue();
         			}
@@ -407,6 +416,7 @@ public class MenuFX extends Application {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle,Toggle new_toggle) {
             	if (scopeButton1.isSelected() == false) {
             		if (scopeButton2.isSelected() == true) {
+            			items.put("scope", "Glasses");
             			if (scopeTemp == 0) {
             				enveloppe -= 5*nbExplorers.getValue();
             			}
@@ -417,6 +427,7 @@ public class MenuFX extends Application {
             			scopeEffect.setText("Scope +");
             		}
             		else if (scopeButton3.isSelected() == true) {
+        				items.put("scope", "Binoculars");
             			if (scopeTemp == 0) {
             				enveloppe -= 10*nbExplorers.getValue();
             			}
@@ -428,6 +439,7 @@ public class MenuFX extends Application {
             		}
         		}
             	else if (scopeButton1.isSelected() == true) {
+            		items.remove("scope");
             		if (scopeTemp == 1) {
         				enveloppe += 5*nbExplorers.getValue();
         			}
@@ -444,6 +456,7 @@ public class MenuFX extends Application {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle,Toggle new_toggle) {
             	if (comButton1.isSelected() == false) {
             		if (comButton2.isSelected() == true) {
+            			items.put("com", "Antenna");
             			if (comTemp == 0) {
             				enveloppe -= 5*nbExplorers.getValue();
             			}
@@ -454,6 +467,7 @@ public class MenuFX extends Application {
             			comEffect.setText("Communication Range +");
             		}
             		else if (comButton3.isSelected() == true) {
+            			items.put("com", "Radio");
             			if (comTemp == 0) {
             				enveloppe -= 10*nbExplorers.getValue();
             			}
@@ -465,6 +479,7 @@ public class MenuFX extends Application {
             		}
         		}
             	else if (comButton1.isSelected() == true) {
+            		items.remove("com");
             		if (comTemp == 1) {
         				enveloppe += 5*nbExplorers.getValue();
         			}
@@ -565,8 +580,22 @@ public class MenuFX extends Application {
         };
         
         
+        
         startButton.setOnAction(actionEvent ->  {
               if (enveloppe >= 0) {
+                  simulationEntry = new SimulationEntry(valueFactory.getValue(), ANIMAL_AMOUNT, CHEST_AMOUNT, EXPLORATION_STRATEGY);
+                  if (items.containsKey("health"))
+                	  simulationEntry.add(items.get("scope"));
+                  if (items.containsKey("speed"))
+                	  simulationEntry.add(items.get("speed"));
+                  if (items.containsKey("damage"))
+                	  simulationEntry.add(items.get("damage"));
+                  if (items.containsKey("scope"))
+                	  simulationEntry.add(items.get("scope"));
+                  if (items.containsKey("com"))
+                	  simulationEntry.add(items.get("com"));
+                  simulation = new Simulation(simulationEntry);
+                  dashboard = new DashboardFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
             	  Group root = new Group();
             	  root.getChildren().add(dashboard); 
             	  primaryStage.setScene(new Scene(root));
@@ -608,14 +637,14 @@ public class MenuFX extends Application {
         hBox.setSpacing(primaryScreenBounds.getWidth() / 30);      
         
         StackPane stack = new StackPane();
-        stack.getChildren().addAll(new Rectangle(primaryScreenBounds.getWidth() / 1.8, primaryScreenBounds.getHeight() / 1.8, Color.OLIVEDRAB), hBox);
+        stack.getChildren().addAll(new Rectangle(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight(), Color.OLIVEDRAB), hBox);
         
         Scene scene = new Scene(stack, primaryScreenBounds.getWidth() / 1.8, primaryScreenBounds.getHeight() / 1.8);
 
         scene.setCursor(Cursor.OPEN_HAND); //Pourra être remplacé par un curseur personnalisé
 
         primaryStage.setScene(scene);
-        primaryStage.sizeToScene();
+       // primaryStage.sizeToScene();
         
         primaryStage.show();
         primaryStage.toFront();
