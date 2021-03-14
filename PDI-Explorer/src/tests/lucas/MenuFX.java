@@ -8,7 +8,6 @@ import java.util.HashMap;
 import data.simulation.SimulationEntry;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -597,9 +596,11 @@ public class MenuFX extends Application {
                   if (items.containsKey("com"))
                 	  simulationEntry.add(items.get("com"));
                   simulation = new Simulation(simulationEntry);
-                  dashboard = new DashboardFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
+                  dashboard = new DashboardFX(primaryScreenBounds.getWidth() - (primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight()), primaryScreenBounds.getHeight());
             	  Group root = new Group();
-            	  root.getChildren().add(dashboard); 
+            	  HBox simuBox = new HBox();
+            	  simuBox.getChildren().addAll(dashboard, new Rectangle(primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight(), primaryScreenBounds.getHeight(), Color.DARKGREY));
+            	  root.getChildren().add(simuBox); 
             	  primaryStage.setScene(new Scene(root));
             	  
             	  simulation.launch();
