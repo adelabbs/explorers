@@ -1,6 +1,7 @@
 package process.manager;
 
 import data.entity.Bear;
+import data.entity.LivingEntity;
 import data.simulation.Environment;
 import process.Simulation;
 import process.SimulationUtility;
@@ -40,6 +41,13 @@ public class BearManager extends LivingEntityManager {
 			action = new AnimalMoveAction(bear, Environment.getInstance());
 			action.execute();
 		}
+		Environment e = Environment.getInstance();
+		e.remove(bear);
+	}
+	
+	@Override
+	public LivingEntity getEntity() {
+		return bear;
 	}
 
 	@Override

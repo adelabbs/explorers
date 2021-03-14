@@ -38,7 +38,7 @@ public class Dashboard extends JPanel {
 		g.dispose();
 		
 	}
-
+	
 	private void printLivingEntities(Graphics g) {
 		Environment e = Environment.getInstance();
 		for (LivingEntity livingEntity : e.getEntities()) {

@@ -3,6 +3,8 @@ package process.manager;
 import java.util.LinkedList;
 
 import data.entity.Explorer;
+import data.entity.LivingEntity;
+import data.simulation.Environment;
 import process.Simulation;
 import process.SimulationUtility;
 import process.action.Action;
@@ -37,8 +39,16 @@ public class ExplorerManager extends LivingEntityManager {
 				}
 			}
 		}
+		Environment e = Environment.getInstance();
+		e.remove(explorer);
+		setRunning(false);
 	}
 
+	@Override
+	public LivingEntity getEntity() {
+		return explorer; 
+	}
+	
 	public void planAction(Action action) {
 		actions.addLast(action);
 	}
