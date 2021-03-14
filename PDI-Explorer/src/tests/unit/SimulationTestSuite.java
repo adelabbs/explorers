@@ -6,7 +6,7 @@ import org.junit.runners.Suite;
 import tests.unit.action.TestCollectChestAction;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({TestCollectChestAction.class})
+@Suite.SuiteClasses({TestCollectChestAction.class, TestDamage.class})
 public class SimulationTestSuite {
 
 }

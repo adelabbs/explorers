@@ -2,7 +2,7 @@ package data.simulation;
 
 import java.util.HashMap;
 
-import process.itemCreation.ItemFactory;
+import process.factory.ItemFactory;
 
 /**
  * This class is used to regroup the simulation entry parameters.

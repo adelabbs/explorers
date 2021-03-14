@@ -98,7 +98,7 @@ public class ConfigurationBuilder {
 		} catch (SAXException se) {
 			System.err.println("Couldn't parse document");
 		} catch (IOException ioe) {
-			System.out.println("I/O Error :" + ioe.getMessage());
+			System.err.println("I/O Error :" + ioe.getMessage());
 		}
 		return null;
 	}
