@@ -21,7 +21,7 @@ public class DashboardFX extends Canvas {
 	public DashboardFX(double arg1, double arg2) {
 		super(arg1, arg2);
 		this.width = arg1;
-		this.width = arg2;
+		this.height = arg2;
 		System.out.println(arg1 + " " + arg2);
 		TILE_SIZE = (arg2 - arg2/20)/90;
 		GraphicsContext gc = this.getGraphicsContext2D();

@@ -100,8 +100,12 @@ public class MapPainter2 {
 	
 	private void generalMapPainter() {
 		ExplorerTile[][] map = Environment.getInstance().getGeneralExplorerMap().getTiles();
-		int originX = 1553; //0 = droite
-		int originY = 713; //0 = haut
+		double height = DashboardFX.height;
+		double width = DashboardFX.width;
+		int originX = (int)(1553*(width / 1920)); //0 = droite
+		int originY = (int) (713*(height / 1040)); //0 = haut
+		System.out.println("X : " + originX + " Y :" + originY + "Height : " + height);
+		
 		for(int i = 0; i < 90; i ++) {
 			for(int j = 0; j < 90; j ++) {
 				if(map[i][j].isExplored()) {
