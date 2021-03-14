@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import data.entity.Explorer;
 import data.map.ExplorerMap;
+import data.map.ExplorerTile;
 import data.simulation.Environment;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -50,6 +51,7 @@ public class MapPainter2 {
 				g.drawImage(tiles, x , y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE);
 			}
 		}
+		generalMapPainter();
 		//explorerMapsPainter();
 	}
 	
@@ -94,6 +96,25 @@ public class MapPainter2 {
 			}
 //		g.setColor(Color.LIGHT_GRAY);
 //		g.fillRect(y, x, 90, 90);
+	}
+	
+	private void generalMapPainter() {
+		ExplorerTile[][] map = Environment.getInstance().getGeneralExplorerMap().getTiles();
+		int originX = 1553; //0 = droite
+		int originY = 713; //0 = haut
+		for(int i = 0; i < 90; i ++) {
+			for(int j = 0; j < 90; j ++) {
+				if(map[i][j].isExplored()) {
+					if(map[i][j].getType().equals("g"))
+						g.setFill(Color.GRAY);
+					else
+						g.setFill(Color.BLUE);
+				}
+				else
+					g.setFill(Color.BLACK);
+				g.fillRect(originX + j*3, originY + i*3, 3, 3);
+			}
+		}
 	}
 	
 }

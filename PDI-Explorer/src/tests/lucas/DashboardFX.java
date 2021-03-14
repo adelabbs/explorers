@@ -10,10 +10,15 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class DashboardFX extends Canvas {
 
-	public static double TILE_SIZE = 10;
+	protected static double TILE_SIZE = 10;
+	protected static double width;
+	protected static double height;
 	
 	public DashboardFX(double arg1, double arg2) {
 		super(arg1, arg2);
+		this.width = arg1;
+		this.width = arg2;
+		System.out.println(arg1 + " " + arg2);
 		TILE_SIZE = (arg2 - arg2/20)/90;
         drawShapes(); 
 	}

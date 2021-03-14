@@ -594,14 +594,14 @@ public class MenuFX extends Application {
                   if (items.containsKey("com"))
                 	  simulationEntry.add(items.get("com"));
                   simulation = new Simulation(simulationEntry);
-                  dashboard = new DashboardFX(primaryScreenBounds.getWidth() - (primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight()), primaryScreenBounds.getHeight());
+                  dashboard = new DashboardFX(primaryScreenBounds.getWidth() /*- (primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight())*/, primaryScreenBounds.getHeight());
                   
             	  Group root = new Group();
             	  HUDFX hud;
             	  try {
             		  hud = new HUDFX(primaryScreenBounds.getWidth());
             		  HBox simuBox = new HBox(dashboard);
-            		  simuBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 35, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
+            		  simuBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 25, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
             		  StackPane pane = new StackPane(simuBox, hud);
             		  root.getChildren().add(pane); 
             		  primaryStage.setScene(new Scene(root, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight()));
