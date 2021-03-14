@@ -102,8 +102,8 @@ public class MapPainter2 {
 		ExplorerTile[][] map = Environment.getInstance().getGeneralExplorerMap().getTiles();
 		double height = DashboardFX.height;
 		double width = DashboardFX.width;
-		int originX = (int)(1553*(width / 1920)); //0 = droite
-		int originY = (int) (713*(height / 1040)); //0 = haut
+		int originY = (int) (DashboardFX.height - DashboardFX.height/3.17);
+		int originX = (int) (DashboardFX.width - DashboardFX.width/5.24);
 		
 		for(int i = 0; i < 90; i ++) {
 			for(int j = 0; j < 90; j ++) {
