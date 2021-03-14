@@ -1,10 +1,9 @@
 package tests.lucas;
 
 import data.entity.Entity;
+
 import data.entity.LivingEntity;
 import data.simulation.Environment;
-import environmentcreation.EnvironmentCreator;
-import environmentcreation.event.EntityCreationException;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -15,7 +14,7 @@ public class DashboardFX extends Canvas {
 	
 	public DashboardFX(double arg1, double arg2) {
 		super(arg1, arg2);
-		TILE_SIZE = arg2 /90;
+		TILE_SIZE = (arg2 - arg2/20)/90;
         drawShapes(); 
 	}
 	void drawShapes() {

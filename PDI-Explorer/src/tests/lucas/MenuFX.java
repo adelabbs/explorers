@@ -19,8 +19,6 @@ import javafx.geometry.VPos;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Spinner;
@@ -136,8 +134,8 @@ public class MenuFX extends Application {
         
         primaryStage.initStyle(StageStyle.UNIFIED);
         primaryStage.setMaximized(true);  //plein écran avec bordures
-       // primaryStage.setFullScreen(true);
-        primaryStage.setResizable(true);
+      //  primaryStage.setFullScreen(true);
+        primaryStage.setResizable(false);
         
 
         
@@ -597,19 +595,27 @@ public class MenuFX extends Application {
                 	  simulationEntry.add(items.get("com"));
                   simulation = new Simulation(simulationEntry);
                   dashboard = new DashboardFX(primaryScreenBounds.getWidth() - (primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight()), primaryScreenBounds.getHeight());
+                  
             	  Group root = new Group();
-            	  HBox simuBox = new HBox();
-            	  simuBox.getChildren().addAll(dashboard, new Rectangle(primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight(), primaryScreenBounds.getHeight(), Color.DARKGREY));
-            	  root.getChildren().add(simuBox); 
-            	  primaryStage.setScene(new Scene(root));
+            	  HUDFX hud;
+            	  try {
+            		  hud = new HUDFX(primaryScreenBounds.getWidth());
+            		  HBox simuBox = new HBox(dashboard);
+            		  simuBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 35, primaryScreenBounds.getHeight() / 40 , 0, primaryScreenBounds.getHeight() / 25));
+            		  StackPane pane = new StackPane(simuBox, hud);
+            		  root.getChildren().add(pane); 
+            		  primaryStage.setScene(new Scene(root, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight()));
             	  
-            	  simulation.launch();
-                  timer.start();
+            		  simulation.launch();
+            		  timer.start();
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					}
               }
               else {
-            	  Alert errorAlert = new Alert(AlertType.ERROR);
+            	 /* Alert errorAlert = new Alert(AlertType.ERROR);
             	  errorAlert.setContentText("The maximum amount of money is exceeded.");
-            	  errorAlert.show(); 
+            	  errorAlert.show(); */
             	  
             	  Tooltip tooltip = new Tooltip("The maximum amount of money is exceeded.");
             	  startButton.setTooltip(tooltip);
@@ -646,10 +652,10 @@ public class MenuFX extends Application {
         scene.setCursor(Cursor.OPEN_HAND); //Pourra être remplacé par un curseur personnalisé
 
         primaryStage.setScene(scene);
-       // primaryStage.sizeToScene();
+        primaryStage.sizeToScene();
         
         primaryStage.show();
-        primaryStage.toFront();
+        //primaryStage.toFront();
  
        	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         	@Override
