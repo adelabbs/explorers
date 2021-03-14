@@ -134,13 +134,15 @@ public class TestDamage {
 		entities.add(explorer);
 		entities.add(bear);
 		e.setEntities(entities);
-				
+		e.setExplorerAmount(1);
+		
 		// When
 		em.setRunning(true);
 		em.run();
 		
 		
 		// Them
+		assertEquals(0,e.getExplorerAmount());
 		assertFalse(em.isRunning());
 		assertFalse(e.getEntities().contains(explorer));
 	}
@@ -158,12 +160,14 @@ public class TestDamage {
 		entities.add(explorer);
 		entities.add(bear);
 		e.setEntities(entities);
+		e.setExplorerAmount(1);
 				
 		// When
 		em.setRunning(true);
 		em.run();
 		
 		// Them
+		assertEquals(0,e.getExplorerAmount());
 		assertFalse(em.isRunning());
 		assertFalse(e.getEntities().contains(explorer));
 	}

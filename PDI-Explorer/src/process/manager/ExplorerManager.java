@@ -41,6 +41,7 @@ public class ExplorerManager extends LivingEntityManager {
 		}
 		Environment e = Environment.getInstance();
 		e.remove(explorer);
+		e.decrementExplorerAmount();
 		setRunning(false);
 	}
 
