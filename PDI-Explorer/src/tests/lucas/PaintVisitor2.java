@@ -116,6 +116,7 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 
 		g.drawImage(bear, 0, 0, 2*IMG_TILE_SIZE, IMG_TILE_SIZE, j * DashboardFX.TILE_SIZE, i * DashboardFX.TILE_SIZE,
 				2*DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE);
+		paintLifeBar(entity);
 		return null;
 	}
 
@@ -135,7 +136,7 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 		g.fillRect(j * DashboardFX.TILE_SIZE - half, i * DashboardFX.TILE_SIZE - half, (DashboardFX.TILE_SIZE) * 2, 3);
 		g.setFill(Color.LIGHTGREEN);
 		g.fillRect(j * DashboardFX.TILE_SIZE - half, i * DashboardFX.TILE_SIZE - half,
-				(int) ((DashboardFX.TILE_SIZE) * 2 * (entity.getHealth() / entity.getMaxHealth())), 3);
+				(int) ((DashboardFX.TILE_SIZE) * 2 * ((double) entity.getHealth() / entity.getMaxHealth())), 3);
 	}
 
 }
