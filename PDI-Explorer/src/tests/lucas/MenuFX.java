@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import data.simulation.SimulationEntry;
-import environmentcreation.EnvironmentCreator;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -14,7 +13,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.concurrent.Worker;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -555,37 +553,26 @@ public class MenuFX extends Application {
             }
         });
         
+        AnimationTimer timer = new AnimationTimer() {
+
+ 			@Override
+ 			public void handle(long arg0) {
+ 				SimulationUtility.unitTime();
+ 				simulation.update();
+ 				dashboard.drawShapes();		
+ 			}
+     	   
+        };
+        
+        
         startButton.setOnAction(actionEvent ->  {
               if (enveloppe >= 0) {
             	  Group root = new Group();
             	  root.getChildren().add(dashboard); 
             	  primaryStage.setScene(new Scene(root));
             	  
-            	  Service<Void> simLaunch = new Service<Void>(){
-
-            		  @Override
-            		  protected Task<Void> createTask() {
-            		    return new Task<Void>(){
-
-            		     @Override
-            		     protected Void call() throws Exception {
-            		 		System.out.println("2");
-            		 		SimulationUtility.unitTime();
-            		 		System.out.println("3");
-            		 		simulation.update();
-            		 		System.out.println("4");
-            		 		dashboard.drawShapes();
-            		 		System.out.println("5");
-            		        return null;
-            		      }
-            		    };
-            		  }
-            		};
-            		simulation.launch();
-            		while (simulation.isRunning()) {
-            			simLaunch.start(); 
-            			System.out.println("7"); 
-            		} 
+            	  simulation.launch();
+                  timer.start();
               }
               else {
             	 /* Alert errorAlert = new Alert(AlertType.ERROR);
@@ -632,37 +619,7 @@ public class MenuFX extends Application {
         
         primaryStage.show();
         primaryStage.toFront();
-                
-//         Thread taskThread = new Thread(new Runnable() {
-//            @Override
-//            public void run() { 
-//            	simulation.launch();
-//            	while (simulation.isRunning()) {
-//        			SimulationUtility.unitTime();
-//        			simulation.update();
-//        			dashboard.drawShapes();
-//            	}
-//        		Platform.runLater(new Runnable() {
-//        			@Override
-//        			public void run() {
-//        			}
-//        		});
-//        	}
-//        });
-//       	taskThread.start();
-        
-        AnimationTimer timer = new AnimationTimer() {
-
- 			@Override
- 			public void handle(long arg0) {
- 				SimulationUtility.unitTime();
- 				simulation.update();
- 				dashboard.drawShapes();		
- 			}
-     	   
-        };
-        timer.start();
-        
+ 
        	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         	@Override
         	public void handle(WindowEvent e) {
