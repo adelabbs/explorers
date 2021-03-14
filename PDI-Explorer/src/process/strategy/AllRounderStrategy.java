@@ -1,5 +1,8 @@
 package process.strategy;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import data.entity.Animal;
@@ -45,6 +48,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	
 	/* Ponderate priorities of this strategy */
 	//Note : CollectAction is set to be the highest level of priority in the simulation
+	private int collect_action = COLLECT_ACTION;
 	private int leave_me_action = LEAVE_ME_ACTION;
 	private int run_away = RUN_AWAY; 
 	private int send_message = SEND_MESSAGE;
@@ -92,7 +96,6 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		int sendMessageChance = 1 + (int)(Math.random() * ((100 - 1) + 1));
 		//Send Message with a 1:99 chance
 		if(sendMessageChance > 99) {
-			System.out.println("Envoyé");
 			pl.addElement(send_message, new SendMessageAction(new MapMessage(getExplorerManager().getExplorer().getMap(), getExplorerManager().getExplorer()),
 					getExplorerManager().getExplorer()));
 		}
@@ -190,4 +193,28 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		}
 		return inScope;
 	}
+	
+	/*
+	public void setPriorities() {
+		BufferedReader br;
+		String line = "";
+		String separator = ";";
+		String csvPath = "/ressources/strategies.csv";
+		int ct = 0;
+		try {
+			br = new BufferedReader(new FileReader(csvPath));
+			br.readLine();
+			while(((line = br.readLine()) != null) && ct != ) {
+				String field[] = line.split(separator);
+				ct++;
+				collect_action = Integer.parseInt(field[1]);
+				leave_me_action = Integer.parseInt(field[2]);
+				run_away = Integer.parseInt(field[3]);
+				send_message = Integer.parseInt(field[4]);
+				explore_action = Integer.parseInt(field[5]);
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}*/
 }
