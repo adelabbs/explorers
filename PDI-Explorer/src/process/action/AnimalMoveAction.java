@@ -95,7 +95,7 @@ public class AnimalMoveAction extends MoveAction {
 	private boolean outOfBorder(double[] newPos) {
 		int i = (int) newPos[0];
 		int j = (int) newPos[1];
-		return (i >= 0 && i < (90 - (int) getEntity().getSize()[0] - 1) && j >= 0 && j < (90 - (int) getEntity().getSize()[1] - 1));
+		return (i >= 0 && i <= (90 - (int) getEntity().getSize()[0] - 1) && j >= 0 && j <= (90 - (int) getEntity().getSize()[1] - 1));
 	}
 
 	public Animal getEntity() {
