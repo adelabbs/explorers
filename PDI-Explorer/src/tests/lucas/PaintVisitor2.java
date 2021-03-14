@@ -31,6 +31,7 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 	private Image rock;
 
 	private Image chest;
+	private Image bear;
 
 	public PaintVisitor2(GraphicsContext gc) {
 		this.g = gc;
@@ -50,6 +51,9 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 			input = new FileInputStream("ressources/img/obstacles/treasure (1).png");
 			this.chest = new Image(input);
 
+			input = new FileInputStream("ressources/img/obstacles/bear.png");
+			this.bear = new Image(input);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -107,8 +111,11 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 
 	@Override
 	public Void visit(Bear entity) {
-		g.setFill(Color.RED);
-		paint(entity);
+		int i = (int) entity.getPosition()[0];
+		int j = (int) entity.getPosition()[1];
+
+		g.drawImage(bear, 0, 0, 2*IMG_TILE_SIZE, IMG_TILE_SIZE, j * DashboardFX.TILE_SIZE, i * DashboardFX.TILE_SIZE,
+				2*DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE);
 		return null;
 	}
 
