@@ -47,10 +47,10 @@ public class MapPainter2 {
 					y = 0;
 					break;
 				}
-				g.drawImage(tiles, x , y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*IMG_TILE_SIZE/scale, i*IMG_TILE_SIZE/scale, IMG_TILE_SIZE/scale, IMG_TILE_SIZE/scale);
+				g.drawImage(tiles, x , y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE);
 			}
 		}
-		explorerMapsPainter();
+		//explorerMapsPainter();
 	}
 	
 	private void explorerMapsPainter() {

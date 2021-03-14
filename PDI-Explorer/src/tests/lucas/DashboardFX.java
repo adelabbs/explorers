@@ -11,16 +11,11 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class DashboardFX extends Canvas {
 
-	public static final double TILE_SIZE = 10;
+	public static double TILE_SIZE = 10;
 	
 	public DashboardFX(double arg1, double arg2) {
 		super(arg1, arg2);
-		/*try {
-			EnvironmentCreator.creation(3, 0, 10);
-		} catch (EntityCreationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		TILE_SIZE = arg2 /90;
         drawShapes(); 
 	}
 	void drawShapes() {

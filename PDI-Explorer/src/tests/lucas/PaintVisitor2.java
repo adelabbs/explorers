@@ -60,7 +60,7 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 		int j = (int) entity.getPosition()[1];
 		x=0;
 		y=0;
-		g.drawImage(tiles, x, y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*IMG_TILE_SIZE/scale, i*IMG_TILE_SIZE/scale, IMG_TILE_SIZE/scale, IMG_TILE_SIZE/scale);
+		g.drawImage(tiles, x, y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE);
 		paintLifeBar(entity);
 		return null;
 	}
@@ -84,11 +84,11 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 		int j = (int) entity.getPosition()[1];
 		int half = (int) (IMG_TILE_SIZE/(2*scale));
 		g.setFill(Color.RED); 
-		g.fillRect(j * IMG_TILE_SIZE/scale - half, i * IMG_TILE_SIZE/scale - half, 
-				(IMG_TILE_SIZE/scale)*2, 3);
+		g.fillRect(j * DashboardFX.TILE_SIZE - half, i * DashboardFX.TILE_SIZE - half, 
+				(DashboardFX.TILE_SIZE)*2, 3);
 		g.setFill(Color.LIGHTGREEN); 
-		g.fillRect(j * IMG_TILE_SIZE/scale - half, i * IMG_TILE_SIZE/scale - half, 
-				(int) ((IMG_TILE_SIZE/scale)*2*(entity.getHealth()/entity.getMaxHealth())), 3);
+		g.fillRect(j * DashboardFX.TILE_SIZE - half, i * DashboardFX.TILE_SIZE - half, 
+				(int) ((DashboardFX.TILE_SIZE)*2*(entity.getHealth()/entity.getMaxHealth())), 3);
 	}
 
 }
