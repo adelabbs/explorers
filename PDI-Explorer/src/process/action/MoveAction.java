@@ -37,16 +37,16 @@ public abstract class MoveAction implements Action {
 		double nextPos[] = getEntity().getPosition();
 		switch (direction) {
 		case NORTH:
-			nextPos[0] -= 1;
+			nextPos[0] -= 0.025*getEntity().getSpeed();
 			break;
 		case EAST:
-			nextPos[1] += 1;
+			nextPos[1] += 0.025*getEntity().getSpeed();
 			break;
 		case WEST:
-			nextPos[1] -= 1;
+			nextPos[1] -= 0.025*getEntity().getSpeed();
 			break;
 		case SOUTH:
-			nextPos[0] += 1;
+			nextPos[0] += 0.025*getEntity().getSpeed();
 			break;
 		}
 
@@ -102,6 +102,10 @@ public abstract class MoveAction implements Action {
 		return direction;
 	}
 
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+	
 	public abstract LivingEntity getEntity();
 
 	public Environment getEnvironment() {

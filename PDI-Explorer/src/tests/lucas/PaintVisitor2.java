@@ -99,8 +99,8 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 		x = x * DashboardFX.TILE_SIZE + DashboardFX.TILE_SIZE / 2;
 		y = y * DashboardFX.TILE_SIZE + DashboardFX.TILE_SIZE / 2;
 		g.strokeOval(x, y, r, r);
-		int i = (int) entity.getPosition()[0];
-		int j = (int) entity.getPosition()[1];
+		double i = entity.getPosition()[0];
+		double j = entity.getPosition()[1];
 		x = 0;
 		y = 0;
 		g.drawImage(tiles, x, y, IMG_TILE_SIZE, IMG_TILE_SIZE, j * DashboardFX.TILE_SIZE, i * DashboardFX.TILE_SIZE,
@@ -111,8 +111,8 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 
 	@Override
 	public Void visit(Bear entity) {
-		int i = (int) entity.getPosition()[0];
-		int j = (int) entity.getPosition()[1];
+		double i = entity.getPosition()[0];
+		double j = entity.getPosition()[1];
 
 		g.drawImage(bear, 0, 0, 2*IMG_TILE_SIZE, IMG_TILE_SIZE, j * DashboardFX.TILE_SIZE, i * DashboardFX.TILE_SIZE,
 				2*DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE);
@@ -129,8 +129,8 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 	}
 
 	private void paintLifeBar(LivingEntity entity) {
-		int i = (int) entity.getPosition()[0];
-		int j = (int) entity.getPosition()[1];
+		double i = entity.getPosition()[0];
+		double j = entity.getPosition()[1];
 		int half = (int) (IMG_TILE_SIZE / (2 * scale));
 		g.setFill(Color.RED);
 		g.fillRect(j * DashboardFX.TILE_SIZE - half, i * DashboardFX.TILE_SIZE - half, (DashboardFX.TILE_SIZE) * 2, 3);

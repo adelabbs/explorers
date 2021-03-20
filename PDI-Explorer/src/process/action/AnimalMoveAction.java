@@ -27,21 +27,22 @@ public class AnimalMoveAction extends MoveAction {
 	public void execute() {
 		double newPos[];
 		double closestHumanPos[];
+		int direction = 0;
 		if((closestHumanPos = closestHumanInScope()) != null) {
 			newPos = new double[] {getEntity().getPosition()[0], getEntity().getPosition()[1]};
 			double vx = closestHumanPos[0] - entity.getPosition()[0];
 			double vy = closestHumanPos[1] - entity.getPosition()[1];
 			if(Math.abs(vx) > Math.abs(vy)) {
 				if(vx < 0) {
-					newPos[0] --;
+					direction = 0;
 				} else {
-					newPos[0] ++;
+					direction = 2;
 				}
 			} else {
 				if(vy < 0) {
-					newPos[1] --;
+					direction = 3;
 				} else {
-					newPos[1] ++;
+					direction = 1;
 				}
 			}
 			//If contact with a human
@@ -54,18 +55,18 @@ public class AnimalMoveAction extends MoveAction {
 		else {
 			do {
 				newPos = new double[] {getEntity().getPosition()[0], getEntity().getPosition()[1]};
-				int direction = (int) (Math.random() * 4);
+				direction = (int) (Math.random() * 4);
 				if (direction == 4)
 					direction = 3;
 				switch (direction) {
 				case 0:
-					newPos[0]++;
-					break;
-				case 1:
 					newPos[0]--;
 					break;
-				case 2:
+				case 1:
 					newPos[1]++;
+					break;
+				case 2:
+					newPos[0]++;
 					break;
 				case 3:
 					newPos[1]--;
@@ -73,7 +74,9 @@ public class AnimalMoveAction extends MoveAction {
 				}
 			} while (distanceFromInitialPos(newPos) > ANIMAL_MAX_TERRITORY && !outOfBorder(newPos));
 		}
-		getEntity().setPosition(newPos);
+		this.setDirection(direction + 1);
+		super.execute();
+		
 	}
 		
 	
