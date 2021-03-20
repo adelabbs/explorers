@@ -11,7 +11,7 @@ public abstract class Animal extends LivingEntity {
 
 	public Animal(String type, double[] position, double[] size, int maxHealth, int speed, int damage, int scope) {
 		super(type, position, size, maxHealth, speed, damage, scope);
-		this.initPosition = position;
+		this.initPosition = new double[] {position[0], position[1]};
 	}
 
 	public double[] getInitPosition() {

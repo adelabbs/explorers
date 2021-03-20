@@ -34,14 +34,18 @@ public class AnimalMoveAction extends MoveAction {
 			double vy = closestHumanPos[1] - entity.getPosition()[1];
 			if(Math.abs(vx) > Math.abs(vy)) {
 				if(vx < 0) {
+					newPos[0]--;
 					direction = 0;
 				} else {
+					newPos[0]++;
 					direction = 2;
 				}
 			} else {
 				if(vy < 0) {
+					newPos[1]--;
 					direction = 3;
 				} else {
+					newPos[1]++;
 					direction = 1;
 				}
 			}
@@ -74,9 +78,10 @@ public class AnimalMoveAction extends MoveAction {
 				}
 			} while (distanceFromInitialPos(newPos) > ANIMAL_MAX_TERRITORY && !outOfBorder(newPos));
 		}
-		this.setDirection(direction + 1);
-		super.execute();
-		
+		if(distanceFromInitialPos(newPos) <= ANIMAL_MAX_TERRITORY) {
+			this.setDirection(direction + 1);
+			super.execute();
+		}
 	}
 		
 	
