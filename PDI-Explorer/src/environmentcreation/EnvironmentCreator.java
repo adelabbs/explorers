@@ -14,8 +14,10 @@ import environmentcreation.mapcreation.MapCreator;
 
 public class EnvironmentCreator {
 
-	public static void creation(int explorerAmount, int animalAmount, int chestAmount) throws EntityCreationException {
+	public static void creation(int explorerAmount, int animalAmount, int chestAmountzer) throws EntityCreationException {
 	
+		int chestAmount = (int) (Math.random() * 5) + 10;
+		
 		Environment.getInstance().setMap(MapCreator.creation());
 		Environment.getInstance().setEntities(EntityCreator.creation(explorerAmount, animalAmount));
 		Environment.getInstance().setObstacles(ObstaclesCreator.creation(chestAmount));
