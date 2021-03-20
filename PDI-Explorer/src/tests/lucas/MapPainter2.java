@@ -48,14 +48,14 @@ public class MapPainter2 {
 					y = 0;
 					break;
 				}
-				g.drawImage(tiles, x , y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*DashboardFX.TILE_SIZE, i*DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE, DashboardFX.TILE_SIZE);
+				g.drawImage(tiles, x , y, IMG_TILE_SIZE, IMG_TILE_SIZE, j*MapFX.TILE_SIZE, i*MapFX.TILE_SIZE, MapFX.TILE_SIZE, MapFX.TILE_SIZE);
 			}
 		}
 		generalMapPainter();
 		//explorerMapsPainter();
 	}
 	
-	private void explorerMapsPainter() {
+	/*private void explorerMapsPainter() {
 		int initY = (int) (90*DashboardFX.TILE_SIZE);
 		int entityAmount = Environment.getInstance().getEntities().size();
 		int sent = 0;
@@ -64,7 +64,7 @@ public class MapPainter2 {
 				explorerMapPainter((sent/2)*90*3, initY + (sent%2)*90*3, i);
 				sent ++;
 			}
-	}
+	}*/
 	
 	private void explorerMapPainter(int x, double d, int i) {
 		ExplorerMap map = ((Explorer) Environment.getInstance().getEntities().get(i)).getMap();
@@ -100,10 +100,10 @@ public class MapPainter2 {
 	
 	private void generalMapPainter() {
 		ExplorerTile[][] map = Environment.getInstance().getGeneralExplorerMap().getTiles();
-		double height = DashboardFX.height;
-		double width = DashboardFX.width;
-		int originY = (int) (DashboardFX.height - DashboardFX.height/3.17);
-		int originX = (int) (DashboardFX.width - DashboardFX.width/5.24);
+		double height = MapFX.height;
+		double width = MapFX.width;
+		int originY = (int) (MapFX.height - MapFX.height/3.17);
+		int originX = (int) (MapFX.width - MapFX.width/5.24);
 		
 		for(int i = 0; i < 90; i ++) {
 			for(int j = 0; j < 90; j ++) {
