@@ -5,7 +5,7 @@ package tests.manual;
  *
  */
 public class SimuPara {
-	public static final int SIMULATION_SPEED = 100;
+	public static final int SIMULATION_SPEED = 40;
 	public static final int TEST_COMMUNICATION_RANGE = 10;
 	public static final String EXPLORER_TYPE = "Explorer";
 	public static final double[] TEST_POSITION = { 1, 1 };
