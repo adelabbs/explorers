@@ -10,6 +10,7 @@ public class CollectChestAction implements Action {
 	private Chest chest;
 	private Explorer explorer;
 	private int collectingTime = SimuPara.CHEST_COLLECTING_TIME;
+	private ExplorerMoveAction ema;
 
 	public CollectChestAction(Chest chest, Explorer explorer) {
 		this.chest = chest;
@@ -19,16 +20,46 @@ public class CollectChestAction implements Action {
 	@Override
 	public void execute() {
 		if (SimulationUtility.distance(chest.getPosition(), explorer.getPosition()) <= explorer.getScope()) {
-			collectingTime--;
-			if (collectingTime == 0) {
-				Environment e = Environment.getInstance();
-				e.remove(chest);
+			if(SimulationUtility.distance(chest.getPosition(), explorer.getPosition()) <= 2) {
+				collectingTime--;
+				if (collectingTime == 0) {
+					Environment e = Environment.getInstance();
+					e.remove(chest);
+				}
+			} else {
+				ema = new ExplorerMoveAction(explorer, Environment.getInstance(), chestDirection());
+				ema.execute();
 			}
+			
 		} else {
 			collectingTime = -1;
 		}
 	}
 
+	public int chestDirection() {
+		double[] chestPos = chest.getPosition();
+		double[] explorerPos = explorer.getPosition();
+		int direction;
+		
+		double dx = (explorerPos[0] - chestPos[0]);
+		double dy = (explorerPos[1] - chestPos[1]);
+				
+		if(Math.abs(dx) > Math.abs(dy)) {
+			if(dx > 0) {
+				direction = MoveAction.NORTH;
+			} else {
+				direction = MoveAction.SOUTH;
+			}
+		} else {
+			if(dy > 0) {
+				direction = MoveAction.WEST;
+			} else {
+				direction = MoveAction.EAST;
+			}
+		}
+		return direction;
+	}
+	
 	@Override
 	public boolean isOver() {
 		return collectingTime <= 0;

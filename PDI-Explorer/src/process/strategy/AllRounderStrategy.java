@@ -180,8 +180,10 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		ArrayList<Entity> entities = Environment.getInstance().getObstacles();
 		ArrayList<Entity> inScope = new ArrayList<Entity>();
 		for (Entity e : entities) {
-			if (SimulationUtility.distance(e.getPosition(), position) <= scope) {
-				inScope.add(e);
+			if(e != null) {
+				if (SimulationUtility.distance(e.getPosition(), position) <= scope) {
+					inScope.add(e);
+				}
 			}
 			/*
 			 * if (e.getPosition()[0] <= dx && e.getPosition()[0] >= mdx) { if
