@@ -97,8 +97,8 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 		x = x * MapFX.TILE_SIZE + MapFX.TILE_SIZE / 2;
 		y = y * MapFX.TILE_SIZE + MapFX.TILE_SIZE / 2;
 		g.strokeOval(x, y, r, r);
-		int i = (int) entity.getPosition()[0];
-		int j = (int) entity.getPosition()[1];
+		double i = entity.getPosition()[0];
+		double j = entity.getPosition()[1];
 		x = 0;
 		y = 0;
 		g.drawImage(tiles, x, y, IMG_TILE_SIZE, IMG_TILE_SIZE, j * MapFX.TILE_SIZE, i * MapFX.TILE_SIZE,
@@ -110,8 +110,8 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 
 	@Override
 	public Void visit(Bear entity) {
-		int i = (int) entity.getPosition()[0];
-		int j = (int) entity.getPosition()[1];
+		double i = entity.getPosition()[0];
+		double j = entity.getPosition()[1];
 
 		g.drawImage(bear, 0, 0, 2*IMG_TILE_SIZE, IMG_TILE_SIZE, j * MapFX.TILE_SIZE, i * MapFX.TILE_SIZE,
 				2*MapFX.TILE_SIZE, MapFX.TILE_SIZE);
@@ -128,8 +128,8 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 	}*/
 
 	private void paintLifeBar(LivingEntity entity) {
-		int i = (int) entity.getPosition()[0];
-		int j = (int) entity.getPosition()[1];
+		double i = entity.getPosition()[0];
+		double j = entity.getPosition()[1];
 		int half = (int) (IMG_TILE_SIZE / (2 * scale));
 		g.setFill(Color.RED);
 		g.fillRect(j * MapFX.TILE_SIZE - half, i * MapFX.TILE_SIZE - half, (MapFX.TILE_SIZE) * 2, 3);

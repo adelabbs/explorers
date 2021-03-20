@@ -58,6 +58,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	public AllRounderStrategy(ExplorerManager explorerManager) {
 		super(explorerManager);
 		updateValues();
+		setPriorities();
 	}
 
 	@Override
@@ -72,7 +73,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 			for (Entity e : inScopeObstacles) {
 				//If the obstacle is a chest
 				if (e.getType().equals("Chest")) {
-					pl.addElement(COLLECT_ACTION, new CollectChestAction((Chest) e, getExplorerManager().getExplorer()));
+					pl.addElement(collect_action, new CollectChestAction((Chest) e, getExplorerManager().getExplorer()));
 				
 				}
 			}
@@ -93,9 +94,9 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		
 		
 		//Sending message
-		int sendMessageChance = 1 + (int)(Math.random() * ((100 - 1) + 1));
+		int sendMessageChance = 1 + (int)(Math.random() * ((300 - 1) + 1));
 		//Send Message with a 1:99 chance
-		if(sendMessageChance > 99) {
+		if(sendMessageChance > 299) {
 			pl.addElement(send_message, new SendMessageAction(new MapMessage(getExplorerManager().getExplorer().getMap(), getExplorerManager().getExplorer()),
 					getExplorerManager().getExplorer()));
 		}
@@ -194,17 +195,17 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		return inScope;
 	}
 	
-	/*
+	
 	public void setPriorities() {
 		BufferedReader br;
 		String line = "";
 		String separator = ";";
-		String csvPath = "/ressources/strategies.csv";
+		String csvPath = "ressources/strategies.csv";
 		int ct = 0;
 		try {
 			br = new BufferedReader(new FileReader(csvPath));
 			br.readLine();
-			while(((line = br.readLine()) != null) && ct != ) {
+			while(((line = br.readLine()) != null) && ct != 1 ) {
 				String field[] = line.split(separator);
 				ct++;
 				collect_action = Integer.parseInt(field[1]);
@@ -216,5 +217,5 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
