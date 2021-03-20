@@ -6,13 +6,11 @@ import java.io.IOException;
 
 import data.entity.Bear;
 import data.entity.Chest;
-import data.entity.Entity;
 import data.entity.Explorer;
 import data.entity.LivingEntity;
 import data.entity.Obstacle;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import process.visitor.EntityVisitor;
 
@@ -89,7 +87,6 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 
 	@Override
 	public Void visit(Explorer entity) {
-		//g.setFill(Color.DARKGRAY);
 		int r = 2 * entity.getScope();
 		double x = entity.getPosition()[1] - r / 2;
 		double y = entity.getPosition()[0] - r / 2;
@@ -118,14 +115,6 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 		paintLifeBar(entity);
 		return null;
 	}
-
-	/*private void paint(Entity entity) {
-		int i = (int) entity.getPosition()[0];
-		int j = (int) entity.getPosition()[1];
-		g.fillRect(j * DashboardFX.TILE_SIZE, i * DashboardFX.TILE_SIZE,
-				(int) (DashboardFX.TILE_SIZE * entity.getSize()[0]),
-				(int) (DashboardFX.TILE_SIZE * entity.getSize()[1]));
-	}*/
 
 	private void paintLifeBar(LivingEntity entity) {
 		double i = entity.getPosition()[0];

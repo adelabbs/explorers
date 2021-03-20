@@ -576,8 +576,8 @@ public class MenuFX extends Application {
  				SimulationUtility.unitTime();
  				entities.clearShapes();
  				simulation.update();
- 				//map.drawShapes();
  				entities.drawShapes();
+ 				map.drawExplorersGeneralMap();
  				
  			}
      	   
@@ -598,8 +598,8 @@ public class MenuFX extends Application {
                   if (items.containsKey("com"))
                 	  simulationEntry.add(items.get("com"));
                   simulation = new Simulation(simulationEntry);
-                  map = new MapFX(primaryScreenBounds.getWidth() /*- (primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight())*/, primaryScreenBounds.getHeight());
-                  entities = new EntitiesFX(primaryScreenBounds.getWidth() /*- (primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight())*/, primaryScreenBounds.getHeight());
+                  map = new MapFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
+                  entities = new EntitiesFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
                   
             	  Group root = new Group();
             	  HUDFX hud;
@@ -622,11 +622,7 @@ public class MenuFX extends Application {
 						e1.printStackTrace();
 					}
               }
-              else {
-            	 /* Alert errorAlert = new Alert(AlertType.ERROR);
-            	  errorAlert.setContentText("The maximum amount of money is exceeded.");
-            	  errorAlert.show(); */
-            	  
+              else {        	  
             	  Tooltip tooltip = new Tooltip("The maximum amount of money is exceeded.");
             	  startButton.setTooltip(tooltip);
             	  tooltip.setShowDelay(Duration.millis(100));

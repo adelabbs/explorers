@@ -18,8 +18,6 @@ public class EntitiesFX extends Canvas {
 	
 	public EntitiesFX(double arg1, double arg2) {
 		super(arg1, arg2);
-		this.width = arg1;
-		this.height = arg2;
 		TILE_SIZE = (arg2 - arg2/20)/90;
 		GraphicsContext gc = this.getGraphicsContext2D();
 		paintVisitor = new PaintVisitor2(gc);
