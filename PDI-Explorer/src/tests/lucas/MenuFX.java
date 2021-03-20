@@ -118,7 +118,8 @@ public class MenuFX extends Application {
     
     private SimulationEntry simulationEntry;
 	private static Simulation simulation;
-    private static DashboardFX dashboard;
+    private static MapFX map;
+    private static EntitiesFX entities;
     
     //private static final int EXPLORER_AMOUNT = 3;
 	private static final int ANIMAL_AMOUNT = 3;
@@ -573,14 +574,16 @@ public class MenuFX extends Application {
  			@Override
  			public void handle(long arg0) {
  				SimulationUtility.unitTime();
+ 				entities.clearShapes();
  				simulation.update();
- 				dashboard.drawShapes();		
+ 				//map.drawShapes();
+ 				entities.drawShapes();
+ 				
  			}
      	   
         };
         
-        
-        
+
         startButton.setOnAction(actionEvent ->  {
               if (enveloppe >= 0) {
                   simulationEntry = new SimulationEntry(valueFactory.getValue(), ANIMAL_AMOUNT, CHEST_AMOUNT, EXPLORATION_STRATEGY);
@@ -595,19 +598,25 @@ public class MenuFX extends Application {
                   if (items.containsKey("com"))
                 	  simulationEntry.add(items.get("com"));
                   simulation = new Simulation(simulationEntry);
-                  dashboard = new DashboardFX(primaryScreenBounds.getWidth() /*- (primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight())*/, primaryScreenBounds.getHeight());
+                  map = new MapFX(primaryScreenBounds.getWidth() /*- (primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight())*/, primaryScreenBounds.getHeight());
+                  entities = new EntitiesFX(primaryScreenBounds.getWidth() /*- (primaryScreenBounds.getWidth() - primaryScreenBounds.getHeight())*/, primaryScreenBounds.getHeight());
                   
             	  Group root = new Group();
             	  HUDFX hud;
             	  try {
             		  hud = new HUDFX(primaryScreenBounds.getWidth());
-            		  HBox simuBox = new HBox(dashboard);
+            		  HBox simuBox = new HBox(map);
             		  simuBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 25, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
-            		  StackPane pane = new StackPane(simuBox, hud);
+            		  
+            		  HBox simuBox2 = new HBox(entities);
+            		  simuBox2.setPadding(new Insets(primaryScreenBounds.getHeight() / 25, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
+            		  
+            		  StackPane pane = new StackPane(simuBox,simuBox2, hud);
             		  root.getChildren().add(pane); 
             		  primaryStage.setScene(new Scene(root, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight()));
             	  
             		  simulation.launch();
+            		  map.drawShapes();
             		  timer.start();
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
