@@ -30,27 +30,104 @@ public class ExplorationAction implements Action {
 		int tempJ = 0;
 		while(!move) {
 			if(range < distMax) {
-				for(int i = x - range/2; i < x + range/2; i ++) {
-					for(int j = y - range/2; j < y + range/2; j ++) {
-						if(!oob(i, j)) {
-							if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
-								int tempX = x - i;
-								int tempY = y - j;
-								int distance = distance(tempX, tempY);
-								if(distance <= distMax) {
-									int rand = (int) (Math.random()*2);
-									if(distance <= distMax || rand == 1) {
-										tempI = i;
-										tempJ = j;
-										if(distance < distMax)
-											distMax = distance;
+				
+				int dir = (int) Math.random()*4;
+				switch(dir) {
+				case 0: //starts top left
+					for(int i = x - range/2; i < x + range/2; i ++) {
+						for(int j = y - range/2; j < y + range/2; j ++) {
+							if(!oob(i, j)) {
+								if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
+									int tempX = x - i;
+									int tempY = y - j;
+									int distance = distance(tempX, tempY);
+									if(distance <= distMax) {
+										int rand = (int) (Math.random()*2);
+										if(distance <= distMax || rand == 1) {
+											tempI = i;
+											tempJ = j;
+											if(distance < distMax)
+												distMax = distance;
+										}
 									}
+									move = true;
 								}
-								move = true;
 							}
 						}
 					}
+					break;
+				case 1: //starts top right
+					for(int j = y - range/2; j < y + range/2; j ++) {
+						for(int i = x + range/2; i > x - range/2; i ++) {
+							if(!oob(i, j)) {
+								if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
+									int tempX = x - i;
+									int tempY = y - j;
+									int distance = distance(tempX, tempY);
+									if(distance <= distMax) {
+										int rand = (int) (Math.random()*2);
+										if(distance <= distMax || rand == 1) {
+											tempI = i;
+											tempJ = j;
+											if(distance < distMax)
+												distMax = distance;
+										}
+									}
+									move = true;
+								}
+							}
+						}
+					}
+					break;
+				case 2: //starts bottom right
+					for(int i = x + range/2; i > x - range/2; i ++) {
+						for(int j = y + range/2; j > y + range/2; j ++) {
+							if(!oob(i, j)) {
+								if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
+									int tempX = x - i;
+									int tempY = y - j;
+									int distance = distance(tempX, tempY);
+									if(distance <= distMax) {
+										int rand = (int) (Math.random()*2);
+										if(distance <= distMax || rand == 1) {
+											tempI = i;
+											tempJ = j;
+											if(distance < distMax)
+												distMax = distance;
+										}
+									}
+									move = true;
+								}
+							}
+						}
+					}
+					break;
+				case 3: //starts bottom left
+					for(int j = y + range/2; j > y - range/2; j ++) {
+						for(int i = x - range/2; i < x + range/2; i ++) {
+							if(!oob(i, j)) {
+								if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
+									int tempX = x - i;
+									int tempY = y - j;
+									int distance = distance(tempX, tempY);
+									if(distance <= distMax) {
+										int rand = (int) (Math.random()*2);
+										if(distance <= distMax || rand == 1) {
+											tempI = i;
+											tempJ = j;
+											if(distance < distMax)
+												distMax = distance;
+										}
+									}
+									move = true;
+								}
+							}
+						}
+					}
+					break;
 				}
+				
+				
 			} else {
 				SendMessageAction sma = new SendMessageAction(new MapMessage(explorer.getMap(), explorer), explorer);
 				sma.execute();
