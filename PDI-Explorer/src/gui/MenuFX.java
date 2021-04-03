@@ -75,6 +75,12 @@ public class MenuFX extends Application {
     private ToggleButton comButton1 = new ToggleButton("Nothing");
     private ToggleButton comButton2 = new ToggleButton("Antenna");
     private ToggleButton comButton3 = new ToggleButton("Radio");
+    
+    private ImageView healthView;
+    private ImageView speedView;
+    private ImageView scopeView;
+    private ImageView damageView;
+    private ImageView comView;
 
     private ToggleGroup comGroup = new ToggleGroup();
     private ToggleGroup scopeGroup = new ToggleGroup();
@@ -120,6 +126,7 @@ public class MenuFX extends Application {
 	private static Simulation simulation;
     private static MapFX map;
     private static EntitiesFX entities;
+    private ExplorersInfosFX infos;
     
     //private static final int EXPLORER_AMOUNT = 3;
 	private static final int ANIMAL_AMOUNT = 3;
@@ -209,38 +216,56 @@ public class MenuFX extends Application {
         
         FileInputStream input1 = new FileInputStream("ressources/img/aucun_objet.png");
         Image image1 = new Image(input1);
-        ImageView healthView = new ImageView(image1);
-        healthView .setFitHeight(primaryScreenBounds.getHeight() / 5);
-        healthView .setPreserveRatio(true);
-        healthBox.getChildren().add(healthView);
         
-        FileInputStream input2 = new FileInputStream("ressources/img/aucun_objet.png");
-        Image image2 = new Image(input2);
-        ImageView speedView = new ImageView(image2);
+        healthView = new ImageView(image1);
+        healthView.setFitHeight(primaryScreenBounds.getHeight() / 5);
+        healthView.setPreserveRatio(true);
+        healthBox.getChildren().add(healthView);
+
+        speedView = new ImageView(image1);
         speedView.setFitHeight(primaryScreenBounds.getHeight() / 5);
         speedView.setPreserveRatio(true);
         speedBox.getChildren().add(speedView);
         
-        FileInputStream input3 = new FileInputStream("ressources/img/aucun_objet.png");
-        Image image3 = new Image(input3);
-        ImageView damageView = new ImageView(image3);
+        damageView = new ImageView(image1);
         damageView.setFitHeight(primaryScreenBounds.getHeight() / 5);
         damageView.setPreserveRatio(true);
         damageBox.getChildren().add(damageView);
-        
-        FileInputStream input4 = new FileInputStream("ressources/img/aucun_objet.png");
-        Image image4 = new Image(input4);
-        ImageView scopeView = new ImageView(image4);
+
+        scopeView = new ImageView(image1);
         scopeView.setFitHeight(primaryScreenBounds.getHeight() / 5);
         scopeView.setPreserveRatio(true);
         scopeBox.getChildren().add(scopeView);
-        
-        FileInputStream input5 = new FileInputStream("ressources/img/aucun_objet.png");
-        Image image5 = new Image(input5);
-        ImageView comView = new ImageView(image5);
+
+        comView = new ImageView(image1);
         comView.setFitHeight(primaryScreenBounds.getHeight() / 5);
         comView.setPreserveRatio(true);
         comBox.getChildren().add(comView);
+        
+        FileInputStream input2 = new FileInputStream("ressources/img/objects/helmet.png");
+		Image image2 = new Image(input2);
+		FileInputStream input3 = new FileInputStream("ressources/img/objects/chestplate.png");
+		Image image3 = new Image(input3);
+		
+		FileInputStream input4 = new FileInputStream("ressources/img/objects/boots.png");
+		Image image4 = new Image(input4);
+		FileInputStream input5 = new FileInputStream("ressources/img/objects/trecking_shoes.png");
+		Image image5 = new Image(input5);
+		
+		FileInputStream input6 = new FileInputStream("ressources/img/objects/knife.png");
+		Image image6 = new Image(input6);
+		FileInputStream input7 = new FileInputStream("ressources/img/objects/machete.png");
+		Image image7 = new Image(input7);
+		
+		FileInputStream input8 = new FileInputStream("ressources/img/objects/glasses.png");
+		Image image8 = new Image(input8);
+		FileInputStream input9 = new FileInputStream("ressources/img/objects/binoculars.png");
+		Image image9 = new Image(input9);
+		
+		FileInputStream input10 = new FileInputStream("ressources/img/objects/antenna.png");
+		Image image10 = new Image(input10);
+		FileInputStream input11 = new FileInputStream("ressources/img/objects/radio.png");
+		Image image11 = new Image(input11);
   
         nbExplorers.setValueFactory(valueFactory);
         
@@ -307,6 +332,7 @@ public class MenuFX extends Application {
             			}
             			healthTemp = 1;
             			healthEffect.setText("Health +");
+						healthView.setImage(image2);     	        
             		}
             		else if (healthButton3.isSelected() == true) {
             			items.put("health", "Chestplate");
@@ -318,6 +344,7 @@ public class MenuFX extends Application {
             			}
             			healthTemp = 2;
             			healthEffect.setText("Health ++");
+            			healthView.setImage(image3);
             		}
         		}
             	else if (healthButton1.isSelected() == true) {
@@ -330,6 +357,7 @@ public class MenuFX extends Application {
         			}
             		healthTemp = 0;
             		healthEffect.setText("None");
+					healthView.setImage(image1);
             	}
             	text2.setText(String.valueOf(enveloppe));
             }
@@ -347,6 +375,7 @@ public class MenuFX extends Application {
             			}
             			speedTemp = 1;
             			speedEffect.setText("Speed +");
+            			speedView.setImage(image4);
             		}
             		else if (speedButton3.isSelected() == true) {
             			items.put("speed", "Trecking_shoes");
@@ -358,6 +387,7 @@ public class MenuFX extends Application {
             			}
             			speedTemp = 2;
             			speedEffect.setText("Speed ++");
+            			speedView.setImage(image5);
             		}
         		}
             	else if (speedButton1.isSelected() == true) {
@@ -370,6 +400,7 @@ public class MenuFX extends Application {
         			}
             		speedTemp = 0;
             		speedEffect.setText("None");
+            		speedView.setImage(image1);
             	}
             	text2.setText(String.valueOf(enveloppe));
             }
@@ -387,6 +418,7 @@ public class MenuFX extends Application {
             			}
             			damageTemp = 1;
             			damageEffect.setText("Damage +");
+            			damageView.setImage(image6);
             		}
             		else if (damageButton3.isSelected() == true) {
             			items.put("damage", "Machete");
@@ -398,6 +430,7 @@ public class MenuFX extends Application {
             			}
             			damageTemp = 2;
             			damageEffect.setText("Damage ++");
+            			damageView.setImage(image7);
             		}
         		}
             	else if (damageButton1.isSelected() == true) {
@@ -410,6 +443,7 @@ public class MenuFX extends Application {
         			}
             		damageTemp = 0;
             		damageEffect.setText("None");
+            		damageView.setImage(image1);
             	}
             	text2.setText(String.valueOf(enveloppe));
             }
@@ -427,6 +461,7 @@ public class MenuFX extends Application {
             			}
             			scopeTemp = 1;
             			scopeEffect.setText("Scope +");
+            			scopeView.setImage(image8);
             		}
             		else if (scopeButton3.isSelected() == true) {
         				items.put("scope", "Binoculars");
@@ -438,6 +473,7 @@ public class MenuFX extends Application {
             			}
             			scopeTemp = 2;
             			scopeEffect.setText("Scope ++");
+            			scopeView.setImage(image9);
             		}
         		}
             	else if (scopeButton1.isSelected() == true) {
@@ -450,6 +486,7 @@ public class MenuFX extends Application {
         			}
             		scopeTemp = 0;
             		scopeEffect.setText("None");
+            		scopeView.setImage(image1);
             	}
             	text2.setText(String.valueOf(enveloppe));
             }
@@ -466,7 +503,8 @@ public class MenuFX extends Application {
             				enveloppe += 5*nbExplorers.getValue();
             			}
             			comTemp = 1;
-            			comEffect.setText("Communication Range +");
+            			comEffect.setText("Communication \n Range +");
+            			comView.setImage(image10);
             		}
             		else if (comButton3.isSelected() == true) {
             			items.put("com", "Radio");
@@ -477,7 +515,8 @@ public class MenuFX extends Application {
             				enveloppe -= 5*nbExplorers.getValue();
             			}
             			comTemp = 2;
-            			comEffect.setText("Communication Range ++");
+            			comEffect.setText("Communication \n Range ++");
+            			comView.setImage(image11);
             		}
         		}
             	else if (comButton1.isSelected() == true) {
@@ -490,6 +529,7 @@ public class MenuFX extends Application {
         			}
             		comTemp = 0;
             		comEffect.setText("None");
+            		comView.setImage(image1);
             	}
             	text2.setText(String.valueOf(enveloppe));
             }
@@ -578,6 +618,7 @@ public class MenuFX extends Application {
  				entities.clearShapes();
  				simulation.update();
  				entities.drawShapes();
+ 				infos.updateInfos();
  				map.drawExplorersGeneralMap();
  			}
      	   
@@ -611,10 +652,13 @@ public class MenuFX extends Application {
             		  HBox simuBox2 = new HBox(entities);
             		  simuBox2.setPadding(new Insets(primaryScreenBounds.getHeight() / 25, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
             		  
-            		  ExplorersInfosFX infos = new ExplorersInfosFX(primaryScreenBounds.getHeight());
-            		  infos.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, primaryScreenBounds.getWidth() / 25 , 0, primaryScreenBounds.getWidth() / 1.62));
+            		  infos = new ExplorersInfosFX(primaryScreenBounds.getHeight());
+            		  infos.setPadding(new Insets(primaryScreenBounds.getHeight() / 9, primaryScreenBounds.getWidth() / 25 , 0, primaryScreenBounds.getWidth() / 1.75));
             		  
-            		  StackPane pane = new StackPane(simuBox,simuBox2, hud, infos);
+            		  ObjectsInfosFX chosenItems = new ObjectsInfosFX(primaryScreenBounds.getHeight(), healthView, speedView, damageView, scopeView, comView);
+            		  chosenItems.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, primaryScreenBounds.getWidth() / 25 , 0, primaryScreenBounds.getWidth() / 1.14));
+            		  
+            		  StackPane pane = new StackPane(simuBox,simuBox2, hud, infos, chosenItems);
             		  root.getChildren().add(pane); 
             		  primaryStage.setScene(new Scene(root, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight()));
             	  
