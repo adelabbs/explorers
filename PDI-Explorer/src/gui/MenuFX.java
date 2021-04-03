@@ -1,4 +1,4 @@
-package tests.lucas;
+package gui;
 
 import java.io.FileInputStream;
 
@@ -134,9 +134,10 @@ public class MenuFX extends Application {
     	
         primaryStage.setTitle("Autonomous and communicant explorers");
         
-        primaryStage.initStyle(StageStyle.UNIFIED);
-        primaryStage.setMaximized(true);  //plein écran avec bordures
-      //  primaryStage.setFullScreen(true);
+       // primaryStage.initStyle(StageStyle.UNIFIED);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        //primaryStage.setMaximized(true);  //plein écran avec bordures
+        primaryStage.setFullScreen(true);
         primaryStage.setResizable(false);
         
 
@@ -578,7 +579,6 @@ public class MenuFX extends Application {
  				simulation.update();
  				entities.drawShapes();
  				map.drawExplorersGeneralMap();
- 				
  			}
      	   
         };
@@ -604,14 +604,17 @@ public class MenuFX extends Application {
             	  Group root = new Group();
             	  HUDFX hud;
             	  try {
-            		  hud = new HUDFX(primaryScreenBounds.getWidth());
+            		  hud = new HUDFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
             		  HBox simuBox = new HBox(map);
             		  simuBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 25, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
             		  
             		  HBox simuBox2 = new HBox(entities);
             		  simuBox2.setPadding(new Insets(primaryScreenBounds.getHeight() / 25, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
             		  
-            		  StackPane pane = new StackPane(simuBox,simuBox2, hud);
+            		  ExplorersInfosFX infos = new ExplorersInfosFX(primaryScreenBounds.getHeight());
+            		  infos.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, primaryScreenBounds.getWidth() / 25 , 0, primaryScreenBounds.getWidth() / 1.62));
+            		  
+            		  StackPane pane = new StackPane(simuBox,simuBox2, hud, infos);
             		  root.getChildren().add(pane); 
             		  primaryStage.setScene(new Scene(root, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight()));
             	  

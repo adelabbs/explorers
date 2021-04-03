@@ -1,4 +1,4 @@
-package tests.lucas;
+package gui;
 
 
 import java.io.FileInputStream;

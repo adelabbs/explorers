@@ -1,4 +1,4 @@
-package tests.lucas;
+package gui;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -9,7 +9,7 @@ public class MapFX extends Canvas {
 	protected static double TILE_SIZE = 10;
 	protected static double width;
 	protected static double height;
-	private MapPainter2 mp;
+	private MapPainterFX mp;
 	
 	public MapFX(double arg1, double arg2) {
 		super(arg1, arg2);
@@ -17,7 +17,7 @@ public class MapFX extends Canvas {
 		this.height = arg2;
 		TILE_SIZE = (arg2 - arg2/20)/90;
 		GraphicsContext gc = this.getGraphicsContext2D();
-		mp = new MapPainter2(gc);
+		mp = new MapPainterFX(gc);
         drawShapes(); 
 	}
 	void drawShapes() {

@@ -1,4 +1,4 @@
-package tests.lucas;
+package gui;
 
 import data.entity.Entity;
 import data.simulation.Environment;

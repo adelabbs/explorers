@@ -1,4 +1,4 @@
-package tests.lucas;
+package gui;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,14 +8,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-public class MapPainter2 {
+public class MapPainterFX {
 
 	private static double IMG_TILE_SIZE = 25;
 	
 	private GraphicsContext g;
 	private Image tiles;
 	
-	public MapPainter2(GraphicsContext gc){
+	public MapPainterFX(GraphicsContext gc){
 		this.g = gc;
 		try {
 			FileInputStream input = new FileInputStream("ressources/img/tiles.png");

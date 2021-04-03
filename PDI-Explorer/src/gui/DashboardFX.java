@@ -1,4 +1,4 @@
-package tests.lucas;
+package gui;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
