@@ -12,7 +12,7 @@ public class EntitiesFX extends Canvas {
 	protected static double width;
 	protected static double height;
 	
-	private PaintVisitor2 paintVisitor;
+	private PaintVisitorFX paintVisitor;
 	private Environment e = Environment.getInstance();
 
 	
@@ -20,7 +20,7 @@ public class EntitiesFX extends Canvas {
 		super(arg1, arg2);
 		TILE_SIZE = (arg2 - arg2/20)/90;
 		GraphicsContext gc = this.getGraphicsContext2D();
-		paintVisitor = new PaintVisitor2(gc);
+		paintVisitor = new PaintVisitorFX(gc);
         drawShapes(); 
 	}
 	void drawShapes() {

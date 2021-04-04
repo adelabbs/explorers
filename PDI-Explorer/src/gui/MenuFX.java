@@ -611,17 +611,19 @@ public class MenuFX extends Application {
         });
         
         AnimationTimer timer = new AnimationTimer() {
-
  			@Override
  			public void handle(long arg0) {
  				SimulationUtility.unitTime();
  				entities.clearShapes();
  				simulation.update();
+ 				try {
+					infos.displayInfos(primaryScreenBounds.getHeight());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
  				entities.drawShapes();
- 				infos.updateInfos();
  				map.drawExplorersGeneralMap();
- 			}
-     	   
+ 			}  	   
         };
         
 
@@ -653,7 +655,7 @@ public class MenuFX extends Application {
             		  simuBox2.setPadding(new Insets(primaryScreenBounds.getHeight() / 25, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
             		  
             		  infos = new ExplorersInfosFX(primaryScreenBounds.getHeight());
-            		  infos.setPadding(new Insets(primaryScreenBounds.getHeight() / 9, primaryScreenBounds.getWidth() / 25 , 0, primaryScreenBounds.getWidth() / 1.75));
+            		  infos.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, primaryScreenBounds.getWidth() / 25 , 0, primaryScreenBounds.getWidth() / 1.75));
             		  
             		  ObjectsInfosFX chosenItems = new ObjectsInfosFX(primaryScreenBounds.getHeight(), healthView, speedView, damageView, scopeView, comView);
             		  chosenItems.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, primaryScreenBounds.getWidth() / 25 , 0, primaryScreenBounds.getWidth() / 1.14));

@@ -14,7 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import process.visitor.EntityVisitor;
 
-public class PaintVisitor2 implements EntityVisitor<Void> {
+public class PaintVisitorFX implements EntityVisitor<Void> {
 
 	private static double IMG_TILE_SIZE = 25;
 	private double scale = 1;
@@ -29,7 +29,7 @@ public class PaintVisitor2 implements EntityVisitor<Void> {
 	private Image chest;
 	private Image bear;
 
-	public PaintVisitor2(GraphicsContext gc) {
+	public PaintVisitorFX(GraphicsContext gc) {
 		this.g = gc;
 		try {
 			FileInputStream input = new FileInputStream("ressources/img/texture.png");
