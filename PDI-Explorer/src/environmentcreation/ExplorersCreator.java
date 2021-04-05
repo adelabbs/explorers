@@ -18,6 +18,12 @@ import process.action.UpdateExplorerMap;
 
 public class ExplorersCreator {
 
+	/**
+	 * Creates the ArrayList of explorers.
+	 * 
+	 * @param explorerAmount The amount of explorers.
+	 * @return
+	 */
 	public static ArrayList<Explorer> creation(int explorerAmount){
 
 		String line = null;

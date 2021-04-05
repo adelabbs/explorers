@@ -3,8 +3,22 @@ package environmentcreation;
 import data.entity.Obstacle;
 import environmentcreation.event.EntityCreationException;
 
+/**
+ * Factory used for the obstacles creation.
+ * 
+ * @author Léo
+ *
+ */
 public class ObstacleFactory {
 
+	/**
+	 * Create the obstacle depending on the parameters.
+	 * 
+	 * @param type The type of the obstacle.
+	 * @param pos The position of the obstacle.
+	 * @return The obstacle.
+	 * @throws EntityCreationException
+	 */
 	public static Obstacle create(String type, double[] pos) throws EntityCreationException {
 
 		switch (type) {

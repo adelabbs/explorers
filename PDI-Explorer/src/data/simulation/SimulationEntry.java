@@ -17,7 +17,7 @@ public class SimulationEntry {
 	public static final int MAX_CHEST_AMOUNT = 15;
 
 	private int explorerAmount = 5;
-	private int animalAmount = 0;
+	private int animalAmount = 3;
 	private int chestAmount = 0;
 	private int explorationStrategy = 0;
 	// HashMap of Item, the key is the Item TYPE

@@ -13,6 +13,14 @@ public class SubMap {
 	private int left;
 	private char[][] zones = new char[3][3];
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param top The top layer's code.
+	 * @param right The right layer's code.
+	 * @param bottom The bottom layer's code.
+	 * @param left The left layer's code.
+	 */
 	public SubMap(int top, int right, int bottom, int left) {
 		this.top = top;
 		this.right = right;
