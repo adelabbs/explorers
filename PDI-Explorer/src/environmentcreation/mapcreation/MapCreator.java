@@ -29,6 +29,11 @@ import data.map.Tile;
 
 public class MapCreator {
 
+	/**
+	 * Calls all the function to create a map.
+	 * 
+	 * @return The created map.
+	 */
 	public static Map creation() {
 
 		SubMap[][] subMaps = new SubMap[6][6];

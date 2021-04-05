@@ -3,7 +3,11 @@ package gui;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
-
+/**
+ * 
+ * @author lespi
+ *
+ */
 public class MapFX extends Canvas {
 
 	protected static double TILE_SIZE = 10;
@@ -11,6 +15,12 @@ public class MapFX extends Canvas {
 	protected static double height;
 	private MapPainterFX mp;
 	
+	/**
+	 * 
+	 * @param arg1
+	 * @param arg2
+	 */
+	@SuppressWarnings("static-access")
 	public MapFX(double arg1, double arg2) {
 		super(arg1, arg2);
 		this.width = arg1;
@@ -27,10 +37,18 @@ public class MapFX extends Canvas {
 		printGeneralExploerMap(this.getGraphicsContext2D());
 	}
 	
+	/**
+	 * 
+	 * @param gc
+	 */
 	private void printMap(GraphicsContext gc) {
 		mp.paint();
 	}
 	
+	/**
+	 * 
+	 * @param gc
+	 */
 	private void printGeneralExploerMap(GraphicsContext gc) {
 		mp.generalMapPainter();
 	}

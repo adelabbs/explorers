@@ -3,11 +3,17 @@ package environmentcreation.mapcreation;
 
 /**
  * Generates all the submaps after creating the border ones. It will fill depeding on the other submaps created.
+ * 
  * @author Léo
  *
  */
 public class SubMapsFiller {
 
+	/**
+	 * Fills the map after having created the borders.
+	 * 
+	 * @param subMaps The SubMap table to fill.
+	 */
 	public static void fill(SubMap[][] subMaps) {
 		for(int i = 2; i < 4; i ++)
 			for(int j = 2; j < 4; j ++)
@@ -20,6 +26,11 @@ public class SubMapsFiller {
 		end(subMaps);
 	}
 	
+	/**
+	 * Creates the last four SubMaps.
+	 * 
+	 * @param subMaps The SubMap table to fill.
+	 */
 	private static void end(SubMap[][] subMaps) {
 		last(subMaps, 1, 3);
 		last(subMaps, 3, 4);
@@ -27,6 +38,13 @@ public class SubMapsFiller {
 		last(subMaps, 3, 1);
 	}
 	
+	/**
+	 * Creates a SubMap depending on the four surrounding.
+	 * 
+	 * @param subMaps The SubMap table to fill.
+	 * @param i The line coordinates.
+	 * @param j The columns coordinates.
+	 */
 	private static void last(SubMap[][] subMaps, int i, int j) {
 		int top = subMaps[i-1][j].getBottom();
 		int right = subMaps[i][j+1].getLeft();
@@ -35,6 +53,11 @@ public class SubMapsFiller {
 		subMaps[i][j] = new SubMap(top, right, bottom, left);
 	}
 	
+	/**
+	 * Generates a SubMap at coordinates (1,1).
+	 * 
+	 * @param subMaps The SubMap table to fill.
+	 */
 	private static void topLeft(SubMap[][] subMaps) {
 		int top = subMaps[0][1].getBottom();
 		int left = subMaps[1][0].getRight();
@@ -43,6 +66,11 @@ public class SubMapsFiller {
 		subMaps[1][1] = new SubMap(top, right, bottom, left);
 	}
 	
+	/**
+	 * Generates a SubMap at coordinates (1,4).
+	 * 
+	 * @param subMaps The SubMap table to fill.
+	 */
 	private static void topRight(SubMap[][] subMaps) {
 		int top = subMaps[0][4].getBottom();
 		int right = subMaps[1][5].getLeft();
@@ -53,6 +81,11 @@ public class SubMapsFiller {
 		subMaps[1][4] = new SubMap(top, right, bottom, left);
 	}
 	
+	/**
+	 * Generates a SubMap at coordinates (4,4).
+	 * 
+	 * @param subMaps The SubMap table to fill.
+	 */
 	private static void bottomRight(SubMap[][] subMaps) {
 		int right = subMaps[4][5].getLeft();
 		int bottom = subMaps[5][4].getTop();
@@ -65,6 +98,11 @@ public class SubMapsFiller {
 		subMaps[4][4] = new SubMap(top, right, bottom, left);
 	}
 	
+	/**
+	 * Generates a SubMap at coordinates (4,1).
+	 * 
+	 * @param subMaps The SubMap table to fill.
+	 */
 	private static void bottomLeft(SubMap[][] subMaps) {
 		int bottom = subMaps[5][1].getTop();
 		int left = subMaps[4][0].getRight();
@@ -75,6 +113,11 @@ public class SubMapsFiller {
 		subMaps[4][1] = new SubMap(top, right, bottom, left);
 	}
 	
+	/**
+	 * Generates the last SubMaps which are not made and not fully depending on the ones around. 
+	 * 
+	 * @param subMaps The SubMap table to fill.
+	 */
 	private static void lastNonPremadeSubMaps(SubMap[][] subMaps) {
 		int top, right, bottom, left;
 		

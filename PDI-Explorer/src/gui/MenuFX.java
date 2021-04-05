@@ -1,26 +1,21 @@
 package gui;
 
 import java.io.FileInputStream;
-
-
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import data.simulation.SimulationEntry;
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.geometry.VPos;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Separator;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Tab;
@@ -28,14 +23,12 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -43,21 +36,22 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import javafx.util.Duration; 
-import process.Simulation;
-import process.SimulationUtility;
 import process.factory.ManagerFactory;
 
+/**
+ * 
+ * @author lespi
+ *
+ */
+
 public class MenuFX extends Application {
-	private int enveloppe = 180;
 	
-	private final Text text = new Text("Global envelope :");
+	private int enveloppe = 180;
 	private Text text2 = new Text(String.valueOf(enveloppe));
-	private final Text text3 = new Text("Number of explorers :");
 	
 	private Button startButton = new Button("START");
 	private VBox enveloppeBox = new VBox();
-    private Separator separator = new Separator(Orientation.VERTICAL);
+	private VBox leftBox = new VBox();
     private TabPane tabPane = new TabPane();
     
     private ToggleButton healthButton1 = new ToggleButton("Nothing");
@@ -76,11 +70,12 @@ public class MenuFX extends Application {
     private ToggleButton comButton2 = new ToggleButton("Antenna");
     private ToggleButton comButton3 = new ToggleButton("Radio");
     
-    private ImageView healthView;
-    private ImageView speedView;
-    private ImageView scopeView;
-    private ImageView damageView;
-    private ImageView comView;
+    private ImageView healthView = new ImageView();
+    private ImageView speedView = new ImageView();
+    private ImageView scopeView = new ImageView();
+    private ImageView damageView = new ImageView();
+    private ImageView comView = new ImageView();
+    private ArrayList<ImageView> views = new ArrayList<ImageView>();
 
     private ToggleGroup comGroup = new ToggleGroup();
     private ToggleGroup scopeGroup = new ToggleGroup();
@@ -88,29 +83,52 @@ public class MenuFX extends Application {
     private ToggleGroup speedGroup = new ToggleGroup();
     private ToggleGroup healthGroup = new ToggleGroup();
     
-    private final Text effectLabel1 = new Text("Effect : ");
-    private final Text effectLabel2 = new Text("Effect : ");
-    private final Text effectLabel3 = new Text("Effect : ");
-    private final Text effectLabel4 = new Text("Effect : ");
-    private final Text effectLabel5 = new Text("Effect : ");
+    @SuppressWarnings("rawtypes")
+	ChoiceBox stratChoice = new ChoiceBox();
     
     private Text healthEffect = new Text("None");
     private Text speedEffect = new Text("None");
     private Text damageEffect = new Text("None");
     private Text scopeEffect = new Text("None");
     private Text comEffect = new Text("None");
+    private ArrayList<Text> effects = new ArrayList<Text>();
     
-    private VBox healthBox = new VBox(healthButton1, healthButton2, healthButton3, effectLabel1, healthEffect);
-    private VBox speedBox = new VBox(speedButton1, speedButton2, speedButton3, effectLabel2, speedEffect);
-    private VBox damageBox = new VBox(damageButton1, damageButton2, damageButton3, effectLabel3, damageEffect);
-    private VBox scopeBox = new VBox(scopeButton1, scopeButton2, scopeButton3, effectLabel4, scopeEffect);
-    private VBox comBox = new VBox(comButton1, comButton2, comButton3, effectLabel5, comEffect);
+    private VBox buttonBox1 = new VBox(healthButton1, healthButton2, healthButton3);
+    private VBox buttonBox2 = new VBox(speedButton1, speedButton2, speedButton3);
+    private VBox buttonBox3 = new VBox(damageButton1, damageButton2, damageButton3);
+    private VBox buttonBox4 = new VBox(scopeButton1, scopeButton2, scopeButton3);
+    private VBox buttonBox5 = new VBox(comButton1, comButton2, comButton3);
+    
+    private VBox effectBox1 = new VBox(healthEffect, healthView);
+    private VBox effectBox2 = new VBox(speedEffect, speedView);
+    private VBox effectBox3 = new VBox(damageEffect, damageView);
+    private VBox effectBox4 = new VBox(scopeEffect, scopeView);
+    private VBox effectBox5 = new VBox(comEffect, comView);
+    
+    private VBox healthBox = new VBox(buttonBox1 , effectBox1);
+    private VBox speedBox = new VBox(buttonBox2 , effectBox2);
+    private VBox damageBox = new VBox(buttonBox3 , effectBox3);
+    private VBox scopeBox = new VBox(buttonBox4 , effectBox4);
+    private VBox comBox = new VBox(buttonBox5 , effectBox5);
     
     private Tab health = new Tab("Health", healthBox);
     private Tab speed = new Tab("Speed", speedBox);
     private Tab damage = new Tab("Damage", damageBox);
     private Tab scope = new Tab("Scope", scopeBox);
     private Tab com = new Tab("Communication Range", comBox);
+    
+    private Image image;
+    private Image image1;
+    private Image image2;
+    private Image image3;
+    private Image image4;
+    private Image image5;
+    private Image image6;
+    private Image image7;
+    private Image image8;
+    private Image image9;
+    private Image image10;
+    private Image image11;
 	
 	private int healthTemp = 0;
 	private int speedTemp = 0;
@@ -121,204 +139,242 @@ public class MenuFX extends Application {
 	private final Spinner<Integer> nbExplorers = new Spinner<Integer>();   
     private final int initialNb = 3;
     private SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(3, 6, initialNb);
-    
-    private SimulationEntry simulationEntry;
-	private static Simulation simulation;
-    private static MapFX map;
-    private static EntitiesFX entities;
-    private ExplorersInfosFX infos;
-    
-    //private static final int EXPLORER_AMOUNT = 3;
-	private static final int ANIMAL_AMOUNT = 3;
-	private static final int CHEST_AMOUNT = 3;
-	private static final int EXPLORATION_STRATEGY = ManagerFactory.ALL_ROUNDER_STRATEGY;
+    private VBox leftButtons = new VBox(nbExplorers, stratChoice, startButton);
+
+	private static int EXPLORATION_STRATEGY = ManagerFactory.ALL_ROUNDER_STRATEGY;
 	
-	private HashMap<String, String> items = new HashMap<String, String>();
-	
+	private HashMap<String, String> items = new HashMap<String, String>();	
+	private Rectangle2D primaryScreenBounds;
 
     @Override
-    public void start(Stage primaryStage) throws FileNotFoundException {
+    public void start(Stage primaryStage)  {
+    	try {
+			init(primaryStage);
+			handlers(primaryStage);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    /**
+     * 
+     * @param primaryStage
+     * @throws FileNotFoundException
+     */
+    @SuppressWarnings("unchecked")
+	private void init(Stage primaryStage) throws FileNotFoundException {
+        primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     	
-        primaryStage.setTitle("Autonomous and communicant explorers");
-        
-       // primaryStage.initStyle(StageStyle.UNIFIED);
+        primaryStage.setTitle("Autonomous and communicant explorers");        
         primaryStage.initStyle(StageStyle.UNDECORATED);
-        //primaryStage.setMaximized(true);  //plein écran avec bordures
         primaryStage.setFullScreen(true);
         primaryStage.setResizable(false);
         
-
-        
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        
-      
-        text.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
-        text.setFill(Color.GOLD);
-        text.setStroke(Color.BROWN);
-        text.setTextOrigin(VPos.TOP);
-        
         text2.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 10));
-        text2.setFill(Color.GOLD);
-        text2.setStroke(Color.DARKGOLDENROD);
+        text2.setFill(new Color(0.90, 0.68, 0.06, 1.0));
+        text2.setStroke(new Color(0.68, 0.48, 0.16, 1.0));
         text2.setTextOrigin(VPos.CENTER);
         
-        text3.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
-        text3.setFill(Color.BROWN);
-        text3.setStroke(Color.BURLYWOOD);
-        text3.setTextOrigin(VPos.CENTER);
+        effects.add(healthEffect);
+        effects.add(speedEffect);
+        effects.add(damageEffect);
+        effects.add(scopeEffect);
+        effects.add(comEffect);
         
-        effectLabel1.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
-        effectLabel1.setFill(Color.BROWN);
-        effectLabel1.setStroke(Color.BURLYWOOD);
-        effectLabel1.setTextOrigin(VPos.CENTER);
-        healthEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
-        healthEffect.setFill(Color.MOCCASIN);
-        healthEffect.setTextOrigin(VPos.CENTER);
-        
-        effectLabel2.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
-        effectLabel2.setFill(Color.BROWN);
-        effectLabel2.setStroke(Color.BURLYWOOD);
-        effectLabel2.setTextOrigin(VPos.CENTER);
-        speedEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
-        speedEffect.setFill(Color.MOCCASIN);
-        speedEffect.setTextOrigin(VPos.CENTER);
-        
-        effectLabel3.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
-        effectLabel3.setFill(Color.BROWN);
-        effectLabel3.setStroke(Color.BURLYWOOD);
-        effectLabel3.setTextOrigin(VPos.CENTER);
-        damageEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
-        damageEffect.setFill(Color.MOCCASIN);
-        damageEffect.setTextOrigin(VPos.CENTER);
-        
-        effectLabel4.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
-        effectLabel4.setFill(Color.BROWN);
-        effectLabel4.setStroke(Color.BURLYWOOD);
-        effectLabel4.setTextOrigin(VPos.CENTER);
-        scopeEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
-        scopeEffect.setFill(Color.MOCCASIN);
-        scopeEffect.setTextOrigin(VPos.CENTER);
-        
-        effectLabel5.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 15));
-        effectLabel5.setFill(Color.BROWN);
-        effectLabel5.setStroke(Color.BURLYWOOD);
-        effectLabel5.setTextOrigin(VPos.CENTER);
-        comEffect.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
-        comEffect.setFill(Color.MOCCASIN);
-        comEffect.setTextOrigin(VPos.CENTER);
-        
+        for (Text t2 : effects) {
+        	t2.setFont(Font.font("Arial", FontWeight.BOLD, primaryScreenBounds.getHeight() / 25));
+            t2.setFill(new Color(0.68, 0.48, 0.26, 1.0));
+            t2.setTextOrigin(VPos.CENTER);
+        }
         
         FileInputStream input = new FileInputStream("ressources/img/Essai_explorateur.gif");
-        Image image = new Image(input);
+        image = new Image(input);
         ImageView explorerGIF = new ImageView(image);
         explorerGIF.setFitHeight(primaryScreenBounds.getHeight() / 5);
         explorerGIF.setPreserveRatio(true);
         
         FileInputStream input1 = new FileInputStream("ressources/img/aucun_objet.png");
-        Image image1 = new Image(input1);
+        image1 = new Image(input1);
         
-        healthView = new ImageView(image1);
-        healthView.setFitHeight(primaryScreenBounds.getHeight() / 5);
-        healthView.setPreserveRatio(true);
-        healthBox.getChildren().add(healthView);
-
-        speedView = new ImageView(image1);
-        speedView.setFitHeight(primaryScreenBounds.getHeight() / 5);
-        speedView.setPreserveRatio(true);
-        speedBox.getChildren().add(speedView);
+        views.add(healthView);
+        views.add(speedView);
+        views.add(damageView);
+        views.add(scopeView);
+        views.add(comView);
         
-        damageView = new ImageView(image1);
-        damageView.setFitHeight(primaryScreenBounds.getHeight() / 5);
-        damageView.setPreserveRatio(true);
-        damageBox.getChildren().add(damageView);
-
-        scopeView = new ImageView(image1);
-        scopeView.setFitHeight(primaryScreenBounds.getHeight() / 5);
-        scopeView.setPreserveRatio(true);
-        scopeBox.getChildren().add(scopeView);
-
-        comView = new ImageView(image1);
-        comView.setFitHeight(primaryScreenBounds.getHeight() / 5);
-        comView.setPreserveRatio(true);
-        comBox.getChildren().add(comView);
+        for (ImageView v : views) {
+        	v.setImage(image1);
+            v.setFitHeight(primaryScreenBounds.getHeight() / 5);
+            v.setPreserveRatio(true);
+        }
         
         FileInputStream input2 = new FileInputStream("ressources/img/objects/helmet.png");
-		Image image2 = new Image(input2);
+		image2 = new Image(input2);
 		FileInputStream input3 = new FileInputStream("ressources/img/objects/chestplate.png");
-		Image image3 = new Image(input3);
+		image3 = new Image(input3);
 		
 		FileInputStream input4 = new FileInputStream("ressources/img/objects/boots.png");
-		Image image4 = new Image(input4);
+		image4 = new Image(input4);
 		FileInputStream input5 = new FileInputStream("ressources/img/objects/trecking_shoes.png");
-		Image image5 = new Image(input5);
+		image5 = new Image(input5);
 		
 		FileInputStream input6 = new FileInputStream("ressources/img/objects/knife.png");
-		Image image6 = new Image(input6);
+		image6 = new Image(input6);
 		FileInputStream input7 = new FileInputStream("ressources/img/objects/machete.png");
-		Image image7 = new Image(input7);
+		image7 = new Image(input7);
 		
 		FileInputStream input8 = new FileInputStream("ressources/img/objects/glasses.png");
-		Image image8 = new Image(input8);
+		image8 = new Image(input8);
 		FileInputStream input9 = new FileInputStream("ressources/img/objects/binoculars.png");
-		Image image9 = new Image(input9);
+		image9 = new Image(input9);
 		
 		FileInputStream input10 = new FileInputStream("ressources/img/objects/antenna.png");
-		Image image10 = new Image(input10);
+		image10 = new Image(input10);
 		FileInputStream input11 = new FileInputStream("ressources/img/objects/radio.png");
-		Image image11 = new Image(input11);
+		image11 = new Image(input11);
   
         nbExplorers.setValueFactory(valueFactory);
         
-        enveloppeBox.getChildren().add(text);
-        enveloppeBox.getChildren().add(text2);
-        enveloppeBox.getChildren().add(text3);
-        enveloppeBox.getChildren().add(explorerGIF);
-        enveloppeBox.getChildren().add(nbExplorers);
-        enveloppeBox.getChildren().add(startButton);
-        enveloppeBox.setAlignment(Pos.BASELINE_CENTER);
-        enveloppeBox.setSpacing(40);
+        enveloppeBox.setAlignment(Pos.TOP_CENTER);
+        enveloppeBox.setSpacing(primaryScreenBounds.getHeight() / 8);
+        enveloppeBox.getChildren().addAll(text2, explorerGIF);
         
-
+        stratChoice.getItems().add("Strategy 1");
+        stratChoice.getItems().add("Strategy 2");
+        stratChoice.getItems().add("Strategy 3");
+        stratChoice.getItems().add("Strategy 4");
+        stratChoice.getItems().add("Strategy 5");
+        stratChoice.getItems().add("Strategy 6");
+        stratChoice.getItems().add("Strategy 7");
+        
+        leftButtons.setAlignment(Pos.TOP_CENTER);
+        leftButtons.setSpacing(primaryScreenBounds.getHeight() / 20);
+        
+        leftBox.getChildren().addAll(enveloppeBox, leftButtons);
+        leftBox.setAlignment(Pos.TOP_CENTER);
+        leftBox.setSpacing(primaryScreenBounds.getHeight() / 20);
+        leftBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, 0, 0, 0));
+        
         healthButton1.setToggleGroup(healthGroup);
         healthButton2.setToggleGroup(healthGroup);
-        healthButton3.setToggleGroup(healthGroup);
-              
-        healthBox.setAlignment(Pos.BASELINE_CENTER);
+        healthButton3.setToggleGroup(healthGroup);            
+        healthBox.setAlignment(Pos.TOP_CENTER);
         
-
         speedButton1.setToggleGroup(speedGroup);
         speedButton2.setToggleGroup(speedGroup);
-        speedButton3.setToggleGroup(speedGroup);
-        
-        speedBox.setAlignment(Pos.BASELINE_CENTER);
-
+        speedButton3.setToggleGroup(speedGroup);      
+        speedBox.setAlignment(Pos.TOP_CENTER);
 
         damageButton1.setToggleGroup(damageGroup);
         damageButton2.setToggleGroup(damageGroup);
-        damageButton3.setToggleGroup(damageGroup);
+        damageButton3.setToggleGroup(damageGroup);      
+        damageBox.setAlignment(Pos.TOP_CENTER);
         
-        damageBox.setAlignment(Pos.BASELINE_CENTER);
-        
-
         scopeButton1.setToggleGroup(scopeGroup);
         scopeButton2.setToggleGroup(scopeGroup);
-        scopeButton3.setToggleGroup(scopeGroup);
-        
-        scopeBox.setAlignment(Pos.BASELINE_CENTER);
-
+        scopeButton3.setToggleGroup(scopeGroup);       
+        scopeBox.setAlignment(Pos.TOP_CENTER);
 
         comButton1.setToggleGroup(comGroup);
         comButton2.setToggleGroup(comGroup);
-        comButton3.setToggleGroup(comGroup);
-        
-        comBox.setAlignment(Pos.BASELINE_CENTER);
+        comButton3.setToggleGroup(comGroup);      
+        comBox.setAlignment(Pos.TOP_CENTER);
         
         healthButton1.setSelected(true);
         speedButton1.setSelected(true);
         damageButton1.setSelected(true);
         scopeButton1.setSelected(true);
         comButton1.setSelected(true);
+        stratChoice.setValue("Strategy 1");
         
+        buttonBox1.setAlignment(Pos.TOP_CENTER);
+        buttonBox1.setSpacing(primaryScreenBounds.getHeight() / 15);
+        effectBox1.setAlignment(Pos.BASELINE_CENTER);
+        effectBox1.setSpacing(primaryScreenBounds.getHeight() / 12);
+        
+        buttonBox2.setAlignment(Pos.TOP_CENTER);
+        buttonBox2.setSpacing(primaryScreenBounds.getHeight() / 15);
+        effectBox2.setAlignment(Pos.BASELINE_CENTER);
+        effectBox2.setSpacing(primaryScreenBounds.getHeight() / 12);
+        
+        buttonBox3.setAlignment(Pos.TOP_CENTER);
+        buttonBox3.setSpacing(primaryScreenBounds.getHeight() / 15);
+        effectBox3.setAlignment(Pos.BASELINE_CENTER);
+        effectBox3.setSpacing(primaryScreenBounds.getHeight() / 12);
+        
+        buttonBox4.setAlignment(Pos.TOP_CENTER);
+        buttonBox4.setSpacing(primaryScreenBounds.getHeight() / 15);
+        effectBox4.setAlignment(Pos.BASELINE_CENTER);
+        effectBox4.setSpacing(primaryScreenBounds.getHeight() / 12);
+        
+        buttonBox5.setAlignment(Pos.TOP_CENTER);
+        buttonBox5.setSpacing(primaryScreenBounds.getHeight() / 15);
+        effectBox5.setAlignment(Pos.BASELINE_CENTER);
+        effectBox5.setSpacing(primaryScreenBounds.getHeight() / 12);
+
+        healthBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        healthBox.setSpacing(primaryScreenBounds.getHeight() / 6.3);
+        speedBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        speedBox.setSpacing(primaryScreenBounds.getHeight() / 6.3);
+        damageBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        damageBox.setSpacing(primaryScreenBounds.getHeight() / 6.3);
+        scopeBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        scopeBox.setSpacing(primaryScreenBounds.getHeight() / 6.3);
+        comBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
+        comBox.setSpacing(primaryScreenBounds.getHeight() / 6.3);
+
+        tabPane.getTabs().add(health);
+        tabPane.getTabs().add(speed);
+        tabPane.getTabs().add(damage);
+        tabPane.getTabs().add(scope);
+        tabPane.getTabs().add(com);
+        
+        HBox hBox = new HBox(leftBox, tabPane);
+        hBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, primaryScreenBounds.getWidth() / 15, primaryScreenBounds.getHeight() / 15, primaryScreenBounds.getWidth() / 4.7));
+        hBox.setSpacing(primaryScreenBounds.getWidth() / 2.83);      
+        
+        FileInputStream inputM = new FileInputStream("ressources/img/menu.png");
+        Image imageM = new Image(inputM);
+        ImageView background = new ImageView(imageM);
+        background.setFitWidth(primaryScreenBounds.getWidth());
+        background.setPreserveRatio(true);
+        
+        StackPane stack = new StackPane();
+        stack.getChildren().addAll(background, hBox);
+        
+        Scene scene = new Scene(stack, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
+
+        scene.setCursor(Cursor.OPEN_HAND); //Pourra être remplacé par un curseur personnalisé
+
+        primaryStage.setScene(scene);
+        primaryStage.sizeToScene();
+        
+        primaryStage.show();
+        primaryStage.toFront();
+ 
+       	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        	@Override
+        	public void handle(WindowEvent e) {
+        		System.exit(0);
+        	}
+        });
+    }
+    
+    /**
+     * 
+     * @param primaryStage
+     */
+    
+    @SuppressWarnings({ "unchecked", "unused" })
+	public void handlers(Stage primaryStage) {
+    	stratChoice.setOnAction((event) -> {
+    	    int selectedIndex = stratChoice.getSelectionModel().getSelectedIndex();
+    	    Object selectedItem = stratChoice.getSelectionModel().getSelectedItem();
+
+    	   // System.out.println("Selection made: [" + selectedIndex + "] " + selectedItem);
+    	    System.out.println("   ChoiceBox.getValue(): " + String.valueOf(stratChoice.getValue()));
+    	});
+    	
         healthGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle,Toggle new_toggle) {
             	if (healthButton1.isSelected() == false) {
@@ -361,7 +417,7 @@ public class MenuFX extends Application {
             	}
             	text2.setText(String.valueOf(enveloppe));
             }
-        });
+        }); 
         speedGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle,Toggle new_toggle) {
             	if (speedButton1.isSelected() == false) {
@@ -494,6 +550,7 @@ public class MenuFX extends Application {
         comGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle,Toggle new_toggle) {
             	if (comButton1.isSelected() == false) {
+            		comBox.setSpacing(primaryScreenBounds.getHeight() / 10);
             		if (comButton2.isSelected() == true) {
             			items.put("com", "Antenna");
             			if (comTemp == 0) {
@@ -520,6 +577,7 @@ public class MenuFX extends Application {
             		}
         		}
             	else if (comButton1.isSelected() == true) {
+            		comBox.setSpacing(primaryScreenBounds.getHeight() / 6.3);
             		items.remove("com");
             		if (comTemp == 1) {
         				enveloppe += 5*nbExplorers.getValue();
@@ -533,9 +591,9 @@ public class MenuFX extends Application {
             	}
             	text2.setText(String.valueOf(enveloppe));
             }
-        });
+        }); 
         
-        nbExplorers.valueProperty().addListener(new ChangeListener<Integer>() {    	 
+       nbExplorers.valueProperty().addListener(new ChangeListener<Integer>() {    	 
             @Override
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
             	if (oldValue < newValue) {
@@ -601,126 +659,23 @@ public class MenuFX extends Application {
             		else if (comTemp == 2) {
             			enveloppe += 10;
             		}
-            	}
+            	} 
             	healthButton1.setSelected(true);
         		speedButton1.setSelected(true);
         		damageButton1.setSelected(true);
         		scopeButton1.setSelected(true);
         		comButton1.setSelected(true);
             }
-        });
-        
-        AnimationTimer timer = new AnimationTimer() {
- 			@Override
- 			public void handle(long arg0) {
- 				SimulationUtility.unitTime();
- 				entities.clearShapes();
- 				simulation.update();
- 				try {
-					infos.displayInfos(primaryScreenBounds.getHeight());
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
- 				entities.drawShapes();
- 				map.drawExplorersGeneralMap();
- 			}  	   
-        };
-        
-
-        startButton.setOnAction(actionEvent ->  {
-              if (enveloppe >= 0) {
-                  simulationEntry = new SimulationEntry(valueFactory.getValue(), ANIMAL_AMOUNT, CHEST_AMOUNT, EXPLORATION_STRATEGY);
-                  if (items.containsKey("health"))
-                	  simulationEntry.add(items.get("health"));
-                  if (items.containsKey("speed"))
-                	  simulationEntry.add(items.get("speed"));
-                  if (items.containsKey("damage"))
-                	  simulationEntry.add(items.get("damage"));
-                  if (items.containsKey("scope"))
-                	  simulationEntry.add(items.get("scope"));
-                  if (items.containsKey("com"))
-                	  simulationEntry.add(items.get("com"));
-                  simulation = new Simulation(simulationEntry);
-                  map = new MapFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-                  entities = new EntitiesFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-                  
-            	  Group root = new Group();
-            	  HUDFX hud;
-            	  try {
-            		  hud = new HUDFX(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-            		  HBox simuBox = new HBox(map);
-            		  simuBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 25, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
-            		  
-            		  HBox simuBox2 = new HBox(entities);
-            		  simuBox2.setPadding(new Insets(primaryScreenBounds.getHeight() / 25, primaryScreenBounds.getHeight() / 30 , 0, primaryScreenBounds.getHeight() / 25));
-            		  
-            		  infos = new ExplorersInfosFX(primaryScreenBounds.getHeight());
-            		  infos.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, primaryScreenBounds.getWidth() / 25 , 0, primaryScreenBounds.getWidth() / 1.75));
-            		  
-            		  ObjectsInfosFX chosenItems = new ObjectsInfosFX(primaryScreenBounds.getHeight(), healthView, speedView, damageView, scopeView, comView);
-            		  chosenItems.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, primaryScreenBounds.getWidth() / 25 , 0, primaryScreenBounds.getWidth() / 1.14));
-            		  
-            		  StackPane pane = new StackPane(simuBox,simuBox2, hud, infos, chosenItems);
-            		  root.getChildren().add(pane); 
-            		  primaryStage.setScene(new Scene(root, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight()));
-            	  
-            		  simulation.launch();
-            		  map.drawShapes();
-            		  timer.start();
-					} catch (FileNotFoundException e1) {
-						e1.printStackTrace();
-					}
-              }
-              else {        	  
-            	  Tooltip tooltip = new Tooltip("The maximum amount of money is exceeded.");
-            	  startButton.setTooltip(tooltip);
-            	  tooltip.setShowDelay(Duration.millis(100));
-              }
-        });
-        
-        healthBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
-        healthBox.setSpacing(primaryScreenBounds.getHeight() / 15);
-        speedBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
-        speedBox.setSpacing(primaryScreenBounds.getHeight() / 15);
-        damageBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
-        damageBox.setSpacing(primaryScreenBounds.getHeight() / 15);
-        scopeBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
-        scopeBox.setSpacing(primaryScreenBounds.getHeight() / 15);
-        comBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, 0, 0, 0));
-        comBox.setSpacing(primaryScreenBounds.getHeight() / 15);
-
-        tabPane.getTabs().add(health);
-        tabPane.getTabs().add(speed);
-        tabPane.getTabs().add(damage);
-        tabPane.getTabs().add(scope);
-        tabPane.getTabs().add(com);
-        
-        HBox hBox = new HBox(enveloppeBox, separator, tabPane);
-        hBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 15, primaryScreenBounds.getWidth() / 15, primaryScreenBounds.getHeight() / 15, primaryScreenBounds.getWidth() / 15));
-        hBox.setSpacing(primaryScreenBounds.getWidth() / 10);      
-        
-        StackPane stack = new StackPane();
-        stack.getChildren().addAll(new Rectangle(primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight(), Color.OLIVEDRAB), hBox);
-        
-        Scene scene = new Scene(stack, primaryScreenBounds.getWidth(), primaryScreenBounds.getHeight());
-
-        scene.setCursor(Cursor.OPEN_HAND); //Pourra être remplacé par un curseur personnalisé
-
-        primaryStage.setScene(scene);
-        primaryStage.sizeToScene();
-        
-        primaryStage.show();
-        primaryStage.toFront();
- 
-       	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-        	@Override
-        	public void handle(WindowEvent e) {
-        		System.exit(0);
-        	}
-        });
+        });  
+        @SuppressWarnings("unused")
+		SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views);
     }         
    
-     public static void main(String[] args) {
-    	 launch(args);
+    /**
+     * 
+     * @param args
+     */
+    public static void main(String[] args) {
+    	launch(args);
     } 
 }

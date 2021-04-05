@@ -34,30 +34,20 @@ public abstract class MoveAction implements Action {
 	public void execute() {
 		double currentPosY = getEntity().getPosition()[0];
 		double currentPosX = getEntity().getPosition()[1];
-		double nextPos[] = getEntity().getPosition();
-		switch (direction) {
-		case NORTH:
-			nextPos[0] -= 0.025 * getEntity().getSpeed();
-			break;
-		case EAST:
-			nextPos[1] += 0.025 * getEntity().getSpeed();
-			break;
-		case WEST:
-			nextPos[1] -= 0.025 * getEntity().getSpeed();
-			break;
-		case SOUTH:
-			nextPos[0] += 0.025 * getEntity().getSpeed();
-			break;
-		}
+		try {
+			double nextPos[] = getNextPosition(getEntity(), direction);
 
-		// If free :
-		if (isValid(nextPos) != false) {
-			// Set the position for the next tick
-			getEntity().setPosition(nextPos);
-		} else {
-			nextPos[0] = currentPosY;
-			nextPos[1] = currentPosX;
-			getEntity().setPosition(nextPos);
+			// If free :
+			if (isValid(nextPos) != false) {
+				// Set the position for the next tick
+				getEntity().setPosition(nextPos);
+			} else {
+				nextPos[0] = currentPosY;
+				nextPos[1] = currentPosX;
+				getEntity().setPosition(nextPos);
+			}
+		} catch (IllegalArgumentException e) {
+			System.err.println(e.getMessage());
 		}
 	}
 
@@ -82,7 +72,6 @@ public abstract class MoveAction implements Action {
 				return false;
 			}
 		}
-
 		return true;
 	}
 
@@ -99,24 +88,34 @@ public abstract class MoveAction implements Action {
 	}
 
 	public double[] getNextPosition(LivingEntity entity, int direction) throws IllegalArgumentException {
+		double currentPosY = entity.getPosition()[0];
+		double currentPosX = entity.getPosition()[1];
+		double multiplier;
 		double nextPos[] = entity.getPosition();
+
+		if (Environment.getInstance().getMap().getTile((int) currentPosY, (int) currentPosX).getType() == "w")
+			multiplier = 0.5;
+		else
+			multiplier = 1;
+
 		switch (direction) {
 		case NORTH:
-			nextPos[0] -= 0.025 * entity.getSpeed();
+			nextPos[0] -= 0.025 * getEntity().getSpeed() * multiplier;
 			break;
 		case EAST:
-			nextPos[1] += 0.025 * entity.getSpeed();
+			nextPos[1] += 0.025 * getEntity().getSpeed() * multiplier;
 			break;
 		case WEST:
-			nextPos[1] -= 0.025 * entity.getSpeed();
+			nextPos[1] -= 0.025 * getEntity().getSpeed() * multiplier;
 			break;
 		case SOUTH:
-			nextPos[0] += 0.025 * entity.getSpeed();
+			nextPos[0] += 0.025 * getEntity().getSpeed() * multiplier;
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown direction" + direction);
 		}
 		return nextPos;
+
 	}
 
 	public int getDirection() {

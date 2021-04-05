@@ -1,5 +1,6 @@
 package process.action;
 
+import data.entity.Entity;
 import data.entity.Explorer;
 import data.map.ExplorerMap;
 import data.message.MapMessage;
@@ -30,8 +31,7 @@ public class ExplorationAction implements Action {
 		int tempJ = 0;
 		while(!move) {
 			if(range < distMax) {
-				
-				int dir = (int) Math.random()*4;
+				int dir = (int) (Math.random()*4);
 				switch(dir) {
 				case 0: //starts top left
 					for(int i = x - range/2; i < x + range/2; i ++) {
@@ -58,7 +58,7 @@ public class ExplorationAction implements Action {
 					break;
 				case 1: //starts top right
 					for(int j = y - range/2; j < y + range/2; j ++) {
-						for(int i = x + range/2; i > x - range/2; i ++) {
+						for(int i = x + range/2; i > x - range/2; i --) {
 							if(!oob(i, j)) {
 								if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
 									int tempX = x - i;
@@ -80,8 +80,8 @@ public class ExplorationAction implements Action {
 					}
 					break;
 				case 2: //starts bottom right
-					for(int i = x + range/2; i > x - range/2; i ++) {
-						for(int j = y + range/2; j > y + range/2; j ++) {
+					for(int i = x + range/2; i > x - range/2; i --) {
+						for(int j = y + range/2; j > y + range/2; j --) {
 							if(!oob(i, j)) {
 								if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
 									int tempX = x - i;
@@ -103,7 +103,7 @@ public class ExplorationAction implements Action {
 					}
 					break;
 				case 3: //starts bottom left
-					for(int j = y + range/2; j > y - range/2; j ++) {
+					for(int j = y + range/2; j > y - range/2; j --) {
 						for(int i = x - range/2; i < x + range/2; i ++) {
 							if(!oob(i, j)) {
 								if(!explorerMap.getTile(i, j).isExplored() && isNotWaterBoarded(explorerMap, i, j)) {
@@ -149,25 +149,60 @@ public class ExplorationAction implements Action {
 	}
 
 	private void createMoveAction(int i, int j) {
-		int vx = i - (int) explorer.getPosition()[0];
-		int vy = j - (int) explorer.getPosition()[1];
+		int fPosX = (int) explorer.getPosition()[0];
+		int fPosY = (int) explorer.getPosition()[1];
+		int vx = i - fPosX;
+		int vy = j - fPosY;
 		if(Math.abs(vx) > Math.abs(vy)) {
-			if(vx < 0) {
-				ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.NORTH);
-				ema.execute();
+			if(vx < 0)
+				fPosX --;
+			else
+				fPosX ++;
+		} else {
+			if(vy < 0)
+				fPosY --;
+			else
+				fPosY ++;
+		}
+		if(Math.abs(vx) > Math.abs(vy)) {
+			if(thereIsAnObstacle(fPosX, fPosY)) {
+				if(vy < 0)
+					ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.WEST);
+				else
+					ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.EAST);
 			} else {
-				ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.SOUTH);
-				ema.execute();
+				if(vx < 0)
+					ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.NORTH);
+				else
+					ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.SOUTH);
 			}
 		} else {
-			if(vy < 0) {
-				ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.WEST);
-				ema.execute();
+			if(thereIsAnObstacle(fPosX, fPosY)) {
+				if(vx < 0)
+					ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.NORTH);
+				else
+					ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.SOUTH);
 			} else {
-				ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.EAST);
-				ema.execute();
+				if(vy < 0)
+					ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.WEST);
+				else
+					ema = new ExplorerMoveAction(explorer, Environment.getInstance(), MoveAction.EAST);
 			}
 		}
+		ema.execute();
+	}
+	
+	private boolean thereIsAnObstacle(int i, int j) {
+		int posX, posY, sizeX, sizeY;
+		for(Entity obstacle : Environment.getInstance().getObstacles()) {
+			posX = (int) obstacle.getPosition()[0];
+			posY = (int) obstacle.getPosition()[1];
+			sizeX = (int) obstacle.getSize()[0];
+			sizeY = (int) obstacle.getSize()[1];
+			if(i <= posX + sizeX + 0.5 && i >= posX - 0.5 && j <= posY + sizeY + 0.5 && j >= posY - 0.5)
+				return true;
+		}
+		return false;
 	}
 	
 	private boolean oob(int i, int j) {
@@ -200,7 +235,6 @@ public class ExplorationAction implements Action {
 			ema.execute();
 		}
 	}
-	
 	
 	@Override
 	public boolean isOver() {

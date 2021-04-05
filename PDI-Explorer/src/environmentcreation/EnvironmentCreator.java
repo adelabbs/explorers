@@ -6,16 +6,25 @@ import data.simulation.*;
 import environmentcreation.event.EntityCreationException;
 import environmentcreation.mapcreation.MapCreator;
 
+
 /**
+ * Class calling every functions to create the environment.
  * 
- * Class used to create the Environment instance, calls all the needed methods to create it.
- * 
+ * @author Léo
+ *
  */
-
 public class EnvironmentCreator {
-
-	public static void creation(int explorerAmount, int animalAmount, int chestAmountzer) throws EntityCreationException {
 	
+	/**
+	 * Calls every functions to create environment.
+	 * 
+	 * @param explorerAmount The amount of explorers.
+	 * @param animalAmount The amount of animals.
+	 * @param chestAmountzer The amount of chests.
+	 * @throws EntityCreationException
+	 */
+	public static void creation(int explorerAmount, int animalAmount, int chestAmountzer) throws EntityCreationException {
+
 		int chestAmount = (int) (Math.random() * 5) + 10;
 		
 		Environment.getInstance().setMap(MapCreator.creation());

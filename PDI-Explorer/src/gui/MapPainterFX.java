@@ -8,6 +8,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+/**
+ * 
+ * @author lespi
+ *
+ */
 public class MapPainterFX {
 
 	private static double IMG_TILE_SIZE = 25;
@@ -15,6 +20,10 @@ public class MapPainterFX {
 	private GraphicsContext g;
 	private Image tiles;
 	
+	/**
+	 * 
+	 * @param gc
+	 */
 	public MapPainterFX(GraphicsContext gc){
 		this.g = gc;
 		try {

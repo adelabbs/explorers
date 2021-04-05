@@ -15,12 +15,18 @@ import data.simulation.Environment;
 
 public class AnimalsCreator {
 
+	/**
+	 * Creation of the 
+	 * 
+	 * @param animalAmount The amount of animal wanted.
+	 * @return An ArrayList of Animal.
+	 */
 	public static ArrayList<LivingEntity> creation(int animalAmount){
 		
 		ArrayList<LivingEntity> animals = new ArrayList<>();
-		animals.add(new Bear(positioning()));
-		animals.add(new Bear(positioning()));
-		animals.add(new Bear(positioning()));
+		for(int i = 0; i < animalAmount; i ++) {
+			animals.add(new Bear(positioning()));
+		}
 		return animals;
 		
 	}

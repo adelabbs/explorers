@@ -15,8 +15,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * 
+ * @author lespi
+ *
+ */
 public class ExplorersInfosFX extends VBox {
 	private HBox expInfos;
 	private VBox expStats1;
@@ -28,6 +34,10 @@ public class ExplorersInfosFX extends VBox {
 	private Text health;
 	private Explorer e;
 	
+	/**
+	 * 
+	 * @param arg0
+	 */
 	public ExplorersInfosFX(double arg0) {
 		super();
         try {
@@ -37,6 +47,11 @@ public class ExplorersInfosFX extends VBox {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param arg0
+	 * @throws FileNotFoundException
+	 */
 	public void displayInfos(double arg0) throws FileNotFoundException {
 		this.getChildren().clear();
 		
@@ -47,9 +62,9 @@ public class ExplorersInfosFX extends VBox {
         chestIcon.setPreserveRatio(true);
         
 		Text chest = new Text("  " + Environment.getInstance().getFoundChest() + "/" + Environment.getInstance().getChestAmount());
-		chest.setFont(Font.font("Arial", arg0 / 28));
-		chest.setFill(Color.GOLD);
-		chest.setStroke(Color.GOLDENROD);
+		chest.setFont(Font.font("Arial", FontWeight.BOLD, arg0 / 28));
+		chest.setFill(new Color(0.68, 0.48, 0.26, 1.0));
+
 		chest.setTextOrigin(VPos.TOP);
 		
 		chestDisplay = new HBox();
@@ -64,38 +79,32 @@ public class ExplorersInfosFX extends VBox {
 				e = (Explorer) Environment.getInstance().getEntities().get(i);
 				Text name = new Text(e.getName());
 				name.setFont(Font.font("Arial", arg0 / 28));
-		        name.setFill(Color.SIENNA);
-		        name.setStroke(Color.SADDLEBROWN);
+		        name.setFill(Color.SADDLEBROWN);
 		        name.setTextOrigin(VPos.TOP);
 		        
 		        Text speed = new Text("Speed: " + e.getSpeed());
 				speed.setFont(Font.font("Arial", arg0 / 36));
-		        speed.setFill(Color.SIENNA);
-		        speed.setStroke(Color.GOLDENROD);
+		        speed.setFill(new Color(0.68, 0.48, 0.26, 1.0));
 		        speed.setTextOrigin(VPos.TOP);
 		        
 		        Text scope = new Text("Scope: " + e.getScope());
 				scope.setFont(Font.font("Arial", arg0 / 36));
-		        scope.setFill(Color.SIENNA);
-		        scope.setStroke(Color.GOLDENROD);
+		        scope.setFill(new Color(0.68, 0.48, 0.26, 1.0));
 		        scope.setTextOrigin(VPos.TOP);
 		        
 		        Text damage = new Text("Damage: " + e.getDamage());
 				damage.setFont(Font.font("Arial", arg0 / 36));
-		        damage.setFill(Color.SIENNA);
-		        damage.setStroke(Color.GOLDENROD);
+		        damage.setFill(new Color(0.68, 0.48, 0.26, 1.0));
 		        damage.setTextOrigin(VPos.TOP);
 		        
 		        comRange1 = new Text("Communication");
 		        comRange1.setFont(Font.font("Arial", arg0 / 36));
-		        comRange1.setFill(Color.SIENNA);
-		        comRange1.setStroke(Color.GOLDENROD);
+		        comRange1.setFill(new Color(0.68, 0.48, 0.26, 1.0));
 		        comRange1.setTextOrigin(VPos.TOP);
 		        
 		        comRange2 = new Text("range: " + e.getCommunicationRange());
 				comRange2.setFont(Font.font("Arial", arg0 / 36));
-		        comRange2.setFill(Color.SIENNA);
-		        comRange2.setStroke(Color.GOLDENROD);
+		        comRange2.setFill(new Color(0.68, 0.48, 0.26, 1.0));
 		        comRange2.setTextOrigin(VPos.TOP);
 		        		        
 		        ImageView movingExplorer = new ImageView(image);
@@ -104,8 +113,7 @@ public class ExplorersInfosFX extends VBox {
 		        
 		        health = new Text("Health: " + e.getHealth() + "/" + e.getMaxHealth());
 				health.setFont(Font.font("Arial", arg0 / 36));
-		        health.setFill(Color.SIENNA);
-		        health.setStroke(Color.GOLDENROD);
+		        health.setFill(new Color(0.68, 0.48, 0.26, 1.0));
 		        health.setTextOrigin(VPos.TOP);
 
 		        expStats1 = new VBox();

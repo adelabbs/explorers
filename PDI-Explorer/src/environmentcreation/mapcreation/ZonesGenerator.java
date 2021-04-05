@@ -1,7 +1,19 @@
 package environmentcreation.mapcreation;
 
+/**
+ * Generates the zones of a SubMap table
+ * 
+ * @author Léo
+ *
+ */
 public class ZonesGenerator {
 
+	/**
+	 * Generation of the zones.
+	 * 
+	 * @param subMaps The SubMap table to create the zones.
+	 * @return The char table of the zones.
+	 */
 	public static char[][] generation(SubMap[][] subMaps){
 		
 		for(int i = 0; i < 6; i ++)
@@ -11,6 +23,11 @@ public class ZonesGenerator {
 		
 	}
 	
+	/**
+	 * Generates a sub map zone
+	 *  
+	 * @param subMap The SubMap table to create the zones.
+	 */
 	private static void subMapZonesGeneration(SubMap subMap) {
 		
 		char[][] zone = new char[3][3];
@@ -78,6 +95,12 @@ public class ZonesGenerator {
 		subMap.setZones(zone);
 	}
 
+	/**
+	 * Assembles the zones together.
+	 * 
+	 * @param subMaps The SubMap table to create the zones.
+	 * @return A char table representing the zones.
+	 */
 	private static char[][] zonesAssembling(SubMap[][] subMaps){
 		
 		char[][] zones = new char[18][18];
