@@ -34,19 +34,24 @@ public abstract class MoveAction implements Action {
 	public void execute() {
 		double currentPosY = getEntity().getPosition()[0];
 		double currentPosX = getEntity().getPosition()[1];
+		double multiplier;
+		if(Environment.getInstance().getMap().getTile((int) currentPosY, (int) currentPosX).getType() == "w")
+			multiplier = 0.5;
+		else
+			multiplier = 1;
 		double nextPos[] = getEntity().getPosition();
 		switch (direction) {
 		case NORTH:
-			nextPos[0] -= 0.025*getEntity().getSpeed();
+			nextPos[0] -= 0.025*getEntity().getSpeed()*multiplier;
 			break;
 		case EAST:
-			nextPos[1] += 0.025*getEntity().getSpeed();
+			nextPos[1] += 0.025*getEntity().getSpeed()*multiplier;
 			break;
 		case WEST:
-			nextPos[1] -= 0.025*getEntity().getSpeed();
+			nextPos[1] -= 0.025*getEntity().getSpeed()*multiplier;
 			break;
 		case SOUTH:
-			nextPos[0] += 0.025*getEntity().getSpeed();
+			nextPos[0] += 0.025*getEntity().getSpeed()*multiplier;
 			break;
 		}
 
@@ -82,7 +87,6 @@ public abstract class MoveAction implements Action {
 				return false;
 			}
 		}
-
 		return true;
 	}
 
