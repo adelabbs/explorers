@@ -220,4 +220,12 @@ public class AllRounderStrategy extends ExplorationStrategy {
 			e.printStackTrace();
 		}
 	}
+
+	public ArrayList<LivingEntity> getInScopeEntities() {
+		return inScopeEntities;
+	}
+
+	public ArrayList<Entity> getInScopeObstacles() {
+		return inScopeObstacles;
+	}
 }

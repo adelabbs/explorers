@@ -37,16 +37,16 @@ public abstract class MoveAction implements Action {
 		double nextPos[] = getEntity().getPosition();
 		switch (direction) {
 		case NORTH:
-			nextPos[0] -= 0.025*getEntity().getSpeed();
+			nextPos[0] -= 0.025 * getEntity().getSpeed();
 			break;
 		case EAST:
-			nextPos[1] += 0.025*getEntity().getSpeed();
+			nextPos[1] += 0.025 * getEntity().getSpeed();
 			break;
 		case WEST:
-			nextPos[1] -= 0.025*getEntity().getSpeed();
+			nextPos[1] -= 0.025 * getEntity().getSpeed();
 			break;
 		case SOUTH:
-			nextPos[0] += 0.025*getEntity().getSpeed();
+			nextPos[0] += 0.025 * getEntity().getSpeed();
 			break;
 		}
 
@@ -72,7 +72,7 @@ public abstract class MoveAction implements Action {
 	 * @param nextPosition
 	 * @return true if the destination is free
 	 */
-	private boolean isValid(double[] nextPosition) {
+	public boolean isValid(double[] nextPosition) {
 		return checkForCollide(nextPosition) && checkRBorderMap(nextPosition) && checkLBorderMap(nextPosition);
 	}
 
@@ -94,8 +94,29 @@ public abstract class MoveAction implements Action {
 		return (position[0] <= MAP_BORDER_MAX) && (position[1] <= MAP_BORDER_MAX);
 	}
 
-	private int pickRandomDirection() {
+	public static int pickRandomDirection() {
 		return (int) (MIN + Math.random() * ((MAX - MIN) + 1));
+	}
+
+	public double[] getNextPosition(LivingEntity entity, int direction) throws IllegalArgumentException {
+		double nextPos[] = entity.getPosition();
+		switch (direction) {
+		case NORTH:
+			nextPos[0] -= 0.025 * entity.getSpeed();
+			break;
+		case EAST:
+			nextPos[1] += 0.025 * entity.getSpeed();
+			break;
+		case WEST:
+			nextPos[1] -= 0.025 * entity.getSpeed();
+			break;
+		case SOUTH:
+			nextPos[0] += 0.025 * entity.getSpeed();
+			break;
+		default:
+			throw new IllegalArgumentException("Unknown direction" + direction);
+		}
+		return nextPos;
 	}
 
 	public int getDirection() {
@@ -105,7 +126,7 @@ public abstract class MoveAction implements Action {
 	public void setDirection(int direction) {
 		this.direction = direction;
 	}
-	
+
 	public abstract LivingEntity getEntity();
 
 	public Environment getEnvironment() {

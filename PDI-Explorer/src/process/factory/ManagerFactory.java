@@ -7,10 +7,12 @@ import process.manager.BearManager;
 import process.manager.ExplorerManager;
 import process.strategy.AllRounderStrategy;
 import process.strategy.RandomStrategy;
+import process.strategy.RegionStrategy;
 
 public class ManagerFactory {
 	public static final int RANDOM_STRATEGY = 0;
 	public static final int ALL_ROUNDER_STRATEGY = 1;
+	public static final int REGION_STRATEGY = 2;
 
 	public static ExplorerManager createExplorerManager(Simulation simulation, Explorer explorer,
 			int explorationStrategy) throws IllegalArgumentException {
@@ -23,6 +25,10 @@ public class ManagerFactory {
 			ExplorerManager allRounderExplorerManager = new ExplorerManager(simulation, explorer);
 			allRounderExplorerManager.setStrategy(new AllRounderStrategy(allRounderExplorerManager));
 			return allRounderExplorerManager;
+		case REGION_STRATEGY:
+			ExplorerManager regionExplorerManager = new ExplorerManager(simulation, explorer);
+			regionExplorerManager.setStrategy(new RegionStrategy(regionExplorerManager));
+			return regionExplorerManager;
 		default:
 			throw new IllegalArgumentException("Unknown strategy: " + explorationStrategy);
 		}
