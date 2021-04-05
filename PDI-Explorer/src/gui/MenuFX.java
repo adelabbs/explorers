@@ -1,7 +1,6 @@
 package gui;
 
 import java.io.FileInputStream;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +38,14 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import process.factory.ManagerFactory;
 
+/**
+ * 
+ * @author lespi
+ *
+ */
+
 public class MenuFX extends Application {
+	
 	private int enveloppe = 180;
 	private Text text2 = new Text(String.valueOf(enveloppe));
 	
@@ -77,7 +83,8 @@ public class MenuFX extends Application {
     private ToggleGroup speedGroup = new ToggleGroup();
     private ToggleGroup healthGroup = new ToggleGroup();
     
-    ChoiceBox stratChoice = new ChoiceBox();
+    @SuppressWarnings("rawtypes")
+	ChoiceBox stratChoice = new ChoiceBox();
     
     private Text healthEffect = new Text("None");
     private Text speedEffect = new Text("None");
@@ -149,7 +156,13 @@ public class MenuFX extends Application {
 		}
     }
     
-    private void init(Stage primaryStage) throws FileNotFoundException {
+    /**
+     * 
+     * @param primaryStage
+     * @throws FileNotFoundException
+     */
+    @SuppressWarnings("unchecked")
+	private void init(Stage primaryStage) throws FileNotFoundException {
         primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     	
         primaryStage.setTitle("Autonomous and communicant explorers");        
@@ -347,7 +360,13 @@ public class MenuFX extends Application {
         });
     }
     
-    public void handlers(Stage primaryStage) {
+    /**
+     * 
+     * @param primaryStage
+     */
+    
+    @SuppressWarnings({ "unchecked", "unused" })
+	public void handlers(Stage primaryStage) {
     	stratChoice.setOnAction((event) -> {
     	    int selectedIndex = stratChoice.getSelectionModel().getSelectedIndex();
     	    Object selectedItem = stratChoice.getSelectionModel().getSelectedItem();
@@ -652,6 +671,10 @@ public class MenuFX extends Application {
 		SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views);
     }         
    
+    /**
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
     	launch(args);
     } 

@@ -21,6 +21,11 @@ import javafx.util.Duration;
 import process.Simulation;
 import process.SimulationUtility;
 
+/**
+ * 
+ * @author lespi
+ *
+ */
 public class SimulationFX {
 	private Simulation simulation;
 	private MapFX map;
@@ -28,10 +33,24 @@ public class SimulationFX {
 	private ExplorersInfosFX infos;
 	private SimulationEntry simulationEntry;
 
+	/**
+	 * 
+	 * @param primaryStage
+	 * @param startButton
+	 * @param enveloppe
+	 * @param valueFactory
+	 * @param strategy
+	 * @param items
+	 * @param primaryScreenBounds
+	 * @param views
+	 */
 		public SimulationFX(Stage primaryStage, Button startButton, int enveloppe, SpinnerValueFactory<Integer> valueFactory, int strategy, HashMap<String, String> items,
 				Rectangle2D primaryScreenBounds, ArrayList<ImageView> views) {
 			 AnimationTimer timer = new AnimationTimer() {
-				
+			/**
+			* 
+			* @param arg0
+			*/
 		 	@Override
 		 	public void handle(long arg0) {
 		 		SimulationUtility.unitTime();

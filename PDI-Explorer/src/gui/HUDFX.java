@@ -7,6 +7,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * 
+ * @author lespi
+ *
+ */
 public class HUDFX extends HBox {
 	public HUDFX(double arg1, double arg2) throws FileNotFoundException {
 		super();

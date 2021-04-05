@@ -18,6 +18,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * 
+ * @author lespi
+ *
+ */
 public class ExplorersInfosFX extends VBox {
 	private HBox expInfos;
 	private VBox expStats1;
@@ -29,6 +34,10 @@ public class ExplorersInfosFX extends VBox {
 	private Text health;
 	private Explorer e;
 	
+	/**
+	 * 
+	 * @param arg0
+	 */
 	public ExplorersInfosFX(double arg0) {
 		super();
         try {
@@ -38,6 +47,11 @@ public class ExplorersInfosFX extends VBox {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param arg0
+	 * @throws FileNotFoundException
+	 */
 	public void displayInfos(double arg0) throws FileNotFoundException {
 		this.getChildren().clear();
 		

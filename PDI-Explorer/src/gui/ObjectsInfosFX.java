@@ -3,8 +3,22 @@ package gui;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
+/**
+ * 
+ * @author lespi
+ *
+ */
 public class ObjectsInfosFX extends VBox {
 	
+	/**
+	 * 
+	 * @param arg0
+	 * @param image1
+	 * @param image2
+	 * @param image3
+	 * @param image4
+	 * @param image5
+	 */
 	public ObjectsInfosFX(Double arg0, ImageView image1, ImageView image2, ImageView image3, ImageView image4, ImageView image5) {
 		super(arg0 / 60);
 		image1.setFitHeight(arg0 / 10);

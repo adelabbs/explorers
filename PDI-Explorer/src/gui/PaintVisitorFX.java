@@ -14,6 +14,11 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import process.visitor.EntityVisitor;
 
+/**
+ * 
+ * @author lespi
+ *
+ */
 public class PaintVisitorFX implements EntityVisitor<Void> {
 
 	private static double IMG_TILE_SIZE = 25;
@@ -29,6 +34,10 @@ public class PaintVisitorFX implements EntityVisitor<Void> {
 	private Image chest;
 	private Image bear;
 
+	/**
+	 * 
+	 * @param gc
+	 */
 	public PaintVisitorFX(GraphicsContext gc) {
 		this.g = gc;
 		try {
@@ -55,6 +64,10 @@ public class PaintVisitorFX implements EntityVisitor<Void> {
 		}
 	}
 
+	/**
+	 * 
+	 * @param entity
+	 */
 	@Override
 	public Void visit(Chest entity) {
 		int i = (int) entity.getPosition()[0];
@@ -65,6 +78,10 @@ public class PaintVisitorFX implements EntityVisitor<Void> {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param entity
+	 */
 	@Override
 	public Void visit(Obstacle entity) {
 		int i = (int) entity.getPosition()[0];
@@ -85,6 +102,10 @@ public class PaintVisitorFX implements EntityVisitor<Void> {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param entity
+	 */
 	@Override
 	public Void visit(Explorer entity) {
 		int r = 2 * entity.getScope();
@@ -104,7 +125,10 @@ public class PaintVisitorFX implements EntityVisitor<Void> {
 		return null;
 	}
 	
-
+	/**
+	 * 
+	 * @param entity
+	 */
 	@Override
 	public Void visit(Bear entity) {
 		double i = entity.getPosition()[0];
@@ -116,6 +140,10 @@ public class PaintVisitorFX implements EntityVisitor<Void> {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param entity
+	 */
 	private void paintLifeBar(LivingEntity entity) {
 		double i = entity.getPosition()[0];
 		double j = entity.getPosition()[1];
