@@ -13,6 +13,7 @@ import data.message.HelpMessage;
 import data.message.MapMessage;
 import data.message.Message;
 import data.simulation.Environment;
+import data.simulation.SimulationEntry;
 import process.SimulationUtility;
 import process.action.Action;
 import process.action.CollectChestAction;
@@ -57,7 +58,6 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	private int run_away = RUN_AWAY; 
 	private int send_message = SEND_MESSAGE;
 	private int explore_action = EXPLORE_ACTION;
-	
 	
 	public AllRounderStrategy(ExplorerManager explorerManager) {
 		super(explorerManager);
@@ -181,11 +181,6 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	 * @return
 	 */
 	public ArrayList<Entity> getAllObstaclesInScope(int scope) {
-		/*
-		 * int dx = (int) position[0] + scope; int mdx = (int) position[0] - scope; int
-		 * dy = (int) position[1] + scope; int mdy = (int) position[1] - scope;
-		 */
-
 		ArrayList<Entity> entities = Environment.getInstance().getObstacles();
 		ArrayList<Entity> inScope = new ArrayList<Entity>();
 		for (Entity e : entities) {
@@ -210,7 +205,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		try {
 			br = new BufferedReader(new FileReader(csvPath));
 			br.readLine();
-			while(((line = br.readLine()) != null) && ct != 1 ) {
+			while(((line = br.readLine()) != null) && ct != SimulationEntry.csvLine) {
 				String field[] = line.split(separator);
 				ct++;
 				collect_action = Integer.parseInt(field[1]);
