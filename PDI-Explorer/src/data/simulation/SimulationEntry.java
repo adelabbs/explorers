@@ -19,7 +19,7 @@ public class SimulationEntry {
 	private int explorerAmount = 5;
 	private int animalAmount = 3;
 	private int chestAmount = 0;
-	private int explorationStrategy = 0;
+	private int explorationStrategy = 2;
 	// HashMap of Item, the key is the Item TYPE
 	private static HashMap<String, Item> items = new HashMap<String, Item>();
 

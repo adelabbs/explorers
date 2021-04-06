@@ -15,6 +15,9 @@ public class RegionManager {
 	public synchronized void enter(RegionStrategy explorerStrategy) {
 		if (occupyingExplorer != null) {
 			try {
+				double pos[] = explorerStrategy.getExplorerManager().getExplorerPosition();
+				System.out.println("Explorer at [x = " + pos[1] + " y = " + pos[0] + "] tries to enter new region ");
+				System.out.println("Region = topLeft :" + region.getTopLeft() + " br = " + region.getBottomRight());
 				wait();
 			} catch (InterruptedException e) {
 				System.err.println(e.getMessage());

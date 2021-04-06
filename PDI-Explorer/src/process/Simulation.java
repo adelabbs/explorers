@@ -80,6 +80,16 @@ public class Simulation {
 		e.setRegions(RegionsCreator.creation());
 	}
 
+	public RegionManager getRegionManager(double position[]) throws IllegalArgumentException {
+		if (position.length != 2)
+			throw new IllegalArgumentException("Invalid position format");
+
+		double positionX = position[1];
+		double positionY = position[0];
+		Integer id = 1 + ((int) (positionY / 15) * 6 + (int) (positionX / 15));
+		return regionManagers.get(id);
+	}
+
 	public void launch() {
 		startAllManagerThreads();
 		setState(SimulationState.RUNNING);

@@ -141,7 +141,7 @@ public class MenuFX extends Application {
     private SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(3, 6, initialNb);
     private VBox leftButtons = new VBox(nbExplorers, stratChoice, startButton);
 
-	private static int EXPLORATION_STRATEGY = ManagerFactory.ALL_ROUNDER_STRATEGY;
+	private static int EXPLORATION_STRATEGY = ManagerFactory.REGION_STRATEGY;
 	
 	private HashMap<String, String> items = new HashMap<String, String>();	
 	private Rectangle2D primaryScreenBounds;

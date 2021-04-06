@@ -27,7 +27,7 @@ public class ManagerFactory {
 			return allRounderExplorerManager;
 		case REGION_STRATEGY:
 			ExplorerManager regionExplorerManager = new ExplorerManager(simulation, explorer);
-			regionExplorerManager.setStrategy(new RegionStrategy(regionExplorerManager));
+			regionExplorerManager.setStrategy(new RegionStrategy(simulation, regionExplorerManager));
 			return regionExplorerManager;
 		default:
 			throw new IllegalArgumentException("Unknown strategy: " + explorationStrategy);

@@ -47,9 +47,9 @@ public class ExplorerManager extends LivingEntityManager {
 
 	@Override
 	public LivingEntity getEntity() {
-		return explorer; 
+		return explorer;
 	}
-	
+
 	public void planAction(Action action) {
 		actions.addLast(action);
 	}
@@ -72,6 +72,10 @@ public class ExplorerManager extends LivingEntityManager {
 
 	public String getExplorerName() {
 		return explorer.getName();
+	}
+
+	public double[] getExplorerPosition() {
+		return explorer.getPosition();
 	}
 
 	public ExplorationStrategy getStrategy() {

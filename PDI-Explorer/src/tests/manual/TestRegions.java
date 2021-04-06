@@ -18,6 +18,11 @@ public class TestRegions {
 			System.out.println(bottomRight);
 		}
 
+		double positionX = 61;
+		double positionY = 75;
+		Integer id = 1 + ((int) (positionY / 15) * 6 + (int) (positionX / 15));
+		System.out.println("Id = " + id);
+
 	}
 
 }
