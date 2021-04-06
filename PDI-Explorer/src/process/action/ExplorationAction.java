@@ -138,6 +138,13 @@ public class ExplorationAction implements Action {
 		createMoveAction(tempI, tempJ);
 	}
 	
+	/**
+	 * 
+	 * @param explorerMap
+	 * @param i
+	 * @param j
+	 * @return
+	 */
 	private boolean isNotWaterBoarded(ExplorerMap explorerMap, int i, int j) {
 		if(i == 0 || i == 89 || j == 0 || j == 89) 
 			return false;
@@ -148,6 +155,11 @@ public class ExplorationAction implements Action {
 				explorerMap.getTile(i, j+1).getType().equals("g"));
 	}
 
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 */
 	private void createMoveAction(int i, int j) {
 		int fPosX = (int) explorer.getPosition()[0];
 		int fPosY = (int) explorer.getPosition()[1];
@@ -192,6 +204,12 @@ public class ExplorationAction implements Action {
 		ema.execute();
 	}
 	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return if there is an obstacle
+	 */
 	private boolean thereIsAnObstacle(int i, int j) {
 		int posX, posY, sizeX, sizeY;
 		for(Entity obstacle : Environment.getInstance().getObstacles()) {
@@ -205,14 +223,31 @@ public class ExplorationAction implements Action {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return If out of border
+	 */
 	private boolean oob(int i, int j) {
 		return i >= 90 || j >= 90 || i < 0 || j < 0;
 	}
 	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return the distance between two points
+	 */
 	private int distance(int i, int j) {
 		return (int) (Math.sqrt(Math.pow((double) i - explorer.getPosition()[0], 2) + Math.pow((double) i - explorer.getPosition()[0], 2)));
 	}
 	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 */
 	public void createUndiscoveredMoveAction(int i, int j) {
 		//South
 		if(explorer.getPosition()[1] < i) {

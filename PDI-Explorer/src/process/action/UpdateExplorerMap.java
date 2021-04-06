@@ -7,10 +7,17 @@ import data.map.ExplorerTile;
 import data.map.Tile;
 import data.simulation.Environment;
 import process.SimulationUtility;
-
+/**
+ * 
+ * Update the map of an explorer (not displayed on the GUI)
+ *
+ */
 public class UpdateExplorerMap {
 
-	//Update of the ExplorerMap
+	/**
+	 * Update of the ExplorerMap
+	 * @param e
+	 */
 	public static void update(Explorer e) {
 		int originI = (int) e.getPosition()[0];
 		int originJ = (int) e.getPosition()[1];
@@ -25,7 +32,12 @@ public class UpdateExplorerMap {
 		}
 	}
 	
-	//verifies the Tile's informations and set the good values on the ExplorerTile
+	/**
+	 * Verifies the Tile's informations and set the good values on the ExplorerTile
+	 * @param i
+	 * @param j
+	 * @param e
+	 */
 	private static void updateTile(int i, int j, Explorer e) {
 		ExplorerTile explorerTile = e.getMap().getTile(i, j);
 		Tile tile = Environment.getInstance().getMap().getTile(i, j);

@@ -5,6 +5,11 @@ import process.action.ExplorerMoveAction;
 import process.action.MoveAction;
 import process.manager.ExplorerManager;
 
+/**
+ * 
+ * Random movement strategy
+ *
+ */
 public class RandomStrategy extends ExplorationStrategy {
 
 	public RandomStrategy(ExplorerManager explorerManager) {

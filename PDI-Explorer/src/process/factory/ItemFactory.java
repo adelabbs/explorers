@@ -2,6 +2,9 @@ package process.factory;
 
 import data.simulation.Item;
 
+/*
+ * Factory for items
+ */
 public class ItemFactory {
 
 	public static Item create(String name) {
@@ -42,42 +45,82 @@ public class ItemFactory {
 		}
 	}
 	
-	//Health items
+
+	/**
+	 * 
+	 * @return Basic health item
+	 */
 	private static Item helmetCreation() {
 		return new Item("Helmet", "Health", 5);
 	}
+	/**
+	 * 
+	 * @return Greater health item
+	 */
 	private static Item chestplateCreation() {
 		return  new Item("Chestplate", "Health", 10);
 	}
 	
-	//Speed items
+	/**
+	 * 
+	 * @return Basic Speed item
+	 */
 	private static Item bootsCreation() {
 		return new Item("Boots", "Speed", 1);
 	}
+	
+	/**
+	 * 
+	 * @return Greater Speed Item
+	 */
 	private static Item treckingShoesCreation() {
 		return new Item("Trecking_Shoes", "Speed", 2);
 	}
-	
-	//Damage items
+		
+	/**
+	 * 
+	 * @return Basic damage item
+	 */
 	private static Item knifeCreation() {
 		return new Item("Knife", "Damage", 1);
 	}
+	
+	/**
+	 * 
+	 * @return Greater damage item
+	 */
 	private static Item macheteCreation() {
 		return new Item("Machete", "Damage", 3);
 	}
 	
-	//Vision items
+	/**
+	 * 
+	 * @return Basic vision item
+	 */
 	private static Item glassesCreation() {
 		return new Item("Glasses", "Scope", 1);
 	}
+	
+	/**
+	 * 
+	 * @return Greater vision item
+	 */
 	private static Item binocularsCreation() {
 		return new Item("Binoculars", "Scope", 2);
 	}
 	
-	//Communication range items
+	/**
+	 * 
+	 * @return Basic communication range item
+	 */
 	private static Item antennaCreation() {
 		return new Item("Antenna", "Communication Range", 1);
 	}
+	
+	/**
+	 * 
+	 * @return Greater communication range item
+	 */
 	private static Item radioCreation() {
 		return new Item("Radio", "Communication Range", 2);
 	}
