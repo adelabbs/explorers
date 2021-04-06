@@ -20,6 +20,7 @@ public class SimulationEntry {
 	private int animalAmount = 3;
 	private int chestAmount = 0;
 	private int explorationStrategy = 0;
+	public static int csvLine;
 	// HashMap of Item, the key is the Item TYPE
 	private static HashMap<String, Item> items = new HashMap<String, Item>();
 
@@ -33,6 +34,7 @@ public class SimulationEntry {
 	public SimulationEntry(int explorerAmount, int explorationStrategy, int csvLine) {
 		this.explorerAmount = explorerAmount;
 		this.explorationStrategy = explorationStrategy;
+		SimulationEntry.csvLine = csvLine;
 	}
 
 	public void setExplorerAmount(int explorerAmount) {
@@ -69,6 +71,10 @@ public class SimulationEntry {
 
 	public int getExplorationStrategy() {
 		return explorationStrategy;
+	}
+	
+	public static int getCsvLine() {
+		return csvLine;
 	}
 
 	public static HashMap<String, Item> getItems() {
