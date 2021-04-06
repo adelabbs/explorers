@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 /**
  * 
  * @author lespi
+ * 
+ * This class displays the background of the HUD
  *
  */
 public class HUDFX extends HBox {

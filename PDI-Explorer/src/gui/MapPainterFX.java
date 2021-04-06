@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
  * 
  * @author lespi
  *
+ *This class paint the general map which will be displayed on the HUD.
  */
 public class MapPainterFX {
 
@@ -57,7 +58,7 @@ public class MapPainterFX {
 	
 	public void generalMapPainter() {
 		ExplorerTile[][] map = Environment.getInstance().getGeneralExplorerMap().getTiles();
-		int originY = (int) (MapFX.height - MapFX.height/3.17);
+		int originY = (int) (MapFX.height - MapFX.height/3.19);
 		int originX = (int) (MapFX.width - MapFX.width/5.24);
 		
 		for(int i = 0; i < 90; i ++) {

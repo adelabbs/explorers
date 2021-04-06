@@ -6,6 +6,8 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * 
  * @author lespi
+ * 
+ * This class displays the global map on the HUD.
  *
  */
 public class MapFX extends Canvas {
