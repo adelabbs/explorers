@@ -30,7 +30,7 @@ public class SimulationEntry {
 		this.explorationStrategy = explorationStrategy;
 	}
 
-	public SimulationEntry(int explorerAmount, int explorationStrategy) {
+	public SimulationEntry(int explorerAmount, int explorationStrategy, int csvLine) {
 		this.explorerAmount = explorerAmount;
 		this.explorationStrategy = explorationStrategy;
 	}

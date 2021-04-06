@@ -135,6 +135,7 @@ public class MenuFX extends Application {
 	private int damageTemp = 0;
 	private int scopeTemp = 0;
 	private int comTemp = 0;
+	private int stratNbr = 0;
 	
 	private final Spinner<Integer> nbExplorers = new Spinner<Integer>();   
     private final int initialNb = 3;
@@ -239,13 +240,12 @@ public class MenuFX extends Application {
         enveloppeBox.setSpacing(primaryScreenBounds.getHeight() / 8);
         enveloppeBox.getChildren().addAll(text2, explorerGIF);
         
-        stratChoice.getItems().add("Strategy 1");
-        stratChoice.getItems().add("Strategy 2");
-        stratChoice.getItems().add("Strategy 3");
-        stratChoice.getItems().add("Strategy 4");
-        stratChoice.getItems().add("Strategy 5");
-        stratChoice.getItems().add("Strategy 6");
-        stratChoice.getItems().add("Strategy 7");
+        stratChoice.getItems().add("All rounder strategy");
+        stratChoice.getItems().add("Greed strategy");
+        stratChoice.getItems().add("Reckless strategy");
+        stratChoice.getItems().add("Dodge strategy");
+        stratChoice.getItems().add("Priority to the exploration");
+        stratChoice.getItems().add("Running strategy");
         
         leftButtons.setAlignment(Pos.TOP_CENTER);
         leftButtons.setSpacing(primaryScreenBounds.getHeight() / 20);
@@ -285,7 +285,8 @@ public class MenuFX extends Application {
         damageButton1.setSelected(true);
         scopeButton1.setSelected(true);
         comButton1.setSelected(true);
-        stratChoice.setValue("Strategy 1");
+        
+        stratChoice.getSelectionModel().selectFirst();
         
         buttonBox1.setAlignment(Pos.TOP_CENTER);
         buttonBox1.setSpacing(primaryScreenBounds.getHeight() / 15);
@@ -351,6 +352,8 @@ public class MenuFX extends Application {
         
         primaryStage.show();
         primaryStage.toFront();
+        
+        System.out.println(stratNbr);
  
        	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         	@Override
@@ -369,10 +372,8 @@ public class MenuFX extends Application {
 	public void handlers(Stage primaryStage) {
     	stratChoice.setOnAction((event) -> {
     	    int selectedIndex = stratChoice.getSelectionModel().getSelectedIndex();
-    	    Object selectedItem = stratChoice.getSelectionModel().getSelectedItem();
-
-    	   // System.out.println("Selection made: [" + selectedIndex + "] " + selectedItem);
-    	    System.out.println("   ChoiceBox.getValue(): " + String.valueOf(stratChoice.getValue()));
+    	    stratNbr = stratChoice.getSelectionModel().getSelectedIndex();
+    	    System.out.println(stratNbr);
     	});
     	
         healthGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
@@ -668,7 +669,7 @@ public class MenuFX extends Application {
             }
         });  
         @SuppressWarnings("unused")
-		SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views);
+		SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views, stratNbr);
     }         
    
     /**
