@@ -201,7 +201,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		String line = "";
 		String separator = ";";
 		String csvPath = "ressources/strategies.csv";
-		int ct = 0;
+		int ct = 1;
 		try {
 			br = new BufferedReader(new FileReader(csvPath));
 			br.readLine();
