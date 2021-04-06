@@ -74,10 +74,6 @@ public class SimulationFX {
 		    };
 			startButton.setOnAction(actionEvent ->  {
 	              if (enveloppe >= 0) {
-	            	  if (stratNbr == 7) {
-	            		  this.simulationEntry = new SimulationEntry(valueFactory.getValue(), strategy);
-	            	  }
-	            	  else {
 	            		  this.simulationEntry = new SimulationEntry(valueFactory.getValue(), strategy, stratNbr);
 	                  		if (items.containsKey("health"))
 	                	  this.simulationEntry.add(items.get("health"));
@@ -120,7 +116,6 @@ public class SimulationFX {
 	            	  			e1.printStackTrace();
 							}
 	            	  	}
-	              }
 	              else {        	  
 	            	  Tooltip tooltip = new Tooltip("The maximum amount of money is exceeded.");
 	            	  startButton.setTooltip(tooltip);

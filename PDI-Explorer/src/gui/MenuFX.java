@@ -145,8 +145,9 @@ public class MenuFX extends Application {
     private SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(3, 6, initialNb);
     private VBox leftButtons = new VBox(nbExplorers, stratChoice, startButton);
 
-	private static int EXPLORATION_STRATEGY = ManagerFactory.ALL_ROUNDER_STRATEGY;
-	private static int EXPLORATION_STRATEGY2 = ManagerFactory.REGION_STRATEGY;
+	private int EXPLORATION_STRATEGY = ManagerFactory.ALL_ROUNDER_STRATEGY;
+	private int EXPLORATION_STRATEGY2 = ManagerFactory.REGION_STRATEGY;
+	private int exploration;
 	
 	private HashMap<String, String> items = new HashMap<String, String>();	
 	private Rectangle2D primaryScreenBounds;
@@ -253,6 +254,7 @@ public class MenuFX extends Application {
         stratChoice.getItems().add("Priority to the exploration");
         stratChoice.getItems().add("Running strategy");
         stratChoice.getItems().add("Canton strategy");
+       
         
         leftButtons.setAlignment(Pos.TOP_CENTER);
         leftButtons.setSpacing(primaryScreenBounds.getHeight() / 20);
@@ -674,11 +676,12 @@ public class MenuFX extends Application {
     	stratChoice.setOnAction((event) -> {
     	    stratNbr = stratChoice.getSelectionModel().getSelectedIndex();
     	    if ((stratNbr > 0) && (stratNbr < 7)) {
-    	    	SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views, stratNbr);
+    	    	exploration = EXPLORATION_STRATEGY;
     	    }
-    	    else if (stratNbr == 7) {
-    	    	SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY2, items, primaryScreenBounds, views, stratNbr);
+    	    else {
+    	    	exploration = EXPLORATION_STRATEGY2;
     	    }
+    	    SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, exploration, items, primaryScreenBounds, views, stratNbr);
     	});
     }         
    
