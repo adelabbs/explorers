@@ -37,6 +37,11 @@ public class SimulationEntry {
 		this.explorationStrategy = explorationStrategy;
 		SimulationEntry.csvLine = csvLine;
 	}
+	
+	public SimulationEntry(int explorerAmount, int explorationStrategy) {
+		this.explorerAmount = explorerAmount;
+		this.explorationStrategy = explorationStrategy;
+	}
 
 	public void setExplorerAmount(int explorerAmount) {
 		this.explorerAmount = explorerAmount;

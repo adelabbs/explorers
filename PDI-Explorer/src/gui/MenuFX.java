@@ -146,6 +146,7 @@ public class MenuFX extends Application {
     private VBox leftButtons = new VBox(nbExplorers, stratChoice, startButton);
 
 	private static int EXPLORATION_STRATEGY = ManagerFactory.ALL_ROUNDER_STRATEGY;
+	private static int EXPLORATION_STRATEGY2 = ManagerFactory.REGION_STRATEGY;
 	
 	private HashMap<String, String> items = new HashMap<String, String>();	
 	private Rectangle2D primaryScreenBounds;
@@ -668,12 +669,15 @@ public class MenuFX extends Application {
         });  
     }
     
-    private void simLaunch() {
+    @SuppressWarnings("unused")
+	private void simLaunch() {
     	stratChoice.setOnAction((event) -> {
     	    stratNbr = stratChoice.getSelectionModel().getSelectedIndex();
-    	    if (stratNbr > 0) {
-    	    	@SuppressWarnings("unused")
+    	    if ((stratNbr > 0) && (stratNbr < 7)) {
     	    	SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views, stratNbr);
+    	    }
+    	    else if (stratNbr == 7) {
+    	    	SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY2, items, primaryScreenBounds, views, stratNbr);
     	    }
     	});
     }         
