@@ -50,4 +50,8 @@ public class RegionStrategy extends AllRounderStrategy {
 		this.regionManager = regionManager;
 	}
 
+	public void stayInCurrentRegion() {
+
+	}
+
 }

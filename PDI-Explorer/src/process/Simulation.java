@@ -90,6 +90,17 @@ public class Simulation {
 		return regionManagers.get(id);
 	}
 
+	public void removeFromRegion(ExplorerManager explorerManager) {
+		if (simulationEntry.getExplorationStrategy() == ManagerFactory.REGION_STRATEGY) {
+			double position[] = explorerManager.getExplorerPosition();
+			RegionManager regionManager = getRegionManager(position);
+			String explorerName = explorerManager.getExplorerName();
+			if (regionManager.getOccupyingExplorerName().equals(explorerName)) {
+				regionManager.exit();
+			}
+		}
+	}
+
 	public void launch() {
 		startAllManagerThreads();
 		setState(SimulationState.RUNNING);
@@ -156,4 +167,5 @@ public class Simulation {
 	public boolean isOver() {
 		return state.equals(SimulationState.OVER);
 	}
+
 }

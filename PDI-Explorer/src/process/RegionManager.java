@@ -8,6 +8,8 @@ public class RegionManager {
 	private Region region;
 	private RegionStrategy occupyingExplorer = null;
 
+	public static final int TIMEOUT = 5000;
+
 	public RegionManager(Region region) {
 		this.region = region;
 	}
@@ -18,7 +20,8 @@ public class RegionManager {
 				double pos[] = explorerStrategy.getExplorerManager().getExplorerPosition();
 				System.out.println("Explorer at [x = " + pos[1] + " y = " + pos[0] + "] tries to enter new region ");
 				System.out.println("Region = topLeft :" + region.getTopLeft() + " br = " + region.getBottomRight());
-				wait();
+				wait(TIMEOUT);
+				explorerStrategy.stayInCurrentRegion();
 			} catch (InterruptedException e) {
 				System.err.println(e.getMessage());
 			}
@@ -48,6 +51,10 @@ public class RegionManager {
 
 	public Point getTopLeft() {
 		return region.getTopLeft();
+	}
+
+	public String getOccupyingExplorerName() {
+		return occupyingExplorer.getExplorerManager().getExplorer().getName();
 	}
 
 	public Point getBottomRight() {

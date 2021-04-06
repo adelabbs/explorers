@@ -40,6 +40,7 @@ public class ExplorerManager extends LivingEntityManager {
 			}
 		}
 		Environment e = Environment.getInstance();
+		simulation.removeFromRegion(this);
 		e.remove(explorer);
 		e.decrementExplorerAmount();
 		setRunning(false);
