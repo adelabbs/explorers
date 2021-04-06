@@ -2,7 +2,6 @@ package data.entity;
 
 /**
  * Class of all breakable entities. Can be animals, explorer, or breakable obstacles such as trees. 
- * @author Léo
  *
  */
 public abstract class BreakableEntity extends Entity {
@@ -10,6 +9,14 @@ public abstract class BreakableEntity extends Entity {
 	private int health;
 	private int maxHealth;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param type
+	 * @param position
+	 * @param size
+	 * @param maxHealth
+	 */
 	public BreakableEntity(String type, double[] position, double[] size, int maxHealth) {
 		super(type, position, size);
 		this.maxHealth = maxHealth;

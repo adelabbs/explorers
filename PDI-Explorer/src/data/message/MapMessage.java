@@ -6,6 +6,10 @@ import data.map.GeneralExplorerMap;
 import data.simulation.Environment;
 import process.action.utility.MapMerger;
 
+/**
+ * Sends the map to the GeneralExplorerMap and receive the updated map.
+ *
+ */
 public class MapMessage extends Message<ExplorerMap> {
 	
 	public MapMessage(ExplorerMap content, Explorer explorer) {

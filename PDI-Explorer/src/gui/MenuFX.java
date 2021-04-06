@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -46,6 +47,7 @@ import process.factory.ManagerFactory;
 
 public class MenuFX extends Application {
 	
+	private Stage primaryStage;
 	private int enveloppe = 180;
 	private Text text2 = new Text(String.valueOf(enveloppe));
 	
@@ -82,9 +84,6 @@ public class MenuFX extends Application {
     private ToggleGroup damageGroup = new ToggleGroup();
     private ToggleGroup speedGroup = new ToggleGroup();
     private ToggleGroup healthGroup = new ToggleGroup();
-    
-    @SuppressWarnings("rawtypes")
-	ChoiceBox stratChoice = new ChoiceBox();
     
     private Text healthEffect = new Text("None");
     private Text speedEffect = new Text("None");
@@ -129,12 +128,15 @@ public class MenuFX extends Application {
     private Image image9;
     private Image image10;
     private Image image11;
-	
+	 
 	private int healthTemp = 0;
 	private int speedTemp = 0;
 	private int damageTemp = 0;
 	private int scopeTemp = 0;
 	private int comTemp = 0;
+	private int stratNbr;
+	
+	ChoiceBox<String> stratChoice = new ChoiceBox<String>();
 	
 	private final Spinner<Integer> nbExplorers = new Spinner<Integer>();   
     private final int initialNb = 3;
@@ -151,6 +153,7 @@ public class MenuFX extends Application {
     	try {
 			init(primaryStage);
 			handlers(primaryStage);
+			simLaunch();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -161,10 +164,10 @@ public class MenuFX extends Application {
      * @param primaryStage
      * @throws FileNotFoundException
      */
-    @SuppressWarnings("unchecked")
-	private void init(Stage primaryStage) throws FileNotFoundException {
+	private void init(Stage stage) throws FileNotFoundException {
         primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     	
+        this.primaryStage = stage;
         primaryStage.setTitle("Autonomous and communicant explorers");        
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setFullScreen(true);
@@ -239,13 +242,12 @@ public class MenuFX extends Application {
         enveloppeBox.setSpacing(primaryScreenBounds.getHeight() / 8);
         enveloppeBox.getChildren().addAll(text2, explorerGIF);
         
-        stratChoice.getItems().add("Strategy 1");
-        stratChoice.getItems().add("Strategy 2");
-        stratChoice.getItems().add("Strategy 3");
-        stratChoice.getItems().add("Strategy 4");
-        stratChoice.getItems().add("Strategy 5");
-        stratChoice.getItems().add("Strategy 6");
-        stratChoice.getItems().add("Strategy 7");
+        stratChoice.getItems().add("All rounder strategy");
+        stratChoice.getItems().add("Greed strategy");
+        stratChoice.getItems().add("Reckless strategy");
+        stratChoice.getItems().add("Dodge strategy");
+        stratChoice.getItems().add("Priority to the exploration");
+        stratChoice.getItems().add("Running strategy");
         
         leftButtons.setAlignment(Pos.TOP_CENTER);
         leftButtons.setSpacing(primaryScreenBounds.getHeight() / 20);
@@ -285,7 +287,8 @@ public class MenuFX extends Application {
         damageButton1.setSelected(true);
         scopeButton1.setSelected(true);
         comButton1.setSelected(true);
-        stratChoice.setValue("Strategy 1");
+        
+        stratChoice.getSelectionModel().selectFirst();
         
         buttonBox1.setAlignment(Pos.TOP_CENTER);
         buttonBox1.setSpacing(primaryScreenBounds.getHeight() / 15);
@@ -327,7 +330,7 @@ public class MenuFX extends Application {
         tabPane.getTabs().add(speed);
         tabPane.getTabs().add(damage);
         tabPane.getTabs().add(scope);
-        tabPane.getTabs().add(com);
+        tabPane.getTabs().add(com); 
         
         HBox hBox = new HBox(leftBox, tabPane);
         hBox.setPadding(new Insets(primaryScreenBounds.getHeight() / 12, primaryScreenBounds.getWidth() / 15, primaryScreenBounds.getHeight() / 15, primaryScreenBounds.getWidth() / 4.7));
@@ -365,16 +368,8 @@ public class MenuFX extends Application {
      * @param primaryStage
      */
     
-    @SuppressWarnings({ "unchecked", "unused" })
-	public void handlers(Stage primaryStage) {
-    	stratChoice.setOnAction((event) -> {
-    	    int selectedIndex = stratChoice.getSelectionModel().getSelectedIndex();
-    	    Object selectedItem = stratChoice.getSelectionModel().getSelectedItem();
-
-    	   // System.out.println("Selection made: [" + selectedIndex + "] " + selectedItem);
-    	    System.out.println("   ChoiceBox.getValue(): " + String.valueOf(stratChoice.getValue()));
-    	});
-    	
+    @SuppressWarnings({"unused"})
+	public void handlers(Stage primaryStage) {	
         healthGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle,Toggle new_toggle) {
             	if (healthButton1.isSelected() == false) {
@@ -667,8 +662,14 @@ public class MenuFX extends Application {
         		comButton1.setSelected(true);
             }
         });  
-        @SuppressWarnings("unused")
-		SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views);
+    }
+    
+    private void simLaunch() {
+    	stratChoice.setOnAction((event) -> {
+    	    stratNbr = stratChoice.getSelectionModel().getSelectedIndex();
+    	    @SuppressWarnings("unused")
+    		SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views, stratNbr);
+    	});
     }         
    
     /**

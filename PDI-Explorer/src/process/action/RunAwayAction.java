@@ -4,6 +4,9 @@ import data.entity.Animal;
 import data.entity.Explorer;
 import data.simulation.Environment;
 
+/*
+ * This action is triggered when an explorer detects a bear 
+ */
 public class RunAwayAction implements Action {
 	
 	private Explorer explorer;

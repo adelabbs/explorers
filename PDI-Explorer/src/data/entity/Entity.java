@@ -4,7 +4,6 @@ import process.visitor.EntityVisitor;
 
 /**
  * Class containing every entities that can be on the map. Can be animals, explorers, chests or obstacles.
- * @author Léo
  *
  */
 public abstract class Entity {
@@ -13,6 +12,13 @@ public abstract class Entity {
 	private double position[] = new double[2];
 	private double size[] = new double[2];
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 * @param position
+	 * @param size
+	 */
 	public Entity(String type, double[] position, double[] size) {
 		this.type = type;
 		this.position = position;

@@ -8,7 +8,7 @@ import process.SimulationUtility;
 
 public class AnimalMoveAction extends MoveAction {
 
-	// Territory's borders for all animals
+	/* Territory's borders for all animals */
 	private static final double ANIMAL_MAX_TERRITORY = 10;
 
 	private Animal entity;
@@ -85,7 +85,11 @@ public class AnimalMoveAction extends MoveAction {
 	}
 		
 	
-	//Damage
+	/**
+	 * 
+	 * @param explorer
+	 * @param animal
+	 */
 	private void fight(Explorer explorer, Animal animal) {
 		int explorersLife = explorer.getHealth();
 		int animalsLife = animal.getHealth();
@@ -94,20 +98,25 @@ public class AnimalMoveAction extends MoveAction {
 		animal.setHealth(animalsLife - explorer.getDamage());
 	}
 	
-	
+	/**
+	 * 
+	 * @param newPos
+	 * @return
+	 */
 	private double distanceFromInitialPos(double newPos[]) {
 		return Math.sqrt(Math.pow(newPos[0] - getEntity().getInitPosition()[0], 2)
 				+ Math.pow(newPos[1] - getEntity().getInitPosition()[1], 2));
 	}
 	
+	/**
+	 * 
+	 * @param newPos
+	 * @return
+	 */
 	private boolean outOfBorder(double[] newPos) {
 		int i = (int) newPos[0];
 		int j = (int) newPos[1];
 		return (i >= 0 && i <= (89 - (int) getEntity().getSize()[0] - 1) && j >= 0 && j <= (89 - (int) getEntity().getSize()[1] - 1));
-	}
-
-	public Animal getEntity() {
-		return entity;
 	}
 	
 	private Explorer getClosestExplorer() {
@@ -142,12 +151,22 @@ public class AnimalMoveAction extends MoveAction {
 		return closestPosition;
 	}
 	
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
 	private double imprecise(double value) {
 		double gap = Math.random() * 2* value/10;
 		gap -= value/10;
 		return value + gap;
 	}
 	
+	/**
+	 * 
+	 * @param values
+	 * @return
+	 */
 	private double[] imprecise(double[] values) {
 		double[] copiedValues = new double[] {values[0], values[1]};
 		for(int i = 0; i < values.length; i ++) {
@@ -155,5 +174,8 @@ public class AnimalMoveAction extends MoveAction {
 		}
 		return copiedValues;
 	}
-
+	
+	public Animal getEntity() {
+		return entity;
+	}
 }

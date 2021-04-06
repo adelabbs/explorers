@@ -43,7 +43,7 @@ public class ObstaclePlacer {
 		Map map = Environment.getInstance().getMap();
 		int i = 0;
 		double pos[] = new double[2];
-		while(i < 9) {
+		while(i < 15) {
 			pos[0] = Math.random()*90;
 			pos[1] = Math.random()*90;
 			if(map.getTile((int) pos[0], (int) pos[1]).getType().equals("g")) {

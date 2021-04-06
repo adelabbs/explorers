@@ -3,6 +3,11 @@ package process.action;
 import data.entity.Explorer;
 import data.message.Message;
 
+/**
+ * 
+ * This action is used by explorers to send a message.
+ *
+ */
 @SuppressWarnings("rawtypes")
 public class SendMessageAction implements Action {
 

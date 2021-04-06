@@ -45,12 +45,13 @@ public class SimulationFX {
 	 * @param views
 	 */
 		public SimulationFX(Stage primaryStage, Button startButton, int enveloppe, SpinnerValueFactory<Integer> valueFactory, int strategy, HashMap<String, String> items,
-				Rectangle2D primaryScreenBounds, ArrayList<ImageView> views) {
+				Rectangle2D primaryScreenBounds, ArrayList<ImageView> views, int stratNbr) {
 			 AnimationTimer timer = new AnimationTimer() {
 			/**
 			* 
 			* @param arg0
 			*/
+			
 		 	@Override
 		 	public void handle(long arg0) {
 		 		SimulationUtility.unitTime();
@@ -67,7 +68,7 @@ public class SimulationFX {
 		    };
 			startButton.setOnAction(actionEvent ->  {
 	              if (enveloppe >= 0) {
-	                  this.simulationEntry = new SimulationEntry(valueFactory.getValue(), strategy);
+	                  this.simulationEntry = new SimulationEntry(valueFactory.getValue(), strategy, stratNbr);
 	                  if (items.containsKey("health"))
 	                	  this.simulationEntry.add(items.get("health"));
 	                  if (items.containsKey("speed"))

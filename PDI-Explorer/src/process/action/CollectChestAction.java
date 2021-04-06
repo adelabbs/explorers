@@ -36,6 +36,10 @@ public class CollectChestAction implements Action {
 		}
 	}
 
+	/**
+	 * 
+	 * @return the direction of the chest
+	 */
 	public int chestDirection() {
 		double[] chestPos = chest.getPosition();
 		double[] explorerPos = explorer.getPosition();

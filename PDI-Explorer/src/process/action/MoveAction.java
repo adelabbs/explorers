@@ -4,6 +4,9 @@ import data.entity.Entity;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
 
+/*
+ * The primary movement class for all entities in the simulation
+ */
 public abstract class MoveAction implements Action {
 	private static final int MIN = 1;
 	private static final int MAX = 4;
@@ -66,6 +69,11 @@ public abstract class MoveAction implements Action {
 		return checkForCollide(nextPosition) && checkRBorderMap(nextPosition) && checkLBorderMap(nextPosition);
 	}
 
+	/**
+	 * 
+	 * @param position
+	 * @return true if there is no entity at this position
+	 */
 	private boolean checkForCollide(double[] position) {
 		for (Entity e : Environment.getInstance().getObstacles()) {
 			if ((e.getPosition()[0] == position[0]) && (e.getPosition()[1] == position[1])) {
@@ -75,14 +83,30 @@ public abstract class MoveAction implements Action {
 		return true;
 	}
 
+	/**
+	 * Check the left border of the map
+	 * 
+	 * @param position
+	 * @return boolean
+	 */
 	private boolean checkLBorderMap(double[] position) {
 		return (position[0] >= MAP_BORDER_MIN) && (position[1] >= MAP_BORDER_MIN);
 	}
 
+	/**
+	 * Check the right border of the map
+	 * 
+	 * @param position
+	 * @return boolean
+	 */
 	private boolean checkRBorderMap(double[] position) {
 		return (position[0] <= MAP_BORDER_MAX) && (position[1] <= MAP_BORDER_MAX);
 	}
 
+	/**
+	 * 
+	 * @return a random direction (NORTH, SOUTH, EAST ,WEST)
+	 */
 	public static int pickRandomDirection() {
 		return (int) (MIN + Math.random() * ((MAX - MIN) + 1));
 	}

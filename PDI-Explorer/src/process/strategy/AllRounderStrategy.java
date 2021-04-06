@@ -13,18 +13,23 @@ import data.message.HelpMessage;
 import data.message.MapMessage;
 import data.message.Message;
 import data.simulation.Environment;
+import data.simulation.SimulationEntry;
 import process.SimulationUtility;
 import process.action.Action;
 import process.action.CollectChestAction;
 import process.action.ExplorationAction;
-import process.action.ExplorerMoveAction;
 import process.action.LeaveMeAloneAction;
-import process.action.MoveAction;
 import process.action.RunAwayAction;
 import process.action.SendMessageAction;
 import process.manager.ExplorerManager;
 import data.entity.Chest;
 
+/**
+ * 
+ * @author Geoffroy
+ * 
+ *
+ */
 public class AllRounderStrategy extends ExplorationStrategy {
 
 	private ExplorerManager em;
@@ -54,12 +59,12 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	private int send_message = SEND_MESSAGE;
 	private int explore_action = EXPLORE_ACTION;
 	
-	
 	public AllRounderStrategy(ExplorerManager explorerManager) {
 		super(explorerManager);
 		updateValues();
 		setPriorities();
 	}
+
 
 	@Override
 	public void decide() {
@@ -116,7 +121,11 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		super.planAction(action);
 	}
 
-
+	/**
+	 * 
+	 * @param senderPos
+	 * @return
+	 */
 	public int calculatePrioritiesByDistance(double[] senderPos) {
 		double distance = SimulationUtility.distance(getExplorerManager().getExplorer().getPosition(), senderPos);
 		if (distance > 10) {
@@ -129,7 +138,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	
 	
 	/**
-	 * Update all in scope values for each tick of decide()
+	 * @brief Update all in scope values for each tick of decide()
 	 */
 	public void updateValues() {
 		em = getExplorerManager();
@@ -172,11 +181,6 @@ public class AllRounderStrategy extends ExplorationStrategy {
 	 * @return
 	 */
 	public ArrayList<Entity> getAllObstaclesInScope(int scope) {
-		/*
-		 * int dx = (int) position[0] + scope; int mdx = (int) position[0] - scope; int
-		 * dy = (int) position[1] + scope; int mdy = (int) position[1] - scope;
-		 */
-
 		ArrayList<Entity> entities = Environment.getInstance().getObstacles();
 		ArrayList<Entity> inScope = new ArrayList<Entity>();
 		for (Entity e : entities) {
@@ -185,19 +189,13 @@ public class AllRounderStrategy extends ExplorationStrategy {
 					inScope.add(e);
 				}
 			}
-			/*
-			 * if (e.getPosition()[0] <= dx && e.getPosition()[0] >= mdx) { if
-			 * (e.getPosition()[1] <= dy && e.getPosition()[1] >= mdy) { if (!(position ==
-			 * e.getPosition())) {
-			 * System.out.println(SimulationUtility.distance(e.getPosition(), position));
-			 * inScope.add(e); } } }
-			 */
-
 		}
 		return inScope;
 	}
 	
-	
+	/**
+	 * @brief This function is used to read the strategies file and set corresponding priorities
+	 */
 	public void setPriorities() {
 		BufferedReader br;
 		String line = "";
@@ -207,7 +205,7 @@ public class AllRounderStrategy extends ExplorationStrategy {
 		try {
 			br = new BufferedReader(new FileReader(csvPath));
 			br.readLine();
-			while(((line = br.readLine()) != null) && ct != 1 ) {
+			while(((line = br.readLine()) != null) && ct != SimulationEntry.csvLine) {
 				String field[] = line.split(separator);
 				ct++;
 				collect_action = Integer.parseInt(field[1]);

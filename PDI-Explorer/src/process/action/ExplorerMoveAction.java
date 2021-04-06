@@ -3,6 +3,11 @@ package process.action;
 import data.entity.Explorer;
 import data.simulation.Environment;
 
+/**
+ * 
+ * The basic movement for an explorer.
+ *
+ */
 public class ExplorerMoveAction extends MoveAction {
 
 	private Explorer entity;

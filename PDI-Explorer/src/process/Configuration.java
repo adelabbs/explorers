@@ -31,6 +31,10 @@ public class Configuration {
 		return enveloppe;
 	}
 
+	/**
+	 * 
+	 * @param item
+	 */
 	public void add(Item item) {
 		if (item != null) {
 			upgrades.put(item.getId(), item);

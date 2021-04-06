@@ -18,13 +18,21 @@ public class PriorityList {
 
 	private HashMap<Integer, Action> priorityMap = new HashMap<Integer, Action>();
 	
-		
+	/**
+	 * Add an action in the priority list
+	 * @param priority
+	 * @param action
+	 */
 	public void addElement(int priority, Action action) {
 		if (!(priority < MIN || priority > MAX)) {
 			priorityMap.put(priority, action);
 		}
 	}
 	
+	/**
+	 * 
+	 * @return the most important priority for this tick
+	 */
 	public Action selectAction() {
 		if (!isEmpty()) {
 			int num = MAX;
