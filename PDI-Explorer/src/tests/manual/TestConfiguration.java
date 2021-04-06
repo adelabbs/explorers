@@ -3,11 +3,6 @@ package tests.manual;
 import data.simulation.Item;
 import process.Configuration;
 
-/**
- * 
- * @author Adel
- *
- */
 public class TestConfiguration {
 
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package tests.unit.action;
+package tests.unit;
 
 import org.junit.Test;
 

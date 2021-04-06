@@ -87,7 +87,10 @@ public class Simulation {
 
 		double positionX = position[1];
 		double positionY = position[0];
-		Integer id = 1 + ((int) (positionY / 15) * 6 + (int) (positionX / 15));
+		Integer id = 1 + ((int) (positionY / (RegionsCreator.MAP_LENGTH / RegionsCreator.REGIONS_COUNT_Y))
+				* RegionsCreator.REGIONS_COUNT_Y
+				+ (int) (positionX / (RegionsCreator.MAP_LENGTH / RegionsCreator.REGIONS_COUNT_X)));
+		System.out.println("id = " + id);
 		return regionManagers.get(id);
 	}
 

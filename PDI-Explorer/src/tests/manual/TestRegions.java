@@ -9,7 +9,7 @@ import environmentcreation.RegionsCreator;
 public class TestRegions {
 
 	public static void main(String[] args) {
-		HashMap<Integer, Region> regions = RegionsCreator.creation(90, 90, 6, 6);
+		HashMap<Integer, Region> regions = RegionsCreator.creation(90, 90, 9, 9);
 		for (Region region : regions.values()) {
 			Point topLeft = region.getTopLeft();
 			Point bottomRight = region.getBottomRight();
@@ -20,7 +20,10 @@ public class TestRegions {
 
 		double positionX = 61;
 		double positionY = 75;
-		Integer id = 1 + ((int) (positionY / 15) * 6 + (int) (positionX / 15));
+		System.out.println("map = " + (RegionsCreator.MAP_LENGTH / RegionsCreator.REGIONS_COUNT_Y));
+		Integer id = 1 + ((int) (positionY / (RegionsCreator.MAP_LENGTH / RegionsCreator.REGIONS_COUNT_Y))
+				* RegionsCreator.REGIONS_COUNT_Y
+				+ (int) (positionX / (RegionsCreator.MAP_LENGTH / RegionsCreator.REGIONS_COUNT_X)));
 		System.out.println("Id = " + id);
 
 	}

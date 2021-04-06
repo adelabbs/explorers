@@ -4,18 +4,28 @@ import data.entity.LivingEntity;
 import data.map.Point;
 import data.map.Region;
 import data.simulation.Environment;
+import process.Simulation;
 import process.manager.ExplorerManager;
 import process.manager.RegionManager;
 import process.strategy.RegionStrategy;
 
+/**
+ * The exploration action processing class during the RegionStrategy.
+ * 
+ * @author Adel
+ *
+ */
 public class ExploreRegionAction extends MoveAction {
 
 	private RegionStrategy regionStrategy;
 	private RegionManager regionManager;
 	private ExplorerManager manager;
+	private Simulation simulation;
 
-	public ExploreRegionAction(Environment environment, RegionStrategy regionStrategy, RegionManager regionManager) {
+	public ExploreRegionAction(Simulation simulation, Environment environment, RegionStrategy regionStrategy,
+			RegionManager regionManager) {
 		super(environment);
+		this.simulation = simulation;
 		this.regionStrategy = regionStrategy;
 		manager = regionStrategy.getExplorerManager();
 		this.regionManager = regionManager;
@@ -23,13 +33,12 @@ public class ExploreRegionAction extends MoveAction {
 
 	@Override
 	public void execute() {
-		int direction = pickRandomDirection();
-		double nextPosition[] = getNextPosition(manager.getExplorer(), direction);
+		double nextPosition[] = getNextPosition(manager.getExplorer(), getDirection());
 		if (isValid(nextPosition)) {
 			if (isOutOfCurrentRegion(nextPosition)) {
-				//System.out.println("getting  out of region");
-				regionManager.enter(regionStrategy);
-			}else {
+				RegionManager nextRegionManager = simulation.getRegionManager(nextPosition);
+				nextRegionManager.enter(regionStrategy, nextPosition);
+			} else {
 				super.execute();
 			}
 		}

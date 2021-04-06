@@ -6,7 +6,7 @@ import process.manager.ExplorerManager;
 /**
  * This class allows us to abstract the decision-making process of the
  * {@link ExplorerManager}
- * 
+ * @author Adel
  *
  */
 public abstract class ExplorationStrategy {

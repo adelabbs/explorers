@@ -4,36 +4,40 @@ import data.map.Point;
 import data.map.Region;
 import process.strategy.RegionStrategy;
 
+/**
+ * The region processing class. This limits access to a given region to a
+ * maximum of 1 explorer at at time.
+ * 
+ * @author Adel
+ *
+ */
 public class RegionManager {
 	private Region region;
 	private RegionStrategy occupyingExplorer = null;
 
-	public static final int TIMEOUT = 5000;
+	public static final int TIMEOUT = 3000;
 
 	public RegionManager(Region region) {
 		this.region = region;
 	}
 
-	public synchronized void enter(RegionStrategy explorerStrategy) {
+	public synchronized void enter(RegionStrategy regionStrategy, double position[]) {
 		if (occupyingExplorer != null) {
+			regionStrategy.updateExplorerPosition(position);
 			try {
-				//double pos[] = explorerStrategy.getExplorerManager().getExplorerPosition();
-				//System.out.println("Explorer at [x = " + pos[1] + " y = " + pos[0] + "] tries to enter new region ");
-				//System.out.println("Region = topLeft :" + region.getTopLeft() + " br = " + region.getBottomRight());
 				wait(TIMEOUT);
-				explorerStrategy.stayInCurrentRegion();
 			} catch (InterruptedException e) {
 				System.err.println(e.getMessage());
 			}
 		}
 
 		// The explorer leaves and frees its previous region.
-		RegionManager previousRegionManager = explorerStrategy.getRegionManager();
+		RegionManager previousRegionManager = regionStrategy.getRegionManager();
 		previousRegionManager.exit();
 
 		// The explorer enters into this region.
-		explorerStrategy.setRegionManager(this);
-		occupyingExplorer = explorerStrategy;
+		regionStrategy.setRegionManager(this);
+		occupyingExplorer = regionStrategy;
 	}
 
 	public synchronized void exit() {
@@ -60,5 +64,4 @@ public class RegionManager {
 	public Point getBottomRight() {
 		return region.getBottomRight();
 	}
-
 }

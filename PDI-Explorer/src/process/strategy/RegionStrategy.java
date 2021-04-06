@@ -11,6 +11,14 @@ import process.action.ExploreRegionAction;
 import process.manager.ExplorerManager;
 import process.manager.RegionManager;
 
+/**
+ * The region strategy processing class. The explorer behavior is naive: they
+ * collect chests within their scope or move randomly. When they're about to
+ * enter a new region they wait for the occupying explorer to leave the region.
+ * 
+ * @author Adel
+ *
+ */
 public class RegionStrategy extends AllRounderStrategy {
 
 	private Simulation simulation;
@@ -20,11 +28,13 @@ public class RegionStrategy extends AllRounderStrategy {
 		super(explorerManager);
 		this.simulation = simulation;
 		regionManager = simulation.getRegionManager(explorerManager.getExplorerPosition());
-		regionManager.enter(this);
+		regionManager.enter(this, explorerManager.getExplorerPosition());
+		System.out.println("begin region " + regionManager.getRegion().getId());
 	}
 
 	@Override
 	public void decide() {
+
 		ArrayList<Entity> inScopeObstacles = getInScopeObstacles();
 		if (!inScopeObstacles.isEmpty()) {
 			for (Entity e : inScopeObstacles) {
@@ -34,8 +44,9 @@ public class RegionStrategy extends AllRounderStrategy {
 				}
 			}
 		} else {
-			super.planAction(new ExploreRegionAction(Environment.getInstance(), this, regionManager));
+			super.planAction(new ExploreRegionAction(simulation, Environment.getInstance(), this, regionManager));
 		}
+
 	}
 
 	public Simulation getSimulation() {
@@ -50,8 +61,8 @@ public class RegionStrategy extends AllRounderStrategy {
 		this.regionManager = regionManager;
 	}
 
-	public void stayInCurrentRegion() {
-
+	public void updateExplorerPosition(double[] newPosistion) {
+		getExplorerManager().updatePosition(newPosistion);
 	}
 
 }

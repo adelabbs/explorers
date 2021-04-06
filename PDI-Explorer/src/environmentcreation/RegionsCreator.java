@@ -5,11 +5,21 @@ import java.util.HashMap;
 import data.map.Point;
 import data.map.Region;
 
+/**
+ * The region creation class. Provides a method to create a HashMap of all the
+ * regions in the environment.
+ * 
+ * @author Adel
+ *
+ */
 public class RegionsCreator {
 	private static Integer nextId = 0;
+	public static final int REGIONS_COUNT_X = 9;
+	public static final int REGIONS_COUNT_Y = 9;
+	public static final int MAP_LENGTH = 90;
 
 	public static HashMap<Integer, Region> creation() {
-		return creation(90, 90, 6, 6);
+		return creation(MAP_LENGTH, MAP_LENGTH, REGIONS_COUNT_X, REGIONS_COUNT_Y);
 	}
 
 	public static HashMap<Integer, Region> creation(int mapWidth, int mapHeight, int regionCountX, int regionCountY) {
