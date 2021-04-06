@@ -143,7 +143,7 @@ public class MenuFX extends Application {
     private SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(3, 6, initialNb);
     private VBox leftButtons = new VBox(nbExplorers, stratChoice, startButton);
 
-	private static int EXPLORATION_STRATEGY = ManagerFactory.REGION_STRATEGY;
+	private static int EXPLORATION_STRATEGY = ManagerFactory.ALL_ROUNDER_STRATEGY;
 	
 	private HashMap<String, String> items = new HashMap<String, String>();	
 	private Rectangle2D primaryScreenBounds;
@@ -242,6 +242,7 @@ public class MenuFX extends Application {
         enveloppeBox.setSpacing(primaryScreenBounds.getHeight() / 8);
         enveloppeBox.getChildren().addAll(text2, explorerGIF);
         
+        stratChoice.getItems().add("No strategy");
         stratChoice.getItems().add("All rounder strategy");
         stratChoice.getItems().add("Greed strategy");
         stratChoice.getItems().add("Reckless strategy");
@@ -667,8 +668,10 @@ public class MenuFX extends Application {
     private void simLaunch() {
     	stratChoice.setOnAction((event) -> {
     	    stratNbr = stratChoice.getSelectionModel().getSelectedIndex();
-    	    @SuppressWarnings("unused")
-    		SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views, stratNbr);
+    	    if (stratNbr > 0) {
+    	    	@SuppressWarnings("unused")
+    	    	SimulationFX sim = new SimulationFX(primaryStage, startButton, enveloppe, valueFactory, EXPLORATION_STRATEGY, items, primaryScreenBounds, views, stratNbr);
+    	    }
     	});
     }         
    
