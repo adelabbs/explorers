@@ -21,6 +21,8 @@ import javafx.scene.text.Text;
 /**
  * 
  * @author lespi
+ * 
+ * This class displays all the explorers's statistic on the HUD, along with the number of treasure chests.
  *
  */
 public class ExplorersInfosFX extends VBox {

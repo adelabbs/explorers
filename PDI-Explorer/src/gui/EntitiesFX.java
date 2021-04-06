@@ -8,6 +8,8 @@ import javafx.scene.canvas.GraphicsContext;
 /**
  * 
  * @author lespi
+ * 
+ * This class display the entities on the global map at each current tick
  *
  */
 public class EntitiesFX extends Canvas {

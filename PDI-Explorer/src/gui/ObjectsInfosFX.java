@@ -6,6 +6,8 @@ import javafx.scene.layout.VBox;
 /**
  * 
  * @author lespi
+ * 
+ * This class displays in the HUB the items equipped by the explorers.
  *
  */
 public class ObjectsInfosFX extends VBox {

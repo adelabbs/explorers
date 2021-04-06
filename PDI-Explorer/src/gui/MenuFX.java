@@ -42,6 +42,8 @@ import process.factory.ManagerFactory;
 /**
  * 
  * @author lespi
+ * 
+ * This class is the the window which displays the menu and the simulation
  *
  */
 
@@ -249,6 +251,7 @@ public class MenuFX extends Application {
         stratChoice.getItems().add("Dodge strategy");
         stratChoice.getItems().add("Priority to the exploration");
         stratChoice.getItems().add("Running strategy");
+        stratChoice.getItems().add("Canton strategy");
         
         leftButtons.setAlignment(Pos.TOP_CENTER);
         leftButtons.setSpacing(primaryScreenBounds.getHeight() / 20);
@@ -353,8 +356,8 @@ public class MenuFX extends Application {
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         
-        primaryStage.show();
         primaryStage.toFront();
+        primaryStage.show();     
  
        	primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
         	@Override

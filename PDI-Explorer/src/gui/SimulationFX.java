@@ -25,6 +25,8 @@ import process.SimulationUtility;
 /**
  * 
  * @author lespi
+ * 
+ * This class displays the HUD and all the informations available to the user. It is the graphical representation of the simulation.
  *
  */
 public class SimulationFX {

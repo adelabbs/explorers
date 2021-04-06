@@ -17,6 +17,8 @@ import process.visitor.EntityVisitor;
 /**
  * 
  * @author lespi
+ * 
+ * This class paints the entities displayed in the global map of the HUB.
  *
  */
 public class PaintVisitorFX implements EntityVisitor<Void> {
