@@ -19,6 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import process.Simulation;
+import process.SimulationState;
 import process.SimulationUtility;
 
 /**
@@ -52,7 +53,7 @@ public class SimulationFX {
 			* @param arg0
 			*/
 			
-		 	@Override
+			@Override
 		 	public void handle(long arg0) {
 		 		SimulationUtility.unitTime();
 		 		entities.clearShapes();
@@ -64,7 +65,10 @@ public class SimulationFX {
 				}
 		 		entities.drawShapes();
 		 		map.drawExplorersGeneralMap();
-		 		}  	   
+		 		if (simulation.getState().equals(SimulationState.OVER)) {
+		 			System.exit(0);
+		 		}
+		 		}  	  		 		
 		    };
 			startButton.setOnAction(actionEvent ->  {
 	              if (enveloppe >= 0) {
