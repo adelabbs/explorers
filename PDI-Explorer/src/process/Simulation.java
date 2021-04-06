@@ -10,6 +10,7 @@ import environmentcreation.event.EntityCreationException;
 import process.factory.ManagerFactory;
 import process.manager.ExplorerManager;
 import process.manager.LivingEntityManager;
+import process.manager.RegionManager;
 import process.visitor.ManagerCreationVisitor;
 import data.entity.LivingEntity;
 import data.map.Region;

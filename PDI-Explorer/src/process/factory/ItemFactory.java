@@ -7,6 +7,12 @@ import data.simulation.Item;
  */
 public class ItemFactory {
 
+	/**
+	 * Creates the asked item.
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public static Item create(String name) {
 		switch(name) {
 		//Health items

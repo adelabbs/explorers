@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import data.entity.Chest;
 import data.entity.Entity;
 import data.simulation.Environment;
-import process.RegionManager;
 import process.Simulation;
 import process.action.CollectChestAction;
 import process.action.ExploreRegionAction;
 import process.manager.ExplorerManager;
+import process.manager.RegionManager;
 
 public class RegionStrategy extends AllRounderStrategy {
 
