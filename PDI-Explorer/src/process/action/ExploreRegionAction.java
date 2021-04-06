@@ -4,8 +4,8 @@ import data.entity.LivingEntity;
 import data.map.Point;
 import data.map.Region;
 import data.simulation.Environment;
-import process.RegionManager;
 import process.manager.ExplorerManager;
+import process.manager.RegionManager;
 import process.strategy.RegionStrategy;
 
 public class ExploreRegionAction extends MoveAction {
@@ -27,7 +27,7 @@ public class ExploreRegionAction extends MoveAction {
 		double nextPosition[] = getNextPosition(manager.getExplorer(), direction);
 		if (isValid(nextPosition)) {
 			if (isOutOfCurrentRegion(nextPosition)) {
-				System.out.println("getting  out of region");
+				//System.out.println("getting  out of region");
 				regionManager.enter(regionStrategy);
 			}else {
 				super.execute();
