@@ -2,13 +2,17 @@ package data.map;
 
 /**
  * Contains the informations of the generated map. Only contains the tiles.
- * @author Léo
  *
  */
 public class Map {
 
 	public Tile[][] tiles = new Tile[90][90];
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param tiles
+	 */
 	public Map(Tile[][] tiles) {
 		this.tiles = tiles;
 	}

@@ -11,7 +11,6 @@ import process.visitor.EntityVisitor;
 /**
  * The explorers will try to find every chests on the map, and interact with the map, and entities depending on the 
  * chosen strategy.
- * @author Léo
  *
  */
 @SuppressWarnings("rawtypes")
@@ -31,6 +30,12 @@ public class Explorer extends LivingEntity {
 	private int communicationRange;
 	private ArrayList<Message> messages = new ArrayList<Message>();
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param position
+	 * @param name
+	 */
 	public Explorer(double[] position, String name) {
 		super("Explorer", position, new double[]{EXPLORER_SIZE_X, EXPLORER_SIZE_Y},
 				BASIC_MAX_HEALTH + boostVerifier("Health"),
@@ -45,6 +50,12 @@ public class Explorer extends LivingEntity {
 		this.communicationRange = BASIC_COMMUNICATION_RANGE + boostVerifier("Communication Range");
 	}
 	
+	/**
+	 * Verifies the boost depending on the items.
+	 * 
+	 * @param type The type we want to verifiy the boost.
+	 * @return The boost.
+	 */
 	private static int boostVerifier(String type) {
 		if(SimulationEntry.getItems().containsKey(type))
 			return SimulationEntry.getItems().get(type).getBoost();

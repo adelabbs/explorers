@@ -3,8 +3,7 @@ package data.entity;
 import process.visitor.EntityVisitor;
 
 /**
- * Instantiable class of a bear. The bear has a large territory, and massive damage/health. 
- * @author Léo
+ * Instantiable class of a bear. The bear has a large territory, and massive damage/health.
  *
  */
 public class Bear extends Animal  {
@@ -17,6 +16,11 @@ public class Bear extends Animal  {
 	private final static int DAMAGE = 5;
 	private final static int SCOPE = 3;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param position
+	 */
 	public Bear(double[] position) {
 		super("Bear", position, new double[] {SIZE_X, SIZE_Y}, MAX_HEALTH, SPEED, DAMAGE, SCOPE);
 	}
