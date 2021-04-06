@@ -6,6 +6,10 @@ import data.entity.Explorer;
 import data.simulation.Environment;
 import process.SimulationUtility;
 
+/**
+ * Class to handle aniaml's moves.
+ * 
+ */
 public class AnimalMoveAction extends MoveAction {
 
 	/* Territory's borders for all animals */

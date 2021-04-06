@@ -6,6 +6,10 @@ import data.simulation.Environment;
 import process.SimulationUtility;
 import tests.manual.SimuPara;
 
+/**
+ * Action to handle chest collection.
+ *
+ */
 public class CollectChestAction implements Action {
 	private Chest chest;
 	private Explorer explorer;

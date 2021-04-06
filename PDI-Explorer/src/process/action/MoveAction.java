@@ -4,7 +4,7 @@ import data.entity.Entity;
 import data.entity.LivingEntity;
 import data.simulation.Environment;
 
-/*
+/**
  * The primary movement class for all entities in the simulation
  */
 public abstract class MoveAction implements Action {
